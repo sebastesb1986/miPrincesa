@@ -1,43 +1,110 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    font-family: 'Georgia', serif;
+    background-color: #e9e5dc;
     color: #333;
-}
-
-h1 {
-    color: #5a2a83;
-    font-size: 2.5em;
-}
-
-.carousel-inner {
-    position: relative;
-    width: 100%;
-    overflow: hidden; /* Evitar desbordamiento de imágenes */
-}
-
-.carousel-inner img {
-    width: 100%; /* Ancho fijo */
-    height: 500px; /* Altura fija */
-    object-fit: contain; /* Hace que las imágenes se ajusten sin recorte */
-    background-color: #fff; /* Fondo blanco para los bordes */
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: #5a2a83; /* Color de los botones de navegación */
+    margin: 0;
+    padding: 20px;
 }
 
 .container {
     max-width: 900px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
+    background: #fdfbf6;
+    padding: 40px 60px;
+    border-radius: 15px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid #d8d3c3;
+    font-family: 'Georgia', serif;
+    position: relative;
+    overflow: visible; /* 👈 Esto permite ver las flechas */
+    z-index: 1;
 }
 
+/* Pseudo-elementos decorativos para borde tipo hoja */
+.container::before,
+.container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, transparent 100%);
+    z-index: 0; /* 👈 Debajo de todo */
+}
+
+.container::before {
+    left: -20px;
+}
+
+.container::after {
+    right: -20px;
+}
+
+/* Título del cuento */
+h1 {
+    color: #4a2d6f;
+    font-size: 2.8em;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Texto del cuento */
 p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #4a4a4a;
+    text-align: justify;
+    text-indent: 2em;
+}
+
+/* Botón de audio */
+#btnPlayAudio {
+    font-family: 'Georgia', serif;
+    background-color: #6d4c91;
+    border: none;
+    padding: 10px 25px;
     font-size: 1.1em;
-    line-height: 1.6;
-    color: #555;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+#btnPlayAudio:hover {
+    background-color: #5a3b78;
+}
+
+/* Carrusel de imágenes */
+.carousel {
+    overflow: visible; /* 👈 Para que las flechas no se oculten */
+    position: relative;
+    z-index: 2;
+}
+
+.carousel-inner img {
+    height: 500px;
+    object-fit: contain;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+/* Sombras suaves en imágenes */
+.carousel-item img {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Flechas del carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(90, 42, 131, 0.9);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+/* Flechas en primer plano */
+.carousel-control-prev,
+.carousel-control-next {
+    z-index: 5;
+    width: 5%;
 }
