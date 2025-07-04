@@ -108,3 +108,8 @@ p {
     z-index: 5;
     width: 5%;
 }
+
+#descripcion-text {
+    text-align: center;
+    text-indent: 0;
+}
