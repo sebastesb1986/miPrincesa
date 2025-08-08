@@ -59,3 +59,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('btnPlayAudio2');
+    const audio = document.getElementById('audio-pienso');
+
+    btn.addEventListener('click', function () {
+        if (audio.paused) {
+            audio.play()
+                .then(() => {
+                    btn.textContent = 'Pausar que significas';
+                })
+                .catch(error => {
+                    console.error('No se pudo reproducir el audio:', error);
+                });
+        } else {
+            audio.pause();
+            btn.textContent = '¿Que significas para mi?';
+        }
+    });
+});

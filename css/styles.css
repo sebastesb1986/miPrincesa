@@ -73,6 +73,20 @@ p {
     background-color: #7a0000;
 }
 
+#btnPlayAudio2 {
+    font-family: 'Georgia', serif;
+    background-color: #1e3a5f;
+    border: none;
+    padding: 10px 25px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+#btnPlayAudio2:hover {
+    background-color: #3b5f83;
+}
+
 /* Carrusel de imágenes */
 .carousel {
     overflow: visible; /* 👈 Para que las flechas no se oculten */
