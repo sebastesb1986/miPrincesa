@@ -3,6 +3,13 @@ body {
     background-color: #f4f1e1; /* Color pergamino claro */
     font-family: 'Times New Roman', serif; /* Estilo clásico para todo el texto */
     color: #333; /* Color de texto oscuro para un buen contraste */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
 }
 
 /* Estilo para la tabla */
@@ -11,6 +18,7 @@ body {
     border-collapse: collapse; /* Elimina los espacios entre celdas */
 }
 
+/* Estilo para las celdas de la tabla */
 .gallery-table td {
     width: 33.33%; /* Asegura que las celdas tengan el mismo tamaño */
     padding: 5px;  /* Espacio entre las imágenes */
@@ -19,7 +27,7 @@ body {
 /* Estilo para las imágenes dentro de la tabla */
 .gallery-table img {
     width: 100%;              /* Asegura que la imagen ocupe todo el ancho de la celda */
-    height: 100%;            /* Fija la altura de todas las imágenes */
+    height: 100%;             /* Fija la altura de todas las imágenes */
     object-fit: cover;        /* Hace que las imágenes se ajusten al tamaño sin deformarse */
     border: 5px solid #d4af37; /* Marco dorado estilo antiguo */
     border-radius: 12px;      /* Bordes redondeados */
@@ -31,6 +39,8 @@ h1 {
     font-family: 'Georgia', serif; /* Fuente clásica para el título */
     color: #3a2a1f; /* Color marrón oscuro para el título */
     font-size: 36px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 /* Páginas */
@@ -41,4 +51,52 @@ h1 {
 /* Añadir margen a las imágenes */
 .gallery-page {
     padding: 20px;
+}
+
+/* Media Queries - Hacemos que todo sea más responsivo */
+
+/* Para pantallas de hasta 768px (tabletas y dispositivos pequeños) */
+@media (max-width: 768px) {
+    /* Las celdas de la tabla ocuparán el 50% del ancho */
+    .gallery-table td {
+        width: 50%;
+    }
+
+    /* Ajustamos el tamaño de las imágenes */
+    .gallery-table img {
+        height: auto; /* Mantiene la relación de aspecto de la imagen */
+    }
+
+    /* Ajuste en el tamaño de fuente del título */
+    h1 {
+        font-size: 28px;
+    }
+
+    /* Ajuste del padding para las imágenes */
+    .gallery-page {
+        padding: 15px;
+    }
+}
+
+/* Para pantallas de hasta 576px (móviles pequeños) */
+@media (max-width: 576px) {
+    /* Las celdas de la tabla ocuparán el 100% del ancho */
+    .gallery-table td {
+        width: 100%;
+    }
+
+    /* Ajustamos el tamaño de las imágenes */
+    .gallery-table img {
+        height: auto; /* Mantiene la relación de aspecto de la imagen */
+    }
+
+    /* Ajuste en el tamaño de fuente del título */
+    h1 {
+        font-size: 24px;
+    }
+
+    /* Ajuste del padding para las imágenes */
+    .gallery-page {
+        padding: 10px;
+    }
 }
