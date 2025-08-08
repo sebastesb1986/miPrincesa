@@ -61,7 +61,7 @@ p {
 /* Botón de audio */
 #btnPlayAudio {
     font-family: 'Georgia', serif;
-    background-color: #6d4c91;
+    background-color: #990000;
     border: none;
     padding: 10px 25px;
     font-size: 1.1em;
@@ -70,7 +70,7 @@ p {
 }
 
 #btnPlayAudio:hover {
-    background-color: #5a3b78;
+    background-color: #7a0000;
 }
 
 /* Carrusel de imágenes */
@@ -117,3 +117,14 @@ p {
     text-align: center;
     text-indent: 0;
 }
+
+a {
+    color: #7a0000; /* Color rojo para el enlace */
+    font-weight: bold; /* Negrita */
+    text-decoration: none; /* Sin subrayado */
+}
+
+a:hover {
+    color: #550000; /* Enlace más oscuro al pasar el ratón */
+}
+

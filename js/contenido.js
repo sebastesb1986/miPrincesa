@@ -33,7 +33,7 @@ document.getElementById('carouselExampleAutoplaying').addEventListener('slide.bs
         if (!ourSpace.innerHTML.includes('Recorri cada reino y obtuve algo para ti')) {
             const extraText = document.createElement('p');
             extraText.id = 'descripcion-text';
-            extraText.innerHTML = `Recorri cada reino y obtuve algo para ti: <a href="pages/vida.html">Vamos!</a>`;
+            extraText.innerHTML = `Pulsame y mira lo que adquiri Recorriendo cada reino para ti: <a href="pages/vida.html">Vamos!</a>`;
             ourSpace.appendChild(extraText);
         }
     }
