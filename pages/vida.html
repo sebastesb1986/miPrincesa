@@ -15,20 +15,38 @@
                 <div class="mt-4 text-center" id="our_space"></div>
             </div>
 
-            <!-- Galería de imágenes con fondo estilo pergamino -->
-            <div class="page gallery-page">
-                <table class="gallery-table">
-                    <tr>
-                        <td><img src="../images/world/1.jpeg" alt="Imagen 1" class="img-fluid"></td>
-                        <td><img src="../images/world/2.jpeg" alt="Imagen 2" class="img-fluid"></td>
-                        <td><img src="../images/world/3.jpeg" alt="Imagen 3" class="img-fluid"></td>
-                    </tr>
-                    <tr>
-                        <td><img src="../images/world/4.jpeg" alt="Imagen 4" class="img-fluid"></td>
-                        <td><img src="../images/world/5.jpeg" alt="Imagen 5" class="img-fluid"></td>
-                        <td><img src="../images/world/6.jpeg" alt="Imagen 6" class="img-fluid"></td>
-                    </tr>
-                </table>
+            <!-- Carrusel de imágenes con fondo estilo pergamino -->
+            <div class="page carousel-page">
+                <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-bs-interval="10000">
+                            <img src="../images/world/1.jpeg" class="d-block w-100" alt="Imagen 1">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="10000">
+                            <img src="../images/world/2.jpeg" class="d-block w-100" alt="Imagen 2">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="10000">
+                            <img src="../images/world/3.jpeg" class="d-block w-100" alt="Imagen 3">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="10000">
+                            <img src="../images/world/4.jpeg" class="d-block w-100" alt="Imagen 4">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="10000">
+                            <img src="../images/world/5.jpeg" class="d-block w-100" alt="Imagen 5">
+                        </div>
+                        <div class="carousel-item" data-bs-interval="10000">
+                            <img src="../images/world/6.jpeg" class="d-block w-100" alt="Imagen 6">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

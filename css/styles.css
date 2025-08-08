@@ -1,98 +1,67 @@
-/* Estilos generales para el body */
 body {
     font-family: 'Georgia', serif;
-    background-color: #d8c8a9; /* Beige pergamino */
-    color: #3e2c1c; /* Color oscuro medieval */
+    background-color: #e9e5dc;
+    color: #333;
     margin: 0;
     padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-size: cover;
-    flex-direction: column; /* Asegura que la página se apile en móviles */
 }
 
-/* Contenedor principal */
 .container {
-    max-width: 1200px;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    perspective: 1000px;
-    flex-direction: column;
-}
-
-/* Estilo para el "libro" */
-.book {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    background: #f5f0e1; /* Color pergamino claro */
-    padding: 40px;
+    max-width: 900px;
+    margin: 40px auto;
+    background: #e9e5dc;
+    padding: 40px 60px;
     border-radius: 15px;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
-    width: 100%;
-    transform-style: preserve-3d;
-    transform: rotateY(0deg);
-    transition: transform 1s ease;
-    flex-wrap: wrap; /* Para que las páginas se acomoden en móviles */
-}
-
-/* Páginas del libro */
-.page {
-    width: 50%;
-    height: 100%;
-    padding: 20px;
-    overflow: hidden;
+    border: 1px solid #d8d3c3;
+    font-family: 'Georgia', serif;
     position: relative;
-    transform-origin: left;
-    background: #f5f0e1; /* Color pergamino claro */
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
-    transition: transform 1s ease;
+    overflow: visible; /* 👈 Esto permite ver las flechas */
+    z-index: 1;
 }
 
-/* Separador entre páginas */
-.page:first-child {
-    border-right: 1px solid #b5a77d; /* Color de separación entre páginas */
+/* Pseudo-elementos decorativos para borde tipo hoja */
+.container::before,
+.container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, transparent 100%);
+    z-index: 0; /* 👈 Debajo de todo */
 }
 
-/* Animación para abrir las páginas */
-.page.open {
-    transform: rotateY(-30deg);
+.container::before {
+    left: -20px;
 }
 
-.page:nth-child(2) {
-    transform: rotateY(0deg);
+.container::after {
+    right: -20px;
 }
 
-.page:nth-child(2).open {
-    transform: rotateY(30deg);
-}
-
-/* Título */
+/* Título del cuento */
 h1 {
-    color: #3e2c1c; /* Color oscuro medieval */
+    color: #4a2d6f;
     font-size: 2.8em;
     font-weight: bold;
     text-align: center;
     margin-bottom: 30px;
 }
 
-/* Estilo del texto */
+/* Texto del cuento */
 p {
     font-size: 1.2em;
     line-height: 1.8;
-    color: #3e2c1c; /* Color oscuro medieval */
+    color: #4a4a4a;
     text-align: justify;
     text-indent: 2em;
 }
 
-/* Botón para reproducir el audio */
+/* Botón de audio */
 #btnPlayAudio {
     font-family: 'Georgia', serif;
-    background-color: #8d6e63; /* Color marrón medieval */
+    background-color: #6d4c91;
     border: none;
     padding: 10px 25px;
     font-size: 1.1em;
@@ -101,137 +70,50 @@ p {
 }
 
 #btnPlayAudio:hover {
-    background-color: #6e4b3b; /* Color marrón oscuro */
+    background-color: #5a3b78;
 }
 
-/* Carrusel (imágenes) */
-.carousel-inner {
-    background-color: #f5f0e1; /* Color pergamino claro */
-    padding: 20px; /* Espaciado para que el fondo no esté pegado a las imágenes */
-    border-radius: 15px; /* Bordes redondeados para simular un efecto envejecido */
+/* Carrusel de imágenes */
+.carousel {
+    overflow: visible; /* 👈 Para que las flechas no se oculten */
+    position: relative;
+    z-index: 2;
 }
 
-/* Estilo de las imágenes dentro del carrusel */
 .carousel-inner img {
     height: 500px;
     object-fit: contain;
     background-color: #fff;
-    border: 1px solid #b5a77d; /* Bordes color medieval */
+    border: 1px solid #ccc;
     padding: 5px;
 }
 
-/* Estilo de las imágenes en los items del carrusel */
+/* Sombras suaves en imágenes */
 .carousel-item img {
-    object-fit: contain;
-    background-color: #f5f0e1; /* Fondo pergamino detrás de la imagen */
-    border: 1px solid #b5a77d; /* Bordes sutiles color pergamino para las imágenes */
-    border-radius: 8px; /* Bordes redondeados para las imágenes */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: #e9e5dc; /* Color de fondo tipo pergamino */
+    padding: 15px; /* Espaciado alrededor de la imagen */
+    border-radius: 10px; /* Bordes redondeados */
+    border: 1px solid #d8d3c3; /* Borde suave tipo pergamino */
 }
 
-/* Estilo de los controles del carrusel */
+/* Flechas del carrusel */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: rgba(90, 42, 131, 0.9); /* Tonalidad morada oscura */
+    background-color: rgba(90, 42, 131, 0.9);
     border-radius: 50%;
     width: 40px;
     height: 40px;
 }
 
+/* Flechas en primer plano */
 .carousel-control-prev,
 .carousel-control-next {
     z-index: 5;
     width: 5%;
 }
 
-/* Descripción */
 #descripcion-text {
     text-align: center;
     text-indent: 0;
-    font-size: 1.2em;
-    color: #3e2c1c; /* Color oscuro medieval */
-}
-
-#descripcion-text a {
-    color: #8d6e63; /* Color marrón medieval para el enlace */
-    font-weight: bold;
-    text-decoration: none;
-    border-bottom: 2px solid #8d6e63; /* Línea decorativa debajo del enlace */
-    transition: color 0.3s, border-color 0.3s; /* Transición suave al pasar el mouse */
-    font-size: 25px;
-}
-
-/* Media Queries - Hacemos que todo sea más responsivo */
-
-/* Para pantallas de hasta 768px (tabletas y dispositivos pequeños) */
-@media (max-width: 768px) {
-    /* Libro en una sola columna */
-    .book {
-        flex-direction: column;
-    }
-
-    /* Página ocupa todo el ancho */
-    .page {
-        width: 100%;
-    }
-
-    /* Título más pequeño */
-    h1 {
-        font-size: 2.2em;
-    }
-
-    /* Ajuste en tamaño de texto */
-    p {
-        font-size: 1.1em;
-    }
-
-    /* Hacemos que las imágenes del carrusel sean más pequeñas */
-    .carousel-inner img {
-        height: 350px;
-    }
-
-    /* Aseguramos que los controles del carrusel se ajusten bien */
-    .carousel-control-prev, .carousel-control-next {
-        width: 10%;
-    }
-
-    /* Botón más grande en móviles */
-    #btnPlayAudio {
-        font-size: 1.3em;
-        padding: 12px 30px;
-    }
-
-    /* Descripción más pequeña */
-    #descripcion-text {
-        font-size: 1.1em;
-    }
-}
-
-/* Para pantallas de hasta 576px (móviles pequeños) */
-@media (max-width: 576px) {
-    /* Título aún más pequeño */
-    h1 {
-        font-size: 1.8em;
-    }
-
-    /* Ajuste de texto */
-    p {
-        font-size: 1em;
-    }
-
-    /* Imágenes del carrusel más pequeñas */
-    .carousel-inner img {
-        height: 250px;
-    }
-
-    /* Botón más pequeño en móviles muy pequeños */
-    #btnPlayAudio {
-        font-size: 1.1em;
-        padding: 10px 20px;
-    }
-
-    /* Descripción aún más pequeña */
-    #descripcion-text {
-        font-size: 1em;
-    }
 }
