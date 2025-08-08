@@ -1,67 +1,86 @@
 body {
     font-family: 'Georgia', serif;
-    background-color: #e9e5dc;
-    color: #333;
+    background-color: #d8c8a9; /* Beige pergamino */
+    color: #3e2c1c; /* Color oscuro medieval */
     margin: 0;
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;
 }
 
 .container {
-    max-width: 900px;
-    margin: 40px auto;
-    background: #fdfbf6;
-    padding: 40px 60px;
+    max-width: 1200px;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    perspective: 1000px;
+}
+
+.book {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    background: #f5f0e1; /* Color pergamino claro */
+    padding: 40px;
     border-radius: 15px;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
-    border: 1px solid #d8d3c3;
-    font-family: 'Georgia', serif;
+    width: 100%;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    transition: transform 1s ease;
+}
+
+.page {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    overflow: hidden;
     position: relative;
-    overflow: visible; /* 👈 Esto permite ver las flechas */
-    z-index: 1;
+    transform-origin: left;
+    background: #f5f0e1; /* Color pergamino claro */
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 1s ease;
 }
 
-/* Pseudo-elementos decorativos para borde tipo hoja */
-.container::before,
-.container::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 20px;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, transparent 100%);
-    z-index: 0; /* 👈 Debajo de todo */
+.page:first-child {
+    border-right: 1px solid #b5a77d; /* Color de separación entre páginas */
 }
 
-.container::before {
-    left: -20px;
+.page.open {
+    transform: rotateY(-30deg);
 }
 
-.container::after {
-    right: -20px;
+.page:nth-child(2) {
+    transform: rotateY(0deg);
 }
 
-/* Título del cuento */
+.page:nth-child(2).open {
+    transform: rotateY(30deg);
+}
+
 h1 {
-    color: #4a2d6f;
+    color: #3e2c1c; /* Color oscuro medieval */
     font-size: 2.8em;
     font-weight: bold;
     text-align: center;
     margin-bottom: 30px;
 }
 
-/* Texto del cuento */
 p {
     font-size: 1.2em;
     line-height: 1.8;
-    color: #4a4a4a;
+    color: #3e2c1c; /* Color oscuro medieval */
     text-align: justify;
     text-indent: 2em;
 }
 
-/* Botón de audio */
 #btnPlayAudio {
     font-family: 'Georgia', serif;
-    background-color: #6d4c91;
+    background-color: #8d6e63; /* Color marrón medieval */
     border: none;
     padding: 10px 25px;
     font-size: 1.1em;
@@ -70,39 +89,39 @@ p {
 }
 
 #btnPlayAudio:hover {
-    background-color: #5a3b78;
+    background-color: #6e4b3b; /* Color marrón oscuro */
 }
 
-/* Carrusel de imágenes */
-.carousel {
-    overflow: visible; /* 👈 Para que las flechas no se oculten */
-    position: relative;
-    z-index: 2;
+.carousel-inner {
+    background-color: #f5f0e1; /* Color pergamino claro */
+    padding: 20px; /* Espaciado para que el fondo no esté pegado a las imágenes */
+    border-radius: 15px; /* Bordes redondeados para simular un efecto envejecido */
 }
 
 .carousel-inner img {
     height: 500px;
     object-fit: contain;
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: 1px solid #b5a77d; /* Bordes color medieval */
     padding: 5px;
 }
 
-/* Sombras suaves en imágenes */
 .carousel-item img {
+    object-fit: contain;
+    background-color: #f5f0e1; /* Fondo pergamino detrás de la imagen */
+    border: 1px solid #b5a77d; /* Bordes sutiles color pergamino para las imágenes */
+    border-radius: 8px; /* Bordes redondeados para las imágenes */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Flechas del carrusel */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: rgba(90, 42, 131, 0.9);
+    background-color: rgba(90, 42, 131, 0.9); /* Tonalidad morada oscura */
     border-radius: 50%;
     width: 40px;
     height: 40px;
 }
 
-/* Flechas en primer plano */
 .carousel-control-prev,
 .carousel-control-next {
     z-index: 5;
@@ -112,4 +131,15 @@ p {
 #descripcion-text {
     text-align: center;
     text-indent: 0;
+    font-size: 1.2em;
+    color: #3e2c1c; /* Color oscuro medieval */
+}
+
+#descripcion-text a {
+    color: #8d6e63; /* Color marrón medieval para el enlace */
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 2px solid #8d6e63; /* Línea decorativa debajo del enlace */
+    transition: color 0.3s, border-color 0.3s; /* Transición suave al pasar el mouse */
+    font-size: 25px;
 }

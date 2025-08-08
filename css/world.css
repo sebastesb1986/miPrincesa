@@ -1,0 +1,44 @@
+/* Fondo tipo pergamino para el body */
+body {
+    background-color: #f4f1e1; /* Color pergamino claro */
+    font-family: 'Times New Roman', serif; /* Estilo clásico para todo el texto */
+    color: #333; /* Color de texto oscuro para un buen contraste */
+}
+
+/* Estilo para la tabla */
+.gallery-table {
+    width: 100%;
+    border-collapse: collapse; /* Elimina los espacios entre celdas */
+}
+
+.gallery-table td {
+    width: 33.33%; /* Asegura que las celdas tengan el mismo tamaño */
+    padding: 5px;  /* Espacio entre las imágenes */
+}
+
+/* Estilo para las imágenes dentro de la tabla */
+.gallery-table img {
+    width: 100%;              /* Asegura que la imagen ocupe todo el ancho de la celda */
+    height: 100%;            /* Fija la altura de todas las imágenes */
+    object-fit: cover;        /* Hace que las imágenes se ajusten al tamaño sin deformarse */
+    border: 5px solid #d4af37; /* Marco dorado estilo antiguo */
+    border-radius: 12px;      /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave para un efecto más histórico */
+}
+
+/* Título centralizado */
+h1 {
+    font-family: 'Georgia', serif; /* Fuente clásica para el título */
+    color: #3a2a1f; /* Color marrón oscuro para el título */
+    font-size: 36px;
+}
+
+/* Páginas */
+.page {
+    margin-bottom: 20px;
+}
+
+/* Añadir margen a las imágenes */
+.gallery-page {
+    padding: 20px;
+}
