@@ -32,7 +32,7 @@ document.getElementById('carouselExampleAutoplaying').addEventListener('slide.bs
     // Verificar si ya hemos insertado el contenido en #our_space, para evitar duplicados
     if (index === textos.length - 1) {
         // Cambiar el texto del párrafo por el nuevo contenido
-        descripcion_a.innerHTML = `Pulsame y mira lo que adquirí recorriendo cada reino para ti: <a href="pages/vida.html">¡Vamos!</a>`;
+        descripcion_a.innerHTML = `Pulsame y mira lo que adquirí recorriendo cada reino para ti: <a href="pages/vida.html" target="_blank">¡Vamos!</a>`;
     } else {
         // Volver al texto original si no estamos en el último texto
         descripcion_a.textContent = "Leeme hasta el final";
