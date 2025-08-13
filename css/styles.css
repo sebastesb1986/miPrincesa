@@ -208,6 +208,25 @@ h1 {
     transition: all 0.3s ease;
 }
 
+/* Ajustes específicos para móvil */
+@media (max-width: 768px) {
+    .carousel-item img {
+        height: 300px;
+        object-fit: contain;
+        background-color: #000;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-item img {
+        height: 250px;
+        object-fit: contain;
+        background-color: #000;
+        padding: 8px;
+    }
+}
+
 /* Controles del carrusel */
 .carousel-control-prev,
 .carousel-control-next {
@@ -417,11 +436,23 @@ h1 {
     
     .carousel-item img {
         height: 300px;
+        object-fit: contain;
+        background-color: #000;
+        padding: 10px;
     }
     
     .btn {
         padding: 12px 24px;
         font-size: 1rem;
+    }
+    
+    .book-layout {
+        gap: 20px;
+    }
+    
+    .text-content,
+    .image-content {
+        padding: 20px;
     }
 }
 
@@ -431,16 +462,40 @@ h1 {
     }
     
     .book-layout {
-        gap: 20px;
+        gap: 15px;
     }
     
     .text-content,
     .page {
-        padding: 20px;
+        padding: 15px;
     }
     
     .carousel-item img {
         height: 250px;
+        object-fit: contain;
+        background-color: #000;
+        padding: 8px;
+    }
+    
+    .carousel {
+        margin: 0 -10px;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 40px;
+        height: 40px;
+        margin: 0 10px;
+    }
+    
+    .carousel-indicators {
+        margin-top: 15px;
+    }
+    
+    .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+        margin: 0 3px;
     }
 }
 

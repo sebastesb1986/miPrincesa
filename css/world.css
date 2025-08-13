@@ -334,10 +334,18 @@ h3 {
     
     .carousel-item img {
         height: 300px;
+        object-fit: contain;
+        background-color: #000;
+        padding: 10px;
     }
     
     .book-layout {
         gap: 20px;
+    }
+    
+    .text-content,
+    .image-content {
+        padding: 20px;
     }
 }
 
@@ -351,16 +359,40 @@ h3 {
     }
     
     .book-layout {
-        gap: 20px;
+        gap: 15px;
     }
     
     .text-content,
     .page {
-        padding: 20px;
+        padding: 15px;
     }
     
     .carousel-item img {
         height: 250px;
+        object-fit: contain;
+        background-color: #000;
+        padding: 8px;
+    }
+    
+    .carousel {
+        margin: 0 -10px;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 40px;
+        height: 40px;
+        margin: 0 10px;
+    }
+    
+    .carousel-indicators {
+        margin-top: 15px;
+    }
+    
+    .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+        margin: 0 3px;
     }
     
     .story-text p {

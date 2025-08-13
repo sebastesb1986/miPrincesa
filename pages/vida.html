@@ -121,5 +121,86 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    
+    <!-- Script específico para la página de viajes -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('carouselExampleAutoplaying');
+            const indicators = document.querySelectorAll('.carousel-indicators button');
+            
+            // Función para actualizar los indicadores del carrusel
+            function updateCarouselIndicators(activeIndex) {
+                indicators.forEach((indicator, index) => {
+                    if (index === activeIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Evento para cuando el carrusel esté cambiando
+            carousel.addEventListener('slide.bs.carousel', function (event) {
+                const index = event.to;
+                updateCarouselIndicators(index);
+            });
+            
+            // Evento para cuando el carrusel termine de cambiar
+            carousel.addEventListener('slid.bs.carousel', function (event) {
+                const index = event.to;
+                updateCarouselIndicators(index);
+            });
+            
+            // Hacer que los indicadores sean clickeables
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', function() {
+                    // Usar Bootstrap para cambiar al slide específico
+                    const carouselInstance = new bootstrap.Carousel(carousel);
+                    carouselInstance.to(index);
+                });
+            });
+            
+            // Inicializar el primer indicador como activo
+            updateCarouselIndicators(0);
+            
+            // Añadir efectos visuales al carrusel
+            carousel.addEventListener('slide.bs.carousel', function (event) {
+                // Añadir efecto de brillo a la imagen activa
+                const activeItem = carousel.querySelector('.carousel-item.active');
+                if (activeItem) {
+                    activeItem.style.boxShadow = '0 0 30px rgba(30, 58, 138, 0.6)';
+                    activeItem.style.transform = 'scale(1.02)';
+                }
+            });
+            
+            carousel.addEventListener('slid.bs.carousel', function (event) {
+                // Remover efectos de la imagen anterior
+                const allItems = carousel.querySelectorAll('.carousel-item');
+                allItems.forEach(item => {
+                    item.style.boxShadow = 'none';
+                    item.style.transform = 'scale(1)';
+                });
+                
+                // Aplicar efectos a la nueva imagen activa
+                const newActiveItem = carousel.querySelector('.carousel-item.active');
+                if (newActiveItem) {
+                    newActiveItem.style.boxShadow = '0 0 30px rgba(30, 58, 138, 0.6)';
+                    newActiveItem.style.transform = 'scale(1.02)';
+                }
+            });
+            
+            // Efectos hover para las imágenes
+            const carouselImages = carousel.querySelectorAll('.carousel-item img');
+            carouselImages.forEach(img => {
+                img.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                });
+                
+                img.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
