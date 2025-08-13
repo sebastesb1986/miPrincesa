@@ -1,135 +1,552 @@
-body {
-    font-family: 'Georgia', serif;
-    background-color: #e9e5dc;
-    color: #333;
+/* Estilos para el libro de cuento romántico */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #1E3A8A;
+    --secondary-color: #3B82F6;
+    --accent-color: #60A5FA;
+    --text-color: #1E293B;
+    --background-color: #F8FAFC;
+    --book-shadow: 0 20px 40px rgba(30, 58, 138, 0.2);
+    --page-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --medieval-blue: #1E40AF;
+    --medieval-light-blue: #93C5FD;
+    --medieval-white: #FEFEFE;
+    --medieval-cream: #F8FAFC;
+}
+
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 50%, #CBD5E1 100%);
+    min-height: 100vh;
     padding: 20px;
+    color: var(--text-color);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Fondo animado con partículas */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(30, 58, 138, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(96, 165, 250, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: backgroundFloat 20s ease-in-out infinite;
+}
+
+@keyframes backgroundFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(1deg); }
 }
 
 .container {
-    max-width: 900px;
-    margin: 40px auto;
-    background: #e9e5dc;
-    padding: 40px 60px;
-    border-radius: 15px;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
-    border: 1px solid #d8d3c3;
-    font-family: 'Georgia', serif;
-    position: relative;
-    overflow: visible; /* 👈 Esto permite ver las flechas */
-    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-/* Pseudo-elementos decorativos para borde tipo hoja */
-.container::before,
-.container::after {
-    content: "";
+/* Estilo del libro */
+.book {
+    background: linear-gradient(145deg, #1E3A8A, #3B82F6);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--book-shadow);
+    position: relative;
+    overflow: hidden;
+    animation: bookAppear 1.5s ease-out;
+}
+
+@keyframes bookAppear {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.book::before {
+    content: '';
     position: absolute;
     top: 0;
+    left: 0;
+    right: 0;
     bottom: 0;
-    width: 20px;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.03) 0%, transparent 100%);
-    z-index: 0; /* 👈 Debajo de todo */
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
 }
 
-.container::before {
-    left: -20px;
+/* Páginas del libro */
+.page {
+    background: linear-gradient(135deg, #FEFEFE 0%, #F8FAFC 100%);
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: var(--page-shadow);
+    position: relative;
+    border: 2px solid #CBD5E1;
+    transition: all 0.3s ease;
 }
 
-.container::after {
-    right: -20px;
+.page:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Título del cuento */
+.page::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+/* Títulos */
 h1 {
-    color: #4a4a4a;
-    font-size: 2.8em;
-    font-weight: bold;
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    color: var(--primary-color);
     text-align: center;
     margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(30, 58, 138, 0.3);
+    background: linear-gradient(45deg, #1E3A8A, #3B82F6, #60A5FA);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleGlow 3s ease-in-out infinite alternate;
 }
 
-/* Texto del cuento */
-p {
-    font-size: 1.2em;
-    line-height: 1.8;
-    color: #4a4a4a;
-    text-align: justify;
-    text-indent: 2em;
+@keyframes titleGlow {
+    from { filter: drop-shadow(0 0 5px rgba(30, 58, 138, 0.5)); }
+    to { filter: drop-shadow(0 0 20px rgba(30, 58, 138, 0.8)); }
 }
 
-/* Botón de audio */
-#btnPlayAudio {
-    font-family: 'Georgia', serif;
-    background-color: #990000;
-    border: none;
-    padding: 10px 25px;
-    font-size: 1.1em;
-    border-radius: 8px;
-    transition: background-color 0.3s;
+/* Layout del libro */
+.book-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    min-height: 600px;
 }
 
-#btnPlayAudio:hover {
-    background-color: #7a0000;
-}
-
-#btnPlayAudio2 {
-    font-family: 'Georgia', serif;
-    background-color: #1e3a5f;
-    border: none;
-    padding: 10px 25px;
-    font-size: 1.1em;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-}
-
-#btnPlayAudio2:hover {
-    background-color: #3b5f83;
-}
-
-/* Carrusel de imágenes */
-.carousel {
-    overflow: visible; /* 👈 Para que las flechas no se oculten */
+.text-content {
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    border: 2px solid #CBD5E1;
     position: relative;
-    z-index: 2;
+    transition: all 0.3s ease;
 }
 
-.carousel-inner img {
-    height: 500px;
-    object-fit: contain;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 5px;
+.text-content:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateX(-5px);
 }
 
-/* Sombras suaves en imágenes */
+.text-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1E3A8A, #3B82F6, #60A5FA);
+    border-radius: 15px 15px 0 0;
+}
+
+.image-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Estilos para el carrusel */
+.carousel {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 3px solid #CBD5E1;
+    transition: all 0.3s ease;
+}
+
+.carousel:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-inner {
+    background: #000;
+}
+
 .carousel-item img {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    background-color: #e9e5dc; /* Color de fondo tipo pergamino */
-    padding: 15px; /* Espaciado alrededor de la imagen */
-    border-radius: 10px; /* Bordes redondeados */
-    border: 1px solid #d8d3c3; /* Borde suave tipo pergamino */
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: all 0.3s ease;
 }
 
-/* Flechas del carrusel */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: rgba(90, 42, 131, 0.9);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-}
-
-/* Flechas en primer plano */
+/* Controles del carrusel */
 .carousel-control-prev,
 .carousel-control-next {
-    z-index: 5;
-    width: 5%;
+    background: rgba(30, 58, 138, 0.8);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: 0 20px;
+    transition: all 0.3s ease;
 }
 
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background: rgba(30, 58, 138, 1);
+    transform: scale(1.1);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: brightness(0) invert(1);
+}
+
+/* Indicadores del carrusel */
+.carousel-indicators {
+    margin-top: 20px;
+}
+
+.carousel-indicators button {
+    background-color: #CBD5E1;
+    border: 2px solid #94A3B8;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.carousel-indicators button.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+.carousel-indicators button:hover {
+    transform: scale(1.1);
+    background-color: var(--secondary-color);
+}
+
+/* Botones */
+.btn {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    padding: 15px 30px;
+    border-radius: 25px;
+    border: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+/* Botón rojo pasión para "Cuéntame la Historia" */
+.btn-danger {
+    background: linear-gradient(45deg, #DC2626, #B91C1C);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(45deg, #B91C1C, #991B1B);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
+}
+
+/* Botón azul celeste para "¿Qué Significas para Mí?" */
+.btn-info {
+    background: linear-gradient(45deg, #3B82F6, #1D4ED8);
+    color: white;
+}
+
+.btn-info:hover {
+    background: linear-gradient(45deg, #1D4ED8, #1E40AF);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+/* Textos descriptivos */
 #descripcion-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--primary-color);
     text-align: center;
-    text-indent: 0;
-    font-size: 30px;
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    border: 2px solid #CBD5E1;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#descripcion-text-a {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--secondary-color);
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    border: 2px solid #CBD5E1;
+    transition: all 0.3s ease;
+}
+
+#descripcion-text-a a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+#descripcion-text-a a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* Decoraciones del libro */
+.book-decoration {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #60A5FA, #3B82F6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    box-shadow: 0 5px 15px rgba(96, 165, 250, 0.4);
+    animation: decorationFloat 3s ease-in-out infinite;
+}
+
+@keyframes decorationFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.book-decoration::before {
+    content: '👑';
+    font-size: 2.5rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .book-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .text-content,
+    .image-content {
+        order: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .book {
+        padding: 20px;
+    }
+    
+    .page {
+        padding: 25px;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    #descripcion-text {
+        font-size: 1.4rem;
+    }
+    
+    .carousel-item img {
+        height: 300px;
+    }
+    
+    .btn {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .book-layout {
+        gap: 20px;
+    }
+    
+    .text-content,
+    .page {
+        padding: 20px;
+    }
+    
+    .carousel-item img {
+        height: 250px;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Efectos hover para las imágenes */
+.carousel-item img:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+
+/* Estilo para el enlace de navegación */
+.nav-link {
+    display: inline-block;
+    background: linear-gradient(45deg, #1E3A8A, #3B82F6);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.nav-link:hover::before {
+    left: 100%;
+}
+
+.nav-link:hover {
+    background: linear-gradient(45deg, #3B82F6, #60A5FA);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(30, 58, 138, 0.4);
+    color: white;
+}
+
+/* Efectos especiales para partículas */
+.heart-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 1000;
+    animation: heartFloat 3s ease-out forwards;
+}
+
+@keyframes heartFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.5) rotate(360deg);
+    }
+}
+
+/* Efectos de brillo para elementos interactivos */
+.interactive-element {
+    transition: all 0.3s ease;
+}
+
+.interactive-element:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+}
+
+/* Estilos para el texto con efecto de máquina de escribir */
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid var(--accent-color);
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--accent-color); }
 }
 

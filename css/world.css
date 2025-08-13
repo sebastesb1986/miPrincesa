@@ -1,24 +1,416 @@
-/* Estilo para las imágenes del carrusel */
+/* Estilos para la página de viajes del libro de cuento romántico */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #1E3A8A;
+    --secondary-color: #3B82F6;
+    --accent-color: #60A5FA;
+    --text-color: #1E293B;
+    --background-color: #F8FAFC;
+    --book-shadow: 0 20px 40px rgba(30, 58, 138, 0.2);
+    --page-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --medieval-blue: #1E40AF;
+    --medieval-light-blue: #93C5FD;
+    --medieval-white: #FEFEFE;
+    --medieval-cream: #F8FAFC;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 50%, #CBD5E1 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Estilo del libro */
+.book {
+    background: linear-gradient(145deg, #1E3A8A, #3B82F6);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--book-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.book::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Páginas del libro */
+.page {
+    background: linear-gradient(135deg, #FEFEFE 0%, #F8FAFC 100%);
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: var(--page-shadow);
+    position: relative;
+    border: 2px solid #CBD5E1;
+}
+
+.page::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+/* Títulos */
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(30, 58, 138, 0.3);
+    background: linear-gradient(45deg, #1E3A8A, #3B82F6, #60A5FA);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(30, 58, 138, 0.2);
+}
+
+h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+/* Layout del libro */
+.book-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    min-height: 600px;
+}
+
+.text-content {
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    border: 2px solid #CBD5E1;
+    position: relative;
+}
+
+.text-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #1E3A8A, #3B82F6, #60A5FA);
+    border-radius: 15px 15px 0 0;
+}
+
+.image-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Estilos para el carrusel */
+.carousel {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    border: 3px solid #CBD5E1;
+}
+
+.carousel-inner {
+    background: #000;
+}
+
 .carousel-item img {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    background-color: #e9e5dc; /* Color de fondo tipo pergamino */
-    padding: 15px; /* Espaciado alrededor de la imagen */
-    border-radius: 10px; /* Bordes redondeados */
-    border: 1px solid #d8d3c3; /* Borde suave tipo pergamino */
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
-/* Flechas del carrusel */
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: rgba(90, 42, 131, 0.9);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-}
-
-/* Flechas en primer plano */
+/* Controles del carrusel */
 .carousel-control-prev,
 .carousel-control-next {
-    z-index: 5;
-    width: 5%;
+    background: rgba(30, 58, 138, 0.8);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: 0 20px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: brightness(0) invert(1);
+}
+
+/* Indicadores del carrusel */
+.carousel-indicators {
+    margin-top: 20px;
+}
+
+.carousel-indicators button {
+    background-color: #CBD5E1;
+    border: 2px solid #94A3B8;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.carousel-indicators button.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+.carousel-indicators button:hover {
+    transform: scale(1.1);
+    background-color: var(--secondary-color);
+}
+
+/* Textos y párrafos */
+.story-text p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+.quote-box {
+    background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(59, 130, 246, 0.1));
+    padding: 20px;
+    border-radius: 15px;
+    border-left: 4px solid var(--accent-color);
+    margin: 30px 0;
+}
+
+.quote-box p {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin: 0;
+}
+
+/* Descripción de imágenes */
+.image-description {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #CBD5E1;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.image-description h3 {
+    font-family: 'Dancing Script', cursive;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.image-description p {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Enlaces de navegación */
+.nav-link {
+    display: inline-block;
+    background: linear-gradient(45deg, #1E3A8A, #3B82F6);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
+}
+
+.nav-link:hover {
+    background: linear-gradient(45deg, #3B82F6, #60A5FA);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(30, 58, 138, 0.4);
+    color: white;
+}
+
+/* Decoraciones del libro */
+.book-decoration {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #60A5FA, #3B82F6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    box-shadow: 0 5px 15px rgba(96, 165, 250, 0.4);
+}
+
+.book-decoration::before {
+    content: '🌍';
+    font-size: 2.5rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .book-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .text-content,
+    .image-content {
+        order: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .book {
+        padding: 20px;
+    }
+    
+    .page {
+        padding: 25px;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .story-text p {
+        font-size: 1.1rem;
+    }
+    
+    .carousel-item img {
+        height: 300px;
+    }
+    
+    .book-layout {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .book-layout {
+        gap: 20px;
+    }
+    
+    .text-content,
+    .page {
+        padding: 20px;
+    }
+    
+    .carousel-item img {
+        height: 250px;
+    }
+    
+    .story-text p {
+        font-size: 1rem;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.page {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Efectos hover para las imágenes */
+.carousel-item img:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+
+/* Efectos especiales para la página de viajes */
+.world-page {
+    background: linear-gradient(135deg, #FEFEFE 0%, #F0F9FF 100%);
+}
+
+.world-page::before {
+    border-color: #60A5FA;
+}
+
+/* Estilo para elementos especiales de viajes */
+.travel-element {
+    background: linear-gradient(45deg, rgba(96, 165, 250, 0.1), rgba(30, 58, 138, 0.1));
+    border: 2px solid #60A5FA;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.travel-element h4 {
+    color: #1E40AF;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
 }
