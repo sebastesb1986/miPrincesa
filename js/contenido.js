@@ -501,7 +501,8 @@ function showDetailedOptions() {
         { text: '¿Cómo me extraña? 🌙', action: 'missing' },
         { text: '¿Qué piensa de mí? 💫', action: 'thoughts' },
         { text: '¿Por qué no me busca? 🔍', action: 'search' },
-        { text: '¿Cuándo volverá? 🚀', action: 'return' }
+        { text: '¿Cuándo volverá? 🚀', action: 'return' },
+        { text: '¿deseas saber algo más o decirle algo a Sebas Nucita? 📱', action: 'contact' }
     ];
     
     options.forEach(option => {
@@ -530,6 +531,9 @@ function handleDetailedOption(action) {
             break;
         case 'return':
             handleReturnResponse();
+            break;
+        case 'contact':
+            handleContactResponse();
             break;
     }
 }
@@ -687,6 +691,27 @@ function showBackToOptions() {
     chatQuestions.appendChild(backBtn);
 }
 
+// Función para manejar respuesta sobre contacto
+function handleContactResponse() {
+    addMessage('¿Quieres contactar a Sebas Nucita? 📱', 'user');
+    
+    setTimeout(() => {
+        addMessage('¡Perfecto! El oráculo siente que es el momento de romper el silencio... 💌✨', 'oracle');
+        
+        setTimeout(() => {
+            addMessage('¿Te gustaría enviarle un mensaje directo a tu Sebas Nucita? 💬💕', 'oracle');
+            
+            setTimeout(() => {
+                addMessage('Elige la opción que prefieras para comunicarte con él: 📱✨', 'oracle');
+                
+                setTimeout(() => {
+                    showWhatsAppOptions();
+                }, 1000);
+            }, 1000);
+        }, 1000);
+    }, 500);
+}
+
 // Función para inicializar el chat del oráculo
 function initializeOracula() {
     const chatMessages = document.getElementById('chatMessages');
@@ -697,7 +722,7 @@ function initializeOracula() {
     chatQuestions.innerHTML = '';
     
     // Mostrar mensaje inicial
-    addMessage("🔮 ¡Bienvenida al oráculo del Amor! Soy el guardián de los sentimientos de tu Sebas Nucita. ¿Qué quieres saber sobre lo que siente por ti?", 'initial');
+    addMessage("🔮 ¡Bienvenida al oráculo del Amor! Soy el guardián de los sentimientos de tu Sebas Nucita. ¿Qué quieres saber sobre lo que siente por ti? Sientete en paz, tranquila y dejate guiar.", 'initial');
     
     // Mostrar preguntas programadas
     setTimeout(() => {
