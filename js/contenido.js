@@ -734,7 +734,11 @@ function handleWhatsAppQuestion() {
             addMessage('¿Te gustaría enviarle un mensaje directo a tu Sebas Nucita? 💬💕', 'oracle');
             
             setTimeout(() => {
-                showWhatsAppOptions();
+                addMessage('Elige la opción que prefieras para comunicarte con él: 📱✨', 'oracle');
+                
+                setTimeout(() => {
+                    showWhatsAppOptions();
+                }, 1000);
             }, 1000);
         }, 1000);
     }, 500);
@@ -750,13 +754,37 @@ function showWhatsAppOptions() {
     whatsappBtn.innerHTML = '📱 Comunicate...';
     whatsappBtn.addEventListener('click', () => openWhatsApp());
     
+    const alternativeBtn = document.createElement('button');
+    alternativeBtn.className = 'question-btn alternative-btn';
+    alternativeBtn.innerHTML = '📱 Comunicate...';
+    alternativeBtn.addEventListener('click', () => openWhatsAppWeb());
+    
     const cancelBtn = document.createElement('button');
     cancelBtn.className = 'question-btn no-btn';
     cancelBtn.textContent = 'No, gracias 💙';
     cancelBtn.addEventListener('click', () => showProgrammedQuestions());
     
     chatQuestions.appendChild(whatsappBtn);
+    chatQuestions.appendChild(alternativeBtn);
     chatQuestions.appendChild(cancelBtn);
+}
+
+// Función para detectar si es dispositivo móvil
+function isMobileDevice() {
+    // Detectar por User Agent
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const isMobileUA = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
+    
+    // Detectar por tamaño de pantalla
+    const isMobileScreen = window.innerWidth <= 768;
+    
+    // Detectar por capacidades táctiles
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    // Detectar por orientación (móviles cambian orientación)
+    const isMobileOrientation = window.orientation !== undefined;
+    
+    return isMobileUA || isMobileScreen || (isTouchDevice && isMobileOrientation);
 }
 
 // Función para abrir WhatsApp
@@ -773,12 +801,59 @@ function openWhatsApp() {
                 // Abrir WhatsApp con el número especificado
                 const phoneNumber = '+573175631608';
                 const message = encodeURIComponent('Hola Sebas Nucita, tengo algo que decirte... 💕');
-                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
                 
-                // Abrir en nueva pestaña
-                window.open(whatsappUrl, '_blank');
+                let whatsappUrl;
+                
+                if (isMobileDevice()) {
+                    // Para móviles, usar protocolo whatsapp://
+                    whatsappUrl = `whatsapp://send?phone=${phoneNumber}&text=${message}`;
+                    
+                    // Intentar abrir WhatsApp App
+                    window.location.href = whatsappUrl;
+                    
+                    // Fallback: después de un delay, abrir WhatsApp Web si la app no se abrió
+                    setTimeout(() => {
+                        const whatsappWebUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+                        window.open(whatsappWebUrl, '_blank');
+                    }, 2000);
+                    
+                } else {
+                    // Para desktop, usar WhatsApp Web
+                    whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+                    window.open(whatsappUrl, '_blank');
+                }
                 
                 addMessage('El portal se ha abierto. ¡No seas tímida y no reprimas! 💖✨', 'oracle');
+                
+                setTimeout(() => {
+                    addMessage('¿Te gustaría hacer otra pregunta al oráculo? 🔮', 'oracle');
+                    showProgrammedQuestions();
+                }, 2000);
+            }, 1000);
+        }, 1000);
+    }, 500);
+}
+
+// Función para abrir WhatsApp Web como alternativa
+function openWhatsAppWeb() {
+    addMessage('🌐 Abriendo WhatsApp Web...', 'user');
+    
+    setTimeout(() => {
+        addMessage('¡Perfecto! El oráculo te está conectando a través de WhatsApp Web... ✨💫', 'oracle');
+        
+        setTimeout(() => {
+            addMessage('Abriendo el portal web para que puedas escribirle tu mensaje... 🌐💌', 'oracle');
+            
+            setTimeout(() => {
+                // Abrir WhatsApp Web
+                const phoneNumber = '+573175631608';
+                const message = encodeURIComponent('Hola Sebas Nucita, tengo algo que decirte... 💕');
+                const whatsappWebUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+                
+                // Abrir en nueva pestaña
+                window.open(whatsappWebUrl, '_blank');
+                
+                addMessage('WhatsApp Web se ha abierto. ¡Escribe tu mensaje con amor! 💖✨', 'oracle');
                 
                 setTimeout(() => {
                     addMessage('¿Te gustaría hacer otra pregunta al oráculo? 🔮', 'oracle');
