@@ -794,7 +794,7 @@ function openWhatsApp() {
             setTimeout(() => {
                 // Abrir WhatsApp con el número especificado
                 const phoneNumber = '+573175631608';
-                const message = encodeURIComponent('Hola Sebas Nucita, tengo algo que decirte... 💕');
+                const message = encodeURIComponent('Hola Sebas Nucita, tengo algo que decirte...');
                 
                 let whatsappUrl;
                 
