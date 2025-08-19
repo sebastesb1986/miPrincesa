@@ -502,7 +502,7 @@ function showDetailedOptions() {
         { text: '¿Qué piensa de mí? 💫', action: 'thoughts' },
         { text: '¿Por qué no me busca? 🔍', action: 'search' },
         { text: '¿Cuándo volverá? 🚀', action: 'return' },
-        { text: '¿deseas saber algo más o decirle algo a Sebas Nucita? 📱', action: 'contact' }
+        { text: '¿Deseas saber algo más o decirle algo a Sebas Nucita? 📱', action: 'contact' }
     ];
     
     options.forEach(option => {
