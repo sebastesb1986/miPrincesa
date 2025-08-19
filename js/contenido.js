@@ -754,18 +754,12 @@ function showWhatsAppOptions() {
     whatsappBtn.innerHTML = '📱 Comunicate...';
     whatsappBtn.addEventListener('click', () => openWhatsApp());
     
-    const alternativeBtn = document.createElement('button');
-    alternativeBtn.className = 'question-btn alternative-btn';
-    alternativeBtn.innerHTML = '📱 Comunicate...';
-    alternativeBtn.addEventListener('click', () => openWhatsAppWeb());
-    
     const cancelBtn = document.createElement('button');
     cancelBtn.className = 'question-btn no-btn';
     cancelBtn.textContent = 'No, gracias 💙';
     cancelBtn.addEventListener('click', () => showProgrammedQuestions());
     
     chatQuestions.appendChild(whatsappBtn);
-    chatQuestions.appendChild(alternativeBtn);
     chatQuestions.appendChild(cancelBtn);
 }
 
