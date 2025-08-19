@@ -19,6 +19,7 @@
                 <div class="text-center my-4">
                     <button id="btnPlayAudio" class="btn btn-danger">Cuéntame la Historia</button>
                     <button id="btnPlayAudio2" class="btn btn-info">¿Qué Significas para Mí?</button>
+                    <button id="btnOracula" class="btn btn-warning">🔮 Pulsame y ven al Oráculo</button>
                 </div>
             </div>
 
@@ -114,5 +115,29 @@
     <script src="js/contenido.js"></script>
     <audio id="audio-cuento" src="audio/miPrincesa.mp3"></audio>
     <audio id="audio-pienso" src="audio/miPersonaFavorita.mp3"></audio>
+
+    <!-- Modal del Orácula -->
+    <div class="modal fade" id="oraculaModal" tabindex="-1" aria-labelledby="oraculaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="oraculaModalLabel">🔮 Orácula del Amor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chatMessages">
+                            <!-- Los mensajes del chat se mostrarán aquí -->
+                        </div>
+                        <div class="chat-input-container">
+                            <div class="chat-questions" id="chatQuestions">
+                                <!-- Las preguntas programadas se mostrarán aquí -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
