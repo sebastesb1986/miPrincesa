@@ -19,7 +19,7 @@
                 <div class="text-center my-4">
                     <button id="btnPlayAudio" class="btn btn-danger">Cuéntame la Historia</button>
                     <button id="btnPlayAudio2" class="btn btn-info">¿Qué Significas para Mí?</button>
-                    <button id="btnOracula" class="btn btn-warning">🔮 Pulsame y ven al Oráculo</button>
+                    <button id="btnOracula" class="btn btn-warning">🔮 Ven al Oráculo</button>
                 </div>
             </div>
 
@@ -115,13 +115,18 @@
     <script src="js/contenido.js"></script>
     <audio id="audio-cuento" src="audio/miPrincesa.mp3"></audio>
     <audio id="audio-pienso" src="audio/miPersonaFavorita.mp3"></audio>
+    <audio id="audio-tePienso" src="audio/tePienso.mp3"></audio>
 
     <!-- Modal del Orácula -->
     <div class="modal fade" id="oraculaModal" tabindex="-1" aria-labelledby="oraculaModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="oraculaModalLabel">🔮 Orácula del Amor</h5>
+                    <h5 class="modal-title" id="oraculaModalLabel">🔮 Oráculo de la Princesa</h5>
+                    <div class="audio-indicator" id="audioIndicator" style="cursor: pointer;">
+                        <span class="music-note" id="musicNote">🎵</span>
+                        <span class="audio-text" id="audioText">Música del Oráculo</span>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

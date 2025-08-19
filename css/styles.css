@@ -638,6 +638,47 @@ h1 {
     color: white;
 }
 
+/* Indicador de audio en el header */
+.audio-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: audioGlow 2s ease-in-out infinite alternate;
+    transition: all 0.3s ease;
+}
+
+.audio-indicator:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.music-note {
+    font-size: 1.2rem;
+    animation: musicFloat 1.5s ease-in-out infinite;
+}
+
+.audio-text {
+    font-size: 0.8rem;
+    color: white;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+@keyframes audioGlow {
+    from { box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+    to { box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
+}
+
+@keyframes musicFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+}
+
 .btn-close {
     filter: brightness(0) invert(1);
 }
@@ -796,11 +837,39 @@ h1 {
     box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
 }
 
+/* Estilo para botón de WhatsApp */
+.whatsapp-btn {
+    background: linear-gradient(45deg, #25D366, #128C7E) !important;
+    color: white;
+    margin: 10px auto;
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    font-weight: 700;
+}
+
+.whatsapp-btn:hover {
+    background: linear-gradient(45deg, #128C7E, #075E54) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+}
+
 /* Responsive para móvil */
 @media (max-width: 768px) {
     .modal-dialog {
         margin: 10px;
         max-width: calc(100% - 20px);
+    }
+    
+    .modal-header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .audio-indicator {
+        order: 2;
+        margin: 5px 0;
     }
     
     .chat-messages {
@@ -832,6 +901,12 @@ h1 {
         font-size: 0.9rem;
     }
     
+    .whatsapp-btn {
+        width: 90%;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
     .chat-questions {
         gap: 8px;
         justify-content: center;
@@ -848,6 +923,19 @@ h1 {
 @media (max-width: 480px) {
     .modal-title {
         font-size: 1.5rem;
+    }
+    
+    .audio-indicator {
+        padding: 4px 8px;
+        gap: 6px;
+    }
+    
+    .music-note {
+        font-size: 1rem;
+    }
+    
+    .audio-text {
+        font-size: 0.7rem;
     }
     
     .chat-messages {
@@ -874,6 +962,12 @@ h1 {
     }
     
     .back-btn {
+        width: 95%;
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+    
+    .whatsapp-btn {
         width: 95%;
         padding: 8px 16px;
         font-size: 0.85rem;
