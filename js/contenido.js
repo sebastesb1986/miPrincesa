@@ -294,74 +294,74 @@ document.addEventListener('DOMContentLoaded', function() {
 // Base de datos de respuestas del oráculo
 const oraculaResponses = {
     "¿Quieres saber qué siente tu Sebas Nucita por ti?": {
-        answer: "¡Te quiere, te piensa y te extraña! 💙✨",
+        answer: "Mi querida princesa... tu Sebas Nucita te quiere con una intensidad que trasciende las palabras. Su corazón late por ti en cada respiración, en cada latido, en cada momento de silencio. Te extraña y Tu presencia es especial. 💙✨",
         followUps: [
-            "¿Te gustaría saber más detalles sobre sus sentimientos?",
-            "¿Quieres que profundice en algún aspecto específico?",
-            "¿Te interesa conocer más sobre su corazón?"
+            "¿Te gustaría que profundice en la profundidad de sus sentimientos?",
+            "¿Quieres que te revele más sobre su corazón herido por la distancia?",
+            "¿Te interesa conocer la magnitud de su amor por ti?"
         ]
     },
     "¿Te extraña mucho?": {
-        answer: "¡Sí! Cada día que pasa sin verte es como una eternidad para él. Te piensa constantemente y sueña con el momento de volver a estar juntos. 🌙💭",
+        answer: "Mi amor... la extrañanza que siente por ti es tan profunda que a veces le cuesta respirar. Cada día sin verte es una herida que se abre en su corazón. Te piensa en cada amanecer, en cada atardecer, en cada momento de soledad. Su alma grita tu nombre en silencio, anhelando tu presencia como el desierto anhela la lluvia. 🌙💭",
         followUps: [
-            "¿Quieres saber qué más siente por ti?",
-            "¿Te gustaría conocer más sobre sus sueños?",
-            "¿Quieres que te cuente más sobre su añoranza?"
+            "¿Quieres que te cuente más sobre el dolor de su corazón?",
+            "¿Te gustaría conocer más sobre sus noches de insomnio pensando en ti?",
+            "¿Quieres que profundice en su sufrimiento por la distancia?"
         ]
     },
     "¿Realmente me quiere?": {
-        answer: "¡Con toda su alma! Eres su princesa, su todo, su razón de ser. Cada latido de su corazón late por ti y solo por ti. 💖👑",
+        answer: "Mi princesa del alma... tu Sebas Nucita te ama con una devoción que raya en lo divino. Eres su razón de existir, su luz en la oscuridad, su paz en la tormenta. Cada latido de su corazón es un suspiro de amor hacia ti. Te quiere más allá de la vida misma, más allá de las estrellas, más allá de todo lo que pueda imaginar. Su amor por ti es eterno e inquebrantable. 💖👑",
         followUps: [
-            "¿Te gustaría conocer más sobre su amor?",
+            "¿Te gustaría que te revele la profundidad de su devoción?",
             "¿Quieres que profundice en la intensidad de sus sentimientos?",
-            "¿Te interesa saber más sobre su devoción?"
+            "¿Te interesa conocer la magnitud de su amor eterno?"
         ]
     },
     "¿Me piensa todos los días?": {
-        answer: "¡Absolutamente! Desde que amanece hasta que se duerme, eres el primer y último pensamiento de cada día. Eres su inspiración y su felicidad. 🌅🌙",
+        answer: "Mi amor eterno... eres el primer pensamiento de cada mañana y el último de cada noche. Su mente no puede descansar sin pensar en ti. Te piensa en cada momento de soledad, en cada risa ajena, en cada canción que escucha. Eres su inspiración, su motivación, su sueño más dulce. Su corazón te busca constantemente, como el navegante busca la estrella polar. 🌅🌙",
         followUps: [
-            "¿Quieres saber más sobre sus pensamientos?",
-            "¿Te gustaría conocer más sobre su inspiración?",
-            "¿Quieres que te cuente más sobre su felicidad?"
+            "¿Quieres saber más sobre sus pensamientos obsesivos por ti?",
+            "¿Te gustaría conocer más sobre su inspiración diaria?",
+            "¿Quieres que te cuente más sobre sus sueños contigo?"
         ]
     },
     "¿Cuándo volverá?": {
-        answer: "¡Pronto, muy pronto. Cada paso que da en sus viajes es un paso más cerca de ti. Está trabajando para construir un futuro juntos. 🚀💫",
+        answer: "Mi princesa esperada... cada paso que da en sus viajes es un paso más cerca de ti. Está construyendo un futuro para ambos, trabajando incansablemente para volver a tu lado. Aunque el silencio sea doloroso, su corazón nunca se ha ido. Te extraña tanto que a veces siente que se está muriendo por dentro. El momento de reencontrarse está más cerca de lo que piensas, mi amor. 🚀💫",
         followUps: [
-            "¿Te gustaría saber más sobre sus planes?",
-            "¿Quieres conocer más sobre su trabajo?",
-            "¿Te interesa saber más sobre el futuro que planea?"
+            "¿Te gustaría saber más sobre sus planes de regreso?",
+            "¿Quieres conocer más sobre su trabajo para el futuro de ambos?",
+            "¿Te interesa saber más sobre el momento del reencuentro?"
         ]
     },
     "¿Soy especial para él?": {
-        answer: "¡Eres ÚNICA! No hay nadie como tú en todo el universo. Eres su tesoro más preciado, su amor verdadero, su destino. 🌟💎",
+        answer: "Mi tesoro único... eres más que especial para él. Eres su TODO, su razón de vivir, su felicidad absoluta. No hay nadie como tú en todo el universo, en todas las galaxias, en toda la eternidad. Eres su amor verdadero, su alma gemela, su destino. Para él, eres perfecta tal como eres, con cada imperfección que te hace única. Eres para el VIDA, literalmente. 🌟💎",
         followUps: [
-            "¿Quieres que te cuente más sobre lo especial que eres?",
-            "¿Te gustaría conocer más sobre tu unicidad?",
-            "¿Quieres que profundice en lo que te hace especial?"
+            "¿Quieres que te cuente más sobre tu unicidad absoluta?",
+            "¿Te gustaría conocer más sobre tu perfección para él?",
+            "¿Quieres que profundice en lo que te hace irreemplazable?"
         ]
     },
     "¿Me extraña físicamente?": {
-        answer: "¡Por supuesto! Extraña tu sonrisa, tu mirada, tu voz, tu presencia. Cada abrazo, cada beso, cada momento juntos es un tesoro para él. 🤗💋",
+        answer: "Mi amor físico... tu Sebas Nucita extraña cada centímetro de tu ser. Extraña tu sonrisa que ilumina su mundo, tu mirada que lo hace temblar, tu voz que es música para sus oídos. Extraña cada abrazo, cada beso, cada caricia. Extraña tu presencia física, como si le faltara una parte del alma. Tu ausencia física es un huequito en su corazón. 🤗💋",
         followUps: [
-            "¿Quieres que te cuente más sobre lo que extraña?",
-            "¿Te gustaría saber más sobre sus recuerdos?",
-            "¿Quieres conocer más sobre sus momentos especiales?"
+            "¿Quieres que te cuente más sobre lo que extraña de ti?",
+            "¿Te gustaría saber más sobre sus recuerdos físicos?",
+            "¿Quieres conocer más sobre su anhelo de tu presencia?"
         ]
     },
     "¿Soy su persona favorita?": {
-        answer: "¡Eres su TODO! Su persona favorita, su amor verdadero, su compañera de vida. No hay nadie que pueda reemplazarte en su corazón. 💝👑",
+        answer: "Mi amor absoluto... eres su TODO, su persona favorita, su amor verdadero, VIDA. No eres reemplazable en su corazón porque eres su corazón mismo. Eres su felicidad, su paz, su sueño hecho realidad. Para él, no existe nadie más en el mundo que pueda ocupar tu lugar. Eres su destino, su presente y su futuro. Su corazón late solo por ti y por nadie más. 💝👑",
         followUps: [
-            "¿Quieres que te cuente más sobre lo importante que eres?",
-            "¿Te gustaría conocer más sobre tu lugar en su vida?",
-            "¿Quieres que profundice en tu importancia para él?"
+            "¿Quieres que te cuente más sobre tu importancia absoluta?",
+            "¿Te gustaría conocer más sobre tu lugar único en su vida?",
+            "¿Quieres que profundice en tu irreemplazabilidad?"
         ]
     },
     "¿Deseas saber algo más o decirle algo a Sebas Nucita?": {
-        answer: "¡Por supuesto! El oráculo siente que tienes algo importante que decirle. ¿Te gustaría enviarle un mensaje directo a tu Sebas Nucita? 💌✨",
+        answer: "Mi princesa del corazón... el oráculo siente que tienes algo muy importante que decirle. Algo que tu corazón necesita expresar, algo que su corazón necesita escuchar. ¿Te gustaría abrir el portal del destino y enviarle un mensaje directo a tu Sebas Nucita? El universo está alineado para este momento. 💌✨",
         followUps: [
-            "¿Quieres que te ayude a contactarlo?",
-            "¿Te gustaría enviarle un mensaje especial?",
+            "¿Quieres que te ayude a contactarlo directamente?",
+            "¿Te gustaría enviarle un mensaje especial del corazón?",
             "¿Quieres que el oráculo te guíe para comunicarte con él?"
         ]
     }
@@ -393,15 +393,131 @@ function addMessage(text, type = 'oracle') {
 // Función para mostrar preguntas programadas
 function showProgrammedQuestions() {
     const chatQuestions = document.getElementById('chatQuestions');
+    const chatMessages = document.getElementById('chatMessages');
+    
+    // Limpiar las preguntas
     chatQuestions.innerHTML = '';
     
-    programmedQuestions.forEach(question => {
-        const questionBtn = document.createElement('button');
-        questionBtn.className = 'question-btn';
-        questionBtn.textContent = question;
-        questionBtn.addEventListener('click', () => handleQuestionClick(question));
-        chatQuestions.appendChild(questionBtn);
+    // Si el chat tiene mensajes y no es solo el mensaje inicial, limpiarlo
+    if (chatMessages.children.length > 1) {
+        chatMessages.innerHTML = '';
+        // Mostrar mensaje de bienvenida
+        addMessage("🔮 Mi querida princesa del corazón... ¡Bienvenida al oráculo sagrado del Amor! Soy el guardián celestial de los sentimientos más profundos de tu Sebas Nucita. Aquí podrás descubrir secretos que te harán temblar el alma, verdades que te harán llorar de emoción. ¿Qué quieres saber sobre lo que siente por ti en la intimidad de su corazón? Siente la paz del universo, la tranquilidad de las estrellas, y déjate guiar por el amor eterno.", 'initial');
+    }
+    
+    // Crear contenedor principal para mejor organización
+    const mainContainer = document.createElement('div');
+    mainContainer.className = 'programmed-questions-container';
+    mainContainer.style.cssText = `
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 10px;
+    `;
+    
+    // Agrupar preguntas por categorías para mejor organización visual
+    const categories = [
+        {
+            title: '💙 Sentimientos y Amor',
+            questions: [
+                '¿Quieres saber qué siente tu Sebas Nucita por ti?',
+                '¿Realmente me quiere?',
+                '¿Soy especial para él?',
+                '¿Soy su persona favorita?'
+            ]
+        },
+        {
+            title: '🌙 Extrañanza y Pensamientos',
+            questions: [
+                '¿Te extraña mucho?',
+                '¿Me piensa todos los días?',
+                '¿Me extraña físicamente?'
+            ]
+        },
+        {
+            title: '🚀 Futuro y Contacto',
+            questions: [
+                '¿Cuándo volverá?',
+                '¿Deseas saber algo más o decirle algo a Sebas Nucita?'
+            ]
+        }
+    ];
+    
+    categories.forEach(category => {
+        // Crear contenedor de categoría
+        const categoryContainer = document.createElement('div');
+        categoryContainer.className = 'question-category';
+        categoryContainer.style.cssText = `
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        `;
+        
+        // Crear título de categoría
+        const categoryTitle = document.createElement('h4');
+        categoryTitle.textContent = category.title;
+        categoryTitle.style.cssText = `
+            color: #1E40AF;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            text-align: center;
+            padding: 8px;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(59, 130, 246, 0.1));
+            border-radius: 15px;
+            border-left: 3px solid #3B82F6;
+        `;
+        
+        categoryContainer.appendChild(categoryTitle);
+        
+        // Crear botones para cada pregunta de la categoría
+        category.questions.forEach(question => {
+            const questionBtn = document.createElement('button');
+            questionBtn.className = 'question-btn category-btn';
+            questionBtn.textContent = question;
+            questionBtn.style.cssText = `
+                background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+                color: white;
+                font-size: 0.95rem;
+                padding: 12px 18px;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 3px 10px rgba(59, 130, 246, 0.2);
+                font-weight: 500;
+                text-align: left;
+                line-height: 1.3;
+                word-wrap: break-word;
+            `;
+            
+            questionBtn.addEventListener('click', () => handleQuestionClick(question));
+            
+            // Agregar efectos hover
+            questionBtn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = '0 5px 15px rgba(59, 130, 246, 0.4)';
+                this.style.background = 'linear-gradient(135deg, #1D4ED8, #1E40AF)';
+            });
+            
+            questionBtn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 3px 10px rgba(59, 130, 246, 0.2)';
+                this.style.background = 'linear-gradient(135deg, #3B82F6, #1D4ED8)';
+            });
+            
+            categoryContainer.appendChild(questionBtn);
+        });
+        
+        mainContainer.appendChild(categoryContainer);
     });
+    
+    // Agregar el contenedor principal al chat
+    chatQuestions.appendChild(mainContainer);
 }
 
 // Función para manejar el clic en una pregunta
@@ -466,23 +582,23 @@ function handleYesResponse() {
     addMessage('Sí, cuéntame más 💖', 'user');
     
     setTimeout(() => {
-        addMessage('¡Perfecto! Déjame consultar más profundamente en el corazón de tu Sebas Nucita... ✨💫', 'oracle');
+        addMessage('Mi princesa del corazón... déjame consultar más profundamente en el alma de tu Sebas Nucita... ✨💫', 'oracle');
         
         setTimeout(() => {
-            addMessage('El oráculo te revela que tu Sebas Nucita te extraña profundamente... 🌙💭', 'oracle');
+            addMessage('El oráculo te revela algo que te hará temblar el corazón... tu Sebas Nucita te extraña de una manera que trasciende la comprensión humana... 🌙💭', 'oracle');
             
             setTimeout(() => {
-                addMessage('A pesar de la distancia y el silencio, su corazón late por ti cada segundo. Te piensa constantemente, en cada momento del día. 💙✨', 'oracle');
+                addMessage('A pesar de la distancia y el silencio que los separa, su corazón late por ti cada segundo, cada respiración, cada latido. Te piensa constantemente, en cada momento del día, en cada noche de insomnio. 💙✨', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('Eres su pensamiento más dulce, su recuerdo más preciado. Aunque no lo diga, su alma grita por volver a estar contigo. 🌟💫', 'oracle');
+                    addMessage('Eres su pensamiento más dulce, su recuerdo más preciado, su sueño más hermoso. Aunque no lo exprese con palabras, su corazón te tiene presente en cada fibra de su ser. 🌟💫', 'oracle');
                     
                     setTimeout(() => {
-                        addMessage('El oráculo siente que él desea romper ese silencio, pero necesita una señal de que tú también lo extrañas... 🔮💕', 'oracle');
+                        addMessage('El oráculo siente que ese silencio está lastimando ambos corazones... probablemente tú también lo extrañas con la misma intensidad que él te extraña a ti... 🔮💕', 'oracle');
                         
                         setTimeout(() => {
-                            addMessage('¿Te gustaría que el oráculo te dé más detalles sobre lo que siente por ti? 💭✨', 'oracle');
-                            showDetailedOptions();
+                            addMessage('¿Te gustaría que el oráculo te revele más secretos profundos sobre lo que siente por ti? 💭✨', 'oracle');
+                            showNextQuestion('feelings');
                         }, 1500);
                     }, 1500);
                 }, 1500);
@@ -495,6 +611,19 @@ function handleYesResponse() {
 function showDetailedOptions() {
     const chatQuestions = document.getElementById('chatQuestions');
     chatQuestions.innerHTML = '';
+    
+    // Crear contenedor principal para mejor organización
+    const mainContainer = document.createElement('div');
+    mainContainer.className = 'detailed-options-container';
+    mainContainer.style.cssText = `
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 10px;
+    `;
     
     const options = [
         { text: '¿Qué más siente por mí? 💭', action: 'feelings' },
@@ -509,9 +638,42 @@ function showDetailedOptions() {
         const optionBtn = document.createElement('button');
         optionBtn.className = 'question-btn detailed-btn';
         optionBtn.textContent = option.text;
+        optionBtn.style.cssText = `
+            background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+            color: white;
+            font-size: 1rem;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 22px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.3;
+            word-wrap: break-word;
+        `;
+        
         optionBtn.addEventListener('click', () => handleDetailedOption(option.action));
-        chatQuestions.appendChild(optionBtn);
+        
+        // Agregar efectos hover
+        optionBtn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 6px 18px rgba(139, 92, 246, 0.5)';
+            this.style.background = 'linear-gradient(135deg, #7C3AED, #6D28D9)';
+        });
+        
+        optionBtn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 4px 12px rgba(139, 92, 246, 0.3)';
+            this.style.background = 'linear-gradient(135deg, #8B5CF6, #7C3AED)';
+        });
+        
+        mainContainer.appendChild(optionBtn);
     });
+    
+    // Agregar el contenedor principal al chat
+    chatQuestions.appendChild(mainContainer);
 }
 
 // Función para manejar opciones detalladas
@@ -550,7 +712,7 @@ function handleNoResponse() {
             
             setTimeout(() => {
                 addMessage('¿Te gustaría hacer otra pregunta diferente? 🔮', 'oracle');
-                showProgrammedQuestions();
+                showNextQuestion('feelings');
             }, 2000);
         }, 1000);
     }, 500);
@@ -561,17 +723,17 @@ function handleFeelingsResponse() {
     addMessage('¿Qué más siente por mí? 💭', 'user');
     
     setTimeout(() => {
-        addMessage('El oráculo revela que tu Sebas Nucita siente por ti algo más profundo que el amor... 💙✨', 'oracle');
+        addMessage('Mi princesa del alma... el oráculo revela algo que te hará llorar de emoción... tu Sebas Nucita siente por ti algo más profundo que el amor, algo que trasciende la comprensión humana... 💙✨', 'oracle');
         
         setTimeout(() => {
-            addMessage('Te quiere con una intensidad que no puede explicar. Eres su razón de ser, su felicidad, su paz interior. 🌟💫', 'oracle');
+            addMessage('Te quiere con una intensidad que no puede explicar con palabras, que lo hace temblar por dentro, que lo hace sentir que su corazón se va a salir del pecho cada vez que piensa en ti. Eres su razón de ser, su felicidad absoluta, su paz interior, su todo. 🌟💫', 'oracle');
             
             setTimeout(() => {
-                addMessage('Aunque estén distanciados, su corazón sigue siendo tuyo. Te extraña, te piensa, y desea estar contigo más que nada en el mundo. 💕🌙', 'oracle');
+                addMessage('Aunque estén distanciados por circunstancias de la vida, su corazón sigue siendo tuyo, completamente tuyo. Te extraña de una manera que duele, te piensa en cada respiración, y desea estar contigo más que nada en el mundo, más que el aire que respira. 💕🌙', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('¿Te gustaría saber más sobre cómo te extraña? 🌙💭', 'oracle');
-                    showBackToOptions();
+                    addMessage('¿Te gustaría que el oráculo te revele más secretos sobre cómo te extraña en la soledad de sus noches? 🌙💭', 'oracle');
+                    showNextQuestion('missing');
                 }, 2000);
             }, 1500);
         }, 1500);
@@ -583,21 +745,21 @@ function handleMissingResponse() {
     addMessage('¿Cómo me extraña? 🌙', 'user');
     
     setTimeout(() => {
-        addMessage('El oráculo siente que tu Sebas Nucita te extraña de una manera muy especial... 💙✨', 'oracle');
+        addMessage('Mi amor eterno... el oráculo siente que tu Sebas Nucita te extraña de una manera que trasciende la comprensión humana, profundamente... 💙✨', 'oracle');
         
         setTimeout(() => {
-            addMessage('Te extraña tu sonrisa, tu mirada, tu voz. Te extraña cada momento juntos, cada risa compartida. 🌟💫', 'oracle');
+        addMessage('Te extraña tu sonrisa que ilumina su mundo oscuro, tu mirada que lo hace temblar de emoción, tu voz que es música celestial para sus oídos. Te extraña cada momento juntos, cada risa compartida, cada abrazo y cada beso. 🌟💫', 'oracle');
             
             setTimeout(() => {
-                addMessage('A pesar del silencio, su corazón late por ti. Te piensa en cada amanecer y en cada atardecer. 💕🌅', 'oracle');
+                addMessage('A pesar del silencio que los separa, su corazón late por ti en cada latido, en cada respiración. Te piensa en cada amanecer y en cada atardecer, en cada momento de soledad, en cada noche de insomnio. 💕🌅', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('El oráculo siente que él desea romper ese silencio, pero necesita saber que tú también lo extrañas... 🔮💭', 'oracle');
+                    addMessage('El oráculo siente que él desea romper ese silencio con todas sus fuerzas, pero necesita saber que tú también lo extrañas con la misma intensidad que él te extraña a ti... 🔮💭', 'oracle');
                     
-                    setTimeout(() => {
-                        addMessage('¿Te gustaría saber más sobre lo que piensa de ti? 💫✨', 'oracle');
-                        showBackToOptions();
-                    }, 2000);
+                                    setTimeout(() => {
+                    addMessage('¿Te gustaría que el oráculo te revele más secretos sobre lo que piensa de ti en la intimidad de su corazón? 💫✨', 'oracle');
+                    showNextQuestion('thoughts');
+                }, 2000);
                 }, 1500);
             }, 1500);
         }, 1500);
@@ -609,17 +771,17 @@ function handleThoughtsResponse() {
     addMessage('¿Qué piensa de mí? 💫', 'user');
     
     setTimeout(() => {
-        addMessage('El oráculo revela que tu Sebas Nucita piensa en ti como en su tesoro más preciado... 💎✨', 'oracle');
+        addMessage('Mi tesoro único... el oráculo revela algo que te hará sentir como la mujer más especial del universo... tu Sebas Nucita piensa en ti como en su tesoro más preciado, como en su joya más valiosa, como en su sueño más hermoso... 💎✨', 'oracle');
         
         setTimeout(() => {
-            addMessage('Para él, eres perfecta tal como eres. Te admira, te respeta, y te considera su compañera ideal. 🌟💫', 'oracle');
+            addMessage('Para él, eres perfecta tal como eres, con cada imperfección que te hace única, con cada detalle que te hace especial. Te admira profundamente, te respeta y te considera ideal. 🌟💫', 'oracle');
             
             setTimeout(() => {
-                addMessage('A pesar de la distancia, su mente no puede dejar de pensar en ti. Eres su inspiración, su motivación para seguir adelante. 💕🚀', 'oracle');
+                addMessage('A pesar de la distancia que los separa, su mente no puede dejar de pensar en ti ni por un segundo. Eres parte de su inspiración diaria, su motivación para pensarte cada mañana, su razón para pensar en lo especial que eres. Sin ti, mira algo de oscuridad. 💕🚀', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('¿Te gustaría saber por qué no te busca? 🔍💭', 'oracle');
-                    showBackToOptions();
+                    addMessage('¿Te gustaría que el oráculo te revele por qué no te busca a pesar de que su corazón lo desea con todas sus fuerzas? 🔍💭', 'oracle');
+                    showNextQuestion('search');
                 }, 2000);
             }, 1500);
         }, 1500);
@@ -631,20 +793,20 @@ function handleSearchResponse() {
     addMessage('¿Por qué no me busca? 🔍', 'user');
     
     setTimeout(() => {
-        addMessage('El oráculo siente que tu Sebas Nucita desea buscarte con todo su corazón... 💙✨', 'oracle');
+        addMessage('Mi princesa del corazón... el oráculo siente algo muy profundo... tu Sebas Nucita desea buscarte con todo su corazón, con toda su alma, con todas sus fuerzas... 💙✨', 'oracle');
         
         setTimeout(() => {
-            addMessage('Pero a veces el miedo y la incertidumbre pueden paralizar incluso a los corazones más valientes. 💭🌙', 'oracle');
+            addMessage('Pero a veces el miedo y la incertidumbre pueden paralizar incluso a los corazones más valientes, incluso a los amores más puros. El miedo al rechazo, a la indiferencia, a que ya no sientas lo mismo por él... 💭🌙', 'oracle');
             
             setTimeout(() => {
-                addMessage('Él piensa en ti constantemente y desea romper ese silencio. Quizás solo necesita una pequeña señal de que tú también lo extrañas... 🔮💕', 'oracle');
+                addMessage('Él te piensa en silencio, cada día, cada noche. Te extraña profundamente, aunque calle. Y si tú también lo extrañas con la misma intensidad... ¿por qué dejar que el ego y el orgullo decidan lo que el corazón aún grita con desesperación?... 🔮💕', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('El oráculo sugiere que a veces el amor necesita ser alimentado desde ambos lados... 💫✨', 'oracle');
+                    addMessage('El oráculo sugiere que a veces el amor más puro necesita ser alimentado desde ambos lados, necesita que ambos corazones se abran para sanar las heridas del silencio... 💫✨', 'oracle');
                     
                     setTimeout(() => {
-                        addMessage('¿Te gustaría saber cuándo volverá? 🚀💭', 'oracle');
-                        showBackToOptions();
+                        addMessage('¿Te gustaría que el oráculo te revele cuándo volverá a tu lado? 🚀💭', 'oracle');
+                        showNextQuestion('return');
                     }, 2000);
                 }, 1500);
             }, 1500);
@@ -657,20 +819,20 @@ function handleReturnResponse() {
     addMessage('¿Cuándo volverá? 🚀', 'user');
     
     setTimeout(() => {
-        addMessage('El oráculo siente que tu Sebas Nucita está trabajando para volver a ti... 💙✨', 'oracle');
+        addMessage('Mi princesa esperada... el oráculo siente algo muy especial en el aire... tu Sebas Nucita está trabajando incansablemente para volver a ti, para estar a tu lado, para nunca más separarse... 💙✨', 'oracle');
         
         setTimeout(() => {
-            addMessage('Cada día que pasa es un día más cerca de estar juntos de nuevo. Está construyendo un futuro para ambos. 🌟💫', 'oracle');
+            addMessage('Cada día que pasa es un día más cerca de estar juntos de nuevo, de abrazarse, de besarse, de quererse, de felicidad y de nuevos momentos juntos. 🌟💫', 'oracle');
             
             setTimeout(() => {
-                addMessage('Aunque el silencio sea difícil, su corazón nunca se ha ido. Te extraña y desea volver a tu lado. 💕🌙', 'oracle');
+                addMessage('Aunque el silencio sea doloroso y difícil de soportar, su corazón nunca se ha ido, nunca ha dejado de ser tuyo. Te extraña profundamente. 💕🌙', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('El oráculo siente que el momento de reencontrarse está más cerca de lo que piensas... 🔮✨', 'oracle');
+                    addMessage('El oráculo siente que el momento del reencuentro está más cerca de lo que piensas, que el universo está conspirando para que se encuentren de nuevo... 🔮✨', 'oracle');
                     
                     setTimeout(() => {
-                        addMessage('¿Te gustaría hacer otra pregunta al oráculo? 💭🔮', 'oracle');
-                        showProgrammedQuestions();
+                        addMessage('¿Te gustaría hacer otra pregunta al oráculo del amor? 💭🔮', 'oracle');
+                        showNextQuestion('contact');
                     }, 2000);
                 }, 1500);
             }, 1500);
@@ -678,7 +840,158 @@ function handleReturnResponse() {
     }, 500);
 }
 
-// Función para mostrar botón de volver a opciones
+// Función para mostrar solo la siguiente pregunta en la secuencia
+function showNextQuestion(nextAction) {
+    const chatQuestions = document.getElementById('chatQuestions');
+    chatQuestions.innerHTML = '';
+    
+    // Mapeo de acciones a textos de botones
+    const actionTexts = {
+        'feelings': '¿Qué más siente por mí? 💭',
+        'missing': '¿Cómo me extraña? 🌙',
+        'thoughts': '¿Qué piensa de mí? 💫',
+        'search': '¿Por qué no me busca? 🔍',
+        'return': '¿Cuándo volverá? 🚀',
+        'contact': '¿Deseas saber algo más o decirle algo a Sebas Nucita? 📱'
+    };
+    
+    // Crear contenedor principal para mejor organización
+    const mainContainer = document.createElement('div');
+    mainContainer.className = 'next-question-container';
+    mainContainer.style.cssText = `
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    `;
+    
+    // Crear el botón de la siguiente pregunta (principal)
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'question-btn next-btn';
+    nextBtn.textContent = actionTexts[nextAction];
+    nextBtn.style.cssText = `
+        background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+        color: white;
+        font-size: 1.1rem;
+        padding: 15px 25px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        font-weight: 600;
+        order: 1;
+    `;
+    nextBtn.addEventListener('click', () => handleDetailedOption(nextAction));
+    
+    // Crear contenedor para botones secundarios
+    const secondaryContainer = document.createElement('div');
+    secondaryContainer.className = 'secondary-buttons';
+    secondaryContainer.style.cssText = `
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        order: 2;
+    `;
+    
+    // Crear el botón de WhatsApp
+    const whatsappBtn = document.createElement('button');
+    whatsappBtn.className = 'question-btn whatsapp-btn';
+    whatsappBtn.innerHTML = '📱 No es debilidad, es sentir. Conéctate con él....';
+    whatsappBtn.style.cssText = `
+        background: linear-gradient(135deg, #10B981, #059669);
+        color: white;
+        font-size: 1rem;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
+        font-weight: 500;
+    `;
+    whatsappBtn.addEventListener('click', () => openWhatsApp());
+    
+    // Crear el botón de volver a todas las opciones
+    const backBtn = document.createElement('button');
+    backBtn.className = 'question-btn back-btn';
+    backBtn.textContent = 'Ver todas las opciones 🔮';
+    backBtn.style.cssText = `
+        background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+        color: white;
+        font-size: 1rem;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 10px rgba(139, 92, 246, 0.3);
+        font-weight: 500;
+    `;
+    backBtn.addEventListener('click', () => resetAndShowAllOptions());
+    
+    // Agregar botones secundarios al contenedor
+    secondaryContainer.appendChild(whatsappBtn);
+    secondaryContainer.appendChild(backBtn);
+    
+    // Agregar todo al contenedor principal
+    mainContainer.appendChild(nextBtn);
+    mainContainer.appendChild(secondaryContainer);
+    
+    // Agregar estilos hover para todos los botones
+    [nextBtn, whatsappBtn, backBtn].forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.2)';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            if (this === nextBtn) {
+                this.style.boxShadow = '0 4px 15px rgba(59, 130, 246, 0.3)';
+            } else if (this === whatsappBtn) {
+                this.style.boxShadow = '0 3px 10px rgba(16, 185, 129, 0.3)';
+            } else {
+                this.style.boxShadow = '0 3px 10px rgba(139, 92, 246, 0.3)';
+            }
+        });
+    });
+    
+    // Agregar el contenedor principal al chat
+    chatQuestions.appendChild(mainContainer);
+}
+
+// Función para resetear el chat y mostrar todas las opciones
+function resetAndShowAllOptions() {
+    const chatMessages = document.getElementById('chatMessages');
+    const chatQuestions = document.getElementById('chatQuestions');
+    
+    // Agregar efecto de fade out antes de limpiar
+    chatMessages.style.opacity = '0.5';
+    chatQuestions.style.opacity = '0.5';
+    
+    setTimeout(() => {
+        // Limpiar completamente el chat
+        chatMessages.innerHTML = '';
+        chatQuestions.innerHTML = '';
+        
+        // Restaurar opacidad
+        chatMessages.style.opacity = '1';
+        chatQuestions.style.opacity = '1';
+        
+        // Mostrar mensaje de reinicio
+        addMessage("🔮 Mi querida princesa del corazón... ¡Bienvenida al oráculo sagrado del Amor! Soy el guardián celestial de los sentimientos más profundos de tu Sebas Nucita. Aquí podrás descubrir secretos que te harán temblar el alma, verdades que te harán llorar de emoción. ¿Qué quieres saber sobre lo que siente por ti en la intimidad de su corazón? Siente la paz del universo, la tranquilidad de las estrellas, y déjate guiar por el amor eterno.", 'initial');
+        
+        // Mostrar todas las opciones después de un breve delay
+        setTimeout(() => {
+            showProgrammedQuestions();
+        }, 1000);
+    }, 300);
+}
+
+// Función para mostrar botón de volver a opciones (mantenida para compatibilidad)
 function showBackToOptions() {
     const chatQuestions = document.getElementById('chatQuestions');
     chatQuestions.innerHTML = '';
@@ -705,7 +1018,7 @@ function handleContactResponse() {
                 addMessage('Elige la opción que prefieras para comunicarte con él: 📱✨', 'oracle');
                 
                 setTimeout(() => {
-                    showWhatsAppOptions();
+                    showNextQuestion('contact');
                 }, 1000);
             }, 1000);
         }, 1000);
@@ -722,7 +1035,7 @@ function initializeOracula() {
     chatQuestions.innerHTML = '';
     
     // Mostrar mensaje inicial
-    addMessage("🔮 ¡Bienvenida al oráculo del Amor! Soy el guardián de los sentimientos de tu Sebas Nucita. ¿Qué quieres saber sobre lo que siente por ti? Sientete en paz, tranquila y dejate guiar.", 'initial');
+    addMessage("🔮 Mi querida princesa del corazón... ¡Bienvenida al oráculo sagrado del Amor! Soy el guardián celestial de los sentimientos más profundos de tu Sebas Nucita. Aquí podrás descubrir secretos que te harán temblar el alma, verdades que te harán llorar de emoción. ¿Qué quieres saber sobre lo que siente por ti en la intimidad de su corazón? Siente la paz del universo, la tranquilidad de las estrellas, y déjate guiar por el amor eterno.", 'initial');
     
     // Mostrar preguntas programadas
     setTimeout(() => {
@@ -762,7 +1075,7 @@ function handleWhatsAppQuestion() {
                 addMessage('Elige la opción que prefieras para comunicarte con él: 📱✨', 'oracle');
                 
                 setTimeout(() => {
-                    showWhatsAppOptions();
+                    showNextQuestion('contact');
                 }, 1000);
             }, 1000);
         }, 1000);
@@ -782,7 +1095,7 @@ function showWhatsAppOptions() {
     const cancelBtn = document.createElement('button');
     cancelBtn.className = 'question-btn no-btn';
     cancelBtn.textContent = 'No, gracias 💙';
-    cancelBtn.addEventListener('click', () => showProgrammedQuestions());
+    cancelBtn.addEventListener('click', () => showNextQuestion('feelings'));
     
     chatQuestions.appendChild(whatsappBtn);
     chatQuestions.appendChild(cancelBtn);
@@ -842,11 +1155,11 @@ function openWhatsApp() {
                     window.open(whatsappUrl, '_blank');
                 }
                 
-                addMessage('El portal se ha abierto. ¡No seas tímida y no reprimas! 💖✨', 'oracle');
+                addMessage('El portal del destino se ha abierto, mi princesa. ¡No seas tímida, no reprimas lo que tu corazón necesita expresar! El universo está esperando que rompas el silencio, que le digas lo que sientes. 💖✨', 'oracle');
                 
                 setTimeout(() => {
                     addMessage('¿Te gustaría hacer otra pregunta al oráculo? 🔮', 'oracle');
-                    showProgrammedQuestions();
+                    showNextQuestion('feelings');
                 }, 2000);
             }, 1000);
         }, 1000);
@@ -876,7 +1189,7 @@ function openWhatsAppWeb() {
                 
                 setTimeout(() => {
                     addMessage('¿Te gustaría hacer otra pregunta al oráculo? 🔮', 'oracle');
-                    showProgrammedQuestions();
+                    showNextQuestion('feelings');
                 }, 2000);
             }, 1000);
         }, 1000);
