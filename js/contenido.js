@@ -1048,7 +1048,7 @@ function setupOraculaAudio() {
     const audioTePienso = document.getElementById('audio-tePienso');
     if (audioTePienso) {
         // Configurar volumen y propiedades del audio
-        audioTePienso.volume = 0.7; // Volumen al 70%
+        audioTePienso.volume = 0.25; // Volumen al 25%
         audioTePienso.loop = false; // No repetir automáticamente
         
         // Event listener para cuando termine la canción
@@ -1057,6 +1057,7 @@ function setupOraculaAudio() {
             // Opcional: reproducir de nuevo si la modal sigue abierta
             if (document.getElementById('oraculaModal').classList.contains('show')) {
                 audioTePienso.currentTime = 0;
+                audioTePienso.volume = 0.25; // Asegurar volumen al 25%
                 audioTePienso.play();
             }
         });
@@ -1205,9 +1206,10 @@ function setupAudioIndicator() {
         audioIndicator.addEventListener('click', function() {
             if (audioTePienso.paused) {
                 // Si está pausado, reanudar
+                audioTePienso.volume = 0.25; // Asegurar volumen al 25%
                 audioTePienso.play()
                     .then(() => {
-                        console.log('🎵 Canción tePienso.mp3 reanudada');
+                        console.log('🎵 Canción tePienso.mp3 reanudada al 25% de volumen');
                         updateAudioIndicator(true);
                     })
                     .catch(error => {
@@ -1265,9 +1267,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Reproducir la canción tePienso.mp3 cuando se abre la modal
             if (audioTePienso) {
                 audioTePienso.currentTime = 0; // Reiniciar desde el principio
+                audioTePienso.volume = 0.25; // Asegurar volumen al 25%
                 audioTePienso.play()
                     .then(() => {
-                        console.log('🎵 Canción tePienso.mp3 iniciada');
+                        console.log('🎵 Canción tePienso.mp3 iniciada al 25% de volumen');
                         updateAudioIndicator(true); // Actualizar indicador como reproduciendo
                     })
                     .catch(error => {
