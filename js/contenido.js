@@ -309,7 +309,7 @@ const oraculaResponses = {
             "¿Quieres que te cuente más sobre su añoranza?"
         ]
     },
-    "¿Realmente me ama?": {
+    "¿Realmente me quiere?": {
         answer: "¡Con toda su alma! Eres su princesa, su todo, su razón de ser. Cada latido de su corazón late por ti y solo por ti. 💖👑",
         followUps: [
             "¿Te gustaría conocer más sobre su amor?",
@@ -542,7 +542,7 @@ function handleNoResponse() {
         addMessage('¡Entendido! El oráculo respeta tu decisión. 💙✨', 'oracle');
         
         setTimeout(() => {
-            addMessage('Recuerda siempre que eres la princesa de su corazón, y que te ama más allá de las estrellas. 👑💖', 'oracle');
+            addMessage('Recuerda siempre que eres la princesa de su corazón, y que te quiere más allá de las estrellas. 👑💖', 'oracle');
             
             setTimeout(() => {
                 addMessage('¿Te gustaría hacer otra pregunta diferente? 🔮', 'oracle');
