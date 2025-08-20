@@ -376,8 +376,7 @@ const programmedQuestions = [
     "¿Cuándo volverá?",
     "¿Soy especial para él?",
     "¿Me extraña físicamente?",
-    "¿Soy su persona favorita?",
-    "¿Deseas saber algo más o decirle algo a Sebas Nucita?"
+    "¿Soy su persona favorita?"
 ];
 
 // Función para mostrar mensaje en el chat
@@ -438,10 +437,9 @@ function showProgrammedQuestions() {
             ]
         },
         {
-            title: '🚀 Futuro y Contacto',
+            title: '🚀 Futuro',
             questions: [
-                '¿Cuándo volverá?',
-                '¿Deseas saber algo más o decirle algo a Sebas Nucita?'
+                '¿Cuándo volverá?'
             ]
         }
     ];
@@ -522,6 +520,10 @@ function showProgrammedQuestions() {
 
 // Función para manejar el clic en una pregunta
 function handleQuestionClick(question) {
+    // Limpiar el chat antes de mostrar la nueva respuesta
+    const chatMessages = document.getElementById('chatMessages');
+    chatMessages.innerHTML = '';
+    
     // Mostrar la pregunta del usuario
     addMessage(question, 'user');
     
@@ -819,7 +821,7 @@ function handleReturnResponse() {
     addMessage('¿Cuándo volverá? 🚀', 'user');
     
     setTimeout(() => {
-        addMessage('Mi princesa esperada... el oráculo siente algo muy especial en el aire... tu Sebas Nucita está trabajando incansablemente para volver a ti, para estar a tu lado, para nunca más separarse... 💙✨', 'oracle');
+        addMessage('Mi princesa esperada... el oráculo siente algo muy especial en el aire... tu Sebas Nucita está trabajando incansablemente para un dia regresar, para compartir a tu lado... 💙✨', 'oracle');
         
         setTimeout(() => {
             addMessage('Cada día que pasa es un día más cerca de estar juntos de nuevo, de abrazarse, de besarse, de quererse, de felicidad y de nuevos momentos juntos. 🌟💫', 'oracle');
@@ -832,12 +834,104 @@ function handleReturnResponse() {
                     
                     setTimeout(() => {
                         addMessage('¿Te gustaría hacer otra pregunta al oráculo del amor? 💭🔮', 'oracle');
-                        showNextQuestion('contact');
+                        showFinalOptions();
                     }, 2000);
                 }, 1500);
             }, 1500);
         }, 1500);
     }, 500);
+}
+
+// Función para mostrar opciones finales (WhatsApp y volver a todas las opciones)
+function showFinalOptions() {
+    const chatQuestions = document.getElementById('chatQuestions');
+    chatQuestions.innerHTML = '';
+    
+    // Crear contenedor principal para mejor organización
+    const mainContainer = document.createElement('div');
+    mainContainer.className = 'final-options-container';
+    mainContainer.style.cssText = `
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    `;
+    
+    // Crear contenedor para botones
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.className = 'final-buttons';
+    buttonsContainer.style.cssText = `
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    `;
+    
+    // Crear el botón de WhatsApp
+    const whatsappBtn = document.createElement('button');
+    whatsappBtn.className = 'question-btn whatsapp-btn';
+    whatsappBtn.innerHTML = '📱 No es debilidad, es sentir. Conéctate con él....';
+    whatsappBtn.style.cssText = `
+        background: linear-gradient(135deg, #10B981, #059669);
+        color: white;
+        font-size: 1.1rem;
+        padding: 16px 24px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        font-weight: 600;
+        text-align: center;
+    `;
+    whatsappBtn.addEventListener('click', () => openWhatsApp());
+    
+    // Crear el botón de volver a todas las opciones
+    const backBtn = document.createElement('button');
+    backBtn.className = 'question-btn back-btn';
+    backBtn.textContent = 'Ver todas las opciones 🔮';
+    backBtn.style.cssText = `
+        background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+        color: white;
+        font-size: 1rem;
+        padding: 14px 20px;
+        border: none;
+        border-radius: 22px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 10px rgba(139, 92, 246, 0.3);
+        font-weight: 500;
+        text-align: center;
+    `;
+    backBtn.addEventListener('click', () => resetAndShowAllOptions());
+    
+    // Agregar botones al contenedor
+    buttonsContainer.appendChild(whatsappBtn);
+    buttonsContainer.appendChild(backBtn);
+    
+    // Agregar todo al contenedor principal
+    mainContainer.appendChild(buttonsContainer);
+    
+    // Agregar estilos hover para todos los botones
+    [whatsappBtn, backBtn].forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.2)';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            if (this === whatsappBtn) {
+                this.style.boxShadow = '0 4px 15px rgba(16, 185, 129, 0.3)';
+            } else {
+                this.style.boxShadow = '0 3px 10px rgba(139, 92, 246, 0.3)';
+            }
+        });
+    });
+    
+    // Agregar el contenedor principal al chat
+    chatQuestions.appendChild(mainContainer);
 }
 
 // Función para mostrar solo la siguiente pregunta en la secuencia
@@ -852,7 +946,7 @@ function showNextQuestion(nextAction) {
         'thoughts': '¿Qué piensa de mí? 💫',
         'search': '¿Por qué no me busca? 🔍',
         'return': '¿Cuándo volverá? 🚀',
-        'contact': '¿Deseas saber algo más o decirle algo a Sebas Nucita? 📱'
+
     };
     
     // Crear contenedor principal para mejor organización
@@ -1018,7 +1112,7 @@ function handleContactResponse() {
                 addMessage('Elige la opción que prefieras para comunicarte con él: 📱✨', 'oracle');
                 
                 setTimeout(() => {
-                    showNextQuestion('contact');
+                    showFinalOptions();
                 }, 1000);
             }, 1000);
         }, 1000);
@@ -1076,7 +1170,7 @@ function handleWhatsAppQuestion() {
                 addMessage('Elige la opción que prefieras para comunicarte con él: 📱✨', 'oracle');
                 
                 setTimeout(() => {
-                    showNextQuestion('contact');
+                    showFinalOptions();
                 }, 1000);
             }, 1000);
         }, 1000);
