@@ -44,7 +44,7 @@
                                 una historia que quiero compartir contigo, mi princesa.
                             </p>
                             
-                            <div class="quote-box" style="background: linear-gradient(135deg, rgba(255, 105, 180, 0.1), rgba(139, 69, 19, 0.1)); padding: 20px; border-radius: 15px; border-left: 4px solid var(--accent-color); margin: 30px 0;">
+                            <div class="quote-box" style="background: linear-gradient(135deg, rgba(194, 24, 91, 0.1), rgba(233, 30, 99, 0.1)); padding: 20px; border-radius: 15px; border-left: 4px solid var(--accent-color); margin: 30px 0;">
                                 <p style="font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: var(--primary-color); text-align: center; margin: 0;">
                                     "El amor verdadero no conoce fronteras, idiomas ni distancias. 
                                     Solo conoce el corazón que late por ti."
@@ -106,7 +106,7 @@
                         </div>
                         
                         <!-- Descripción de las imágenes -->
-                        <div class="image-description" style="background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 15px; border: 2px solid #DEB887; margin-top: 20px; text-align: center;">
+                        <div class="image-description" style="background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 15px; border: 2px solid #F8BBD9; margin-top: 20px; text-align: center;">
                             <h3 style="font-family: 'Dancing Script', cursive; color: var(--primary-color); margin-bottom: 15px;">Mis Aventuras por Ti</h3>
                             <p style="color: var(--text-color); font-size: 1.1rem;">
                                 Cada lugar visitado, cada cultura descubierta, 
@@ -122,22 +122,298 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     
-    <!-- Script específico para la página de viajes -->
+    <!-- Script mejorado para la página de viajes -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        // ===== MEJORAS DINÁMICAS PARA EL CARRUSEL DE VIAJES =====
+
+        // Función para crear efecto de partículas en el carrusel
+        function createCarouselParticles() {
+            const carousel = document.querySelector('.carousel');
+            if (!carousel) return;
+            
+            // Crear partículas flotantes
+            for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'carousel-particle';
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 4px;
+                    background: radial-gradient(circle, rgba(248, 187, 217, 0.8) 0%, transparent 70%);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 5;
+                    animation: floatParticle ${3 + Math.random() * 4}s ease-in-out infinite;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                `;
+                carousel.appendChild(particle);
+            }
+        }
+
+        // Función para mejorar la experiencia táctil en móviles
+        function enhanceTouchExperience() {
+            const carousel = document.querySelector('.carousel');
+            if (!carousel) return;
+            
+            let startX = 0;
+            let startY = 0;
+            let isDragging = false;
+            
+            carousel.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                isDragging = false;
+            }, { passive: true });
+            
+            carousel.addEventListener('touchmove', (e) => {
+                if (!startX || !startY) return;
+                
+                const currentX = e.touches[0].clientX;
+                const currentY = e.touches[0].clientY;
+                const diffX = Math.abs(currentX - startX);
+                const diffY = Math.abs(currentY - startY);
+                
+                if (diffX > diffY && diffX > 10) {
+                    isDragging = true;
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            carousel.addEventListener('touchend', (e) => {
+                if (!isDragging) return;
+                
+                const endX = e.changedTouches[0].clientX;
+                const diffX = startX - endX;
+                
+                if (Math.abs(diffX) > 50) {
+                    if (diffX > 0) {
+                        // Swipe izquierda - siguiente imagen
+                        const nextBtn = carousel.querySelector('.carousel-control-next');
+                        if (nextBtn) nextBtn.click();
+                    } else {
+                        // Swipe derecha - imagen anterior
+                        const prevBtn = carousel.querySelector('.carousel-control-prev');
+                        if (prevBtn) prevBtn.click();
+                    }
+                }
+                
+                startX = 0;
+                startY = 0;
+                isDragging = false;
+            }, { passive: true });
+        }
+
+        // Función para añadir efectos de hover mejorados
+        function addEnhancedHoverEffects() {
+            const carouselItems = document.querySelectorAll('.carousel-item img');
+            
+            carouselItems.forEach(img => {
+                img.addEventListener('mouseenter', () => {
+                    img.style.transform = 'scale(1.08) rotate(1deg)';
+                    img.style.filter = 'brightness(1.1) contrast(1.3) saturate(1.2)';
+                });
+                
+                img.addEventListener('mouseleave', () => {
+                    img.style.transform = 'scale(1) rotate(0deg)';
+                    img.style.filter = 'brightness(1) contrast(1.2) saturate(1)';
+                });
+            });
+        }
+
+        // Función para crear efecto de zoom suave en las imágenes
+        function addSmoothZoomEffect() {
+            const carousel = document.querySelector('.carousel');
+            if (!carousel) return;
+            
+            carousel.addEventListener('mouseenter', () => {
+                carousel.style.transform = 'scale(1.03) translateY(-5px)';
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                carousel.style.transform = 'scale(1) translateY(0)';
+            });
+        }
+
+        // Función para mejorar los indicadores con animaciones
+        function enhanceIndicators() {
+            const indicators = document.querySelectorAll('.carousel-indicators button');
+            
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('mouseenter', () => {
+                    indicator.style.transform = 'scale(1.3) translateY(-2px)';
+                });
+                
+                indicator.addEventListener('mouseleave', () => {
+                    if (!indicator.classList.contains('active')) {
+                        indicator.style.transform = 'scale(1) translateY(0)';
+                    }
+                });
+                
+                indicator.addEventListener('click', () => {
+                    // Añadir efecto de click
+                    indicator.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        if (indicator.classList.contains('active')) {
+                            indicator.style.transform = 'scale(1.4) translateY(-3px)';
+                        } else {
+                            indicator.style.transform = 'scale(1) translateY(0)';
+                        }
+                    }, 150);
+                });
+            });
+        }
+
+        // Función para crear efecto de carga progresiva de imágenes
+        function addProgressiveImageLoading() {
+            const carouselImages = document.querySelectorAll('.carousel-item img');
+            
+            carouselImages.forEach((img, index) => {
+                img.addEventListener('load', () => {
+                    img.style.opacity = '1';
+                    img.style.transform = 'scale(1)';
+                    
+                    // Añadir efecto de brillo al cargar
+                    const glow = document.createElement('div');
+                    glow.style.cssText = `
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(45deg, transparent 30%, rgba(248, 187, 217, 0.3) 50%, transparent 70%);
+                        pointer-events: none;
+                        z-index: 2;
+                        animation: imageGlow 1s ease-out;
+                    `;
+                    img.parentElement.appendChild(glow);
+                    
+                    setTimeout(() => {
+                        if (glow.parentElement) {
+                            glow.parentElement.removeChild(glow);
+                        }
+                    }, 1000);
+                });
+            });
+        }
+
+        // Función para añadir efectos de sonido visual (opcional)
+        function addVisualSoundEffects() {
+            const carousel = document.querySelector('.carousel');
+            if (!carousel) return;
+            
+            // Crear ondas de sonido visuales
+            const createSoundWave = () => {
+                const wave = document.createElement('div');
+                wave.style.cssText = `
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 20px;
+                    height: 20px;
+                    border: 2px solid rgba(248, 187, 217, 0.6);
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+                    pointer-events: none;
+                    z-index: 3;
+                    animation: soundWave 2s ease-out forwards;
+                `;
+                carousel.appendChild(wave);
+                
+                setTimeout(() => {
+                    if (wave.parentElement) {
+                        wave.parentElement.removeChild(wave);
+                    }
+                }, 2000);
+            };
+            
+            // Activar ondas en hover
+            carousel.addEventListener('mouseenter', createSoundWave);
+        }
+
+        // Función para mejorar la accesibilidad del carrusel
+        function improveCarouselAccessibility() {
+            const carousel = document.querySelector('.carousel');
+            if (!carousel) return;
+            
+            // Añadir navegación por teclado
+            carousel.addEventListener('keydown', (e) => {
+                const prevBtn = carousel.querySelector('.carousel-control-prev');
+                const nextBtn = carousel.querySelector('.carousel-control-next');
+                
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        if (prevBtn) prevBtn.click();
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        if (nextBtn) nextBtn.click();
+                        break;
+                }
+            });
+            
+            // Hacer el carrusel focusable
+            carousel.setAttribute('tabindex', '0');
+            carousel.setAttribute('role', 'region');
+            carousel.setAttribute('aria-label', 'Carrusel de imágenes de viajes románticos');
+        }
+
+        // Función para crear efecto de parallax sutil
+        function addParallaxEffect() {
+            const carousel = document.querySelector('.carousel');
+            if (!carousel) return;
+            
+            carousel.addEventListener('mousemove', (e) => {
+                const rect = carousel.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                carousel.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                carousel.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+            });
+        }
+
+        // Función para actualizar los indicadores del carrusel
+        function updateCarouselIndicators(activeIndex) {
+            const indicators = document.querySelectorAll('.carousel-indicators button');
+            indicators.forEach((indicator, index) => {
+                if (index === activeIndex) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+        }
+
+        // Inicializar todas las mejoras del carrusel cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', () => {
             const carousel = document.getElementById('carouselExampleAutoplaying');
             const indicators = document.querySelectorAll('.carousel-indicators button');
             
-            // Función para actualizar los indicadores del carrusel
-            function updateCarouselIndicators(activeIndex) {
-                indicators.forEach((indicator, index) => {
-                    if (index === activeIndex) {
-                        indicator.classList.add('active');
-                    } else {
-                        indicator.classList.remove('active');
-                    }
-                });
-            }
+            // Esperar un poco para que Bootstrap inicialice el carrusel
+            setTimeout(() => {
+                createCarouselParticles();
+                enhanceTouchExperience();
+                addEnhancedHoverEffects();
+                addSmoothZoomEffect();
+                enhanceIndicators();
+                addProgressiveImageLoading();
+                addVisualSoundEffects();
+                improveCarouselAccessibility();
+                addParallaxEffect();
+                
+                console.log('🌍 Mejoras dinámicas del carrusel de viajes inicializadas');
+            }, 1000);
             
             // Evento para cuando el carrusel esté cambiando
             carousel.addEventListener('slide.bs.carousel', function (event) {
@@ -162,45 +438,60 @@
             
             // Inicializar el primer indicador como activo
             updateCarouselIndicators(0);
-            
-            // Añadir efectos visuales al carrusel
-            carousel.addEventListener('slide.bs.carousel', function (event) {
-                // Añadir efecto de brillo a la imagen activa
-                const activeItem = carousel.querySelector('.carousel-item.active');
-                if (activeItem) {
-                    activeItem.style.boxShadow = '0 0 30px rgba(30, 58, 138, 0.6)';
-                    activeItem.style.transform = 'scale(1.02)';
-                }
-            });
-            
-            carousel.addEventListener('slid.bs.carousel', function (event) {
-                // Remover efectos de la imagen anterior
-                const allItems = carousel.querySelectorAll('.carousel-item');
-                allItems.forEach(item => {
-                    item.style.boxShadow = 'none';
-                    item.style.transform = 'scale(1)';
-                });
-                
-                // Aplicar efectos a la nueva imagen activa
-                const newActiveItem = carousel.querySelector('.carousel-item.active');
-                if (newActiveItem) {
-                    newActiveItem.style.boxShadow = '0 0 30px rgba(30, 58, 138, 0.6)';
-                    newActiveItem.style.transform = 'scale(1.02)';
-                }
-            });
-            
-            // Efectos hover para las imágenes
-            const carouselImages = carousel.querySelectorAll('.carousel-item img');
-            carouselImages.forEach(img => {
-                img.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.02)';
-                });
-                
-                img.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1)';
-                });
-            });
         });
+
+        // Añadir estilos CSS dinámicos para las animaciones
+        const dynamicStyles = document.createElement('style');
+        dynamicStyles.textContent = `
+            @keyframes floatParticle {
+                0%, 100% { 
+                    transform: translateY(0px) translateX(0px) rotate(0deg);
+                    opacity: 0.8;
+                }
+                25% { 
+                    transform: translateY(-20px) translateX(10px) rotate(90deg);
+                    opacity: 1;
+                }
+                50% { 
+                    transform: translateY(-10px) translateX(-10px) rotate(180deg);
+                    opacity: 0.6;
+                }
+                75% { 
+                    transform: translateY(-30px) translateX(5px) rotate(270deg);
+                    opacity: 0.9;
+                }
+            }
+            
+            @keyframes imageGlow {
+                0% { 
+                    transform: translateX(-100%);
+                    opacity: 0;
+                }
+                50% { 
+                    opacity: 1;
+                }
+                100% { 
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes soundWave {
+                0% { 
+                    transform: translate(-50%, -50%) scale(0.5);
+                    opacity: 1;
+                }
+                100% { 
+                    transform: translate(-50%, -50%) scale(3);
+                    opacity: 0;
+                }
+            }
+            
+            .carousel-particle {
+                will-change: transform, opacity;
+            }
+        `;
+        document.head.appendChild(dynamicStyles);
     </script>
 </body>
 </html>

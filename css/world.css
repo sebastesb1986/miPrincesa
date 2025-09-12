@@ -2,17 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@400;700&display=swap');
 
 :root {
-    --primary-color: #1E3A8A;
-    --secondary-color: #3B82F6;
-    --accent-color: #60A5FA;
-    --text-color: #1E293B;
-    --background-color: #F8FAFC;
-    --book-shadow: 0 20px 40px rgba(30, 58, 138, 0.2);
+    --primary-color: #C2185B;
+    --secondary-color: #E91E63;
+    --accent-color: #F8BBD9;
+    --text-color: #2D1B69;
+    --background-color: #FFF8F0;
+    --book-shadow: 0 20px 40px rgba(194, 24, 91, 0.2);
     --page-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    --medieval-blue: #1E40AF;
-    --medieval-light-blue: #93C5FD;
+    --medieval-rose: #C2185B;
+    --medieval-gold: #D4AF37;
     --medieval-white: #FEFEFE;
-    --medieval-cream: #F8FAFC;
+    --medieval-cream: #FFF8F0;
+    --love-pink: #F8BBD9;
+    --friendship-green: #4CAF50;
+    --royal-purple: #7B1FA2;
+    --warm-gold: #FFD700;
 }
 
 * {
@@ -23,7 +27,7 @@
 
 body {
     font-family: 'Playfair Display', serif;
-    background: linear-gradient(135deg, #F1F5F9 0%, #E2E8F0 50%, #CBD5E1 100%);
+    background: linear-gradient(135deg, #FFF8F0 0%, #FFE0E6 50%, #F8BBD9 100%);
     min-height: 100vh;
     padding: 20px;
     color: var(--text-color);
@@ -36,7 +40,7 @@ body {
 
 /* Estilo del libro */
 .book {
-    background: linear-gradient(145deg, #1E3A8A, #3B82F6);
+    background: linear-gradient(145deg, #C2185B, #E91E63);
     border-radius: 20px;
     padding: 30px;
     box-shadow: var(--book-shadow);
@@ -58,13 +62,13 @@ body {
 
 /* Páginas del libro */
 .page {
-    background: linear-gradient(135deg, #FEFEFE 0%, #F8FAFC 100%);
+    background: linear-gradient(135deg, #FEFEFE 0%, #FFF8F0 100%);
     border-radius: 15px;
     padding: 40px;
     margin-bottom: 30px;
     box-shadow: var(--page-shadow);
     position: relative;
-    border: 2px solid #CBD5E1;
+    border: 2px solid #F8BBD9;
 }
 
 .page::before {
@@ -86,8 +90,8 @@ h1 {
     color: var(--primary-color);
     text-align: center;
     margin-bottom: 30px;
-    text-shadow: 2px 2px 4px rgba(30, 58, 138, 0.3);
-    background: linear-gradient(45deg, #1E3A8A, #3B82F6, #60A5FA);
+    text-shadow: 2px 2px 4px rgba(194, 24, 91, 0.3);
+    background: linear-gradient(45deg, #C2185B, #E91E63, #F8BBD9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -121,7 +125,7 @@ h3 {
     padding: 30px;
     background: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
-    border: 2px solid #CBD5E1;
+    border: 2px solid #F8BBD9;
     position: relative;
 }
 
@@ -132,7 +136,7 @@ h3 {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #1E3A8A, #3B82F6, #60A5FA);
+    background: linear-gradient(90deg, #C2185B, #E91E63, #F8BBD9);
     border-radius: 15px 15px 0 0;
 }
 
@@ -148,7 +152,7 @@ h3 {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    border: 3px solid #CBD5E1;
+    border: 3px solid #F8BBD9;
 }
 
 .carousel-inner {
@@ -165,7 +169,7 @@ h3 {
 /* Controles del carrusel */
 .carousel-control-prev,
 .carousel-control-next {
-    background: rgba(30, 58, 138, 0.8);
+    background: rgba(194, 24, 91, 0.8);
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -183,8 +187,8 @@ h3 {
 }
 
 .carousel-indicators button {
-    background-color: #CBD5E1;
-    border: 2px solid #94A3B8;
+    background-color: #F8BBD9;
+    border: 2px solid #E91E63;
     border-radius: 50%;
     width: 12px;
     height: 12px;
@@ -214,7 +218,7 @@ h3 {
 }
 
 .quote-box {
-    background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(59, 130, 246, 0.1));
+    background: linear-gradient(135deg, rgba(194, 24, 91, 0.1), rgba(233, 30, 99, 0.1));
     padding: 20px;
     border-radius: 15px;
     border-left: 4px solid var(--accent-color);
@@ -234,7 +238,7 @@ h3 {
     background: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 15px;
-    border: 2px solid #CBD5E1;
+    border: 2px solid #F8BBD9;
     margin-top: 20px;
     text-align: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -255,20 +259,20 @@ h3 {
 /* Enlaces de navegación */
 .nav-link {
     display: inline-block;
-    background: linear-gradient(45deg, #1E3A8A, #3B82F6);
+    background: linear-gradient(45deg, #C2185B, #E91E63);
     color: white;
     padding: 15px 30px;
     border-radius: 25px;
     text-decoration: none;
     font-weight: 700;
     transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
+    box-shadow: 0 5px 15px rgba(194, 24, 91, 0.3);
 }
 
 .nav-link:hover {
-    background: linear-gradient(45deg, #3B82F6, #60A5FA);
+    background: linear-gradient(45deg, #E91E63, #F8BBD9);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(30, 58, 138, 0.4);
+    box-shadow: 0 8px 20px rgba(194, 24, 91, 0.4);
     color: white;
 }
 
@@ -279,14 +283,14 @@ h3 {
     right: 20px;
     width: 60px;
     height: 60px;
-    background: linear-gradient(45deg, #60A5FA, #3B82F6);
+    background: linear-gradient(45deg, #F8BBD9, #E91E63);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2rem;
     color: white;
-    box-shadow: 0 5px 15px rgba(96, 165, 250, 0.4);
+    box-shadow: 0 5px 15px rgba(248, 187, 217, 0.4);
 }
 
 .book-decoration::before {
@@ -424,24 +428,24 @@ h3 {
 
 /* Efectos especiales para la página de viajes */
 .world-page {
-    background: linear-gradient(135deg, #FEFEFE 0%, #F0F9FF 100%);
+    background: linear-gradient(135deg, #FEFEFE 0%, #FFF8F0 100%);
 }
 
 .world-page::before {
-    border-color: #60A5FA;
+    border-color: #F8BBD9;
 }
 
 /* Estilo para elementos especiales de viajes */
 .travel-element {
-    background: linear-gradient(45deg, rgba(96, 165, 250, 0.1), rgba(30, 58, 138, 0.1));
-    border: 2px solid #60A5FA;
+    background: linear-gradient(45deg, rgba(248, 187, 217, 0.1), rgba(194, 24, 91, 0.1));
+    border: 2px solid #F8BBD9;
     border-radius: 15px;
     padding: 20px;
     margin: 20px 0;
 }
 
 .travel-element h4 {
-    color: #1E40AF;
+    color: #C2185B;
     font-family: 'Dancing Script', cursive;
     font-size: 1.5rem;
     margin-bottom: 15px;

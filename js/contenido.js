@@ -1393,3 +1393,333 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// ===== MEJORAS DINÁMICAS PARA EL CARRUSEL =====
+
+// Función para crear efecto de partículas en el carrusel
+function createCarouselParticles() {
+    const carousel = document.querySelector('.carousel');
+    if (!carousel) return;
+    
+    // Crear partículas flotantes
+    for (let i = 0; i < 5; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'carousel-particle';
+        particle.style.cssText = `
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, rgba(248, 187, 217, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 5;
+            animation: floatParticle ${3 + Math.random() * 4}s ease-in-out infinite;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+        `;
+        carousel.appendChild(particle);
+    }
+}
+
+// Función para mejorar la experiencia táctil en móviles
+function enhanceTouchExperience() {
+    const carousel = document.querySelector('.carousel');
+    if (!carousel) return;
+    
+    let startX = 0;
+    let startY = 0;
+    let isDragging = false;
+    
+    carousel.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        isDragging = false;
+    }, { passive: true });
+    
+    carousel.addEventListener('touchmove', (e) => {
+        if (!startX || !startY) return;
+        
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const diffX = Math.abs(currentX - startX);
+        const diffY = Math.abs(currentY - startY);
+        
+        if (diffX > diffY && diffX > 10) {
+            isDragging = true;
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    carousel.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+        
+        if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+                // Swipe izquierda - siguiente imagen
+                const nextBtn = carousel.querySelector('.carousel-control-next');
+                if (nextBtn) nextBtn.click();
+            } else {
+                // Swipe derecha - imagen anterior
+                const prevBtn = carousel.querySelector('.carousel-control-prev');
+                if (prevBtn) prevBtn.click();
+            }
+        }
+        
+        startX = 0;
+        startY = 0;
+        isDragging = false;
+    }, { passive: true });
+}
+
+// Función para añadir efectos de hover mejorados
+function addEnhancedHoverEffects() {
+    const carouselItems = document.querySelectorAll('.carousel-item img');
+    
+    carouselItems.forEach(img => {
+        img.addEventListener('mouseenter', () => {
+            img.style.transform = 'scale(1.08) rotate(1deg)';
+            img.style.filter = 'brightness(1.1) contrast(1.3) saturate(1.2)';
+        });
+        
+        img.addEventListener('mouseleave', () => {
+            img.style.transform = 'scale(1) rotate(0deg)';
+            img.style.filter = 'brightness(1) contrast(1.2) saturate(1)';
+        });
+    });
+}
+
+// Función para crear efecto de zoom suave en las imágenes
+function addSmoothZoomEffect() {
+    const carousel = document.querySelector('.carousel');
+    if (!carousel) return;
+    
+    carousel.addEventListener('mouseenter', () => {
+        carousel.style.transform = 'scale(1.03) translateY(-5px)';
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+        carousel.style.transform = 'scale(1) translateY(0)';
+    });
+}
+
+// Función para mejorar los indicadores con animaciones
+function enhanceIndicators() {
+    const indicators = document.querySelectorAll('.carousel-indicators button');
+    
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('mouseenter', () => {
+            indicator.style.transform = 'scale(1.3) translateY(-2px)';
+        });
+        
+        indicator.addEventListener('mouseleave', () => {
+            if (!indicator.classList.contains('active')) {
+                indicator.style.transform = 'scale(1) translateY(0)';
+            }
+        });
+        
+        indicator.addEventListener('click', () => {
+            // Añadir efecto de click
+            indicator.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                if (indicator.classList.contains('active')) {
+                    indicator.style.transform = 'scale(1.4) translateY(-3px)';
+                } else {
+                    indicator.style.transform = 'scale(1) translateY(0)';
+                }
+            }, 150);
+        });
+    });
+}
+
+// Función para crear efecto de carga progresiva de imágenes
+function addProgressiveImageLoading() {
+    const carouselImages = document.querySelectorAll('.carousel-item img');
+    
+    carouselImages.forEach((img, index) => {
+        img.addEventListener('load', () => {
+            img.style.opacity = '1';
+            img.style.transform = 'scale(1)';
+            
+            // Añadir efecto de brillo al cargar
+            const glow = document.createElement('div');
+            glow.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(45deg, transparent 30%, rgba(248, 187, 217, 0.3) 50%, transparent 70%);
+                pointer-events: none;
+                z-index: 2;
+                animation: imageGlow 1s ease-out;
+            `;
+            img.parentElement.appendChild(glow);
+            
+            setTimeout(() => {
+                if (glow.parentElement) {
+                    glow.parentElement.removeChild(glow);
+                }
+            }, 1000);
+        });
+    });
+}
+
+// Función para añadir efectos de sonido visual (opcional)
+function addVisualSoundEffects() {
+    const carousel = document.querySelector('.carousel');
+    if (!carousel) return;
+    
+    // Crear ondas de sonido visuales
+    const createSoundWave = () => {
+        const wave = document.createElement('div');
+        wave.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(248, 187, 217, 0.6);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 3;
+            animation: soundWave 2s ease-out forwards;
+        `;
+        carousel.appendChild(wave);
+        
+        setTimeout(() => {
+            if (wave.parentElement) {
+                wave.parentElement.removeChild(wave);
+            }
+        }, 2000);
+    };
+    
+    // Activar ondas en hover
+    carousel.addEventListener('mouseenter', createSoundWave);
+}
+
+// Función para mejorar la accesibilidad del carrusel
+function improveCarouselAccessibility() {
+    const carousel = document.querySelector('.carousel');
+    if (!carousel) return;
+    
+    // Añadir navegación por teclado
+    carousel.addEventListener('keydown', (e) => {
+        const prevBtn = carousel.querySelector('.carousel-control-prev');
+        const nextBtn = carousel.querySelector('.carousel-control-next');
+        
+        switch(e.key) {
+            case 'ArrowLeft':
+                e.preventDefault();
+                if (prevBtn) prevBtn.click();
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                if (nextBtn) nextBtn.click();
+                break;
+        }
+    });
+    
+    // Hacer el carrusel focusable
+    carousel.setAttribute('tabindex', '0');
+    carousel.setAttribute('role', 'region');
+    carousel.setAttribute('aria-label', 'Carrusel de imágenes románticas');
+}
+
+// Función para crear efecto de parallax sutil
+function addParallaxEffect() {
+    const carousel = document.querySelector('.carousel');
+    if (!carousel) return;
+    
+    carousel.addEventListener('mousemove', (e) => {
+        const rect = carousel.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        
+        carousel.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+    
+    carousel.addEventListener('mouseleave', () => {
+        carousel.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+}
+
+// Inicializar todas las mejoras del carrusel cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    // Esperar un poco para que Bootstrap inicialice el carrusel
+    setTimeout(() => {
+        createCarouselParticles();
+        enhanceTouchExperience();
+        addEnhancedHoverEffects();
+        addSmoothZoomEffect();
+        enhanceIndicators();
+        addProgressiveImageLoading();
+        addVisualSoundEffects();
+        improveCarouselAccessibility();
+        addParallaxEffect();
+        
+        console.log('🎠 Mejoras dinámicas del carrusel inicializadas');
+    }, 1000);
+});
+
+// Añadir estilos CSS dinámicos para las animaciones
+const dynamicStyles = document.createElement('style');
+dynamicStyles.textContent = `
+    @keyframes floatParticle {
+        0%, 100% { 
+            transform: translateY(0px) translateX(0px) rotate(0deg);
+            opacity: 0.8;
+        }
+        25% { 
+            transform: translateY(-20px) translateX(10px) rotate(90deg);
+            opacity: 1;
+        }
+        50% { 
+            transform: translateY(-10px) translateX(-10px) rotate(180deg);
+            opacity: 0.6;
+        }
+        75% { 
+            transform: translateY(-30px) translateX(5px) rotate(270deg);
+            opacity: 0.9;
+        }
+    }
+    
+    @keyframes imageGlow {
+        0% { 
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        50% { 
+            opacity: 1;
+        }
+        100% { 
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes soundWave {
+        0% { 
+            transform: translate(-50%, -50%) scale(0.5);
+            opacity: 1;
+        }
+        100% { 
+            transform: translate(-50%, -50%) scale(3);
+            opacity: 0;
+        }
+    }
+    
+    .carousel-particle {
+        will-change: transform, opacity;
+    }
+`;
+document.head.appendChild(dynamicStyles);
