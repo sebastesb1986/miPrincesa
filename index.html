@@ -112,6 +112,25 @@
 	
 	<div id="sfc5lkx7b2lcq5jpe6p2arfzyyt1nhqwtp4"></div>
 	<script type="text/javascript" src="https://counter5.optistats.ovh/private/counter.js?c=5lkx7b2lcq5jpe6p2arfzyyt1nhqwtp4&down=async" async></script>
+	<script>
+	  // Espera a que la página y el contador estén completamente cargados
+	  window.addEventListener("load", function () {
+		// Selecciona el div generado por el script del contador
+		const contadorDiv = document.querySelector('div[id^="FCS_"][id$="_divCou"]');
+		if (contadorDiv) {
+		  const enlace = contadorDiv.querySelector("a");
+		  if (enlace) {
+			// Clona el contenido del <a> (la imagen)
+			const img = enlace.querySelector("img");
+			if (img) {
+			  const imgClone = img.cloneNode(true);
+			  // Reemplaza el <a> por solo la <img>
+			  enlace.replaceWith(imgClone);
+			}
+		  }
+		}
+	  });
+	</script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
