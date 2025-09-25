@@ -1723,3 +1723,494 @@ dynamicStyles.textContent = `
     }
 `;
 document.head.appendChild(dynamicStyles);
+
+// ===== FUNCIONALIDAD DEL MODAL DE ESTRELLAS =====
+
+// Función para actualizar los indicadores del carrusel de estrellas
+function updateStarsCarouselIndicators(activeIndex) {
+    const indicators = document.querySelectorAll('.stars-indicators button');
+    indicators.forEach((indicator, index) => {
+        if (index === activeIndex) {
+            indicator.classList.add('active');
+        } else {
+            indicator.classList.remove('active');
+        }
+    });
+}
+
+// Función para crear partículas de estrellas
+function createStarParticle() {
+    const star = document.createElement('div');
+    star.innerHTML = '⭐';
+    star.style.position = 'fixed';
+    star.style.left = Math.random() * window.innerWidth + 'px';
+    star.style.top = window.innerHeight + 'px';
+    star.style.fontSize = '20px';
+    star.style.pointerEvents = 'none';
+    star.style.zIndex = '1000';
+    star.style.transition = 'all 3s ease-out';
+    star.style.color = '#3B82F6';
+    
+    document.body.appendChild(star);
+    
+    setTimeout(() => {
+        star.style.top = '-50px';
+        star.style.opacity = '0';
+        star.style.transform = 'rotate(360deg) scale(1.5)';
+    }, 100);
+    
+    setTimeout(() => {
+        if (document.body.contains(star)) {
+            document.body.removeChild(star);
+        }
+    }, 3000);
+}
+
+// Función simplificada para el carrusel de estrellas
+function addStarsCarouselEffects() {
+    // Esta función ahora está integrada en addStarsCarouselNavigation
+    // Solo mantener para compatibilidad
+}
+
+// Función de touch removida - Bootstrap maneja el touch nativamente
+
+// Funciones de efectos removidas para mejor funcionalidad del carrusel
+
+// Función para mejorar los indicadores del carrusel de estrellas con animaciones
+function enhanceStarsIndicators() {
+    const indicators = document.querySelectorAll('.stars-indicators button');
+    
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('mouseenter', () => {
+            indicator.style.transform = 'scale(1.3) translateY(-2px)';
+        });
+        
+        indicator.addEventListener('mouseleave', () => {
+            if (!indicator.classList.contains('active')) {
+                indicator.style.transform = 'scale(1) translateY(0)';
+            }
+        });
+        
+        indicator.addEventListener('click', () => {
+            // Añadir efecto de click
+            indicator.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                if (indicator.classList.contains('active')) {
+                    indicator.style.transform = 'scale(1.4) translateY(-3px)';
+                } else {
+                    indicator.style.transform = 'scale(1) translateY(0)';
+                }
+            }, 150);
+        });
+    });
+}
+
+// Función de navegación removida - ahora integrada en initStarsCarousel
+
+// Funciones de efectos adicionales removidas para mejor funcionalidad
+
+// Event listener para el botón de estrellas
+document.addEventListener('DOMContentLoaded', function() {
+    const btnStars = document.getElementById('btnStars');
+    const starsModal = document.getElementById('starsModal');
+    
+    if (btnStars) {
+        btnStars.addEventListener('click', function() {
+            // Mostrar la modal
+            const modal = new bootstrap.Modal(starsModal);
+            modal.show();
+            
+            // Crear partículas de estrellas
+            createStarParticle();
+            
+            console.log('⭐ Modal de estrellas abierta');
+        });
+    }
+    
+    // Event listener para cuando se abre la modal
+    if (starsModal) {
+        starsModal.addEventListener('shown.bs.modal', function() {
+            // Inicializar el carrusel cuando la modal esté completamente visible
+            setTimeout(() => {
+                initStarsCarousel();
+            }, 100);
+        });
+        
+        // Event listener para cuando se cierra la modal
+        starsModal.addEventListener('hidden.bs.modal', function() {
+            console.log('⭐ Modal de estrellas cerrada');
+        });
+    }
+});
+
+// Función para inicializar el carrusel de estrellas
+function initStarsCarousel() {
+    const starsCarousel = document.getElementById('starsCarousel');
+    if (!starsCarousel) {
+        console.error('❌ Carrusel no encontrado');
+        return;
+    }
+    
+    // Destruir instancia existente si existe
+    const existingCarousel = bootstrap.Carousel.getInstance(starsCarousel);
+    if (existingCarousel) {
+        existingCarousel.dispose();
+    }
+    
+    // Inicializar el carrusel de Bootstrap
+    const carousel = new bootstrap.Carousel(starsCarousel, {
+        interval: 5000,
+        wrap: true,
+        touch: true
+    });
+    
+    console.log('✅ Carrusel inicializado:', carousel);
+    
+    // Verificar que los elementos existen
+    const prevBtn = starsCarousel.querySelector('.carousel-control-prev');
+    const nextBtn = starsCarousel.querySelector('.carousel-control-next');
+    const indicators = starsCarousel.querySelectorAll('.carousel-indicators button');
+    
+    console.log('🔍 Elementos encontrados:', {
+        prevBtn: !!prevBtn,
+        nextBtn: !!nextBtn,
+        indicators: indicators.length
+    });
+    
+    // Añadir event listeners manuales
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('⬅️ Botón anterior clickeado');
+            carousel.prev();
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('➡️ Botón siguiente clickeado');
+            carousel.next();
+        });
+    }
+    
+    // Event listeners para indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('🔘 Indicador clickeado:', index);
+            carousel.to(index);
+        });
+    });
+    
+    // Event listener para actualizar indicadores y clases
+    starsCarousel.addEventListener('slid.bs.carousel', function(event) {
+        const activeIndex = event.to;
+        console.log('📸 Slide cambiada a:', activeIndex);
+        
+        // Remover clase active de todos los items
+        const allItems = starsCarousel.querySelectorAll('.carousel-item');
+        allItems.forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        // Añadir clase active al item actual
+        if (allItems[activeIndex]) {
+            allItems[activeIndex].classList.add('active');
+        }
+        
+        updateStarsCarouselIndicators(activeIndex);
+    });
+    
+    // Asegurar que el primer item tenga la clase active
+    const firstItem = starsCarousel.querySelector('.carousel-item');
+    if (firstItem) {
+        firstItem.classList.add('active');
+    }
+}
+
+// Crear partículas de estrellas cada cierto tiempo cuando la modal esté abierta
+setInterval(() => {
+    if (document.getElementById('starsModal').classList.contains('show')) {
+        createStarParticle();
+    }
+}, 3000);
+
+// ===== FUNCIONALIDAD DEL BOTÓN DE DESCARGA =====
+
+// Función para crear partículas de corazones para el botón de descarga
+function createDownloadHeartParticle() {
+    const heart = document.createElement('div');
+    heart.innerHTML = '💚';
+    heart.style.position = 'fixed';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.top = window.innerHeight + 'px';
+    heart.style.fontSize = '20px';
+    heart.style.pointerEvents = 'none';
+    heart.style.zIndex = '1000';
+    heart.style.transition = 'all 3s ease-out';
+    heart.style.color = '#4CAF50';
+    
+    document.body.appendChild(heart);
+    
+    setTimeout(() => {
+        heart.style.top = '-50px';
+        heart.style.opacity = '0';
+        heart.style.transform = 'rotate(360deg) scale(1.5)';
+    }, 100);
+    
+    setTimeout(() => {
+        if (document.body.contains(heart)) {
+            document.body.removeChild(heart);
+        }
+    }, 3000);
+}
+
+// Función para añadir efectos especiales al botón de descarga
+function addDownloadButtonEffects() {
+    const downloadBtn = document.getElementById('btnDownload');
+    if (!downloadBtn) return;
+    
+    // Efecto de hover con partículas
+    downloadBtn.addEventListener('mouseenter', function() {
+        // Crear partícula de corazón
+        createDownloadHeartParticle();
+        
+        // Añadir efecto de brillo
+        this.style.boxShadow = '0 0 20px rgba(76, 175, 80, 0.6)';
+        this.style.transform = 'translateY(-2px) scale(1.02)';
+    });
+    
+    downloadBtn.addEventListener('mouseleave', function() {
+        this.style.boxShadow = '0 5px 15px rgba(76, 175, 80, 0.3)';
+        this.style.transform = 'translateY(0) scale(1)';
+    });
+    
+    // Efecto de click
+    downloadBtn.addEventListener('click', function(e) {
+        e.preventDefault(); // Prevenir descarga inmediata
+        
+        // Crear múltiples partículas de corazones
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+                createDownloadHeartParticle();
+            }, i * 200);
+        }
+        
+        // Efecto de click visual
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = 'translateY(-2px) scale(1.02)';
+        }, 150);
+        
+        // Mostrar alerta de 5 segundos
+        showDownloadAlert();
+    });
+    
+    // Efecto de focus para accesibilidad
+    downloadBtn.addEventListener('focus', function() {
+        this.style.boxShadow = '0 0 0 3px rgba(76, 175, 80, 0.3)';
+    });
+    
+    downloadBtn.addEventListener('blur', function() {
+        this.style.boxShadow = '0 5px 15px rgba(76, 175, 80, 0.3)';
+    });
+}
+
+// Función para mostrar alerta de descarga con mensaje sobre fuentes desconocidas
+function showDownloadAlert() {
+    // Crear elemento de alerta
+    const alert = document.createElement('div');
+    alert.innerHTML = `
+        <div style="text-align: center; margin-bottom: 15px;">
+            <div style="font-size: 2rem; margin-bottom: 10px;">📱</div>
+            <h4 style="color: #FCE4EC; margin-bottom: 10px; font-family: 'Playfair Display', serif;">¡Preparando tu descarga!</h4>
+            <p style="color: #333; margin-bottom: 15px; font-size: 1rem; line-height: 1.5;">
+                <strong>Importante:</strong> Para instalar la aplicación en tu teléfono, necesitarás permitir la instalación de fuentes desconocidas en la configuración de seguridad.
+            </p>
+            <div style="background: #FCE4EC; padding: 10px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #E91E63;">
+                <p style="margin: 0; font-size: 0.9rem; color: #C2185B;">
+                    <strong>💡 Consejo:</strong> Ve a Configuración > Seguridad > Fuentes desconocidas y actívala para instalar.
+                </p>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; margin-top: 15px;">
+                <div style="width: 20px; height: 20px; border: 3px solid #FCE4EC; border-top: 3px solid transparent; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 10px;"></div>
+            </div>
+        </div>
+    `;
+    
+    alert.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(45deg, #E91E63, #F06292);
+        color: white;
+        padding: 25px;
+        border-radius: 20px;
+        font-family: 'Playfair Display', serif;
+        font-size: 1rem;
+        font-weight: 700;
+        z-index: 10000;
+        box-shadow: 0 15px 35px rgba(233, 30, 99, 0.4);
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        animation: downloadAlert 8.5s ease-out forwards;
+        text-align: center;
+        max-width: 350px;
+        width: 85%;
+    `;
+    
+    // Añadir estilos de animación
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes downloadAlert {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            10% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+            90% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    document.body.appendChild(alert);
+    
+    // Contador regresivo
+    let countdown = 8.5;
+    const countdownElement = alert.querySelector('#countdown');
+    
+    const countdownInterval = setInterval(() => {
+        countdown -= 0.5;
+        if (countdownElement) {
+            countdownElement.textContent = countdown.toFixed(1);
+        }
+        
+        if (countdown <= 0) {
+            clearInterval(countdownInterval);
+            // Descarga directa sin ventana emergente
+            const downloadLink = document.createElement('a');
+            downloadLink.href = 'https://drive.usercontent.google.com/download?id=1aJb0gf--p4QAHhFb_5O_aPoVhK_6yvv4&export=download&authuser=0&confirm=t&uuid=ceee5668-4918-47f3-86eb-951e3b46e5e4&at=AN8xHooLNMup0MARBFeB0ydJ4EBd:1758776353961';
+            downloadLink.download = 'Elizabeth_Una_Princesa.apk';
+            downloadLink.target = '_self';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }
+    }, 500);
+    
+    // Remover después de 8.5 segundos
+    setTimeout(() => {
+        if (document.body.contains(alert)) {
+            document.body.removeChild(alert);
+        }
+        if (document.head.contains(style)) {
+            document.head.removeChild(style);
+        }
+    }, 8500);
+}
+
+// Función para detectar si es dispositivo móvil y mostrar mensaje especial
+function detectMobileAndShowMessage() {
+    const downloadBtn = document.getElementById('btnDownload');
+    if (!downloadBtn) return;
+    
+    // Detectar si es móvil
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    
+    if (isMobile) {
+        // Cambiar el texto del botón para móviles
+        downloadBtn.innerHTML = '📱 Descárgame en tu teléfono';
+        
+        // Añadir evento especial para móviles
+        downloadBtn.addEventListener('click', function(e) {
+            // Crear partículas especiales para móviles
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    createDownloadHeartParticle();
+                }, i * 100);
+            }
+            
+            // Mostrar mensaje especial para móviles
+            const mobileMessage = document.createElement('div');
+            mobileMessage.innerHTML = '💚 ¡Perfecto! Te llevo contigo a donde vayas 💚';
+            mobileMessage.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(45deg, #4CAF50, #66BB6A);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 20px;
+                font-family: 'Playfair Display', serif;
+                font-size: 1rem;
+                font-weight: 700;
+                z-index: 10000;
+                box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                animation: mobileMessage 4s ease-out forwards;
+                text-align: center;
+                max-width: 90%;
+            `;
+            
+            // Añadir animación para móviles
+            const mobileStyle = document.createElement('style');
+            mobileStyle.textContent = `
+                @keyframes mobileMessage {
+                    0% {
+                        opacity: 0;
+                        transform: translateX(-50%) translateY(-20px);
+                    }
+                    20% {
+                        opacity: 1;
+                        transform: translateX(-50%) translateY(0);
+                    }
+                    80% {
+                        opacity: 1;
+                        transform: translateX(-50%) translateY(0);
+                    }
+                    100% {
+                        opacity: 0;
+                        transform: translateX(-50%) translateY(-20px);
+                    }
+                }
+            `;
+            document.head.appendChild(mobileStyle);
+            
+            document.body.appendChild(mobileMessage);
+            
+            // Remover después de 4 segundos
+            setTimeout(() => {
+                if (document.body.contains(mobileMessage)) {
+                    document.body.removeChild(mobileMessage);
+                }
+                if (document.head.contains(mobileStyle)) {
+                    document.head.removeChild(mobileStyle);
+                }
+            }, 4000);
+        });
+    }
+}
+
+// Inicializar efectos del botón de descarga
+document.addEventListener('DOMContentLoaded', function() {
+    addDownloadButtonEffects();
+    detectMobileAndShowMessage();
+    
+    console.log('📱 Botón de descarga inicializado');
+});

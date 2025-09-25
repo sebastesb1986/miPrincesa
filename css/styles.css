@@ -323,7 +323,6 @@ h1 {
         background-color: #000;
         padding: 10px;
     }
-}
     
     .carousel-control-prev,
     .carousel-control-next {
@@ -404,20 +403,6 @@ h1 {
     .carousel-item img {
         height: 450px;
     }
-    
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 65px;
-        height: 65px;
-        margin: 0 30px;
-    }
-    
-    .carousel-indicators button {
-        width: 18px;
-        height: 18px;
-        margin: 0 10px;
-    }
-}
     
     .carousel-control-prev,
     .carousel-control-next {
@@ -1275,6 +1260,737 @@ h1 {
     background: linear-gradient(45deg, #C2185B, #AD1457) !important;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+}
+
+/* ===== ESTILOS PARA EL BOTÓN DE ESTRELLAS ===== */
+
+/* Botón azul noche para estrellas */
+.btn-stars {
+    background: linear-gradient(45deg, #1E3A8A, #3B82F6);
+    color: white;
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-stars::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-stars:hover {
+    background: linear-gradient(45deg, #3B82F6, #1E40AF);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(30, 58, 138, 0.4);
+    border-color: rgba(59, 130, 246, 0.6);
+}
+
+.btn-stars:hover::before {
+    left: 100%;
+}
+
+.btn-stars:active {
+    transform: translateY(0);
+    transition: transform 0.1s ease;
+}
+
+/* ===== ESTILOS PARA EL BOTÓN DE DESCARGA ===== */
+
+/* Botón de descarga verde azulado */
+.btn-download {
+    background: linear-gradient(45deg, #4CAF50, #66BB6A);
+    color: white;
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-download::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-download:hover {
+    background: linear-gradient(45deg, #66BB6A, #81C784);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+    border-color: rgba(76, 175, 80, 0.6);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-download:hover::before {
+    left: 100%;
+}
+
+.btn-download:active {
+    transform: translateY(0);
+    transition: transform 0.1s ease;
+}
+
+.btn-download:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
+
+/* Efecto de partículas para el botón de descarga */
+.btn-download::after {
+    content: '💚';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.btn-download:hover::after {
+    opacity: 1;
+    transform: scale(1) rotate(360deg);
+    animation: downloadPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes downloadPulse {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg);
+    }
+    50% { 
+        transform: scale(1.2) rotate(180deg);
+    }
+}
+
+/* Efecto de brillo especial para el botón de descarga */
+.btn-download:hover {
+    background: linear-gradient(45deg, #66BB6A, #81C784, #A5D6A7);
+    background-size: 200% 200%;
+    animation: downloadShimmer 2s ease-in-out infinite;
+}
+
+@keyframes downloadShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== ESTILOS PARA EL MODAL DE ESTRELLAS ===== */
+
+/* Contenedor principal del modal de estrellas */
+.stars-modal-content {
+    background: linear-gradient(135deg, #F8FAFC 0%, #E0F2FE 100%);
+    border: 3px solid #3B82F6;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(30, 58, 138, 0.3);
+    overflow: hidden;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Header del modal de estrellas */
+.stars-modal-header {
+    background: linear-gradient(45deg, #1E3A8A, #3B82F6);
+    color: white;
+    border-radius: 17px 17px 0 0;
+    border-bottom: 2px solid #3B82F6;
+    padding: 20px 30px;
+}
+
+.stars-modal-header .modal-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: white;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stars-modal-header .btn-close {
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.stars-modal-header .btn-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Body del modal de estrellas */
+.stars-modal-body {
+    padding: 30px;
+    background: linear-gradient(135deg, #F8FAFC 0%, #E0F2FE 100%);
+}
+
+/* Subtítulo del modal */
+.stars-subtitle {
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    border: 2px solid #E0F2FE;
+    box-shadow: 0 5px 15px rgba(30, 58, 138, 0.1);
+}
+
+.stars-subtitle p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #1E3A8A;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Contenedor del carrusel de estrellas */
+.stars-carousel-container {
+    margin-bottom: 25px;
+    position: relative;
+    padding: 0 60px;
+    overflow: visible;
+}
+
+/* Carrusel de estrellas */
+#starsCarousel {
+    border-radius: 20px;
+    overflow: visible;
+    box-shadow: 
+        0 20px 40px rgba(30, 58, 138, 0.15),
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 3px solid #3B82F6;
+    background: linear-gradient(145deg, #F8FAFC, #E0F2FE);
+    position: relative;
+}
+
+#starsCarousel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.1) 50%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+#starsCarousel:hover {
+    transform: scale(1.02) translateY(-5px);
+    box-shadow: 
+        0 25px 50px rgba(30, 58, 138, 0.25),
+        0 12px 24px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-color: #1E40AF;
+}
+
+/* Imágenes del carrusel de estrellas */
+#starsCarousel .carousel-inner {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    position: relative;
+    overflow: hidden;
+    height: 350px;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 12px;
+}
+
+#starsCarousel .carousel-item {
+    position: relative;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    transition: transform 0.6s ease-in-out;
+}
+
+#starsCarousel .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    background: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.6s ease-in-out;
+}
+
+/* Transiciones del carrusel */
+#starsCarousel .carousel-item {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+#starsCarousel .carousel-item.active {
+    opacity: 1;
+}
+
+#starsCarousel .carousel-item.active img {
+    transform: none;
+    filter: none;
+}
+
+#starsCarousel .carousel-item img:hover {
+    transform: none;
+    filter: none;
+}
+
+/* Efecto de overlay removido para mejor funcionalidad */
+
+/* Controles del carrusel de estrellas */
+#starsCarousel .carousel-control-prev,
+#starsCarousel .carousel-control-next {
+    background: linear-gradient(145deg, rgba(30, 58, 138, 0.9), rgba(59, 130, 246, 0.8));
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+        0 8px 20px rgba(30, 58, 138, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    position: absolute;
+    overflow: hidden;
+}
+
+#starsCarousel .carousel-control-prev {
+    left: -30px;
+}
+
+#starsCarousel .carousel-control-next {
+    right: -30px;
+}
+
+#starsCarousel .carousel-control-prev::before,
+#starsCarousel .carousel-control-next::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+#starsCarousel .carousel-control-prev:hover,
+#starsCarousel .carousel-control-next:hover {
+    background: linear-gradient(145deg, rgba(30, 58, 138, 1), rgba(59, 130, 246, 0.9));
+    transform: scale(1.15) translateY(-2px);
+    box-shadow: 
+        0 12px 30px rgba(30, 58, 138, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+#starsCarousel .carousel-control-prev:hover::before,
+#starsCarousel .carousel-control-next:hover::before {
+    transform: translateX(100%);
+}
+
+#starsCarousel .carousel-control-prev:active,
+#starsCarousel .carousel-control-next:active {
+    transform: scale(1.05) translateY(0);
+    transition: transform 0.1s ease;
+}
+
+#starsCarousel .carousel-control-prev-icon,
+#starsCarousel .carousel-control-next-icon {
+    filter: brightness(0) invert(1);
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
+}
+
+#starsCarousel .carousel-control-prev:hover .carousel-control-prev-icon,
+#starsCarousel .carousel-control-next:hover .carousel-control-next-icon {
+    transform: scale(1.2);
+    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+/* Indicadores del carrusel de estrellas */
+.stars-indicators {
+    margin-top: 20px;
+    padding: 20px 0;
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.1));
+    border-radius: 0 0 20px 20px;
+}
+
+.stars-indicators button {
+    background: linear-gradient(145deg, #E0F2FE, #3B82F6);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    margin: 0 8px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+}
+
+.stars-indicators button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+.stars-indicators button:hover {
+    transform: scale(1.3) translateY(-2px);
+    background: linear-gradient(145deg, #3B82F6, #1E40AF);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4);
+}
+
+.stars-indicators button:hover::before {
+    width: 100%;
+    height: 100%;
+}
+
+.stars-indicators button.active {
+    background: linear-gradient(145deg, #1E3A8A, #1E40AF);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: scale(1.4) translateY(-3px);
+    box-shadow: 
+        0 8px 25px rgba(30, 58, 138, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.stars-indicators button.active::before {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
+    animation: ripple 2s ease-in-out infinite;
+}
+
+/* Descripción del modal de estrellas */
+.stars-description {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(30, 58, 138, 0.1);
+    border: 2px solid #E0F2FE;
+}
+
+.stars-description p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: #1E3A8A;
+    text-align: center;
+    line-height: 1.6;
+    font-style: italic;
+    margin: 0;
+}
+
+/* ===== RESPONSIVE PARA EL MODAL DE ESTRELLAS ===== */
+
+/* Responsive para tablets */
+@media (max-width: 768px) {
+    .stars-modal-content {
+        max-width: 600px;
+    }
+    
+    .stars-modal-body {
+        padding: 15px;
+    }
+    
+    .stars-subtitle p {
+        font-size: 0.9rem;
+    }
+    
+    .stars-carousel-container {
+        padding: 0 40px;
+    }
+    
+    #starsCarousel .carousel-inner {
+        height: 300px;
+        max-width: 100%;
+    }
+    
+    #starsCarousel .carousel-item {
+        height: 300px;
+        padding: 8px;
+    }
+    
+    #starsCarousel .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .stars-modal-header {
+        padding: 12px 15px;
+    }
+    
+    .stars-modal-header .modal-title {
+        font-size: 1.3rem;
+    }
+    
+    #starsCarousel .carousel-control-prev,
+    #starsCarousel .carousel-control-next {
+        width: 45px;
+        height: 45px;
+        left: -22px;
+        right: -22px;
+    }
+    
+    .stars-indicators button {
+        width: 12px;
+        height: 12px;
+        margin: 0 5px;
+    }
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+    .stars-modal-content {
+        max-width: 95%;
+        margin: 10px auto;
+    }
+    
+    .stars-modal-body {
+        padding: 10px;
+    }
+    
+    .stars-subtitle {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .stars-subtitle p {
+        font-size: 0.8rem;
+    }
+    
+    .stars-carousel-container {
+        padding: 0 30px;
+    }
+    
+    #starsCarousel .carousel-inner {
+        height: 250px;
+        max-width: 100%;
+    }
+    
+    #starsCarousel .carousel-item {
+        height: 250px;
+        padding: 6px;
+    }
+    
+    #starsCarousel .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .stars-modal-header {
+        padding: 10px 12px;
+    }
+    
+    .stars-modal-header .modal-title {
+        font-size: 1.1rem;
+    }
+    
+    #starsCarousel .carousel-control-prev,
+    #starsCarousel .carousel-control-next {
+        width: 35px;
+        height: 35px;
+        left: -17px;
+        right: -17px;
+    }
+    
+    .stars-indicators {
+        margin-top: 10px;
+    }
+    
+    .stars-indicators button {
+        width: 10px;
+        height: 10px;
+        margin: 0 3px;
+    }
+    
+    .stars-description {
+        padding: 10px;
+    }
+    
+    .stars-description p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Responsive para pantallas muy pequeñas */
+@media (max-width: 360px) {
+    .stars-modal-content {
+        max-width: 98%;
+        margin: 5px auto;
+    }
+    
+    .stars-carousel-container {
+        padding: 0 25px;
+    }
+    
+    #starsCarousel .carousel-control-prev,
+    #starsCarousel .carousel-control-next {
+        width: 30px;
+        height: 30px;
+        left: -15px;
+        right: -15px;
+    }
+    
+    #starsCarousel .carousel-inner {
+        height: 220px;
+    }
+    
+    #starsCarousel .carousel-item {
+        height: 220px;
+        padding: 4px;
+    }
+    
+    #starsCarousel .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+/* ===== RESPONSIVE PARA EL BOTÓN DE DESCARGA ===== */
+
+/* Responsive para tablets */
+@media (max-width: 768px) {
+    .btn-download {
+        padding: 12px 24px;
+        font-size: 1rem;
+        margin: 8px;
+        display: block;
+        width: 100%;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .btn-download::after {
+        font-size: 1rem;
+        top: -8px;
+        right: -8px;
+    }
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+    .btn-download {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        margin: 6px;
+        display: block;
+        width: 100%;
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.3;
+        word-wrap: break-word;
+        white-space: normal;
+        height: auto;
+        min-height: 50px;
+    }
+    
+    .btn-download::after {
+        font-size: 0.9rem;
+        top: -6px;
+        right: -6px;
+    }
+}
+
+/* Responsive para móviles pequeños */
+@media (max-width: 360px) {
+    .btn-download {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        margin: 4px;
+        max-width: 320px;
+        min-height: 45px;
+    }
+    
+    .btn-download::after {
+        font-size: 0.8rem;
+        top: -5px;
+        right: -5px;
+    }
+}
+
+/* Ajustes para el contenedor de botones en móviles */
+@media (max-width: 768px) {
+    .text-center.my-4 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 400px;
+        margin: 5px auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .text-center.my-4 {
+        gap: 8px;
+    }
+    
+    .btn {
+        max-width: 350px;
+        margin: 4px auto;
+    }
+}
+
+@media (max-width: 360px) {
+    .text-center.my-4 {
+        gap: 6px;
+    }
+    
+    .btn {
+        max-width: 320px;
+        margin: 3px auto;
+    }
 }
 
 /* Responsive para móvil */
