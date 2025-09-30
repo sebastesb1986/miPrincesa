@@ -8,7 +8,11 @@ const textos = [
     "Yo quiero que tú seas mi princesa, que tú seas la bella y yo la bestia que se transforma con tu amor",
     "Y solo con tus besos me iluminas y me llenas de felicidad infinita",
     "Y que despiertes de tus sueños solo con mis besos de amor verdadero",
-    "¿Quieres saber qué pasó recorriendo otros reinos? Todo lo hice por ti, mi amor"
+    "¿Quieres saber qué pasó recorriendo otros reinos? Todo lo hice por ti, mi amor",
+    "En cada viaje que emprendo, llevo tu recuerdo como mi tesoro más preciado",
+    "Cada lugar que visito, cada aventura que vivo, es un regalo que preparo para ti",
+    "Aunque estemos separados por la distancia, mi corazón viaja contigo en cada paso",
+    "¿Quieres conocer todos los lugares que he recorrido pensando en ti? Todo lo hice por amor"
 ];
 
 // Elementos del DOM
@@ -56,8 +60,11 @@ document.getElementById('carouselExampleAutoplaying').addEventListener('slide.bs
     // Obtener el índice de la imagen activa
     let index = event.to;
     
+    console.log('🎠 Carrusel cambiando a índice:', index, 'Total de textos:', textos.length);
+    
     // Asegúrate de que el índice esté dentro del rango correcto
     if (index >= textos.length) {
+        console.log('⚠️ Índice fuera de rango, reseteando a 0');
         index = 0;
     }
 
@@ -285,8 +292,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Inicializar los indicadores del carrusel al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
+    // Verificar cuántas imágenes tiene el carrusel
+    const carouselItems = document.querySelectorAll('#carouselExampleAutoplaying .carousel-item');
+    console.log('🖼️ Total de imágenes en el carrusel:', carouselItems.length);
+    console.log('📝 Total de textos disponibles:', textos.length);
+    
     // Establecer el primer indicador como activo por defecto
     updateCarouselIndicators(0);
+    
+    // Verificar que todas las imágenes se carguen correctamente
+    carouselItems.forEach((item, index) => {
+        const img = item.querySelector('img');
+        if (img) {
+            img.addEventListener('load', function() {
+                console.log(`✅ Imagen ${index + 1} cargada:`, this.src);
+            });
+            img.addEventListener('error', function() {
+                console.error(`❌ Error cargando imagen ${index + 1}:`, this.src);
+            });
+        }
+    });
 });
 
 // ===== FUNCIONALIDAD DEL oráculo =====
