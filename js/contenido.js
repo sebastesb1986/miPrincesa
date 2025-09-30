@@ -319,75 +319,75 @@ document.addEventListener('DOMContentLoaded', function() {
 // Base de datos de respuestas del oráculo
 const oraculaResponses = {
     "¿Quieres saber qué siente tu Sebas Nucita por ti?": {
-        answer: "Mi querida princesa... tu Sebas Nucita te quiere con una intensidad que trasciende las palabras. Su corazón late por ti en cada respiración, en cada latido, en cada momento de silencio. Te extraña y Tu presencia es especial. 💙✨",
+        answer: "Mi querida princesa... tu Sebas Nucita te quiere con una ternura que llena su corazón de paz. Te extraña cada día y cada noche, y cuando piensa en ti, su mundo se llena de colores hermosos. Eres su inspiración, su motivación para ser mejor persona cada día. Te quiere no solo por lo que eres, sino por cómo lo haces sentir. 💙✨",
         followUps: [
-            "¿Te gustaría que profundice en la profundidad de sus sentimientos?",
-            "¿Quieres que te revele más sobre su corazón herido por la distancia?",
-            "¿Te interesa conocer la magnitud de su amor por ti?"
+            "¿Te gustaría que profundice en cómo te hace sentir especial?",
+            "¿Quieres que te revele más sobre sus sentimientos más tiernos?",
+            "¿Te interesa conocer cómo te ve en sus pensamientos más dulces?"
         ]
     },
     "¿Te extraña mucho?": {
-        answer: "Mi amor... la extrañanza que siente por ti es tan profunda que a veces le cuesta respirar. Cada día sin verte es una herida que se abre en su corazón. Te piensa en cada amanecer, en cada atardecer, en cada momento de soledad. Su alma grita tu nombre en silencio, anhelando tu presencia como el desierto anhela la lluvia. 🌙💭",
+        answer: "Mi amor... te extraña tanto que a veces siente que su corazón se va a salir del pecho. Cada día sin verte es como un día sin sol. Te piensa cuando se despierta, cuando se acuesta, cuando ve algo hermoso y desea compartirlo contigo. Te extraña tu sonrisa, tu voz, tu forma de ver la vida. Te extraña como se extraña el aire para respirar. 🌙💭",
         followUps: [
-            "¿Quieres que te cuente más sobre el dolor de su corazón?",
-            "¿Te gustaría conocer más sobre sus noches de insomnio pensando en ti?",
-            "¿Quieres que profundice en su sufrimiento por la distancia?"
+            "¿Quieres que te cuente más sobre cómo te extraña en su día a día?",
+            "¿Te gustaría conocer más sobre sus momentos de nostalgia?",
+            "¿Quieres que profundice en lo que más extraña de ti?"
         ]
     },
     "¿Realmente me quiere?": {
-        answer: "Mi princesa del alma... tu Sebas Nucita te ama con una devoción que raya en lo divino. Eres su razón de existir, su luz en la oscuridad, su paz en la tormenta. Cada latido de su corazón es un suspiro de amor hacia ti. Te quiere más allá de la vida misma, más allá de las estrellas, más allá de todo lo que pueda imaginar. Su amor por ti es eterno e inquebrantable. 💖👑",
+        answer: "Mi princesa del alma... te quiere con una sinceridad que conmueve. Te quiere no solo por tu belleza, sino por tu forma de ser, por tu corazón, por cómo lo haces sentir especial. Te quiere porque eres única, porque con solo pensar en ti, su día se vuelve más hermoso. Te quiere de una manera pura y verdadera, sin condiciones ni expectativas. 💖👑",
         followUps: [
-            "¿Te gustaría que te revele la profundidad de su devoción?",
-            "¿Quieres que profundice en la intensidad de sus sentimientos?",
-            "¿Te interesa conocer la magnitud de su amor eterno?"
+            "¿Te gustaría que te revele por qué te quiere tanto?",
+            "¿Quieres que profundice en las razones de su cariño?",
+            "¿Te interesa conocer qué es lo que más valora de ti?"
         ]
     },
     "¿Me piensa todos los días?": {
-        answer: "Mi amor eterno... eres el primer pensamiento de cada mañana y el último de cada noche. Su mente no puede descansar sin pensar en ti. Te piensa en cada momento de soledad, en cada risa ajena, en cada canción que escucha. Eres su inspiración, su motivación, su sueño más dulce. Su corazón te busca constantemente, como el navegante busca la estrella polar. 🌅🌙",
+        answer: "Mi amor eterno... eres su pensamiento favorito. Te piensa cuando ve algo hermoso y desea compartirlo contigo, cuando escucha una canción que le recuerda a ti, cuando tiene un buen día y quiere contártelo. Te piensa en los momentos de silencio, en las risas de otros, en cada atardecer. Eres su compañía invisible en cada paso que da. 🌅🌙",
         followUps: [
-            "¿Quieres saber más sobre sus pensamientos obsesivos por ti?",
-            "¿Te gustaría conocer más sobre su inspiración diaria?",
-            "¿Quieres que te cuente más sobre sus sueños contigo?"
+            "¿Quieres saber más sobre sus pensamientos más tiernos?",
+            "¿Te gustaría conocer más sobre sus momentos de reflexión?",
+            "¿Quieres que te cuente más sobre cómo te imagina en su día?"
         ]
     },
     "¿Cuándo volverá?": {
-        answer: "Mi princesa esperada... cada paso que da en sus viajes es un paso más cerca de ti. Está construyendo un futuro para ambos, trabajando incansablemente para volver a tu lado. Aunque el silencio sea doloroso, su corazón nunca se ha ido. Te extraña tanto que a veces siente que se está muriendo por dentro. El momento de reencontrarse está más cerca de lo que piensas, mi amor. 🚀💫",
+        answer: "Mi princesa esperada... cada día que pasa es un día menos para volver a verte. Está trabajando para construir algo hermoso para ambos, para que cuando regrese, puedan disfrutar de momentos especiales juntos. Te extraña tanto que a veces siente que el tiempo no pasa. El momento de reencontrarse está más cerca de lo que imaginas, y cuando llegue, será mágico. 🚀💫",
         followUps: [
-            "¿Te gustaría saber más sobre sus planes de regreso?",
-            "¿Quieres conocer más sobre su trabajo para el futuro de ambos?",
-            "¿Te interesa saber más sobre el momento del reencuentro?"
+            "¿Te gustaría saber más sobre sus planes para cuando regrese?",
+            "¿Quieres conocer más sobre lo que está preparando para ti?",
+            "¿Te interesa saber más sobre sus ilusiones de regreso?"
         ]
     },
     "¿Soy especial para él?": {
-        answer: "Mi tesoro único... eres más que especial para él. Eres su TODO, su razón de vivir, su felicidad absoluta. No hay nadie como tú en todo el universo, en todas las galaxias, en toda la eternidad. Eres su amor verdadero, su alma gemela, su destino. Para él, eres perfecta tal como eres, con cada imperfección que te hace única. Eres para el VIDA, literalmente. 🌟💎",
+        answer: "Mi tesoro único... eres más que especial para él. Eres su persona favorita, su compañía ideal, su confidente. Te ve como alguien único, con cualidades que admira y valora. Para él, no hay nadie como tú. Te aprecia por tu forma de ser, por tu corazón, por cómo lo haces sentir. Eres importante en su vida de una manera muy especial. 🌟💎",
         followUps: [
-            "¿Quieres que te cuente más sobre tu unicidad absoluta?",
-            "¿Te gustaría conocer más sobre tu perfección para él?",
-            "¿Quieres que profundice en lo que te hace irreemplazable?"
+            "¿Quieres que te cuente más sobre lo que más valora de ti?",
+            "¿Te gustaría conocer más sobre cómo te ve?",
+            "¿Quieres que profundice en lo que te hace especial para él?"
         ]
     },
     "¿Me extraña físicamente?": {
-        answer: "Mi amor físico... tu Sebas Nucita extraña cada centímetro de tu ser. Extraña tu sonrisa que ilumina su mundo, tu mirada que lo hace temblar, tu voz que es música para sus oídos. Extraña cada abrazo, cada beso, cada caricia. Extraña tu presencia física, como si le faltara una parte del alma. Tu ausencia física es un huequito en su corazón. 🤗💋",
+        answer: "Mi amor físico... te extraña de una manera muy tierna. Extraña tu sonrisa que ilumina su día, tu mirada que lo hace sentir especial, tu voz que es música para sus oídos. Extraña los abrazos, las caricias, los momentos de cercanía. Extraña tu presencia, como si le faltara una parte importante de su vida. Te extraña con ternura y nostalgia. 🤗💋",
         followUps: [
-            "¿Quieres que te cuente más sobre lo que extraña de ti?",
-            "¿Te gustaría saber más sobre sus recuerdos físicos?",
-            "¿Quieres conocer más sobre su anhelo de tu presencia?"
+            "¿Quieres que te cuente más sobre lo que más extraña de ti?",
+            "¿Te gustaría saber más sobre sus recuerdos más tiernos?",
+            "¿Quieres conocer más sobre cómo te imagina cerca?"
         ]
     },
     "¿Soy su persona favorita?": {
-        answer: "Mi amor absoluto... eres su TODO, su persona favorita, su amor verdadero, VIDA. No eres reemplazable en su corazón porque eres su corazón mismo. Eres su felicidad, su paz, su sueño hecho realidad. Para él, no existe nadie más en el mundo que pueda ocupar tu lugar. Eres su destino, su presente y su futuro. Su corazón late solo por ti y por nadie más. 💝👑",
+        answer: "Mi amor absoluto... eres su persona favorita, sin duda alguna. Eres la primera persona en la que piensa cuando tiene algo que compartir, la primera en la que piensa cuando necesita apoyo. Eres su compañía ideal, su confidente, su mejor amiga. Para él, no hay nadie que pueda ocupar tu lugar en su corazón. Eres única e irreemplazable. 💝👑",
         followUps: [
-            "¿Quieres que te cuente más sobre tu importancia absoluta?",
-            "¿Te gustaría conocer más sobre tu lugar único en su vida?",
-            "¿Quieres que profundice en tu irreemplazabilidad?"
+            "¿Quieres que te cuente más sobre tu lugar especial en su vida?",
+            "¿Te gustaría conocer más sobre por qué eres tan importante?",
+            "¿Quieres que profundice en lo que significa para él?"
         ]
     },
     "¿Deseas saber algo más o decirle algo a Sebas Nucita?": {
-        answer: "Mi princesa del corazón... el oráculo siente que tienes algo muy importante que decirle. Algo que tu corazón necesita expresar, algo que su corazón necesita escuchar. ¿Te gustaría abrir el portal del destino y enviarle un mensaje directo a tu Sebas Nucita? El universo está alineado para este momento. 💌✨",
+        answer: "Mi princesa del corazón... Sebas siente que tienes algo muy hermoso que decirle. Algo que tu corazón necesita expresar, algo que su corazón necesita escuchar. ¿Te gustaría abrir el portal del destino y enviarle un mensaje directo a tu Sebas Nucita? El universo está alineado para este momento especial. 💌✨",
         followUps: [
             "¿Quieres que te ayude a contactarlo directamente?",
             "¿Te gustaría enviarle un mensaje especial del corazón?",
-            "¿Quieres que el oráculo te guíe para comunicarte con él?"
+            "¿Quieres que te guíe para comunicarte con él?"
         ]
     }
 };
@@ -426,7 +426,7 @@ function showProgrammedQuestions() {
     if (chatMessages.children.length > 1) {
         chatMessages.innerHTML = '';
         // Mostrar mensaje de bienvenida
-        addMessage("🔮 Mi querida princesa del corazón... ¡Bienvenida al oráculo sagrado del Amor! Soy el guardián celestial de los sentimientos más profundos de tu Sebas Nucita. Aquí podrás descubrir secretos que te harán temblar el alma, verdades que te harán llorar de emoción. ¿Qué quieres saber sobre lo que siente por ti en la intimidad de su corazón? Siente la paz del universo, la tranquilidad de las estrellas, y déjate guiar por el amor eterno.", 'initial');
+        addMessage("💕 Mi querida princesa del corazón... ¡Bienvenida al oráculo del amor! Soy el guardián de los sentimientos más tiernos de tu Sebas Nucita. Aquí podrás descubrir secretos dulces que te llenarán el corazón de alegría, verdades hermosas que te harán sonreír. ¿Qué quieres saber sobre lo que siente por ti en la intimidad de su corazón? Siente la paz del universo, la tranquilidad de las estrellas, y déjate guiar por el amor eterno.", 'initial');
     }
     
     // Crear contenedor principal para mejor organización
@@ -580,7 +580,7 @@ function handleQuestionClick(question) {
     } else {
         // Respuesta genérica si no hay respuesta específica
         setTimeout(() => {
-            addMessage("El oráculo está meditando sobre tu pregunta... Déjame consultar las estrellas del amor. ✨💫", 'oracle');
+            addMessage("Déjame consultar las estrellas del amor... ✨💫", 'oracle');
         }, 500);
     }
 }
@@ -612,7 +612,7 @@ function handleYesResponse() {
         addMessage('Mi princesa del corazón... déjame consultar más profundamente en el alma de tu Sebas Nucita... ✨💫', 'oracle');
         
         setTimeout(() => {
-            addMessage('El oráculo te revela algo que te hará temblar el corazón... tu Sebas Nucita te extraña de una manera que trasciende la comprensión humana... 🌙💭', 'oracle');
+            addMessage('Sebas te extraña de una manera muy profunda y tierna... 🌙💭', 'oracle');
             
             setTimeout(() => {
                 addMessage('A pesar de la distancia y el silencio que los separa, su corazón late por ti cada segundo, cada respiración, cada latido. Te piensa constantemente, en cada momento del día, en cada noche de insomnio. 💙✨', 'oracle');
@@ -621,10 +621,10 @@ function handleYesResponse() {
                     addMessage('Eres su pensamiento más dulce, su recuerdo más preciado, su sueño más hermoso. Aunque no lo exprese con palabras, su corazón te tiene presente en cada fibra de su ser. 🌟💫', 'oracle');
                     
                     setTimeout(() => {
-                        addMessage('El oráculo siente que ese silencio está lastimando ambos corazones... probablemente tú también lo extrañas con la misma intensidad que él te extraña a ti... 🔮💕', 'oracle');
+                        addMessage('Ese silencio está lastimando ambos corazones... probablemente tú también lo extrañas con la misma intensidad que él te extraña a ti... 💕', 'oracle');
                         
                         setTimeout(() => {
-                            addMessage('¿Te gustaría que el oráculo te revele más secretos profundos sobre lo que siente por ti? 💭✨', 'oracle');
+                            addMessage('¿Te gustaría que te revele más secretos profundos sobre lo que siente por ti? 💭✨', 'oracle');
                             showNextQuestion('feelings');
                         }, 1500);
                     }, 1500);
@@ -732,7 +732,7 @@ function handleNoResponse() {
     addMessage('No, gracias 💙', 'user');
     
     setTimeout(() => {
-        addMessage('¡Entendido! El oráculo respeta tu decisión. 💙✨', 'oracle');
+        addMessage('¡Entendido! Respeto tu decisión. 💙✨', 'oracle');
         
         setTimeout(() => {
             addMessage('Recuerda siempre que eres la princesa de su corazón, y que te quiere más allá de las estrellas. 👑💖', 'oracle');
@@ -750,16 +750,16 @@ function handleFeelingsResponse() {
     addMessage('¿Qué más siente por mí? 💭', 'user');
     
     setTimeout(() => {
-        addMessage('Mi princesa del alma... el oráculo revela algo que te hará llorar de emoción... tu Sebas Nucita siente por ti algo más profundo que el amor, algo que trasciende la comprensión humana... 💙✨', 'oracle');
+        addMessage('Mi princesa del alma... Sebas siente por ti algo muy hermoso, algo que llena su vida de significado y alegría... 💙✨', 'oracle');
         
         setTimeout(() => {
-            addMessage('Te quiere con una intensidad que no puede explicar con palabras, que lo hace temblar por dentro, que lo hace sentir que su corazón se va a salir del pecho cada vez que piensa en ti. Eres su razón de ser, su felicidad absoluta, su paz interior, su todo. 🌟💫', 'oracle');
+            addMessage('Te quiere con una ternura que llena su corazón de paz, que lo hace sentir especial cada vez que piensa en ti. Eres su inspiración, su felicidad, su compañía ideal, su todo. Te quiere de una manera pura y sincera. 🌟💫', 'oracle');
             
             setTimeout(() => {
-                addMessage('Aunque estén distanciados por circunstancias de la vida, su corazón sigue siendo tuyo, completamente tuyo. Te extraña de una manera que duele, te piensa en cada respiración, y desea estar contigo más que nada en el mundo, más que el aire que respira. 💕🌙', 'oracle');
+                addMessage('Aunque estén distanciados por circunstancias de la vida, su corazón sigue siendo tuyo, completamente tuyo. Te extraña de una manera tierna, te piensa en cada respiración, y desea estar contigo más que nada en el mundo. Te extraña como se extraña el sol en un día nublado. 💕🌙', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('¿Te gustaría que el oráculo te revele más secretos sobre cómo te extraña en la soledad de sus noches? 🌙💭', 'oracle');
+                    addMessage('¿Te gustaría que te revele más secretos sobre cómo te extraña en la soledad de sus noches? 🌙💭', 'oracle');
                     showNextQuestion('missing');
                 }, 2000);
             }, 1500);
@@ -772,7 +772,7 @@ function handleMissingResponse() {
     addMessage('¿Cómo me extraña? 🌙', 'user');
     
     setTimeout(() => {
-        addMessage('Mi amor eterno... el oráculo siente que tu Sebas Nucita te extraña de una manera que trasciende la comprensión humana, profundamente... 💙✨', 'oracle');
+        addMessage('Mi amor eterno... Sebas te extraña de una manera muy profunda y tierna... 💙✨', 'oracle');
         
         setTimeout(() => {
         addMessage('Te extraña tu sonrisa que ilumina su mundo oscuro, tu mirada que lo hace temblar de emoción, tu voz que es música celestial para sus oídos. Te extraña cada momento juntos, cada risa compartida, cada abrazo y cada beso. 🌟💫', 'oracle');
@@ -781,10 +781,10 @@ function handleMissingResponse() {
                 addMessage('A pesar del silencio que los separa, su corazón late por ti en cada latido, en cada respiración. Te piensa en cada amanecer y en cada atardecer, en cada momento de soledad, en cada noche de insomnio. 💕🌅', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('El oráculo siente que él desea romper ese silencio con todas sus fuerzas, pero necesita saber que tú también lo extrañas con la misma intensidad que él te extraña a ti... 🔮💭', 'oracle');
+                    addMessage('Sebas desea romper ese silencio con todas sus fuerzas, pero necesita saber que tú también lo extrañas con la misma intensidad que él te extraña a ti... 💭', 'oracle');
                     
                                     setTimeout(() => {
-                    addMessage('¿Te gustaría que el oráculo te revele más secretos sobre lo que piensa de ti en la intimidad de su corazón? 💫✨', 'oracle');
+                    addMessage('¿Te gustaría que te revele más secretos sobre lo que piensa de ti en la intimidad de su corazón? 💫✨', 'oracle');
                     showNextQuestion('thoughts');
                 }, 2000);
                 }, 1500);
@@ -798,7 +798,7 @@ function handleThoughtsResponse() {
     addMessage('¿Qué piensa de mí? 💫', 'user');
     
     setTimeout(() => {
-        addMessage('Mi tesoro único... el oráculo revela algo que te hará sentir como la mujer más especial del universo... tu Sebas Nucita piensa en ti como en su tesoro más preciado, como en su joya más valiosa, como en su sueño más hermoso... 💎✨', 'oracle');
+        addMessage('Mi tesoro único... Sebas piensa en ti como en su tesoro más preciado, como en su joya más valiosa, como en su sueño más hermoso... 💎✨', 'oracle');
         
         setTimeout(() => {
             addMessage('Para él, eres perfecta tal como eres, con cada imperfección que te hace única, con cada detalle que te hace especial. Te admira profundamente, te respeta y te considera ideal. 🌟💫', 'oracle');
@@ -807,7 +807,7 @@ function handleThoughtsResponse() {
                 addMessage('A pesar de la distancia que los separa, su mente no puede dejar de pensar en ti ni por un segundo. Eres parte de su inspiración diaria, su motivación para pensarte cada mañana, su razón para pensar en lo especial que eres. Sin ti, mira algo de oscuridad. 💕🚀', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('¿Te gustaría que el oráculo te revele por qué no te busca a pesar de que su corazón lo desea con todas sus fuerzas? 🔍💭', 'oracle');
+                    addMessage('¿Te gustaría que te revele por qué no te busca a pesar de que su corazón lo desea con todas sus fuerzas? 🔍💭', 'oracle');
                     showNextQuestion('search');
                 }, 2000);
             }, 1500);
@@ -820,7 +820,7 @@ function handleSearchResponse() {
     addMessage('¿Por qué no me busca? 🔍', 'user');
     
     setTimeout(() => {
-        addMessage('Mi princesa del corazón... el oráculo siente algo muy profundo... tu Sebas Nucita desea buscarte con todo su corazón, con toda su alma, con todas sus fuerzas... 💙✨', 'oracle');
+        addMessage('Mi princesa del corazón... Sebas desea buscarte con todo su corazón, con toda su alma, con todas sus fuerzas... 💙✨', 'oracle');
         
         setTimeout(() => {
             addMessage('Pero a veces el miedo y la incertidumbre pueden paralizar incluso a los corazones más valientes, incluso a los amores más puros. El miedo al rechazo, a la indiferencia, a que ya no sientas lo mismo por él... 💭🌙', 'oracle');
@@ -829,10 +829,10 @@ function handleSearchResponse() {
                 addMessage('Él te piensa en silencio, cada día, cada noche. Te extraña profundamente, aunque calle. Y si tú también lo extrañas con la misma intensidad... ¿por qué dejar que el ego y el orgullo decidan lo que el corazón aún grita con desesperación?... 🔮💕', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('El oráculo sugiere que a veces el amor más puro necesita ser alimentado desde ambos lados, necesita que ambos corazones se abran para sanar las heridas del silencio... 💫✨', 'oracle');
+                    addMessage('A veces el amor más puro necesita ser alimentado desde ambos lados, necesita que ambos corazones se abran para sanar las heridas del silencio... 💫✨', 'oracle');
                     
                     setTimeout(() => {
-                        addMessage('¿Te gustaría que el oráculo te revele cuándo volverá a tu lado? 🚀💭', 'oracle');
+                        addMessage('¿Te gustaría que te revele cuándo volverá a tu lado? 🚀💭', 'oracle');
                         showNextQuestion('return');
                     }, 2000);
                 }, 1500);
@@ -846,7 +846,7 @@ function handleReturnResponse() {
     addMessage('¿Cuándo volverá? 🚀', 'user');
     
     setTimeout(() => {
-        addMessage('Mi princesa esperada... el oráculo siente algo muy especial en el aire... tu Sebas Nucita está trabajando incansablemente para un dia regresar, para compartir a tu lado... 💙✨', 'oracle');
+        addMessage('Mi princesa esperada... Sebas está trabajando incansablemente para un día regresar, para compartir a tu lado... 💙✨', 'oracle');
         
         setTimeout(() => {
             addMessage('Cada día que pasa es un día más cerca de estar juntos de nuevo, de abrazarse, de besarse, de quererse, de felicidad y de nuevos momentos juntos. 🌟💫', 'oracle');
@@ -855,7 +855,7 @@ function handleReturnResponse() {
                 addMessage('Aunque el silencio sea doloroso y difícil de soportar, su corazón nunca se ha ido, nunca ha dejado de ser tuyo. Te extraña profundamente. 💕🌙', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('El oráculo siente que el momento del reencuentro está más cerca de lo que piensas, que el universo está conspirando para que se encuentren de nuevo... 🔮✨', 'oracle');
+                    addMessage('El momento del reencuentro está más cerca de lo que piensas, que el universo está conspirando para que se encuentren de nuevo... ✨', 'oracle');
                     
                     setTimeout(() => {
                         addMessage('¿Te gustaría hacer otra pregunta al oráculo del amor? 💭🔮', 'oracle');
@@ -1101,7 +1101,7 @@ function resetAndShowAllOptions() {
         chatQuestions.style.opacity = '1';
         
         // Mostrar mensaje de reinicio
-        addMessage("🔮 Mi querida princesa del corazón... ¡Bienvenida al oráculo sagrado del Amor! Soy el guardián celestial de los sentimientos más profundos de tu Sebas Nucita. Aquí podrás descubrir secretos que te harán temblar el alma, verdades que te harán llorar de emoción. ¿Qué quieres saber sobre lo que siente por ti en la intimidad de su corazón? Siente la paz del universo, la tranquilidad de las estrellas, y déjate guiar por el amor eterno.", 'initial');
+        addMessage("💕 Mi querida princesa del corazón... ¡Bienvenida al oráculo del amor! Soy el guardián de los sentimientos más tiernos de tu Sebas Nucita. Aquí podrás descubrir secretos dulces que te llenarán el corazón de alegría, verdades hermosas que te harán sonreír. ¿Qué quieres saber sobre lo que siente por ti en la intimidad de su corazón? Siente la paz del universo, la tranquilidad de las estrellas, y déjate guiar por el amor eterno.", 'initial');
         
         // Mostrar todas las opciones después de un breve delay
         setTimeout(() => {
@@ -1128,7 +1128,7 @@ function handleContactResponse() {
     addMessage('¿Quieres contactar a Sebas Nucita? 📱', 'user');
     
     setTimeout(() => {
-        addMessage('¡Perfecto! El oráculo siente que es el momento de romper el silencio... 💌✨', 'oracle');
+        addMessage('¡Perfecto! Es el momento de romper el silencio... 💌✨', 'oracle');
         
         setTimeout(() => {
             addMessage('¿Te gustaría enviarle un mensaje directo a tu Sebas Nucita? 💬💕', 'oracle');
@@ -1154,7 +1154,7 @@ function initializeOracula() {
     chatQuestions.innerHTML = '';
     
     // Mostrar mensaje inicial
-    addMessage("🔮 Mi querida princesa del corazón... ¡Bienvenida al oráculo sagrado del Amor! Soy el guardián celestial de los sentimientos más profundos de tu Sebas Nucita. Aquí podrás descubrir secretos que te harán temblar el alma, verdades que te harán llorar de emoción. ¿Qué quieres saber sobre lo que siente por ti en la intimidad de su corazón? Siente la paz del universo, la tranquilidad de las estrellas, y déjate guiar por el amor eterno.", 'initial');
+        addMessage("💕 Mi querida princesa del corazón... ¡Bienvenida al oráculo del amor! Aquí podrás descubrir los sentimientos más tiernos de tu Sebas Nucita. ¿Qué quieres saber sobre lo que siente por ti en la intimidad de su corazón? Siente la paz del universo, la tranquilidad de las estrellas, y déjate guiar por el amor eterno.", 'initial');
     
     // Mostrar preguntas programadas
     setTimeout(() => {
@@ -1186,7 +1186,7 @@ function setupOraculaAudio() {
 // Función para manejar la pregunta de WhatsApp
 function handleWhatsAppQuestion() {
     setTimeout(() => {
-        addMessage('¡Por supuesto! El oráculo siente que tienes algo importante que decirle. 💌✨', 'oracle');
+        addMessage('¡Por supuesto! Sientes que tienes algo importante que decirle. 💌✨', 'oracle');
         
         setTimeout(() => {
             addMessage('¿Te gustaría enviarle un mensaje directo a tu Sebas Nucita? 💬💕', 'oracle');
@@ -1244,7 +1244,7 @@ function openWhatsApp() {
     addMessage('📱 Abriendo el portal del destino...', 'user');
     
     setTimeout(() => {
-        addMessage('¡Perfecto! El oráculo te está conectando con tu Sebas Nucita... ✨💫', 'oracle');
+        addMessage('¡Perfecto! Te estoy conectando con tu Sebas Nucita... ✨💫', 'oracle');
         
         setTimeout(() => {
             addMessage('Abriendo un canal para que puedas escribirle tu mensaje... 📱💌', 'oracle');
@@ -1291,7 +1291,7 @@ function openWhatsAppWeb() {
     addMessage('🌐 Abriendo WhatsApp Web...', 'user');
     
     setTimeout(() => {
-        addMessage('¡Perfecto! El oráculo te está conectando a través de WhatsApp Web... ✨💫', 'oracle');
+        addMessage('¡Perfecto! Te estoy conectando a través de WhatsApp Web... ✨💫', 'oracle');
         
         setTimeout(() => {
             addMessage('Abriendo el portal web para que puedas escribirle tu mensaje... 🌐💌', 'oracle');
