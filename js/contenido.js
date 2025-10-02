@@ -2232,10 +2232,70 @@ function detectMobileAndShowMessage() {
     }
 }
 
+// Función para inicializar el carrusel de princess correctamente
+function initializePrincessCarousel() {
+    const carousel = document.getElementById('princessCarousel');
+    if (carousel) {
+        // Limpiar cualquier instancia previa
+        const existingCarousel = bootstrap.Carousel.getInstance(carousel);
+        if (existingCarousel) {
+            existingCarousel.dispose();
+        }
+        
+        // Asegurar que solo la primera imagen esté activa
+        const allItems = carousel.querySelectorAll('.carousel-item');
+        allItems.forEach((item, index) => {
+            item.classList.remove('active');
+            if (index === 0) {
+                item.classList.add('active');
+            }
+        });
+        
+        // Inicializar el carrusel con configuración específica
+        const bsCarousel = new bootstrap.Carousel(carousel, {
+            interval: 4000,
+            ride: 'carousel',
+            wrap: true
+        });
+        
+        // Forzar que vaya al primer slide
+        bsCarousel.to(0);
+        
+        console.log('🎠 Carrusel de Princess inicializado correctamente');
+        console.log('📸 Total de imágenes:', allItems.length);
+        console.log('🖼️ Imagen activa:', allItems[0].querySelector('img').alt);
+    }
+}
+
+// Función para abrir el modal de princess automáticamente
+function openPrincessModal() {
+    // Esperar un poco para que la página se cargue completamente
+    setTimeout(() => {
+        const princessModal = new bootstrap.Modal(document.getElementById('princessModal'));
+        princessModal.show();
+        console.log('👑 Modal de Princess abierto automáticamente');
+    }, 1000); // 1 segundo de delay para que se vea mejor
+}
+
 // Inicializar efectos del botón de descarga
 document.addEventListener('DOMContentLoaded', function() {
     addDownloadButtonEffects();
     detectMobileAndShowMessage();
     
+    // Configurar evento para reinicializar carrusel cuando se abra el modal
+    const princessModal = document.getElementById('princessModal');
+    if (princessModal) {
+        princessModal.addEventListener('shown.bs.modal', function() {
+            console.log('🎠 Modal de Princess abierto, inicializando carrusel...');
+            setTimeout(() => {
+                initializePrincessCarousel();
+            }, 200);
+        });
+    }
+    
+    // Abrir modal de princess automáticamente
+    openPrincessModal();
+    
     console.log('📱 Botón de descarga inicializado');
+    console.log('👑 Modal de Princess configurado para abrirse automáticamente');
 });
