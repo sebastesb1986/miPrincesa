@@ -2277,6 +2277,27 @@ function openPrincessModal() {
     }, 1000); // 1 segundo de delay para que se vea mejor
 }
 
+// Función para abrir el modal de princess desde el botón Tour de Amor
+function openPrincessModalFromTour() {
+    // Crear partículas de corazones azules antes de abrir la modal
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+            createTourHeartParticle();
+        }, i * 100);
+    }
+    
+    // Abrir la modal de Princess inmediatamente
+    const princessModal = new bootstrap.Modal(document.getElementById('princessModal'));
+    princessModal.show();
+    
+    // Inicializar el carrusel cuando la modal esté completamente visible
+    setTimeout(() => {
+        initializePrincessCarousel();
+    }, 200);
+    
+    console.log('💙 Modal de Princess abierto desde Tour de Amor');
+}
+
 // Inicializar efectos del botón de descarga
 document.addEventListener('DOMContentLoaded', function() {
     addDownloadButtonEffects();
@@ -2298,4 +2319,91 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('📱 Botón de descarga inicializado');
     console.log('👑 Modal de Princess configurado para abrirse automáticamente');
+    
+    // Inicializar botón de tour de amor
+    initializeTourButton();
 });
+
+// ===== FUNCIONALIDAD DEL BOTÓN TOUR DE AMOR =====
+
+// Función para crear partículas de corazones azules para el botón de tour
+function createTourHeartParticle() {
+    const heart = document.createElement('div');
+    heart.innerHTML = '💙';
+    heart.style.position = 'fixed';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.top = window.innerHeight + 'px';
+    heart.style.fontSize = '20px';
+    heart.style.pointerEvents = 'none';
+    heart.style.zIndex = '1000';
+    heart.style.transition = 'all 3s ease-out';
+    heart.style.color = '#87CEEB';
+    
+    document.body.appendChild(heart);
+    
+    setTimeout(() => {
+        heart.style.top = '-50px';
+        heart.style.opacity = '0';
+        heart.style.transform = 'rotate(360deg) scale(1.5)';
+    }, 100);
+    
+    setTimeout(() => {
+        if (document.body.contains(heart)) {
+            document.body.removeChild(heart);
+        }
+    }, 3000);
+}
+
+
+// Función para inicializar el botón de tour
+function initializeTourButton() {
+    const tourBtn = document.getElementById('btnTour');
+    if (!tourBtn) return;
+    
+    // Efecto de hover con partículas
+    tourBtn.addEventListener('mouseenter', function() {
+        // Crear partícula de corazón azul
+        createTourHeartParticle();
+        
+        // Añadir efecto de brillo
+        this.style.boxShadow = '0 0 20px rgba(135, 206, 235, 0.6)';
+        this.style.transform = 'translateY(-2px) scale(1.02)';
+    });
+    
+    tourBtn.addEventListener('mouseleave', function() {
+        this.style.boxShadow = '0 5px 15px rgba(135, 206, 235, 0.3)';
+        this.style.transform = 'translateY(0) scale(1)';
+    });
+    
+    // Efecto de click
+    tourBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Crear múltiples partículas de corazones azules
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+                createTourHeartParticle();
+            }, i * 200);
+        }
+        
+        // Efecto de click visual
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = 'translateY(-2px) scale(1.02)';
+        }, 150);
+        
+        // Abrir la modal de Princess
+        openPrincessModalFromTour();
+    });
+    
+    // Efecto de focus para accesibilidad
+    tourBtn.addEventListener('focus', function() {
+        this.style.boxShadow = '0 0 0 3px rgba(135, 206, 235, 0.3)';
+    });
+    
+    tourBtn.addEventListener('blur', function() {
+        this.style.boxShadow = '0 5px 15px rgba(135, 206, 235, 0.3)';
+    });
+    
+    console.log('💙 Botón Tour de Amor inicializado - Abre la modal de Princess');
+}
