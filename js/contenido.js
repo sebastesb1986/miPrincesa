@@ -276,12 +276,113 @@ function typeWriter(element, text, speed = 50) {
     type();
 }
 
+// Función para añadir efectos de escritura al texto y mostrar imagen al final
+function typeWriterWithImage(element, text, imgHTML, speed = 50) {
+    let i = 0;
+    element.innerHTML = '';
+    
+    function type() {
+        if (i < text.length) {
+            element.innerHTML = text.substring(0, i + 1);
+            i++;
+            setTimeout(type, speed);
+        } else {
+            // Cuando termine la animación, agregar la imagen
+            if (imgHTML) {
+                element.innerHTML = text + ' ' + imgHTML;
+                console.log('Imagen de princesa agregada al DOM');
+            }
+        }
+    }
+    
+    type();
+}
+
+// Función para mostrar la burbuja de diálogo de la princesa
+function showPrincessBubble() {
+    console.log('Mostrando burbuja de princesa');
+    
+    // Remover burbuja existente si hay una
+    const existingBubble = document.querySelector('.princess-bubble');
+    if (existingBubble) {
+        existingBubble.remove();
+    }
+    
+    // Crear la burbuja de diálogo
+    const bubble = document.createElement('div');
+    bubble.className = 'princess-bubble';
+    bubble.innerHTML = `
+        <div class="bubble-content">
+            <div class="bubble-arrow-left"></div>
+            <div class="bubble-text">
+                "El amor verdadero no necesita coronas ni castillos, solo gestos sinceros. Y en esta, mi historia, se nota cuánto me quieren… porque el corazón de mi caballero no miente."
+            </div>
+        </div>
+    `;
+    
+    // Obtener la posición de la princesa
+    const princessImg = document.querySelector('.princess-icon');
+    const princessRect = princessImg.getBoundingClientRect();
+    
+    // Calcular posición a la derecha de la princesa
+    const bubbleLeft = princessRect.right + 10;
+    const bubbleTop = princessRect.top + (princessRect.height / 2) - 60; // Centrado verticalmente
+    
+    // Agregar estilos inline para la burbuja
+    bubble.style.cssText = `
+        position: fixed !important;
+        top: ${bubbleTop}px !important;
+        left: ${bubbleLeft}px !important;
+        background: white !important;
+        border: 3px solid #C2185B !important;
+        border-radius: 20px !important;
+        padding: 20px !important;
+        box-shadow: 0 10px 30px rgba(194, 24, 91, 0.3) !important;
+        z-index: 9999 !important;
+        max-width: 300px !important;
+        width: 280px !important;
+        font-family: 'Dancing Script', cursive !important;
+        font-size: 1.1rem !important;
+        color: #2D1B69 !important;
+        text-align: center !important;
+        line-height: 1.4 !important;
+        pointer-events: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+    `;
+    
+    // Agregar la burbuja directamente al body
+    document.body.appendChild(bubble);
+    console.log('Burbuja agregada al body');
+    
+    // Remover la burbuja después de 5 segundos
+    setTimeout(() => {
+        if (bubble.parentNode) {
+            bubble.style.opacity = '0';
+            bubble.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            setTimeout(() => {
+                if (bubble.parentNode) {
+                    bubble.parentNode.removeChild(bubble);
+                    console.log('Burbuja removida');
+                }
+            }, 500);
+        }
+    }, 5000);
+}
+
 // Aplicar efecto de escritura al título principal cuando se carga la página
 document.addEventListener('DOMContentLoaded', function() {
     const title = document.querySelector('h1');
     if (title) {
-        const originalText = title.textContent;
-        typeWriter(title, originalText, 100);
+        // Extraer solo el texto sin la imagen
+        const originalText = title.textContent.trim();
+        // Guardar la imagen si existe
+        const img = title.querySelector('img');
+        const imgHTML = img ? img.outerHTML : '';
+        
+        // Aplicar efecto de escritura solo al texto
+        typeWriterWithImage(title, originalText, imgHTML, 100);
     }
 });
 
