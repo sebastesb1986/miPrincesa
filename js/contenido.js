@@ -300,7 +300,7 @@ function typeWriterWithImage(element, text, imgHTML, speed = 50) {
 
 // Función para mostrar la burbuja de diálogo de la princesa
 function showPrincessBubble() {
-    console.log('Mostrando burbuja de princesa');
+    console.log('Mostrando secuencia de mensajes de la princesa');
     
     // Remover burbuja existente si hay una
     const existingBubble = document.querySelector('.princess-bubble');
@@ -308,67 +308,164 @@ function showPrincessBubble() {
         existingBubble.remove();
     }
     
-    // Crear la burbuja de diálogo
-    const bubble = document.createElement('div');
-    bubble.className = 'princess-bubble';
-    bubble.innerHTML = `
-        <div class="bubble-content">
+    // Array de mensajes de la princesa
+    const mensajes = [
+        "El amor verdadero no necesita coronas ni castillos, solo gestos sinceros. Y en esta, mi historia, se nota cuánto me quieren… porque el corazón de mi caballero no miente.",
+        "El me quiere y sus besos son especiales, el tiempo se detiene entre nosotros.",
+        "Lo nuestro es un amor de verdad.\nEsto que vivimos... es amor del bueno y real."
+    ];
+    
+    let indiceMensaje = 0;
+    
+    // Función para mostrar un mensaje específico
+    function mostrarMensaje(mensaje) {
+        // Remover burbuja anterior si existe
+        const bubbleAnterior = document.querySelector('.princess-bubble');
+        if (bubbleAnterior) {
+            bubbleAnterior.remove();
+        }
+        
+        // Crear la burbuja de diálogo
+        const bubble = document.createElement('div');
+        bubble.className = 'princess-bubble';
+        bubble.innerHTML = `
             <div class="bubble-arrow-left"></div>
             <div class="bubble-text">
-                "El amor verdadero no necesita coronas ni castillos, solo gestos sinceros. Y en esta, mi historia, se nota cuánto me quieren… porque el corazón de mi caballero no miente."
+                "${mensaje}"
             </div>
-        </div>
-    `;
-    
-    // Obtener la posición de la princesa
-    const princessImg = document.querySelector('.princess-icon');
-    const princessRect = princessImg.getBoundingClientRect();
-    
-    // Calcular posición a la derecha de la princesa
-    const bubbleLeft = princessRect.right + 10;
-    const bubbleTop = princessRect.top + (princessRect.height / 2) - 60; // Centrado verticalmente
-    
-    // Agregar estilos inline para la burbuja
-    bubble.style.cssText = `
-        position: fixed !important;
-        top: ${bubbleTop}px !important;
-        left: ${bubbleLeft}px !important;
-        background: white !important;
-        border: 3px solid #C2185B !important;
-        border-radius: 20px !important;
-        padding: 20px !important;
-        box-shadow: 0 10px 30px rgba(194, 24, 91, 0.3) !important;
-        z-index: 9999 !important;
-        max-width: 300px !important;
-        width: 280px !important;
-        font-family: 'Dancing Script', cursive !important;
-        font-size: 1.1rem !important;
-        color: #2D1B69 !important;
-        text-align: center !important;
-        line-height: 1.4 !important;
-        pointer-events: none !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        display: block !important;
-    `;
-    
-    // Agregar la burbuja directamente al body
-    document.body.appendChild(bubble);
-    console.log('Burbuja agregada al body');
-    
-    // Remover la burbuja después de 5 segundos
-    setTimeout(() => {
-        if (bubble.parentNode) {
-            bubble.style.opacity = '0';
-            bubble.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        `;
+        
+        // Obtener la posición de la princesa
+        const princessImg = document.querySelector('.princess-icon');
+        const princessRect = princessImg.getBoundingClientRect();
+        
+        // Calcular el ancho dinámico basado en la longitud del texto
+        const textLength = mensaje.length;
+        const isMobile = window.innerWidth <= 768;
+        const maxWidth = isMobile ? Math.min(window.innerWidth - 40, 350) : 400; // En móvil: máximo ancho de pantalla - 40px
+        let bubbleWidth = Math.min(Math.max(textLength * 8, 200), maxWidth);
+        
+        // Calcular posición según el dispositivo
+        let bubbleLeft, bubbleTop;
+        if (isMobile) {
+            // En móvil: centrar horizontalmente y posicionar abajo
+            bubbleLeft = princessRect.left + (princessRect.width / 2) - (bubbleWidth / 2);
+            bubbleTop = princessRect.bottom + 10;
+        } else {
+            // En desktop: a la derecha de la princesa
+            bubbleLeft = princessRect.right + 10;
+            bubbleTop = princessRect.top + (princessRect.height / 2) - 60;
+        }
+        
+        // Calcular padding dinámico basado en la longitud del texto
+        let bubblePadding;
+        if (textLength > 150) {
+            bubblePadding = '0px 12px 6px 12px'; // Muy compacto: sin arriba, abajo 6px
+        } else if (textLength > 100) {
+            bubblePadding = '0px 15px 8px 15px'; // Compacto: sin arriba, abajo 8px
+        } else if (textLength > 50) {
+            bubblePadding = '0px 18px 10px 18px'; // Medio: sin arriba, abajo 10px
+        } else {
+            bubblePadding = '0px 20px 12px 20px'; // Normal: sin arriba, abajo 12px
+        }
+        
+        // Agregar estilos inline para la burbuja
+        bubble.style.cssText = `
+            position: fixed !important;
+            top: ${bubbleTop}px !important;
+            left: ${bubbleLeft}px !important;
+            background: white !important;
+            border: 3px solid #C2185B !important;
+            border-radius: 20px !important;
+            padding: ${bubblePadding} !important;
+            box-shadow: 0 10px 30px rgba(194, 24, 91, 0.3) !important;
+            z-index: 9999 !important;
+            max-width: ${bubbleWidth}px !important;
+            width: ${bubbleWidth}px !important;
+            font-family: 'Dancing Script', cursive !important;
+            font-size: 1.1rem !important;
+            color: #2D1B69 !important;
+            text-align: center !important;
+            line-height: 1.2 !important;
+            pointer-events: none !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+            white-space: pre-line !important;
+        `;
+        
+        // Agregar estilos para la flecha
+        const arrow = bubble.querySelector('.bubble-arrow-left');
+        if (arrow) {
+            if (isMobile) {
+                // En móvil: flecha apuntando hacia arriba
+                arrow.style.cssText = `
+                    position: absolute !important;
+                    left: 50% !important;
+                    top: -10px !important;
+                    transform: translateX(-50%) !important;
+                    width: 0 !important;
+                    height: 0 !important;
+                    border-left: 10px solid transparent !important;
+                    border-right: 10px solid transparent !important;
+                    border-bottom: 10px solid #C2185B !important;
+                `;
+            } else {
+                // En desktop: flecha apuntando hacia la izquierda
+                arrow.style.cssText = `
+                    position: absolute !important;
+                    left: -10px !important;
+                    top: 50% !important;
+                    transform: translateY(-50%) !important;
+                    width: 0 !important;
+                    height: 0 !important;
+                    border-top: 10px solid transparent !important;
+                    border-bottom: 10px solid transparent !important;
+                    border-right: 10px solid #C2185B !important;
+                `;
+            }
+        }
+        
+        // Agregar estilos para el texto
+        const textElement = bubble.querySelector('.bubble-text');
+        if (textElement) {
+            textElement.style.cssText = `
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block !important;
+                width: 100% !important;
+            `;
+        }
+        
+        // Agregar la burbuja al body
+        document.body.appendChild(bubble);
+        console.log(`Mensaje ${indiceMensaje + 1} de la princesa mostrado`);
+        
+        // Programar el siguiente mensaje o finalizar
+        indiceMensaje++;
+        if (indiceMensaje < mensajes.length) {
+            setTimeout(() => {
+                mostrarMensaje(mensajes[indiceMensaje]);
+            }, 6000); // 6 segundos entre mensajes
+        } else {
+            // Remover la última burbuja después de 6 segundos
             setTimeout(() => {
                 if (bubble.parentNode) {
-                    bubble.parentNode.removeChild(bubble);
-                    console.log('Burbuja removida');
+                    bubble.style.opacity = '0';
+                    bubble.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        if (bubble.parentNode) {
+                            bubble.parentNode.removeChild(bubble);
+                            console.log('Secuencia de mensajes de la princesa completada');
+                        }
+                    }, 500);
                 }
-            }, 500);
+            }, 6000);
         }
-    }, 5000);
+    }
+    
+    // Iniciar la secuencia con el primer mensaje
+    mostrarMensaje(mensajes[0]);
 }
 
 // Aplicar efecto de escritura al título principal cuando se carga la página
@@ -2389,6 +2486,134 @@ function initializePrincessCarousel() {
     }
 }
 
+// Función para mostrar el mensaje de invitación de la princesa
+function showPrincessInvitation() {
+    // Crear la burbuja de invitación
+    const invitationBubble = document.createElement('div');
+    invitationBubble.className = 'princess-invitation-bubble';
+    invitationBubble.innerHTML = `
+        <div class="bubble-arrow-left"></div>
+        <div class="bubble-text">
+            👑 ¡Pulsame!, tengo algo muy especial que decirte... 💕
+        </div>
+    `;
+    
+    // Obtener la posición de la princesa
+    const princessImg = document.querySelector('.princess-icon');
+    if (!princessImg) {
+        console.log('No se encontró la imagen de la princesa');
+        return;
+    }
+    
+    const princessRect = princessImg.getBoundingClientRect();
+    
+    // Detectar si es móvil
+    const isMobile = window.innerWidth <= 768;
+    
+    // Calcular ancho dinámico
+    const textLength = "👑 ¡Pulsame!, tengo algo muy especial que decirte... 💕".length;
+    const maxWidth = isMobile ? Math.min(window.innerWidth - 40, 300) : 320;
+    const bubbleWidth = Math.min(Math.max(textLength * 8, 200), maxWidth);
+    
+    // Calcular posición según el dispositivo
+    let bubbleLeft, bubbleTop;
+    if (isMobile) {
+        // En móvil: centrar horizontalmente y posicionar abajo
+        bubbleLeft = princessRect.left + (princessRect.width / 2) - (bubbleWidth / 2);
+        bubbleTop = princessRect.bottom + 10;
+    } else {
+        // En desktop: a la derecha de la princesa
+        bubbleLeft = princessRect.right + 10;
+        bubbleTop = princessRect.top + (princessRect.height / 2) - 50;
+    }
+    
+    // Agregar estilos inline para la burbuja de invitación
+    invitationBubble.style.cssText = `
+        position: fixed !important;
+        top: ${bubbleTop}px !important;
+        left: ${bubbleLeft}px !important;
+        background: linear-gradient(135deg, #FFE4E1, #FFB6C1) !important;
+        border: 3px solid #FF69B4 !important;
+        border-radius: 20px !important;
+        padding: 12px !important;
+        box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4) !important;
+        z-index: 9999 !important;
+        max-width: ${bubbleWidth}px !important;
+        width: ${bubbleWidth}px !important;
+        font-family: 'Dancing Script', cursive !important;
+        font-size: 1.1rem !important;
+        color: #8B008B !important;
+        text-align: center !important;
+        line-height: 1.4 !important;
+        pointer-events: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        display: block !important;
+        animation: invitationPulse 2s ease-in-out infinite !important;
+    `;
+    
+    // Agregar estilos para la flecha de invitación
+    const arrow = invitationBubble.querySelector('.bubble-arrow-left');
+    if (arrow) {
+        if (isMobile) {
+            // En móvil: flecha apuntando hacia arriba
+            arrow.style.cssText = `
+                position: absolute !important;
+                left: 50% !important;
+                top: -10px !important;
+                transform: translateX(-50%) !important;
+                width: 0 !important;
+                height: 0 !important;
+                border-left: 10px solid transparent !important;
+                border-right: 10px solid transparent !important;
+                border-bottom: 10px solid #FF69B4 !important;
+            `;
+        } else {
+            // En desktop: flecha apuntando hacia la izquierda
+            arrow.style.cssText = `
+                position: absolute !important;
+                left: -10px !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                width: 0 !important;
+                height: 0 !important;
+                border-top: 10px solid transparent !important;
+                border-bottom: 10px solid transparent !important;
+                border-right: 10px solid #FF69B4 !important;
+            `;
+        }
+    }
+    
+    // Agregar estilos para el texto de invitación
+    const textElement = invitationBubble.querySelector('.bubble-text');
+    if (textElement) {
+        textElement.style.cssText = `
+            margin: 0 !important;
+            padding: 0 !important;
+            display: block !important;
+            width: 100% !important;
+        `;
+    }
+    
+    // Agregar la burbuja de invitación al body
+    document.body.appendChild(invitationBubble);
+    console.log('👑 Mensaje de invitación de la princesa mostrado');
+    
+    // Remover la burbuja de invitación después de 6 segundos
+    setTimeout(() => {
+        if (invitationBubble.parentNode) {
+            invitationBubble.style.opacity = '0';
+            invitationBubble.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                if (invitationBubble.parentNode) {
+                    invitationBubble.parentNode.removeChild(invitationBubble);
+                    console.log('👑 Mensaje de invitación removido');
+                }
+            }, 500);
+        }
+    }, 6000);
+}
+
 // Función para abrir el modal de princess automáticamente
 function openPrincessModal() {
     // Esperar un poco para que la página se cargue completamente
@@ -2450,11 +2675,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Abrir modal de princess automáticamente
-    openPrincessModal();
+    // Mostrar mensaje de invitación de la princesa después de 3 segundos
+    setTimeout(() => {
+        showPrincessInvitation();
+    }, 3000);
     
     console.log('📱 Botón de descarga inicializado');
-    console.log('👑 Modal de Princess configurado para abrirse automáticamente');
+    console.log('👑 Mensaje de invitación de la princesa configurado');
     
     // Inicializar botón de tour de amor
     initializeTourButton();
