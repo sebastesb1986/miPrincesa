@@ -2193,7 +2193,7 @@ function detectMobileAndShowMessage() {
             
             // Mostrar mensaje especial para móviles
             const mobileMessage = document.createElement('div');
-            mobileMessage.innerHTML = '💚 ¡Perfecto! Te llevo contigo a donde vayas 💚';
+            mobileMessage.innerHTML = '💚 ¡Perfecto! Me llevas contigo a donde vayas 💚';
             mobileMessage.style.cssText = `
                 position: fixed;
                 top: 20px;
