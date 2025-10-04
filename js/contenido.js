@@ -2150,7 +2150,7 @@ function showDownloadAlert() {
             clearInterval(countdownInterval);
             // Descarga directa sin ventana emergente
             const downloadLink = document.createElement('a');
-            downloadLink.href = 'https://cvws.icloud-content.com/B/AfdetlCLs1B_cugWjE5nSG_0Sy14AZ8xo347NA93lr1mHhWrAH7p24bf/universalPush.apk?o=Avd37ZGv7vtsW7eSK0TsJABBcI-lLBVujcROgnc-nx6K&v=1&x=3&a=CAog_jBzLSm8qLp6mAJkbST1zfpFpRZbb-YNFFCbS4E_w3MSbxC64J_wmjMYur378ZozIgEAUgT0Sy14WgTp24bfaieIqHIn0-id5qNPvAJrlZc-wNWdiKNRHFmRYVPbSLP0AbizMdv-79FyJ8gjnyWK1gmzihtCErK_ZI1gjxIuW60eg6iQMOfjn66XC3xVsgMX0Q&e=1759564979&fl=&r=1efc4bba-bf85-4044-acca-5a0d9a975813-1&k=1Zha0NgI1vxAXHV4okNaVw&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=49&s=drKBy4473dP5wOzplAqTvJXmu6Q';
+            downloadLink.href = 'https://drive.google.com/drive/folders/1XmvFviMmfro9O_tKrIUSoxdGRPNwO3LM';
             downloadLink.download = 'Elizabeth_Una_Princesa.apk';
             downloadLink.target = '_self';
             document.body.appendChild(downloadLink);
