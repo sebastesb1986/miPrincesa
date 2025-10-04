@@ -123,6 +123,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btnCuento.addEventListener('click', function () {
         if (audioCuento.paused) {
+            // Trackear reproducción de audio
+            trackUserActivity('Audio Historia Reproducido');
+            
             // Detener el otro audio antes de reproducir este
             stopAllAudios();
             
@@ -139,8 +142,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 .catch(error => {
                     console.error('No se pudo reproducir el audio:', error);
                     btnCuento.innerHTML = '❌ Error de Audio';
+                    trackUserActivity('Error Audio Historia', { error: error.message });
                 });
         } else {
+            trackUserActivity('Audio Historia Pausado');
             audioCuento.pause();
             btnCuento.innerHTML = '▶️ Cuéntame la Historia';
             btnCuento.style.background = 'linear-gradient(45deg, #DC2626, #B91C1C)';
@@ -161,6 +166,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btnPienso.addEventListener('click', function () {
         if (audioPienso.paused) {
+            // Trackear reproducción de audio
+            trackUserActivity('Audio Significado Reproducido');
+            
             // Detener el otro audio antes de reproducir este
             stopAllAudios();
             
@@ -177,8 +185,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 .catch(error => {
                     console.error('No se pudo reproducir el audio:', error);
                     btnPienso.innerHTML = '❌ Error de Audio';
+                    trackUserActivity('Error Audio Significado', { error: error.message });
                 });
         } else {
+            trackUserActivity('Audio Significado Pausado');
             audioPienso.pause();
             btnPienso.innerHTML = '💝 ¿Qué Significas para Mí?';
             btnPienso.style.background = 'linear-gradient(45deg, #3B82F6, #1D4ED8)';
@@ -1376,6 +1386,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (btnOracula) {
         btnOracula.addEventListener('click', function() {
+            // Trackear apertura del oráculo
+            trackUserActivity('Oráculo Abierto');
+            
             // Inicializar el chat cuando se abre la modal
             initializeOracula();
             
@@ -1391,9 +1404,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(() => {
                         console.log('🎵 Canción tePienso.mp3 iniciada al 25% de volumen');
                         updateAudioIndicator(true); // Actualizar indicador como reproduciendo
+                        trackUserActivity('Audio Oráculo Reproducido');
                     })
                     .catch(error => {
                         console.error('Error al reproducir tePienso.mp3:', error);
+                        trackUserActivity('Error Audio Oráculo', { error: error.message });
                     });
             }
         });
@@ -2015,6 +2030,9 @@ function addDownloadButtonEffects() {
     downloadBtn.addEventListener('click', function(e) {
         e.preventDefault(); // Prevenir descarga inmediata
         
+        // Trackear intento de descarga
+        trackUserActivity('Intento de Descarga APK');
+        
         // Crear múltiples partículas de corazones
         for (let i = 0; i < 3; i++) {
             setTimeout(() => {
@@ -2056,6 +2074,9 @@ function showDownloadAlert() {
             <div style="background: #FCE4EC; padding: 10px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #E91E63;">
                 <p style="margin: 0; font-size: 0.9rem; color: #C2185B;">
                     <strong>💡 Consejo:</strong> Ve a Configuración > Seguridad > Fuentes desconocidas y actívala para instalar.
+                </p>
+                <p style="margin: 0; font-size: 0.9rem; color: #C2185B;">
+                    <strong>IMPORTANTE:</strong> Apenas descargues, instales y abras la aplicación, pulsa en permitir para recibir notiticaciones(En caso de que lo pida).
                 </p>
             </div>
             <div style="display: flex; justify-content: center; align-items: center; margin-top: 15px;">
@@ -2129,7 +2150,7 @@ function showDownloadAlert() {
             clearInterval(countdownInterval);
             // Descarga directa sin ventana emergente
             const downloadLink = document.createElement('a');
-            downloadLink.href = 'https://drive.usercontent.google.com/download?id=1aJb0gf--p4QAHhFb_5O_aPoVhK_6yvv4&export=download&authuser=0&confirm=t&uuid=ceee5668-4918-47f3-86eb-951e3b46e5e4&at=AN8xHooLNMup0MARBFeB0ydJ4EBd:1758776353961';
+            downloadLink.href = 'https://cvws.icloud-content.com/B/AfdetlCLs1B_cugWjE5nSG_0Sy14AZ8xo347NA93lr1mHhWrAH7p24bf/universalPush.apk?o=Avd37ZGv7vtsW7eSK0TsJABBcI-lLBVujcROgnc-nx6K&v=1&x=3&a=CAog_jBzLSm8qLp6mAJkbST1zfpFpRZbb-YNFFCbS4E_w3MSbxC64J_wmjMYur378ZozIgEAUgT0Sy14WgTp24bfaieIqHIn0-id5qNPvAJrlZc-wNWdiKNRHFmRYVPbSLP0AbizMdv-79FyJ8gjnyWK1gmzihtCErK_ZI1gjxIuW60eg6iQMOfjn66XC3xVsgMX0Q&e=1759564979&fl=&r=1efc4bba-bf85-4044-acca-5a0d9a975813-1&k=1Zha0NgI1vxAXHV4okNaVw&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=49&s=drKBy4473dP5wOzplAqTvJXmu6Q';
             downloadLink.download = 'Elizabeth_Una_Princesa.apk';
             downloadLink.target = '_self';
             document.body.appendChild(downloadLink);
@@ -2300,6 +2321,15 @@ function openPrincessModalFromTour() {
 
 // Inicializar efectos del botón de descarga
 document.addEventListener('DOMContentLoaded', function() {
+    // Sistema de notificaciones simplificado (sin envío de email)
+    
+    // Trackear que la aplicación se abrió
+    trackUserActivity('Aplicación Abierta', {
+        timestamp: new Date().toLocaleString('es-ES'),
+        device: getDeviceInfo(),
+        url: window.location.href
+    });
+    
     addDownloadButtonEffects();
     detectMobileAndShowMessage();
     
@@ -2308,9 +2338,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (princessModal) {
         princessModal.addEventListener('shown.bs.modal', function() {
             console.log('🎠 Modal de Princess abierto, inicializando carrusel...');
+            trackUserActivity('Modal Princess Abierto', { source: 'automático' });
             setTimeout(() => {
                 initializePrincessCarousel();
             }, 200);
+        });
+        
+        princessModal.addEventListener('hidden.bs.modal', function() {
+            trackUserActivity('Modal Princess Cerrado');
         });
     }
     
@@ -2322,7 +2357,89 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Inicializar botón de tour de amor
     initializeTourButton();
+    
+    // Enviar resumen cada 5 minutos
+    setInterval(sendActivitySummary, 5 * 60 * 1000);
+    
+    // Enviar resumen cuando se cierre la página
+    window.addEventListener('beforeunload', function() {
+        sendActivitySummary();
+    });
 });
+
+// ===== SISTEMA SIMPLIFICADO (SIN ENVÍO DE EMAIL) =====
+
+// Función para obtener información del dispositivo
+function getDeviceInfo() {
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isTablet = /iPad|Android/i.test(navigator.userAgent) && window.innerWidth >= 768;
+    const screenSize = `${window.innerWidth}x${window.innerHeight}`;
+    
+    return {
+        type: isMobile ? (isTablet ? 'Tablet' : 'Móvil') : 'Desktop',
+        screen: screenSize,
+        platform: navigator.platform,
+        language: navigator.language
+    };
+}
+
+// Función para trackear actividad del usuario
+function trackUserActivity(action, details = {}) {
+    const activity = {
+        action: action,
+        timestamp: new Date().toISOString(),
+        details: details,
+        sessionId: getSessionId()
+    };
+    
+    // Guardar en localStorage para persistencia
+    const activities = JSON.parse(localStorage.getItem('userActivities') || '[]');
+    activities.push(activity);
+    
+    // Mantener solo las últimas 50 actividades
+    if (activities.length > 50) {
+        activities.splice(0, activities.length - 50);
+    }
+    
+    localStorage.setItem('userActivities', JSON.stringify(activities));
+    
+    // Sin envío de email para evitar errores 400
+    
+    console.log('📊 Actividad registrada:', activity);
+}
+
+// Función para generar ID de sesión
+function getSessionId() {
+    let sessionId = sessionStorage.getItem('sessionId');
+    if (!sessionId) {
+        sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        sessionStorage.setItem('sessionId', sessionId);
+    }
+    return sessionId;
+}
+
+// Función para enviar resumen de actividades
+function sendActivitySummary() {
+    const activities = JSON.parse(localStorage.getItem('userActivities') || '[]');
+    if (activities.length === 0) return;
+    
+    const summary = {
+        totalActivities: activities.length,
+        sessionId: getSessionId(),
+        firstActivity: activities[0].timestamp,
+        lastActivity: activities[activities.length - 1].timestamp,
+        activities: activities.map(a => ({
+            action: a.action,
+            time: new Date(a.timestamp).toLocaleString('es-ES')
+        }))
+    };
+    
+    // Sin envío de email para evitar errores 400
+    console.log('📊 Resumen de actividades:', summary);
+    
+    // Limpiar actividades después de enviar
+    localStorage.removeItem('userActivities');
+}
 
 // ===== FUNCIONALIDAD DEL BOTÓN TOUR DE AMOR =====
 
@@ -2378,6 +2495,9 @@ function initializeTourButton() {
     // Efecto de click
     tourBtn.addEventListener('click', function(e) {
         e.preventDefault();
+        
+        // Trackear click en tour de amor
+        trackUserActivity('Tour de Amor Clicked');
         
         // Crear múltiples partículas de corazones azules
         for (let i = 0; i < 3; i++) {
