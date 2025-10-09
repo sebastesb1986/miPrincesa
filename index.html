@@ -8,6 +8,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" >
 </head>
 <body>
+    <!-- Overlay de encantamiento inicial -->
+    <div id="enchantmentOverlay" class="enchantment-overlay">
+        <div class="star-particles" id="starParticles"></div>
+        <div class="enchantment-text-container">
+            <h1 class="enchantment-title">Bienvenida, mi princesa…</h1>
+            <div class="typewriter-text" id="typewriterText"></div>
+            <div class="beating-heart" id="beatingHeart" style="display: none;">💖</div>
+        </div>
+        <div class="final-glow" id="finalGlow" style="display: none;"></div>
+    </div>
+
     <div class="container mt-5">
         <div class="book" id="book">
             <!-- Decoración del libro -->
@@ -15,7 +26,7 @@
             
             <!-- Primera página - Portada -->
             <div class="page">
-                <h1>Elizabeth, Una Princesa <img src="./images/princesaEli.png" alt="Princesa Elizabeth" class="princess-icon" style="width: 50px; height: 50px; display: inline-block; cursor: pointer;" onclick="showPrincessBubble()"><!-- Updated: 2025-01-10 --></h1>
+                <h1>Elizabeth, Una Princesa <img src="./images/princesaEli.png" alt="Princesa Elizabeth" class="princess-icon" style="width: 50px; height: 50px; display: inline-block; cursor: pointer;" onclick="showPrincessFullSequence()"><!-- Updated: 2025-01-10 --></h1>
                 <div class="text-center my-4">
                     <button id="btnStars" class="btn btn-stars">⭐ Aún recolectando las estrellas para ti</button>
                     <button id="btnPlayAudio" class="btn btn-danger">Cuéntame la Historia</button>
