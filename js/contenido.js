@@ -331,17 +331,15 @@ function showPrincessBubble() {
     const maxWidth = isMobile ? Math.min(window.innerWidth - 40, 350) : 400;
     let bubbleWidth = Math.min(Math.max(textLength * 8, 200), maxWidth);
     
-    // Calcular posición según el dispositivo
-    let bubbleLeft, bubbleTop;
-    if (isMobile) {
-        // En móvil: centrar horizontalmente y posicionar abajo
-        bubbleLeft = princessRect.left + (princessRect.width / 2) - (bubbleWidth / 2);
-        bubbleTop = princessRect.bottom + 10;
-    } else {
-        // En desktop: a la derecha de la princesa
-        bubbleLeft = princessRect.right + 10;
-        bubbleTop = princessRect.top + (princessRect.height / 2) - 60;
-    }
+    // Calcular posición - SIEMPRE DEBAJO DE LA PRINCESA
+    const bubbleLeft = princessRect.left + (princessRect.width / 2) - (bubbleWidth / 2);
+    const bubbleTop = princessRect.bottom + 15;
+    
+    // Asegurar que no se salga de la pantalla horizontalmente
+    const screenWidth = window.innerWidth;
+    const minLeft = 10;
+    const maxLeft = screenWidth - bubbleWidth - 10;
+    const adjustedBubbleLeft = Math.max(minLeft, Math.min(maxLeft, bubbleLeft));
     
     // Calcular padding dinámico basado en la longitud del texto
     let bubblePadding;
@@ -359,7 +357,7 @@ function showPrincessBubble() {
     bubble.style.cssText = `
         position: fixed !important;
         top: ${bubbleTop}px !important;
-        left: ${bubbleLeft}px !important;
+        left: ${adjustedBubbleLeft}px !important;
         background: white !important;
         border: 3px solid #C2185B !important;
         border-radius: 20px !important;
@@ -379,38 +377,28 @@ function showPrincessBubble() {
         display: block !important;
         white-space: pre-line !important;
         animation: invitationPulse 2s ease-in-out infinite !important;
+        transform: none !important;
     `;
     
-    // Agregar estilos para la flecha
+    // Agregar estilos para la flecha - SIEMPRE HACIA ARRIBA
     const arrow = bubble.querySelector('.bubble-arrow-left');
     if (arrow) {
-        if (isMobile) {
-            // En móvil: flecha apuntando hacia arriba
-            arrow.style.cssText = `
-                position: absolute !important;
-                left: 50% !important;
-                top: -10px !important;
-                transform: translateX(-50%) !important;
-                width: 0 !important;
-                height: 0 !important;
-                border-left: 10px solid transparent !important;
-                border-right: 10px solid transparent !important;
-                border-bottom: 10px solid #C2185B !important;
-            `;
-        } else {
-            // En desktop: flecha apuntando hacia la izquierda
-            arrow.style.cssText = `
-                position: absolute !important;
-                left: -10px !important;
-                top: 50% !important;
-                transform: translateY(-50%) !important;
-                width: 0 !important;
-                height: 0 !important;
-                border-top: 10px solid transparent !important;
-                border-bottom: 10px solid transparent !important;
-                border-right: 10px solid #C2185B !important;
-            `;
-        }
+        // Calcular la posición de la flecha para que apunte hacia la princesa
+        const princessCenterX = princessRect.left + (princessRect.width / 2);
+        const bubbleCenterX = adjustedBubbleLeft + (bubbleWidth / 2);
+        const arrowOffset = princessCenterX - bubbleCenterX;
+        
+        arrow.style.cssText = `
+            position: absolute !important;
+            left: calc(50% + ${arrowOffset}px) !important;
+            top: -10px !important;
+            transform: translateX(-50%) !important;
+            width: 0 !important;
+            height: 0 !important;
+            border-left: 10px solid transparent !important;
+            border-right: 10px solid transparent !important;
+            border-bottom: 10px solid #C2185B !important;
+        `;
     }
     
     // Agregar estilos para el texto
@@ -490,15 +478,15 @@ function showPrincessFullSequence() {
         const maxWidth = isMobile ? Math.min(window.innerWidth - 40, 350) : 400;
         let bubbleWidth = Math.min(Math.max(textLength * 8, 200), maxWidth);
         
-        // Calcular posición según el dispositivo
-        let bubbleLeft, bubbleTop;
-        if (isMobile) {
-            bubbleLeft = princessRect.left + (princessRect.width / 2) - (bubbleWidth / 2);
-            bubbleTop = princessRect.bottom + 10;
-        } else {
-            bubbleLeft = princessRect.right + 10;
-            bubbleTop = princessRect.top + (princessRect.height / 2) - 60;
-        }
+        // Calcular posición - SIEMPRE DEBAJO DE LA PRINCESA
+        const bubbleLeft = princessRect.left + (princessRect.width / 2) - (bubbleWidth / 2);
+        const bubbleTop = princessRect.bottom + 15;
+        
+        // Asegurar que no se salga de la pantalla horizontalmente
+        const screenWidth = window.innerWidth;
+        const minLeft = 10;
+        const maxLeft = screenWidth - bubbleWidth - 10;
+        const adjustedBubbleLeft = Math.max(minLeft, Math.min(maxLeft, bubbleLeft));
         
         // Calcular padding dinámico basado en la longitud del texto
         let bubblePadding;
@@ -516,7 +504,7 @@ function showPrincessFullSequence() {
         bubble.style.cssText = `
             position: fixed !important;
             top: ${bubbleTop}px !important;
-            left: ${bubbleLeft}px !important;
+            left: ${adjustedBubbleLeft}px !important;
             background: white !important;
             border: 3px solid #C2185B !important;
             border-radius: 20px !important;
@@ -535,36 +523,28 @@ function showPrincessFullSequence() {
             visibility: visible !important;
             display: block !important;
             white-space: pre-line !important;
+            transform: none !important;
         `;
         
-        // Agregar estilos para la flecha
+        // Agregar estilos para la flecha - SIEMPRE HACIA ARRIBA
         const arrow = bubble.querySelector('.bubble-arrow-left');
         if (arrow) {
-            if (isMobile) {
-                arrow.style.cssText = `
-                    position: absolute !important;
-                    left: 50% !important;
-                    top: -10px !important;
-                    transform: translateX(-50%) !important;
-                    width: 0 !important;
-                    height: 0 !important;
-                    border-left: 10px solid transparent !important;
-                    border-right: 10px solid transparent !important;
-                    border-bottom: 10px solid #C2185B !important;
-                `;
-            } else {
-                arrow.style.cssText = `
-                    position: absolute !important;
-                    left: -10px !important;
-                    top: 50% !important;
-                    transform: translateY(-50%) !important;
-                    width: 0 !important;
-                    height: 0 !important;
-                    border-top: 10px solid transparent !important;
-                    border-bottom: 10px solid transparent !important;
-                    border-right: 10px solid #C2185B !important;
-                `;
-            }
+            // Calcular la posición de la flecha para que apunte hacia la princesa
+            const princessCenterX = princessRect.left + (princessRect.width / 2);
+            const bubbleCenterX = adjustedBubbleLeft + (bubbleWidth / 2);
+            const arrowOffset = princessCenterX - bubbleCenterX;
+            
+            arrow.style.cssText = `
+                position: absolute !important;
+                left: calc(50% + ${arrowOffset}px) !important;
+                top: -10px !important;
+                transform: translateX(-50%) !important;
+                width: 0 !important;
+                height: 0 !important;
+                border-left: 10px solid transparent !important;
+                border-right: 10px solid transparent !important;
+                border-bottom: 10px solid #C2185B !important;
+            `;
         }
         
         // Agregar estilos para el texto
@@ -2866,10 +2846,30 @@ function initializeTourButton() {
 
 // ===== ANIMACIÓN INICIAL DE ENCANTAMIENTO =====
 
-// Función para crear partículas de estrellas
+// Función para crear partículas de estrellas (optimizada para móviles)
 function createStarParticles() {
     const particlesContainer = document.getElementById('starParticles');
-    const particleCount = 50;
+    
+    // Determinar número de partículas según el tamaño de pantalla
+    let particleCount;
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    const isMobile = screenWidth <= 768;
+    const isSmallMobile = screenWidth <= 480;
+    const isVerySmallMobile = screenWidth <= 360;
+    
+    if (isVerySmallMobile) {
+        particleCount = 15; // Muy pocas partículas para pantallas muy pequeñas
+    } else if (isSmallMobile) {
+        particleCount = 25; // Pocas partículas para móviles pequeños
+    } else if (isMobile) {
+        particleCount = 35; // Partículas moderadas para móviles
+    } else {
+        particleCount = 50; // Partículas completas para desktop
+    }
+    
+    // Limpiar contenedor antes de agregar nuevas partículas
+    particlesContainer.innerHTML = '';
     
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -2879,38 +2879,92 @@ function createStarParticles() {
         particle.style.left = Math.random() * 100 + '%';
         particle.style.top = Math.random() * 100 + '%';
         
-        // Tamaño aleatorio
-        const size = Math.random() * 3 + 1;
+        // Tamaño aleatorio basado en el dispositivo
+        let size;
+        if (isVerySmallMobile) {
+            size = Math.random() * 1.5 + 0.5; // Muy pequeñas
+        } else if (isSmallMobile) {
+            size = Math.random() * 2 + 0.8; // Pequeñas
+        } else if (isMobile) {
+            size = Math.random() * 2.5 + 1; // Medianas
+        } else {
+            size = Math.random() * 3 + 1; // Grandes
+        }
+        
         particle.style.width = size + 'px';
         particle.style.height = size + 'px';
         
         // Delay aleatorio para la animación
         particle.style.animationDelay = Math.random() * 3 + 's';
-        particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        
+        // Duración de animación basada en el dispositivo
+        let duration;
+        if (isMobile) {
+            duration = Math.random() * 1.5 + 2; // Más rápida en móviles
+        } else {
+            duration = Math.random() * 2 + 2; // Normal en desktop
+        }
+        particle.style.animationDuration = duration + 's';
         
         particlesContainer.appendChild(particle);
     }
+    
+    console.log(`🌟 Creadas ${particleCount} partículas de estrellas para pantalla ${screenWidth}x${screenHeight}`);
 }
 
-// Función para efecto de máquina de escribir
+// Función para efecto de máquina de escribir (optimizada para móviles)
 function typeWriter(element, text, speed = 50) {
     let i = 0;
     element.innerHTML = '';
+    
+    // Ajustar velocidad según el dispositivo
+    const isMobile = window.innerWidth <= 768;
+    const isSmallMobile = window.innerWidth <= 480;
+    
+    let adjustedSpeed = speed;
+    if (isSmallMobile) {
+        adjustedSpeed = speed * 0.7; // Más rápida en móviles pequeños
+    } else if (isMobile) {
+        adjustedSpeed = speed * 0.8; // Más rápida en móviles
+    }
     
     function type() {
         if (i < text.length) {
             element.innerHTML += text.charAt(i);
             i++;
-            setTimeout(type, speed);
+            setTimeout(type, adjustedSpeed);
         }
     }
     
     type();
 }
 
-// Función principal de la animación de encantamiento
+// Función principal de la animación de encantamiento (optimizada para móviles)
 function startEnchantmentAnimation() {
     console.log('🌟 Iniciando animación de encantamiento');
+    
+    // Detectar tipo de dispositivo para ajustar tiempos
+    const isMobile = window.innerWidth <= 768;
+    const isSmallMobile = window.innerWidth <= 480;
+    
+    // Ajustar tiempos según el dispositivo
+    let heartDelay, textDelay, glowDelay, overlayDelay;
+    if (isSmallMobile) {
+        heartDelay = 1500;    // Más rápido en móviles pequeños
+        textDelay = 500;      // Menos delay para texto
+        glowDelay = 4000;     // Más rápido para brillo
+        overlayDelay = 6000;  // Más rápido para ocultar
+    } else if (isMobile) {
+        heartDelay = 1800;    // Moderadamente rápido en móviles
+        textDelay = 800;      // Delay moderado para texto
+        glowDelay = 5000;     // Moderado para brillo
+        overlayDelay = 7000;  // Moderado para ocultar
+    } else {
+        heartDelay = 2000;    // Tiempo normal en desktop
+        textDelay = 1000;     // Delay normal para texto
+        glowDelay = 6000;     // Tiempo normal para brillo
+        overlayDelay = 8000;  // Tiempo normal para ocultar
+    }
     
     // Crear partículas de estrellas
     createStarParticles();
@@ -2926,16 +2980,18 @@ function startEnchantmentAnimation() {
         const fullText = "este portal se abre solo con el latido del amor.";
         
         setTimeout(() => {
-            typeWriter(typewriterText, fullText, 80);
-        }, 1000);
+            // Ajustar velocidad de escritura según el dispositivo
+            const typeSpeed = isSmallMobile ? 60 : (isMobile ? 70 : 80);
+            typeWriter(typewriterText, fullText, typeSpeed);
+        }, textDelay);
         
-    }, 2000);
+    }, heartDelay);
     
     // Mostrar efecto de brillo final
     setTimeout(() => {
         const finalGlow = document.getElementById('finalGlow');
         finalGlow.style.display = 'block';
-    }, 6000);
+    }, glowDelay);
     
     // Ocultar overlay y mostrar contenido
     setTimeout(() => {
@@ -2951,10 +3007,58 @@ function startEnchantmentAnimation() {
             }, 1000);
         }, 2000);
         
-    }, 8000);
+    }, overlayDelay);
+    
+    console.log(`🌟 Animación configurada para ${isMobile ? 'móvil' : 'desktop'} (${window.innerWidth}x${window.innerHeight})`);
 }
 
 // Inicializar la animación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
     startEnchantmentAnimation();
+});
+
+// Redimensionar partículas cuando cambie el tamaño de la ventana
+window.addEventListener('resize', function() {
+    // Solo recrear partículas si la animación aún está activa
+    const overlay = document.getElementById('enchantmentOverlay');
+    if (overlay && overlay.style.display !== 'none') {
+        createStarParticles();
+        console.log('🌟 Partículas ajustadas para nuevo tamaño de pantalla');
+    }
+    
+    // Reposicionar burbuja de la princesa si está visible
+    const existingBubble = document.querySelector('.princess-bubble');
+    if (existingBubble) {
+        // Recalcular posición - SIEMPRE DEBAJO DE LA PRINCESA
+        const princessImg = document.querySelector('.princess-icon');
+        if (princessImg) {
+            const princessRect = princessImg.getBoundingClientRect();
+            const bubbleWidth = existingBubble.offsetWidth;
+            
+            const bubbleLeft = princessRect.left + (princessRect.width / 2) - (bubbleWidth / 2);
+            const bubbleTop = princessRect.bottom + 15;
+            
+            // Asegurar que no se salga de la pantalla horizontalmente
+            const screenWidth = window.innerWidth;
+            const minLeft = 10;
+            const maxLeft = screenWidth - bubbleWidth - 10;
+            const adjustedBubbleLeft = Math.max(minLeft, Math.min(maxLeft, bubbleLeft));
+            
+            existingBubble.style.left = adjustedBubbleLeft + 'px';
+            existingBubble.style.top = bubbleTop + 'px';
+            existingBubble.style.transform = 'none';
+            
+            // Reposicionar la flecha para que apunte hacia la princesa
+            const arrow = existingBubble.querySelector('.bubble-arrow-left');
+            if (arrow) {
+                const princessCenterX = princessRect.left + (princessRect.width / 2);
+                const bubbleCenterX = adjustedBubbleLeft + (bubbleWidth / 2);
+                const arrowOffset = princessCenterX - bubbleCenterX;
+                
+                arrow.style.left = `calc(50% + ${arrowOffset}px)`;
+            }
+            
+            console.log('💬 Burbuja de la princesa reposicionada');
+        }
+    }
 });
