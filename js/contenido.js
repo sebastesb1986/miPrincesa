@@ -2844,188 +2844,15 @@ function initializeTourButton() {
     console.log('💙 Botón Tour de Amor inicializado - Abre la modal de Princess');
 }
 
-// ===== ANIMACIÓN INICIAL DE ENCANTAMIENTO =====
 
-// Función para crear partículas de estrellas (optimizada para móviles)
-function createStarParticles() {
-    const particlesContainer = document.getElementById('starParticles');
-    
-    // Determinar número de partículas según el tamaño de pantalla
-    let particleCount;
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
-    const isMobile = screenWidth <= 768;
-    const isSmallMobile = screenWidth <= 480;
-    const isVerySmallMobile = screenWidth <= 360;
-    
-    if (isVerySmallMobile) {
-        particleCount = 15; // Muy pocas partículas para pantallas muy pequeñas
-    } else if (isSmallMobile) {
-        particleCount = 25; // Pocas partículas para móviles pequeños
-    } else if (isMobile) {
-        particleCount = 35; // Partículas moderadas para móviles
-    } else {
-        particleCount = 50; // Partículas completas para desktop
-    }
-    
-    // Limpiar contenedor antes de agregar nuevas partículas
-    particlesContainer.innerHTML = '';
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'star-particle';
-        
-        // Posición aleatoria
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        
-        // Tamaño aleatorio basado en el dispositivo
-        let size;
-        if (isVerySmallMobile) {
-            size = Math.random() * 1.5 + 0.5; // Muy pequeñas
-        } else if (isSmallMobile) {
-            size = Math.random() * 2 + 0.8; // Pequeñas
-        } else if (isMobile) {
-            size = Math.random() * 2.5 + 1; // Medianas
-        } else {
-            size = Math.random() * 3 + 1; // Grandes
-        }
-        
-        particle.style.width = size + 'px';
-        particle.style.height = size + 'px';
-        
-        // Delay aleatorio para la animación
-        particle.style.animationDelay = Math.random() * 3 + 's';
-        
-        // Duración de animación basada en el dispositivo
-        let duration;
-        if (isMobile) {
-            duration = Math.random() * 1.5 + 2; // Más rápida en móviles
-        } else {
-            duration = Math.random() * 2 + 2; // Normal en desktop
-        }
-        particle.style.animationDuration = duration + 's';
-        
-        particlesContainer.appendChild(particle);
-    }
-    
-    console.log(`🌟 Creadas ${particleCount} partículas de estrellas para pantalla ${screenWidth}x${screenHeight}`);
-}
-
-// Función para efecto de máquina de escribir (optimizada para móviles)
-function typeWriter(element, text, speed = 50) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    // Ajustar velocidad según el dispositivo
-    const isMobile = window.innerWidth <= 768;
-    const isSmallMobile = window.innerWidth <= 480;
-    
-    let adjustedSpeed = speed;
-    if (isSmallMobile) {
-        adjustedSpeed = speed * 0.7; // Más rápida en móviles pequeños
-    } else if (isMobile) {
-        adjustedSpeed = speed * 0.8; // Más rápida en móviles
-    }
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, adjustedSpeed);
-        }
-    }
-    
-    type();
-}
-
-// Función principal de la animación de encantamiento (optimizada para móviles)
-function startEnchantmentAnimation() {
-    console.log('🌟 Iniciando animación de encantamiento');
-    
-    // Detectar tipo de dispositivo para ajustar tiempos
-    const isMobile = window.innerWidth <= 768;
-    const isSmallMobile = window.innerWidth <= 480;
-    
-    // Ajustar tiempos según el dispositivo
-    let heartDelay, textDelay, glowDelay, overlayDelay;
-    if (isSmallMobile) {
-        heartDelay = 1500;    // Más rápido en móviles pequeños
-        textDelay = 500;      // Menos delay para texto
-        glowDelay = 4000;     // Más rápido para brillo
-        overlayDelay = 6000;  // Más rápido para ocultar
-    } else if (isMobile) {
-        heartDelay = 1800;    // Moderadamente rápido en móviles
-        textDelay = 800;      // Delay moderado para texto
-        glowDelay = 5000;     // Moderado para brillo
-        overlayDelay = 7000;  // Moderado para ocultar
-    } else {
-        heartDelay = 2000;    // Tiempo normal en desktop
-        textDelay = 1000;     // Delay normal para texto
-        glowDelay = 6000;     // Tiempo normal para brillo
-        overlayDelay = 8000;  // Tiempo normal para ocultar
-    }
-    
-    // Crear partículas de estrellas
-    createStarParticles();
-    
-    // Secuencia de la animación
-    setTimeout(() => {
-        // Mostrar el corazón que late
-        const heart = document.getElementById('beatingHeart');
-        heart.style.display = 'block';
-        
-        // Escribir el texto principal
-        const typewriterText = document.getElementById('typewriterText');
-        const fullText = "este portal se abre solo con el latido del amor.";
-        
-        setTimeout(() => {
-            // Ajustar velocidad de escritura según el dispositivo
-            const typeSpeed = isSmallMobile ? 60 : (isMobile ? 70 : 80);
-            typeWriter(typewriterText, fullText, typeSpeed);
-        }, textDelay);
-        
-    }, heartDelay);
-    
-    // Mostrar efecto de brillo final
-    setTimeout(() => {
-        const finalGlow = document.getElementById('finalGlow');
-        finalGlow.style.display = 'block';
-    }, glowDelay);
-    
-    // Ocultar overlay y mostrar contenido
-    setTimeout(() => {
-        const overlay = document.getElementById('enchantmentOverlay');
-        overlay.classList.add('fade-out');
-        
-        // Después de que termine la transición, activar la burbuja de la princesa
-        setTimeout(() => {
-            overlay.style.display = 'none';
-            // Activar automáticamente la burbuja de la princesa
-            setTimeout(() => {
-                showPrincessBubble();
-            }, 1000);
-        }, 2000);
-        
-    }, overlayDelay);
-    
-    console.log(`🌟 Animación configurada para ${isMobile ? 'móvil' : 'desktop'} (${window.innerWidth}x${window.innerHeight})`);
-}
-
-// Inicializar la animación cuando el DOM esté listo
+// Inicializar directamente el modal de bienvenida cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
-    startEnchantmentAnimation();
+    // Mostrar el modal de bienvenida inmediatamente
+    setupWelcomeModal();
 });
 
-// Redimensionar partículas cuando cambie el tamaño de la ventana
+// Reposicionar burbuja de la princesa cuando cambie el tamaño de la ventana
 window.addEventListener('resize', function() {
-    // Solo recrear partículas si la animación aún está activa
-    const overlay = document.getElementById('enchantmentOverlay');
-    if (overlay && overlay.style.display !== 'none') {
-        createStarParticles();
-        console.log('🌟 Partículas ajustadas para nuevo tamaño de pantalla');
-    }
-    
     // Reposicionar burbuja de la princesa si está visible
     const existingBubble = document.querySelector('.princess-bubble');
     if (existingBubble) {
@@ -3061,4 +2888,256 @@ window.addEventListener('resize', function() {
             console.log('💬 Burbuja de la princesa reposicionada');
         }
     }
+});
+
+// ===== FUNCIONES PARA EL MODAL DE BIENVENIDA =====
+
+// Variable para rastrear si el usuario ha interactuado
+let userHasInteracted = false;
+let welcomeVideo = null;
+let modalClosing = false;
+
+// Detectar interacción del usuario y activar audio inmediatamente
+function detectUserInteraction() {
+    const events = ['click', 'touchstart', 'keydown', 'scroll', 'mousemove'];
+    
+    events.forEach(event => {
+        document.addEventListener(event, function() {
+            if (!userHasInteracted) {
+                userHasInteracted = true;
+                console.log('👤 Usuario ha interactuado - activando audio...');
+                
+                // Activar audio inmediatamente cuando el usuario interactúe
+                if (welcomeVideo) {
+                    welcomeVideo.muted = false;
+                    welcomeVideo.volume = 1.0;
+                    console.log('🔊 Audio activado por interacción del usuario');
+                }
+            }
+        }, { once: true });
+    });
+}
+
+// Configurar el modal de bienvenida
+function setupWelcomeModal() {
+    console.log('🎬 Configurando modal de bienvenida...');
+    
+    // Detectar interacción del usuario
+    detectUserInteraction();
+    
+    // Mostrar el modal inmediatamente
+    showWelcomeModal();
+    
+    // Configurar eventos del video
+    const welcomeVideo = document.getElementById('welcomeModalVideo');
+    if (welcomeVideo) {
+        // Mostrar botón de cerrar cuando el video termine
+        welcomeVideo.addEventListener('ended', function() {
+            console.log('🎬 Video de bienvenida terminado');
+            
+            // Cerrar automáticamente el modal después de 2 segundos
+            setTimeout(() => {
+                hideWelcomeModal();
+            }, 2000);
+        });
+        
+        // Manejar errores de video
+        welcomeVideo.addEventListener('error', function() {
+            console.error('❌ Error cargando video de bienvenida');
+            // El botón cerrar ya está visible, no necesitamos hacer nada más
+        });
+        
+        // Manejar cuando el video esté listo para reproducir
+        welcomeVideo.addEventListener('canplaythrough', function() {
+            console.log('🎬 Video de bienvenida listo para reproducir');
+        });
+        
+    }
+    
+    // Configurar botón de cerrar manual
+    const closeBtn = document.getElementById('welcomeModalClose');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            console.log('❌ Cerrando modal de bienvenida...');
+            hideWelcomeModal();
+        });
+    }
+    
+    // Configurar evento cuando el modal se cierre completamente
+    const modalElement = document.getElementById('welcomeModal');
+    modalElement.addEventListener('hidden.bs.modal', function() {
+        console.log('✅ Modal completamente cerrado - limpiando estado...');
+        
+        // Limpiar estado adicional
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+        document.body.style.pointerEvents = '';
+        
+        // Remover cualquier backdrop residual
+        const modalBackdrops = document.querySelectorAll('.modal-backdrop');
+        modalBackdrops.forEach(backdrop => backdrop.remove());
+        
+        console.log('✅ Estado del modal completamente restaurado');
+    });
+}
+
+// Mostrar el modal de bienvenida
+function showWelcomeModal() {
+    console.log('🎬 Mostrando modal de bienvenida...');
+    
+    // Resetear el estado de cierre
+    modalClosing = false;
+    
+    const welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+    welcomeModal.show();
+    
+    // Configurar el video para reproducción automática
+    welcomeVideo = document.getElementById('welcomeModalVideo');
+    if (welcomeVideo) {
+        // Configurar atributos para reproducción automática
+        welcomeVideo.muted = true; // Empezar silenciado para garantizar reproducción
+        welcomeVideo.autoplay = true;
+        welcomeVideo.loop = false;
+        welcomeVideo.playsInline = true; // Importante para móviles
+        welcomeVideo.controls = true; // Mostrar controles desde el inicio
+        welcomeVideo.volume = 1.0; // Volumen máximo
+        
+        console.log('🎵 Reproduciendo video silenciado - audio se activará con interacción del usuario');
+        
+        // Reproducir inmediatamente (silenciado) con manejo de errores mejorado
+        const playVideo = () => {
+            // Verificar que el video aún existe, el modal está abierto y no se está cerrando
+            if (!welcomeVideo || welcomeVideo.paused === false || modalClosing) {
+                return;
+            }
+            
+            welcomeVideo.play().then(() => {
+                console.log('🎬 Video reproduciéndose silenciado - esperando interacción del usuario para audio');
+                
+                // Mostrar indicador sutil de audio
+                const audioIndicator = document.createElement('div');
+                audioIndicator.innerHTML = '🔊';
+                audioIndicator.style.cssText = `
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+                    background: rgba(0, 0, 0, 0.7);
+                    color: white;
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 16px;
+                    z-index: 15;
+                    animation: pulseAudio 2s ease-in-out infinite;
+                    cursor: pointer;
+                `;
+                
+                // Agregar animación CSS
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes pulseAudio {
+                        0%, 100% { opacity: 0.6; transform: scale(1); }
+                        50% { opacity: 1; transform: scale(1.1); }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                welcomeVideo.parentElement.style.position = 'relative';
+                welcomeVideo.parentElement.appendChild(audioIndicator);
+                
+                // Remover indicador cuando se active el audio
+                const removeIndicator = () => {
+                    if (audioIndicator.parentElement) {
+                        audioIndicator.remove();
+                    }
+                };
+                
+                // Escuchar cuando se active el audio
+                const checkAudio = () => {
+                    if (!welcomeVideo.muted) {
+                        removeIndicator();
+                    } else {
+                        setTimeout(checkAudio, 100);
+                    }
+                };
+                checkAudio();
+                
+            }).catch(error => {
+                // Solo mostrar error si no es por interrupción
+                if (error.name !== 'AbortError') {
+                    console.warn('⚠️ No se pudo reproducir el video:', error);
+                } else {
+                    console.log('🎬 Reproducción interrumpida (normal)');
+                }
+            });
+        };
+        
+        // Intentar reproducir después de un pequeño delay para evitar conflictos
+        setTimeout(playVideo, 100);
+    }
+}
+
+// Ocultar el modal de bienvenida
+function hideWelcomeModal() {
+    console.log('🎬 Ocultando modal de bienvenida...');
+    
+    // Marcar que el modal se está cerrando
+    modalClosing = true;
+    
+    // Pausar el video antes de cerrar de manera segura
+    if (welcomeVideo) {
+        try {
+            welcomeVideo.pause();
+            welcomeVideo.currentTime = 0; // Reiniciar el video
+        } catch (error) {
+            console.log('🎬 Video ya pausado o no disponible');
+        }
+    }
+    
+    // Obtener la instancia del modal
+    const welcomeModal = bootstrap.Modal.getInstance(document.getElementById('welcomeModal'));
+    if (welcomeModal) {
+        welcomeModal.hide();
+    } else {
+        // Si no hay instancia, crear una nueva y cerrarla
+        const modalElement = document.getElementById('welcomeModal');
+        const modal = new bootstrap.Modal(modalElement);
+        modal.hide();
+    }
+    
+    // Limpiar inmediatamente el estado del modal
+    const modalElement = document.getElementById('welcomeModal');
+    modalElement.classList.remove('show');
+    modalElement.setAttribute('aria-hidden', 'true');
+    modalElement.style.display = 'none';
+    
+    // Asegurar que el overlay se elimine completamente
+    setTimeout(() => {
+        // Remover todos los backdrops
+        const modalBackdrops = document.querySelectorAll('.modal-backdrop');
+        modalBackdrops.forEach(backdrop => backdrop.remove());
+        
+        // Restaurar completamente el body
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+        
+        // Remover cualquier estilo inline que pueda estar bloqueando
+        document.body.style.pointerEvents = '';
+        document.body.style.position = '';
+        
+        // Forzar reflow para asegurar que los cambios se apliquen
+        document.body.offsetHeight;
+        
+        console.log('✅ Modal cerrado completamente - interacción restaurada');
+    }, 100);
+}
+
+// Llamar a setupWelcomeModal cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    setupWelcomeModal();
 });
