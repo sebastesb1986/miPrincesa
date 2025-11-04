@@ -2377,6 +2377,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listener para cuando se abre la modal
     if (starsModal) {
         starsModal.addEventListener('shown.bs.modal', function() {
+            // Cargar imágenes del carrusel de estrellas cuando se abra el modal
+            loadStarsCarouselImages();
+            
             // Inicializar el carrusel cuando la modal esté completamente visible
             setTimeout(() => {
                 initStarsCarousel();
@@ -2403,6 +2406,29 @@ function initStarsCarousel() {
     if (existingCarousel) {
         existingCarousel.dispose();
     }
+    
+    // Cargar la primera imagen activa inmediatamente
+    const activeItem = starsCarousel.querySelector('.carousel-item.active');
+    if (activeItem) {
+        const activeImg = activeItem.querySelector('img[data-src]');
+        if (activeImg && activeImg.dataset.src) {
+            activeImg.src = activeImg.dataset.src;
+            activeImg.removeAttribute('data-src');
+        }
+    }
+    
+    // Cargar imágenes cuando cambie el slide
+    starsCarousel.addEventListener('slide.bs.carousel', function(event) {
+        const nextIndex = event.to;
+        const nextItem = starsCarousel.querySelectorAll('.carousel-item')[nextIndex];
+        if (nextItem) {
+            const nextImg = nextItem.querySelector('img[data-src]');
+            if (nextImg && nextImg.dataset.src) {
+                nextImg.src = nextImg.dataset.src;
+                nextImg.removeAttribute('data-src');
+            }
+        }
+    });
     
     // Inicializar el carrusel de Bootstrap
     const carousel = new bootstrap.Carousel(starsCarousel, {
@@ -2776,6 +2802,25 @@ function initializePrincessCarousel() {
             item.classList.remove('active');
             if (index === 0) {
                 item.classList.add('active');
+                // Cargar la primera imagen activa
+                const activeImg = item.querySelector('img[data-src]');
+                if (activeImg && activeImg.dataset.src) {
+                    activeImg.src = activeImg.dataset.src;
+                    activeImg.removeAttribute('data-src');
+                }
+            }
+        });
+        
+        // Cargar imágenes cuando cambie el slide
+        carousel.addEventListener('slide.bs.carousel', function(event) {
+            const nextIndex = event.to;
+            const nextItem = carousel.querySelectorAll('.carousel-item')[nextIndex];
+            if (nextItem) {
+                const nextImg = nextItem.querySelector('img[data-src]');
+                if (nextImg && nextImg.dataset.src) {
+                    nextImg.src = nextImg.dataset.src;
+                    nextImg.removeAttribute('data-src');
+                }
             }
         });
         
@@ -2791,7 +2836,12 @@ function initializePrincessCarousel() {
         
         console.log('🎠 Carrusel de Princess inicializado correctamente');
         console.log('📸 Total de imágenes:', allItems.length);
-        console.log('🖼️ Imagen activa:', allItems[0].querySelector('img').alt);
+        if (allItems[0]) {
+            const firstImg = allItems[0].querySelector('img');
+            if (firstImg) {
+                console.log('🖼️ Imagen activa:', firstImg.alt);
+            }
+        }
     }
 }
 
@@ -2802,6 +2852,10 @@ function openPrincessModal() {
     setTimeout(() => {
         const princessModal = new bootstrap.Modal(document.getElementById('princessModal'));
         princessModal.show();
+        
+        // Cargar imágenes del carrusel de princess cuando se abra el modal
+        loadPrincessCarouselImages();
+        
         console.log('👑 Modal de Princess abierto automáticamente');
     }, 1000); // 1 segundo de delay para que se vea mejor
 }
@@ -2819,12 +2873,37 @@ function openPrincessModalFromTour() {
     const princessModal = new bootstrap.Modal(document.getElementById('princessModal'));
     princessModal.show();
     
+    // Cargar imágenes del carrusel de princess cuando se abra el modal
+    loadPrincessCarouselImages();
+    
     // Inicializar el carrusel cuando la modal esté completamente visible
     setTimeout(() => {
         initializePrincessCarousel();
     }, 200);
     
     console.log('💙 Modal de Princess abierto desde Tour de Amor');
+}
+
+// Función para cargar imágenes del carrusel de princess solo cuando se abra el modal
+function loadPrincessCarouselImages() {
+    const princessImages = document.querySelectorAll('#princessCarousel img[data-src]');
+    princessImages.forEach(img => {
+        if (img.dataset.src && !img.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+        }
+    });
+}
+
+// Función para cargar imágenes del carrusel de estrellas solo cuando se abra el modal
+function loadStarsCarouselImages() {
+    const starsImages = document.querySelectorAll('#starsCarousel img[data-src]');
+    starsImages.forEach(img => {
+        if (img.dataset.src && !img.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+        }
+    });
 }
 
 // Inicializar efectos del botón de descarga
@@ -2847,6 +2926,10 @@ document.addEventListener('DOMContentLoaded', function() {
         princessModal.addEventListener('shown.bs.modal', function() {
             console.log('🎠 Modal de Princess abierto, inicializando carrusel...');
             trackUserActivity('Modal Princess Abierto', { source: 'automático' });
+            
+            // Cargar imágenes del carrusel de princess cuando se abra el modal
+            loadPrincessCarouselImages();
+            
             setTimeout(() => {
                 initializePrincessCarousel();
             }, 200);
