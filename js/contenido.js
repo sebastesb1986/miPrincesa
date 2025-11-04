@@ -11,7 +11,7 @@ const textos = [
     "¿Quieres saber qué pasó recorriendo otros reinos? Todo lo hice por ti, mi amor",
     "En cada viaje que emprendo, llevo tu recuerdo como mi tesoro más preciado",
     "Cada lugar que visito, cada aventura que vivo, es un regalo que preparo para ti",
-    "Aunque estemos separados por la distancia, mi corazón viaja contigo en cada paso",
+    "Aunque estemos cada quien en su casa, mi corazón esta contigo en cada paso",
     "¿Quieres conocer todos los lugares que he recorrido pensando en ti? Todo lo hice por amor"
 ];
 
@@ -26,17 +26,7 @@ let audioPienso = null;
 let btnCuento = null;
 let btnPienso = null;
 
-// Función para actualizar los indicadores del carrusel
-function updateCarouselIndicators(activeIndex) {
-    const indicators = document.querySelectorAll('.carousel-indicators button');
-    indicators.forEach((indicator, index) => {
-        if (index === activeIndex) {
-            indicator.classList.add('active');
-        } else {
-            indicator.classList.remove('active');
-        }
-    });
-}
+// Nota: La función updateCarouselIndicators ya no es necesaria porque el carrusel fue reemplazado por la galería
 
 // Función para detener todos los audios
 function stopAllAudios() {
@@ -55,66 +45,134 @@ function stopAllAudios() {
     }
 }
 
-// Función para cambiar el texto de acuerdo a la imagen activa
-document.getElementById('carouselExampleAutoplaying').addEventListener('slide.bs.carousel', function (event) {
-    // Obtener el índice de la imagen activa
-    let index = event.to;
+// ===== FUNCIONALIDAD DE LA GALERÍA =====
+
+// Función para abrir el modal de la galería con la imagen y texto correspondiente
+function openGalleryModal(imageIndex, imageSrc) {
+    // Obtener el modal de Bootstrap
+    const galleryModal = new bootstrap.Modal(document.getElementById('galleryModal'));
     
-    console.log('🎠 Carrusel cambiando a índice:', index, 'Total de textos:', textos.length);
+    // Obtener los elementos del modal
+    const modalImage = document.getElementById('galleryModalImage');
+    const modalText = document.getElementById('galleryModalText');
+    const modalButtonContainer = document.getElementById('galleryModalButtonContainer');
     
+    // Asegurarse de que el índice esté dentro del rango correcto
+    if (imageIndex >= textos.length) {
+        console.log('⚠️ Índice fuera de rango, reseteando a 0');
+        imageIndex = 0;
+    }
+    
+    // Establecer la imagen y el texto
+    modalImage.src = imageSrc;
+    modalImage.alt = `Imagen ${imageIndex + 1}`;
+    modalText.textContent = textos[imageIndex];
+    
+    // Mostrar u ocultar el botón según si es la última imagen
+    if (imageIndex === textos.length - 1) {
+        // Mostrar el botón para la última imagen
+        if (modalButtonContainer) {
+            modalButtonContainer.style.display = 'block';
+        }
+    } else {
+        // Ocultar el botón para las demás imágenes
+        if (modalButtonContainer) {
+            modalButtonContainer.style.display = 'none';
+        }
+    }
+    
+    // Abrir el modal
+    galleryModal.show();
+    
+    console.log('🖼️ Abriendo galería - Imagen:', imageIndex + 1, 'Texto:', textos[imageIndex]);
+}
+
+// Event listeners para los items de la galería
+document.addEventListener('DOMContentLoaded', function() {
+    // Esperar a que el DOM esté completamente cargado
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    console.log('🖼️ Total de items en la galería:', galleryItems.length);
+    console.log('📝 Total de textos disponibles:', textos.length);
+    
+    // Agregar event listener a cada item de la galería
+    galleryItems.forEach((item, index) => {
+        item.addEventListener('click', function() {
+            const imageIndex = parseInt(this.getAttribute('data-index'));
+            const imageSrc = this.getAttribute('data-image');
+            
+            // Abrir el modal con la imagen y texto correspondiente
+            openGalleryModal(imageIndex, imageSrc);
+        });
+        
+        // Verificar que las imágenes se carguen correctamente
+        const img = item.querySelector('img');
+        if (img) {
+            img.addEventListener('load', function() {
+                console.log(`✅ Imagen de galería ${index + 1} cargada:`, this.src);
+            });
+            img.addEventListener('error', function() {
+                console.error(`❌ Error cargando imagen de galería ${index + 1}:`, this.src);
+            });
+        }
+    });
+    
+    // Establecer el texto inicial en la descripción
+    if (descripcion && textos.length > 0) {
+        descripcion.textContent = textos[0];
+    }
+});
+
+// Función para cambiar el texto de acuerdo a la imagen activa (mantener para compatibilidad)
+function updateDescriptionText(index) {
     // Asegúrate de que el índice esté dentro del rango correcto
     if (index >= textos.length) {
         console.log('⚠️ Índice fuera de rango, reseteando a 0');
         index = 0;
     }
 
-    // Actualizar los indicadores del carrusel
-    updateCarouselIndicators(index);
-
     // Cambiar el texto según el índice de la imagen con efecto de transición
-    descripcion.style.opacity = '0';
-    descripcion.style.transform = 'translateY(-10px)';
-    
-    setTimeout(() => {
-        descripcion.textContent = textos[index];
-        descripcion.style.opacity = '1';
-        descripcion.style.transform = 'translateY(0)';
-    }, 300);
+    if (descripcion) {
+        descripcion.style.opacity = '0';
+        descripcion.style.transform = 'translateY(-10px)';
+        
+        setTimeout(() => {
+            descripcion.textContent = textos[index];
+            descripcion.style.opacity = '1';
+            descripcion.style.transform = 'translateY(0)';
+        }, 300);
+    }
 
     // Verificar si ya hemos insertado el contenido en #our_space, para evitar duplicados
-    if (index === textos.length - 1) {
-        // Cambiar el texto del párrafo por el nuevo contenido con estilo de enlace
-        descripcion_a.innerHTML = `
-            <div style="background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(59, 130, 246, 0.1)); 
-                        padding: 20px; border-radius: 15px; border-left: 4px solid var(--accent-color);">
-                <p style="font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: var(--primary-color); 
-                          text-align: center; margin-bottom: 15px;">
-                    ¡Descubre mis aventuras por el mundo!
+    if (descripcion_a) {
+        if (index === textos.length - 1) {
+            // Cambiar el texto del párrafo por el nuevo contenido con estilo de enlace
+            descripcion_a.innerHTML = `
+                <div style="background: linear-gradient(135deg, rgba(30, 58, 138, 0.1), rgba(59, 130, 246, 0.1)); 
+                            padding: 20px; border-radius: 15px; border-left: 4px solid var(--accent-color);">
+                    <p style="font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: var(--primary-color); 
+                              text-align: center; margin-bottom: 15px;">
+                        ¡Descubre mis aventuras por el mundo!
+                    </p>
+                    <a href="pages/vida.html" class="nav-link" style="display: inline-block; margin: 0;">
+                        🌍 Ver Mis Viajes por Ti
+                    </a>
+                </div>
+            `;
+        } else {
+            // Volver al texto original si no estamos en el último texto
+            descripcion_a.innerHTML = `
+                <p style="font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: var(--secondary-color); 
+                          text-align: center; margin: 0;">
+                    Léeme hasta el final para descubrir más...
                 </p>
-                <a href="pages/vida.html" class="nav-link" style="display: inline-block; margin: 0;">
-                    🌍 Ver Mis Viajes por Ti
-                </a>
-            </div>
-        `;
-    } else {
-        // Volver al texto original si no estamos en el último texto
-        descripcion_a.innerHTML = `
-            <p style="font-family: 'Dancing Script', cursive; font-size: 1.4rem; color: var(--secondary-color); 
-                      text-align: center; margin: 0;">
-                Léeme hasta el final para descubrir más...
-            </p>
-        `;
+            `;
+        }
     }
-});
+}
 
-// Evento para cuando el carrusel termine de cambiar
-document.getElementById('carouselExampleAutoplaying').addEventListener('slid.bs.carousel', function (event) {
-    // Obtener el índice de la imagen activa después del cambio
-    let index = event.to;
-    
-    // Asegurarse de que los indicadores estén sincronizados
-    updateCarouselIndicators(index);
-});
+// Nota: El código del carrusel ha sido reemplazado por la galería. 
+// Los eventos del carrusel ya no son necesarios.
 
 // Función para reproducir el audio del cuento
 document.addEventListener('DOMContentLoaded', function () {
@@ -202,35 +260,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Función para añadir efectos visuales al carrusel
-document.addEventListener('DOMContentLoaded', function() {
-    const carousel = document.getElementById('carouselExampleAutoplaying');
-    
-    carousel.addEventListener('slide.bs.carousel', function (event) {
-        // Añadir efecto de brillo a la imagen activa
-        const activeItem = carousel.querySelector('.carousel-item.active');
-        if (activeItem) {
-            activeItem.style.boxShadow = '0 0 30px rgba(30, 58, 138, 0.6)';
-            activeItem.style.transform = 'scale(1.02)';
-        }
-    });
-    
-    carousel.addEventListener('slid.bs.carousel', function (event) {
-        // Remover efectos de la imagen anterior
-        const allItems = carousel.querySelectorAll('.carousel-item');
-        allItems.forEach(item => {
-            item.style.boxShadow = 'none';
-            item.style.transform = 'scale(1)';
-        });
-        
-        // Aplicar efectos a la nueva imagen activa
-        const newActiveItem = carousel.querySelector('.carousel-item.active');
-        if (newActiveItem) {
-            newActiveItem.style.boxShadow = '0 0 30px rgba(30, 58, 138, 0.6)';
-            newActiveItem.style.transform = 'scale(1.02)';
-        }
-    });
-});
+// Nota: Los efectos visuales del carrusel ya no son necesarios porque el carrusel fue reemplazado por la galería
 
 // Función para añadir efectos de partículas románticas
 function createHeartParticle() {
@@ -300,135 +330,272 @@ function typeWriterWithImage(element, text, imgHTML, speed = 50) {
 
 // Función para mostrar la burbuja de diálogo de la princesa (solo invitación inicial)
 function showPrincessBubble() {
-    console.log('Mostrando burbuja de invitación de la princesa');
+    console.log('🔵 Función showPrincessBubble() llamada');
     
-    // Remover burbuja existente si hay una
-    const existingBubble = document.querySelector('.princess-bubble');
-    if (existingBubble) {
-        existingBubble.remove();
-    }
-    
-    // Mensaje de invitación inicial
-    const mensajeInvitacion = "👑 ¡Pulsame!, tengo algo muy especial que decirte... 💕";
-    
-    // Crear la burbuja de diálogo
-    const bubble = document.createElement('div');
-    bubble.className = 'princess-bubble';
-    bubble.innerHTML = `
-        <div class="bubble-arrow-left"></div>
-        <div class="bubble-text">
-            "${mensajeInvitacion}"
-        </div>
-    `;
-    
-    // Obtener la posición de la princesa
-    const princessImg = document.querySelector('.princess-icon');
-    const princessRect = princessImg.getBoundingClientRect();
-    
-    // Calcular el ancho dinámico basado en la longitud del texto
-    const textLength = mensajeInvitacion.length;
-    const isMobile = window.innerWidth <= 768;
-    const maxWidth = isMobile ? Math.min(window.innerWidth - 40, 350) : 400;
-    let bubbleWidth = Math.min(Math.max(textLength * 8, 200), maxWidth);
-    
-    // Calcular posición - SIEMPRE DEBAJO DE LA PRINCESA
-    const bubbleLeft = princessRect.left + (princessRect.width / 2) - (bubbleWidth / 2);
-    const bubbleTop = princessRect.bottom + 15;
-    
-    // Asegurar que no se salga de la pantalla horizontalmente
-    const screenWidth = window.innerWidth;
-    const minLeft = 10;
-    const maxLeft = screenWidth - bubbleWidth - 10;
-    const adjustedBubbleLeft = Math.max(minLeft, Math.min(maxLeft, bubbleLeft));
-    
-    // Calcular padding dinámico basado en la longitud del texto
-    let bubblePadding;
-    if (textLength > 150) {
-        bubblePadding = '0px 12px 6px 12px';
-    } else if (textLength > 100) {
-        bubblePadding = '0px 15px 8px 15px';
-    } else if (textLength > 50) {
-        bubblePadding = '0px 18px 10px 18px';
-    } else {
-        bubblePadding = '0px 20px 12px 20px';
-    }
-    
-    // Agregar estilos inline para la burbuja
-    bubble.style.cssText = `
-        position: fixed !important;
-        top: ${bubbleTop}px !important;
-        left: ${adjustedBubbleLeft}px !important;
-        background: white !important;
-        border: 3px solid #C2185B !important;
-        border-radius: 20px !important;
-        padding: ${bubblePadding} !important;
-        box-shadow: 0 10px 30px rgba(194, 24, 91, 0.3) !important;
-        z-index: 9999 !important;
-        max-width: ${bubbleWidth}px !important;
-        width: ${bubbleWidth}px !important;
-        font-family: 'Dancing Script', cursive !important;
-        font-size: 1.1rem !important;
-        color: #2D1B69 !important;
-        text-align: center !important;
-        line-height: 1.2 !important;
-        pointer-events: none !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        display: block !important;
-        white-space: pre-line !important;
-        animation: invitationPulse 2s ease-in-out infinite !important;
-        transform: none !important;
-    `;
-    
-    // Agregar estilos para la flecha - SIEMPRE HACIA ARRIBA
-    const arrow = bubble.querySelector('.bubble-arrow-left');
-    if (arrow) {
-        // Calcular la posición de la flecha para que apunte hacia la princesa
-        const princessCenterX = princessRect.left + (princessRect.width / 2);
-        const bubbleCenterX = adjustedBubbleLeft + (bubbleWidth / 2);
-        const arrowOffset = princessCenterX - bubbleCenterX;
-        
-        arrow.style.cssText = `
-            position: absolute !important;
-            left: calc(50% + ${arrowOffset}px) !important;
-            top: -10px !important;
-            transform: translateX(-50%) !important;
-            width: 0 !important;
-            height: 0 !important;
-            border-left: 10px solid transparent !important;
-            border-right: 10px solid transparent !important;
-            border-bottom: 10px solid #C2185B !important;
-        `;
-    }
-    
-    // Agregar estilos para el texto
-    const textElement = bubble.querySelector('.bubble-text');
-    if (textElement) {
-        textElement.style.cssText = `
-            margin: 0 !important;
-            padding: 0 !important;
-            display: block !important;
-            width: 100% !important;
-        `;
-    }
-    
-    // Agregar la burbuja al body
-    document.body.appendChild(bubble);
-    console.log('Burbuja de invitación de la princesa mostrada');
-    
-    // Remover la burbuja después de 10 segundos si no se interactúa
-    setTimeout(() => {
-        if (bubble.parentNode) {
-            bubble.style.opacity = '0';
-            bubble.style.transform = 'scale(0.8)';
-            setTimeout(() => {
-                if (bubble.parentNode) {
-                    bubble.parentNode.removeChild(bubble);
-                    console.log('Burbuja de invitación removida automáticamente');
-                }
-            }, 500);
+    try {
+        // Remover burbuja existente si hay una
+        const existingBubble = document.querySelector('.princess-bubble');
+        if (existingBubble) {
+            console.log('🔵 Removiendo burbuja existente');
+            existingBubble.remove();
         }
-    }, 10000);
+        
+        // Mensaje de invitación inicial
+        const mensajeInvitacion = "👑 ¡Pulsame!, tengo algo muy especial que decirte... 💕";
+        console.log('🔵 Mensaje de invitación:', mensajeInvitacion);
+        
+        // Obtener la posición de la princesa
+        const princessImg = document.querySelector('.princess-icon');
+        console.log('🔵 Icono de princesa encontrado:', princessImg);
+        
+        // Verificar que el icono de la princesa exista
+        if (!princessImg) {
+            console.warn('⚠️ No se encontró el icono de la princesa, intentando de nuevo...');
+            // Intentar de nuevo después de un delay
+            setTimeout(() => {
+                showPrincessBubble();
+            }, 1000);
+            return;
+        }
+        
+        const princessRect = princessImg.getBoundingClientRect();
+        console.log('🔵 Dimensiones del icono:', princessRect);
+        
+        // Verificar que el icono tenga dimensiones válidas
+        if (princessRect.width === 0 || princessRect.height === 0) {
+            console.warn('⚠️ El icono de la princesa no tiene dimensiones válidas, intentando de nuevo...');
+            setTimeout(() => {
+                showPrincessBubble();
+            }, 1000);
+            return;
+        }
+        
+        // Crear la burbuja de diálogo
+        const bubble = document.createElement('div');
+        bubble.className = 'princess-bubble';
+        bubble.innerHTML = `
+            <div class="bubble-arrow-left"></div>
+            <div class="bubble-text">
+                "${mensajeInvitacion}"
+            </div>
+        `;
+        
+        // Detectar si es móvil
+        const isMobile = window.innerWidth <= 768;
+        const isSmallMobile = window.innerWidth <= 480;
+        const isVerySmallMobile = window.innerWidth <= 360;
+        
+        // Calcular el ancho dinámico basado en la longitud del texto y tamaño de pantalla
+        const textLength = mensajeInvitacion.length;
+        let maxWidth;
+        let bubbleWidth;
+        let fontSize;
+        
+        if (isVerySmallMobile) {
+            maxWidth = window.innerWidth - 20;
+            bubbleWidth = Math.min(Math.max(textLength * 6, 180), maxWidth);
+            fontSize = '0.85rem';
+        } else if (isSmallMobile) {
+            maxWidth = window.innerWidth - 30;
+            bubbleWidth = Math.min(Math.max(textLength * 7, 200), maxWidth);
+            fontSize = '0.9rem';
+        } else if (isMobile) {
+            maxWidth = Math.min(window.innerWidth - 40, 350);
+            bubbleWidth = Math.min(Math.max(textLength * 8, 220), maxWidth);
+            fontSize = '1rem';
+        } else {
+            maxWidth = 400;
+            bubbleWidth = Math.min(Math.max(textLength * 8, 250), maxWidth);
+            fontSize = '1.1rem';
+        }
+        
+        // Calcular posición - SIEMPRE DEBAJO DE LA PRINCESA
+        // En móviles, centrar mejor la burbuja
+        let bubbleLeft, bubbleTop;
+        
+        if (isMobile) {
+            // En móvil, centrar la burbuja en la pantalla o cerca del icono
+            const princessCenterX = princessRect.left + (princessRect.width / 2);
+            const screenCenterX = window.innerWidth / 2;
+            const distanceFromCenter = Math.abs(princessCenterX - screenCenterX);
+            
+            if (distanceFromCenter > window.innerWidth * 0.3) {
+                // Si el icono está muy a un lado, centrar la burbuja
+                bubbleLeft = screenCenterX - (bubbleWidth / 2);
+            } else {
+                // Si está cerca del centro, colocar debajo del icono
+                bubbleLeft = princessCenterX - (bubbleWidth / 2);
+            }
+            
+            // Asegurar que no se salga de la pantalla
+            bubbleLeft = Math.max(10, Math.min(bubbleLeft, window.innerWidth - bubbleWidth - 10));
+            bubbleTop = princessRect.bottom + 20; // Más espacio en móvil
+        } else {
+            bubbleLeft = princessRect.left + (princessRect.width / 2) - (bubbleWidth / 2);
+            bubbleTop = princessRect.bottom + 15;
+            
+            // Asegurar que no se salga de la pantalla horizontalmente
+            const screenWidth = window.innerWidth;
+            const minLeft = 10;
+            const maxLeft = screenWidth - bubbleWidth - 10;
+            bubbleLeft = Math.max(minLeft, Math.min(maxLeft, bubbleLeft));
+        }
+        
+        // Calcular padding dinámico basado en el tamaño de pantalla
+        let bubblePadding;
+        if (isVerySmallMobile) {
+            bubblePadding = '8px 12px';
+        } else if (isSmallMobile) {
+            bubblePadding = '10px 14px';
+        } else if (isMobile) {
+            bubblePadding = '12px 16px';
+        } else {
+            if (textLength > 150) {
+                bubblePadding = '12px 18px';
+            } else if (textLength > 100) {
+                bubblePadding = '15px 20px';
+            } else {
+                bubblePadding = '18px 22px';
+            }
+        }
+        
+        // Verificar que la burbuja no se salga de la pantalla verticalmente (especialmente en móviles)
+        // Primero agregar la burbuja al DOM temporalmente para calcular su altura
+        bubble.style.cssText = `
+            position: fixed !important;
+            top: -1000px !important;
+            left: ${bubbleLeft}px !important;
+            background: white !important;
+            border: ${isMobile ? '2px' : '3px'} solid #C2185B !important;
+            border-radius: ${isMobile ? '15px' : '20px'} !important;
+            padding: ${bubblePadding} !important;
+            box-shadow: 0 ${isMobile ? '8px' : '10px'} ${isMobile ? '20px' : '30px'} rgba(194, 24, 91, 0.3) !important;
+            z-index: 99999 !important;
+            max-width: ${bubbleWidth}px !important;
+            width: ${bubbleWidth}px !important;
+            min-width: ${isMobile ? '180px' : '200px'} !important;
+            font-family: 'Dancing Script', cursive !important;
+            font-size: ${fontSize} !important;
+            color: #2D1B69 !important;
+            text-align: center !important;
+            line-height: ${isMobile ? '1.4' : '1.2'} !important;
+            pointer-events: none !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+        `;
+        
+        // Agregar temporalmente al DOM para calcular altura
+        document.body.appendChild(bubble);
+        const bubbleHeight = bubble.offsetHeight || 80;
+        
+        // Verificar que la burbuja no se salga de la pantalla verticalmente
+        const maxTop = window.innerHeight - bubbleHeight - 20;
+        let finalTop = Math.min(bubbleTop, maxTop);
+        
+        // Si la burbuja se sale por abajo, colocarla arriba del icono
+        if (finalTop !== bubbleTop && isMobile && bubbleTop > maxTop) {
+            finalTop = princessRect.top - bubbleHeight - 20;
+            // Asegurar que no se salga por arriba
+            finalTop = Math.max(10, finalTop);
+        }
+        
+        // Actualizar la posición final directamente
+        bubble.style.setProperty('top', `${finalTop}px`, 'important');
+        bubble.style.setProperty('left', `${bubbleLeft}px`, 'important');
+        bubble.style.setProperty('transform', 'none', 'important');
+        bubble.style.setProperty('animation', 'invitationPulse 2s ease-in-out infinite', 'important');
+        
+        // Agregar estilos para la flecha - SIEMPRE HACIA ARRIBA (o abajo si está arriba del icono)
+        const arrow = bubble.querySelector('.bubble-arrow-left');
+        if (arrow) {
+            // Calcular la posición de la flecha para que apunte hacia la princesa
+            const princessCenterX = princessRect.left + (princessRect.width / 2);
+            const bubbleCenterX = bubbleLeft + (bubbleWidth / 2);
+            const arrowOffset = princessCenterX - bubbleCenterX;
+            
+            // Determinar tamaño de la flecha según el dispositivo
+            const arrowSize = isVerySmallMobile ? 5 : (isSmallMobile ? 6 : (isMobile ? 7 : 10));
+            
+            // Si la burbuja está arriba del icono, la flecha apunta hacia abajo
+            const isAboveIcon = finalTop < princessRect.top;
+            
+            if (isAboveIcon) {
+                // Flecha apuntando hacia abajo
+                arrow.style.cssText = `
+                    position: absolute !important;
+                    left: calc(50% + ${arrowOffset}px) !important;
+                    bottom: -${arrowSize}px !important;
+                    transform: translateX(-50%) !important;
+                    width: 0 !important;
+                    height: 0 !important;
+                    border-left: ${arrowSize}px solid transparent !important;
+                    border-right: ${arrowSize}px solid transparent !important;
+                    border-top: ${arrowSize}px solid #C2185B !important;
+                    border-bottom: none !important;
+                `;
+            } else {
+                // Flecha apuntando hacia arriba (normal)
+                arrow.style.cssText = `
+                    position: absolute !important;
+                    left: calc(50% + ${arrowOffset}px) !important;
+                    top: -${arrowSize}px !important;
+                    transform: translateX(-50%) !important;
+                    width: 0 !important;
+                    height: 0 !important;
+                    border-left: ${arrowSize}px solid transparent !important;
+                    border-right: ${arrowSize}px solid transparent !important;
+                    border-bottom: ${arrowSize}px solid #C2185B !important;
+                    border-top: none !important;
+                `;
+            }
+        }
+        
+        // Agregar estilos para el texto con mejor soporte para móviles
+        const textElement = bubble.querySelector('.bubble-text');
+        if (textElement) {
+            textElement.style.cssText = `
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block !important;
+                width: 100% !important;
+                font-size: ${fontSize} !important;
+                line-height: ${isMobile ? '1.4' : '1.2'} !important;
+                word-wrap: break-word !important;
+                overflow-wrap: break-word !important;
+                hyphens: auto !important;
+            `;
+        }
+    
+        // La burbuja ya está en el DOM desde antes, solo confirmar que está visible
+        console.log('✅ Burbuja de invitación de la princesa mostrada exitosamente');
+        console.log('✅ Posición final - Top:', finalTop, 'Left:', bubbleLeft);
+        console.log('✅ Dimensiones - Width:', bubbleWidth, 'Height:', bubbleHeight);
+        
+        // Remover la burbuja después de 6 segundos si no se interactúa
+        setTimeout(() => {
+            if (bubble.parentNode) {
+                bubble.style.opacity = '0';
+                bubble.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    if (bubble.parentNode) {
+                        bubble.parentNode.removeChild(bubble);
+                        console.log('Burbuja de invitación removida automáticamente');
+                    }
+                }, 500);
+            }
+        }, 6000);
+    } catch (error) {
+        console.error('❌ Error al mostrar la burbuja de la princesa:', error);
+        // Intentar de nuevo después de un delay si hay un error
+        setTimeout(() => {
+            showPrincessBubble();
+        }, 2000);
+    }
 }
 
 // Función para mostrar la secuencia completa de mensajes de la princesa (solo cuando se hace clic)
@@ -567,7 +734,7 @@ function showPrincessFullSequence() {
         if (indiceMensaje < mensajes.length) {
             setTimeout(() => {
                 mostrarMensaje(mensajes[indiceMensaje]);
-            }, 6000);
+            }, 5000);
         } else {
             setTimeout(() => {
                 if (bubble.parentNode) {
@@ -580,7 +747,7 @@ function showPrincessFullSequence() {
                         }
                     }, 500);
                 }
-            }, 6000);
+            }, 5000);
         }
     }
     
@@ -601,6 +768,50 @@ document.addEventListener('DOMContentLoaded', function() {
         // Aplicar efecto de escritura solo al texto
         typeWriterWithImage(title, originalText, imgHTML, 100);
     }
+    
+    // Mostrar la burbuja de invitación de la princesa automáticamente después de un pequeño delay
+    // Función para intentar mostrar la burbuja
+    function tryShowPrincessBubble() {
+        const princessIcon = document.querySelector('.princess-icon');
+        if (princessIcon) {
+            // Esperar un momento para que el icono esté completamente renderizado
+            setTimeout(() => {
+                const rect = princessIcon.getBoundingClientRect();
+                if (rect.width > 0 && rect.height > 0) {
+                    console.log('Mostrando burbuja de invitación automáticamente');
+                    showPrincessBubble();
+                } else {
+                    // Si no tiene dimensiones, intentar de nuevo
+                    console.log('El icono aún no tiene dimensiones, intentando de nuevo...');
+                    setTimeout(() => {
+                        tryShowPrincessBubble();
+                    }, 1000);
+                }
+            }, 500);
+        } else {
+            // Si no se encuentra el icono, intentar de nuevo
+            console.log('No se encontró el icono de la princesa, intentando de nuevo...');
+            setTimeout(() => {
+                tryShowPrincessBubble();
+            }, 1000);
+        }
+    }
+    
+    // Intentar después de DOMContentLoaded
+    setTimeout(() => {
+        tryShowPrincessBubble();
+    }, 2500);
+    
+    // También intentar después de que la página esté completamente cargada
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            const princessIcon = document.querySelector('.princess-icon');
+            if (princessIcon && !document.querySelector('.princess-bubble')) {
+                console.log('Intentando mostrar burbuja después de load...');
+                showPrincessBubble();
+            }
+        }, 1000);
+    });
 });
 
 // Función para añadir efectos de brillo a los botones
@@ -618,44 +829,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Inicializar los indicadores del carrusel al cargar la página
-document.addEventListener('DOMContentLoaded', function() {
-    // Verificar cuántas imágenes tiene el carrusel
-    const carouselItems = document.querySelectorAll('#carouselExampleAutoplaying .carousel-item');
-    console.log('🖼️ Total de imágenes en el carrusel:', carouselItems.length);
-    console.log('📝 Total de textos disponibles:', textos.length);
-    
-    // Establecer el primer indicador como activo por defecto
-    updateCarouselIndicators(0);
-    
-    // Verificar que todas las imágenes se carguen correctamente
-    carouselItems.forEach((item, index) => {
-        const img = item.querySelector('img');
-        if (img) {
-            img.addEventListener('load', function() {
-                console.log(`✅ Imagen ${index + 1} cargada:`, this.src);
-            });
-            img.addEventListener('error', function() {
-                console.error(`❌ Error cargando imagen ${index + 1}:`, this.src);
-            });
-        }
-    });
-});
+// Nota: El código de inicialización de la galería se maneja en el event listener de DOMContentLoaded anterior
 
 // ===== FUNCIONALIDAD DEL oráculo =====
 
 // Base de datos de respuestas del oráculo
 const oraculaResponses = {
     "¿Quieres saber qué siente tu Sebas Nucita por ti?": {
-        answer: "Mi querida princesa... tu Sebas Nucita te quiere con una ternura que llena su corazón de paz. Te extraña cada día y cada noche, y cuando piensa en ti, su mundo se llena de colores hermosos. Eres su inspiración, su motivación para ser mejor persona cada día. Te quiere no solo por lo que eres, sino por cómo lo haces sentir. 💙✨",
+        answer: "Mi querida princesa... tu Sebas Nucita te quiere con ternura y cariño sincero. Te tiene en sus pensamientos durante el día y disfruta recordar los buenos momentos que han compartido. Eres alguien importante para él, alguien que valora y aprecia. Te quiere por cómo eres, por tu forma de ser y por cómo lo haces sentir cuando están juntos. 💙✨",
         followUps: [
             "¿Te gustaría que profundice en cómo te hace sentir especial?",
-            "¿Quieres que te revele más sobre sus sentimientos más tiernos?",
-            "¿Te interesa conocer cómo te ve en sus pensamientos más dulces?"
+            "¿Quieres que te revele más sobre sus sentimientos?",
+            "¿Te interesa conocer cómo te ve en sus pensamientos?"
         ]
     },
     "¿Te extraña mucho?": {
-        answer: "Mi amor... te extraña tanto que a veces siente que su corazón se va a salir del pecho. Cada día sin verte es como un día sin sol. Te piensa cuando se despierta, cuando se acuesta, cuando ve algo hermoso y desea compartirlo contigo. Te extraña tu sonrisa, tu voz, tu forma de ver la vida. Te extraña como se extraña el aire para respirar. 🌙💭",
+        answer: "Mi princesa... sí, te extraña. Te piensa cuando ve algo interesante y desea compartirlo contigo, cuando recuerda momentos agradables que han pasado juntos. Te extraña tu compañía, tu sonrisa, tu forma de ser. Cada día que pasa sin verte, espera con ilusión el momento de reencontrarse. 🌙💭",
         followUps: [
             "¿Quieres que te cuente más sobre cómo te extraña en su día a día?",
             "¿Te gustaría conocer más sobre sus momentos de nostalgia?",
@@ -663,31 +852,31 @@ const oraculaResponses = {
         ]
     },
     "¿Realmente me quiere?": {
-        answer: "Mi princesa del alma... te quiere con una sinceridad que conmueve. Te quiere no solo por tu belleza, sino por tu forma de ser, por tu corazón, por cómo lo haces sentir especial. Te quiere porque eres única, porque con solo pensar en ti, su día se vuelve más hermoso. Te quiere de una manera pura y verdadera, sin condiciones ni expectativas. 💖👑",
+        answer: "Mi princesa... sí, te quiere con sinceridad. Te quiere por tu forma de ser, por tu personalidad, por cómo lo haces sentir cuando están juntos. Te aprecia y valora, y disfruta de tu compañía. Te quiere de una manera genuina, sin condiciones. 💖👑",
         followUps: [
-            "¿Te gustaría que te revele por qué te quiere tanto?",
+            "¿Te gustaría que te revele por qué te quiere?",
             "¿Quieres que profundice en las razones de su cariño?",
             "¿Te interesa conocer qué es lo que más valora de ti?"
         ]
     },
     "¿Me piensa todos los días?": {
-        answer: "Mi amor eterno... eres su pensamiento favorito. Te piensa cuando ve algo hermoso y desea compartirlo contigo, cuando escucha una canción que le recuerda a ti, cuando tiene un buen día y quiere contártelo. Te piensa en los momentos de silencio, en las risas de otros, en cada atardecer. Eres su compañía invisible en cada paso que da. 🌅🌙",
+        answer: "Mi princesa... sí, eres alguien en quien piensa con frecuencia. Te piensa cuando ve algo que le gustaría compartir contigo, cuando recuerda momentos agradables, cuando tiene algo que contarte. Eres alguien importante en sus pensamientos, alguien que disfruta recordar. 🌅🌙",
         followUps: [
-            "¿Quieres saber más sobre sus pensamientos más tiernos?",
+            "¿Quieres saber más sobre sus pensamientos?",
             "¿Te gustaría conocer más sobre sus momentos de reflexión?",
             "¿Quieres que te cuente más sobre cómo te imagina en su día?"
         ]
     },
-    "¿Cuándo volverá?": {
-        answer: "Mi princesa esperada... cada día que pasa es un día menos para volver a verte. Está trabajando para construir algo hermoso para ambos, para que cuando regrese, puedan disfrutar de momentos especiales juntos. Te extraña tanto que a veces siente que el tiempo no pasa. El momento de reencontrarse está más cerca de lo que imaginas, y cuando llegue, será mágico. 🚀💫",
+    "¿Te digo algo ahora que ya se encontraron de nuevo?": {
+        answer: "Mi princesa... Tu Sebas está trabajando para que cuando regrese puedan disfrutar juntos de momentos especiales. Cada día que pasa es un paso más cerca de volver a verte. Espera con ilusión el momento de reencontrarse y compartir nuevas experiencias contigo. 🚀💫",
         followUps: [
-            "¿Te gustaría saber más sobre sus planes para cuando regrese?",
-            "¿Quieres conocer más sobre lo que está preparando para ti?",
+            "¿Quieres saber algo más?",
+            "¿Quieres conocer más sobre lo que está preparando?",
             "¿Te interesa saber más sobre sus ilusiones de regreso?"
         ]
     },
     "¿Soy especial para él?": {
-        answer: "Mi tesoro único... eres más que especial para él. Eres su persona favorita, su compañía ideal, su confidente. Te ve como alguien único, con cualidades que admira y valora. Para él, no hay nadie como tú. Te aprecia por tu forma de ser, por tu corazón, por cómo lo haces sentir. Eres importante en su vida de una manera muy especial. 🌟💎",
+        answer: "Mi princesa... sí, eres especial para él. Eres alguien importante en su vida, alguien que valora y aprecia. Te ve como una persona única, con cualidades que admira. Disfruta de tu compañía y te considera alguien especial en su vida. 🌟💎",
         followUps: [
             "¿Quieres que te cuente más sobre lo que más valora de ti?",
             "¿Te gustaría conocer más sobre cómo te ve?",
@@ -695,26 +884,26 @@ const oraculaResponses = {
         ]
     },
     "¿Me extraña físicamente?": {
-        answer: "Mi amor físico... te extraña de una manera muy tierna. Extraña tu sonrisa que ilumina su día, tu mirada que lo hace sentir especial, tu voz que es música para sus oídos. Extraña los abrazos, las caricias, los momentos de cercanía. Extraña tu presencia, como si le faltara una parte importante de su vida. Te extraña con ternura y nostalgia. 🤗💋",
+        answer: "Mi princesa... sí, te extraña de manera tierna. Extraña tu sonrisa, tu mirada, tu voz. Extraña los momentos de cercanía, los abrazos, la compañía. Extraña tu presencia y disfruta recordar esos momentos especiales que han compartido juntos. 🤗💋",
         followUps: [
             "¿Quieres que te cuente más sobre lo que más extraña de ti?",
-            "¿Te gustaría saber más sobre sus recuerdos más tiernos?",
+            "¿Te gustaría saber más sobre sus recuerdos?",
             "¿Quieres conocer más sobre cómo te imagina cerca?"
         ]
     },
     "¿Soy su persona favorita?": {
-        answer: "Mi amor absoluto... eres su persona favorita, sin duda alguna. Eres la primera persona en la que piensa cuando tiene algo que compartir, la primera en la que piensa cuando necesita apoyo. Eres su compañía ideal, su confidente, su mejor amiga. Para él, no hay nadie que pueda ocupar tu lugar en su corazón. Eres única e irreemplazable. 💝👑",
+        answer: "Mi princesa... eres alguien muy importante para él. Eres una de las primeras personas en las que piensa cuando tiene algo que compartir, alguien en quien confía. Disfruta de tu compañía y te considera alguien especial en su vida. Para él, eres alguien único e importante. 💝👑",
         followUps: [
             "¿Quieres que te cuente más sobre tu lugar especial en su vida?",
-            "¿Te gustaría conocer más sobre por qué eres tan importante?",
+            "¿Te gustaría conocer más sobre por qué eres importante?",
             "¿Quieres que profundice en lo que significa para él?"
         ]
     },
     "¿Deseas saber algo más o decirle algo a Sebas Nucita?": {
-        answer: "Mi princesa del corazón... Sebas siente que tienes algo muy hermoso que decirle. Algo que tu corazón necesita expresar, algo que su corazón necesita escuchar. ¿Te gustaría abrir el portal del destino y enviarle un mensaje directo a tu Sebas Nucita? El universo está alineado para este momento especial. 💌✨",
+        answer: "Mi princesa... Sebas siente que podrías tener algo que decirle. Algo que tu corazón quiere expresar, algo que sería especial compartir. ¿Te gustaría enviarle un mensaje directo a tu Sebas Nucita? Sería un momento especial para ambos. 💌✨",
         followUps: [
             "¿Quieres que te ayude a contactarlo directamente?",
-            "¿Te gustaría enviarle un mensaje especial del corazón?",
+            "¿Te gustaría enviarle un mensaje especial?",
             "¿Quieres que te guíe para comunicarte con él?"
         ]
     }
@@ -726,7 +915,7 @@ const programmedQuestions = [
     "¿Te extraña mucho?",
     "¿Realmente me quiere?",
     "¿Me piensa todos los días?",
-    "¿Cuándo volverá?",
+    "¿Te digo algo ahora que ya se encontraron de nuevo?",
     "¿Soy especial para él?",
     "¿Me extraña físicamente?",
     "¿Soy su persona favorita?"
@@ -754,7 +943,7 @@ function showProgrammedQuestions() {
     if (chatMessages.children.length > 1) {
         chatMessages.innerHTML = '';
         // Mostrar mensaje de bienvenida
-        addMessage("💕 Mi querida princesa del corazón... ¡Bienvenida al oráculo del amor! Soy el guardián de los sentimientos más tiernos de tu Sebas Nucita. Aquí podrás descubrir secretos dulces que te llenarán el corazón de alegría, verdades hermosas que te harán sonreír. ¿Qué quieres saber sobre lo que siente por ti en la intimidad de su corazón? Siente la paz del universo, la tranquilidad de las estrellas, y déjate guiar por el amor eterno.", 'initial');
+        addMessage("💕 Mi querida princesa... ¡Bienvenida al oráculo! Soy el guardián de los sentimientos de tu Sebas Nucita. Aquí podrás descubrir cosas dulces que te llenarán de alegría, verdades hermosas que te harán sonreír. ¿Qué quieres saber sobre lo que siente por ti? Déjate guiar por la curiosidad y la ternura. ✨", 'initial');
     }
     
     // Crear contenedor principal para mejor organización
@@ -792,7 +981,7 @@ function showProgrammedQuestions() {
         {
             title: '🚀 Futuro',
             questions: [
-                '¿Cuándo volverá?'
+                '¿Te digo algo ahora que ya se encontraron de nuevo?'
             ]
         }
     ];
@@ -908,7 +1097,7 @@ function handleQuestionClick(question) {
     } else {
         // Respuesta genérica si no hay respuesta específica
         setTimeout(() => {
-            addMessage("Déjame consultar las estrellas del amor... ✨💫", 'oracle');
+            addMessage("Déjame consultar las estrellas... ✨💫", 'oracle');
         }, 500);
     }
 }
@@ -943,13 +1132,13 @@ function handleYesResponse() {
             addMessage('Sebas te extraña de una manera muy profunda y tierna... 🌙💭', 'oracle');
             
             setTimeout(() => {
-                addMessage('A pesar de la distancia y el silencio que los separa, su corazón late por ti cada segundo, cada respiración, cada latido. Te piensa constantemente, en cada momento del día, en cada noche de insomnio. 💙✨', 'oracle');
+                addMessage('A pesar de que se encuentran en la misma ciudad y se estan intentando conectar una vez mas, su corazón late por ti cada segundo, cada respiración, cada latido. Te piensa constantemente, en cada momento del día, en cada noche de insomnio. 💙✨', 'oracle');
                 
                 setTimeout(() => {
                     addMessage('Eres su pensamiento más dulce, su recuerdo más preciado, su sueño más hermoso. Aunque no lo exprese con palabras, su corazón te tiene presente en cada fibra de su ser. 🌟💫', 'oracle');
                     
                     setTimeout(() => {
-                        addMessage('Ese silencio está lastimando ambos corazones... probablemente tú también lo extrañas con la misma intensidad que él te extraña a ti... 💕', 'oracle');
+                        addMessage('Tan cerca y a la vez tan lejos, tengan paciencia uno con el otro, que los miedos y egos no sean mas que lo que se han propuesto una vez mas... 💕', 'oracle');
                         
                         setTimeout(() => {
                             addMessage('¿Te gustaría que te revele más secretos profundos sobre lo que siente por ti? 💭✨', 'oracle');
@@ -984,8 +1173,8 @@ function showDetailedOptions() {
         { text: '¿Qué más siente por mí? 💭', action: 'feelings' },
         { text: '¿Cómo me extraña? 🌙', action: 'missing' },
         { text: '¿Qué piensa de mí? 💫', action: 'thoughts' },
-        { text: '¿Por qué no me busca? 🔍', action: 'search' },
-        { text: '¿Cuándo volverá? 🚀', action: 'return' },
+        { text: '¿Dime ese algo más? 🔍', action: 'search' },
+        { text: '¿Te digo algo ahora que ya se encontraron de nuevo? 🚀', action: 'return' },
         { text: '¿Deseas saber algo más o decirle algo a Sebas Nucita? 📱', action: 'contact' }
     ];
     
@@ -1084,10 +1273,10 @@ function handleFeelingsResponse() {
             addMessage('Te quiere con una ternura que llena su corazón de paz, que lo hace sentir especial cada vez que piensa en ti. Eres su inspiración, su felicidad, su compañía ideal, su todo. Te quiere de una manera pura y sincera. 🌟💫', 'oracle');
             
             setTimeout(() => {
-                addMessage('Aunque estén distanciados por circunstancias de la vida, su corazón sigue siendo tuyo, completamente tuyo. Te extraña de una manera tierna, te piensa en cada respiración, y desea estar contigo más que nada en el mundo. Te extraña como se extraña el sol en un día nublado. 💕🌙', 'oracle');
+                addMessage('Te extraña de una manera tierna, te piensa en cada respiración, y desea estar contigo más que nada en el mundo. Te extraña como se extraña el sol en un día nublado. 💕🌙', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('¿Te gustaría que te revele más secretos sobre cómo te extraña en la soledad de sus noches? 🌙💭', 'oracle');
+                    addMessage('¿Te gustaría que te revele más secretos sobre cómo te extraña en las noches? 🌙💭', 'oracle');
                     showNextQuestion('missing');
                 }, 2000);
             }, 1500);
@@ -1100,16 +1289,16 @@ function handleMissingResponse() {
     addMessage('¿Cómo me extraña? 🌙', 'user');
     
     setTimeout(() => {
-        addMessage('Mi amor eterno... Sebas te extraña de una manera muy profunda y tierna... 💙✨', 'oracle');
+        addMessage('Mi princesa... Sebas te extraña de manera tierna y sincera... 💙✨', 'oracle');
         
         setTimeout(() => {
-        addMessage('Te extraña tu sonrisa que ilumina su mundo oscuro, tu mirada que lo hace temblar de emoción, tu voz que es música celestial para sus oídos. Te extraña cada momento juntos, cada risa compartida, cada abrazo y cada beso. 🌟💫', 'oracle');
+        addMessage('Te extraña tu sonrisa, tu mirada, tu voz. Te extraña los momentos juntos, las risas compartidas, los abrazos y la compañía. 🌟💫', 'oracle');
             
             setTimeout(() => {
-                addMessage('A pesar del silencio que los separa, su corazón late por ti en cada latido, en cada respiración. Te piensa en cada amanecer y en cada atardecer, en cada momento de soledad, en cada noche de insomnio. 💕🌅', 'oracle');
+                addMessage('A pesar del silencio que los separa, te piensa con frecuencia. Te piensa en diferentes momentos del día, cuando recuerda momentos agradables que han compartido. 💕🌅', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('Sebas desea romper ese silencio con todas sus fuerzas, pero necesita saber que tú también lo extrañas con la misma intensidad que él te extraña a ti... 💭', 'oracle');
+                    addMessage('Ambos ya han roto su silencio, el ahora es el aprovechar la presencia del otro... 💭', 'oracle');
                     
                                     setTimeout(() => {
                     addMessage('¿Te gustaría que te revele más secretos sobre lo que piensa de ti en la intimidad de su corazón? 💫✨', 'oracle');
@@ -1126,16 +1315,16 @@ function handleThoughtsResponse() {
     addMessage('¿Qué piensa de mí? 💫', 'user');
     
     setTimeout(() => {
-        addMessage('Mi tesoro único... Sebas piensa en ti como en su tesoro más preciado, como en su joya más valiosa, como en su sueño más hermoso... 💎✨', 'oracle');
+        addMessage('Mi princesa... Sebas piensa en ti como alguien especial, alguien que valora y aprecia... 💎✨', 'oracle');
         
         setTimeout(() => {
-            addMessage('Para él, eres perfecta tal como eres, con cada imperfección que te hace única, con cada detalle que te hace especial. Te admira profundamente, te respeta y te considera ideal. 🌟💫', 'oracle');
+            addMessage('Para él, eres alguien especial tal como eres, con cualidades que admira. Te respeta y te considera importante en su vida. 🌟💫', 'oracle');
             
             setTimeout(() => {
-                addMessage('A pesar de la distancia que los separa, su mente no puede dejar de pensar en ti ni por un segundo. Eres parte de su inspiración diaria, su motivación para pensarte cada mañana, su razón para pensar en lo especial que eres. Sin ti, mira algo de oscuridad. 💕🚀', 'oracle');
+                addMessage('A pesar de la circunstancias, te piensa con frecuencia. Eres alguien importante en sus pensamientos, alguien que disfruta recordar. 💕🚀', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('¿Te gustaría que te revele por qué no te busca a pesar de que su corazón lo desea con todas sus fuerzas? 🔍💭', 'oracle');
+                    addMessage('¿Te gustaría que te revele algo más? 🔍💭', 'oracle');
                     showNextQuestion('search');
                 }, 2000);
             }, 1500);
@@ -1145,22 +1334,22 @@ function handleThoughtsResponse() {
 
 // Función para manejar respuesta sobre búsqueda
 function handleSearchResponse() {
-    addMessage('¿Por qué no me busca? 🔍', 'user');
+    addMessage('¿Dime ese algo más? 🔍', 'user');
     
     setTimeout(() => {
-        addMessage('Mi princesa del corazón... Sebas desea buscarte con todo su corazón, con toda su alma, con todas sus fuerzas... 💙✨', 'oracle');
+        addMessage('Mi princesa... Sebas esta para ti, ese silencio ya no es más... 💙✨', 'oracle');
         
         setTimeout(() => {
-            addMessage('Pero a veces el miedo y la incertidumbre pueden paralizar incluso a los corazones más valientes, incluso a los amores más puros. El miedo al rechazo, a la indiferencia, a que ya no sientas lo mismo por él... 💭🌙', 'oracle');
+            addMessage('Pero a veces el miedo y la incertidumbre pueden paralizar incluso a los corazones más valientes. El miedo al rechazo, a la indiferencia, a que ya no sientas lo mismo por él... 💭🌙', 'oracle');
             
             setTimeout(() => {
-                addMessage('Él te piensa en silencio, cada día, cada noche. Te extraña profundamente, aunque calle. Y si tú también lo extrañas con la misma intensidad... ¿por qué dejar que el ego y el orgullo decidan lo que el corazón aún grita con desesperación?... 🔮💕', 'oracle');
+                addMessage('Él te piensa en silencio, con frecuencia. Te extraña, aunque calle. Y si tú también lo extrañas... ¿por qué dejar que el silencio se apodere de lo que ambos sienten?... 🔮💕', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('A veces el amor más puro necesita ser alimentado desde ambos lados, necesita que ambos corazones se abran para sanar las heridas del silencio... 💫✨', 'oracle');
+                    addMessage('A veces el cariño sincero necesita ser alimentado desde ambos lados, necesita que ambos se abran para sanar las heridas del silencio... 💫✨', 'oracle');
                     
                     setTimeout(() => {
-                        addMessage('¿Te gustaría que te revele cuándo volverá a tu lado? 🚀💭', 'oracle');
+                        addMessage('¿Te gustaría algo ahora que esta para ti? 🚀💭', 'oracle');
                         showNextQuestion('return');
                     }, 2000);
                 }, 1500);
@@ -1171,22 +1360,22 @@ function handleSearchResponse() {
 
 // Función para manejar respuesta sobre regreso
 function handleReturnResponse() {
-    addMessage('¿Cuándo volverá? 🚀', 'user');
+    addMessage('¿Te digo algo ahora que ya se encontraron de nuevo? 🚀', 'user');
     
     setTimeout(() => {
-        addMessage('Mi princesa esperada... Sebas está trabajando incansablemente para un día regresar, para compartir a tu lado... 💙✨', 'oracle');
+        addMessage('Mi princesa esperada... Sebas está trabajando incansablemente para ser mejor, para compartir a tu lado... 💙✨', 'oracle');
         
         setTimeout(() => {
-            addMessage('Cada día que pasa es un día más cerca de estar juntos de nuevo, de abrazarse, de besarse, de quererse, de felicidad y de nuevos momentos juntos. 🌟💫', 'oracle');
+            addMessage('Cada día que pasa es un día más para conectar, no dejes pasar eso. 🌟💫', 'oracle');
             
             setTimeout(() => {
-                addMessage('Aunque el silencio sea doloroso y difícil de soportar, su corazón nunca se ha ido, nunca ha dejado de ser tuyo. Te extraña profundamente. 💕🌙', 'oracle');
+                addMessage('Aunque el silencio sea doloroso y difícil de soportar, su corazón nunca se ha ido, nunca ha dejado de ser tuyo. Te extraña. 💕🌙', 'oracle');
                 
                 setTimeout(() => {
-                    addMessage('El momento del reencuentro está más cerca de lo que piensas, que el universo está conspirando para que se encuentren de nuevo... ✨', 'oracle');
+                    addMessage('El universo ha venido conspirando para que se esten comunicando de nuevo... Que la falta de interes no mate sus intenciones claras y honestas. ✨', 'oracle');
                     
                     setTimeout(() => {
-                        addMessage('¿Te gustaría hacer otra pregunta al oráculo del amor? 💭🔮', 'oracle');
+                        addMessage('¿Te gustaría hacer otra pregunta al oráculo? 💭🔮', 'oracle');
                         showFinalOptions();
                     }, 2000);
                 }, 1500);
@@ -1297,8 +1486,8 @@ function showNextQuestion(nextAction) {
         'feelings': '¿Qué más siente por mí? 💭',
         'missing': '¿Cómo me extraña? 🌙',
         'thoughts': '¿Qué piensa de mí? 💫',
-        'search': '¿Por qué no me busca? 🔍',
-        'return': '¿Cuándo volverá? 🚀',
+        'search': '¿Dime ese algo más? 🔍',
+        'return': '¿Te digo algo ahora que ya se encontraron de nuevo? 🚀',
 
     };
     
@@ -1429,7 +1618,7 @@ function resetAndShowAllOptions() {
         chatQuestions.style.opacity = '1';
         
         // Mostrar mensaje de reinicio
-        addMessage("💕 Mi querida princesa del corazón... ¡Bienvenida al oráculo del amor! Soy el guardián de los sentimientos más tiernos de tu Sebas Nucita. Aquí podrás descubrir secretos dulces que te llenarán el corazón de alegría, verdades hermosas que te harán sonreír. ¿Qué quieres saber sobre lo que siente por ti en la intimidad de su corazón? Siente la paz del universo, la tranquilidad de las estrellas, y déjate guiar por el amor eterno.", 'initial');
+        addMessage("💕 Mi querida princesa... ¡Bienvenida al oráculo! Soy el guardián de los sentimientos de tu Sebas Nucita. Aquí podrás descubrir cosas dulces que te llenarán de alegría, verdades hermosas que te harán sonreír. ¿Qué quieres saber sobre lo que siente por ti? Déjate guiar por la curiosidad y la ternura. ✨", 'initial');
         
         // Mostrar todas las opciones después de un breve delay
         setTimeout(() => {
@@ -1482,7 +1671,7 @@ function initializeOracula() {
     chatQuestions.innerHTML = '';
     
     // Mostrar mensaje inicial
-        addMessage("💕 Mi querida princesa del corazón... ¡Bienvenida al oráculo del amor! Aquí podrás descubrir los sentimientos más tiernos de tu Sebas Nucita. ¿Qué quieres saber sobre lo que siente por ti en la intimidad de su corazón? Siente la paz del universo, la tranquilidad de las estrellas, y déjate guiar por el amor eterno.", 'initial');
+        addMessage("💕 Mi querida princesa... ¡Bienvenida al oráculo! Aquí podrás descubrir los sentimientos de tu Sebas Nucita. ¿Qué quieres saber sobre lo que siente por ti? Déjate guiar por la curiosidad y la ternura. ✨", 'initial');
     
     // Mostrar preguntas programadas
     setTimeout(() => {
@@ -1633,7 +1822,7 @@ function openWhatsAppWeb() {
                 // Abrir en nueva pestaña
                 window.open(whatsappWebUrl, '_blank');
                 
-                addMessage('WhatsApp Web se ha abierto. ¡Escribe tu mensaje con amor! 💖✨', 'oracle');
+                addMessage('WhatsApp Web se ha abierto. ¡Escribe tu mensaje con cariño! 💖✨', 'oracle');
                 
                 setTimeout(() => {
                     addMessage('¿Te gustaría hacer otra pregunta al oráculo? 🔮', 'oracle');
@@ -2846,10 +3035,7 @@ function initializeTourButton() {
 
 
 // Inicializar directamente el modal de bienvenida cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
-    // Mostrar el modal de bienvenida inmediatamente
-    setupWelcomeModal();
-});
+
 
 // Reposicionar burbuja de la princesa cuando cambie el tamaño de la ventana
 window.addEventListener('resize', function() {

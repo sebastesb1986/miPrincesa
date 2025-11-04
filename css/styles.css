@@ -27,7 +27,21 @@
 
 body {
     font-family: 'Playfair Display', serif;
-    background: linear-gradient(135deg, #FFF8F0 0%, #FFE0E6 50%, #F8BBD9 100%);
+    background: 
+        /* Fondo azul muy claro estilo papel coreano */
+        linear-gradient(135deg, rgba(240, 248, 255, 0.98) 0%, rgba(230, 240, 250, 0.98) 50%, rgba(235, 245, 255, 0.98) 100%),
+        /* Textura sutil de papel */
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 100px,
+            rgba(200, 220, 240, 0.02) 100px,
+            rgba(200, 220, 240, 0.02) 200px
+        ),
+        /* Patrón de papel coreano sutil */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%23E8F4F8" opacity="0.3"/><path d="M0 0 L200 200 M200 0 L0 200" stroke="%23D0E0F0" stroke-width="0.5" opacity="0.15"/></svg>');
+    background-size: 100% 100%, 200px 200px, 200px 200px;
+    background-attachment: fixed;
     min-height: 100vh;
     padding: 20px;
     color: var(--text-color);
@@ -35,7 +49,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Fondo animado con partículas */
+/* Fondo animado con tulipanes de colores - MÁS DEFINIDOS */
 body::before {
     content: '';
     position: fixed;
@@ -43,13 +57,74 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(194, 24, 91, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 107, 157, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(248, 187, 217, 0.05) 0%, transparent 50%);
+    background-image: 
+        /* Tulipanes rojos - con pétalos individuales y detalles */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%23FF1744" opacity="0.4" stroke="%23C51162" stroke-width="0.8"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%23FF1744" opacity="0.4" stroke="%23C51162" stroke-width="0.8"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23FF5252" opacity="0.35" stroke="%23C51162" stroke-width="0.7"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23FF5252" opacity="0.35" stroke="%23C51162" stroke-width="0.7"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%23D32F2F" opacity="0.5"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.5" stroke="%231B5E20" stroke-width="1"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.4" stroke="%232E7D32" stroke-width="0.8"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.4" stroke="%232E7D32" stroke-width="0.8"/></g></svg>'),
+        /* Tulipanes rosas */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%23E91E63" opacity="0.35" stroke="%23AD1457" stroke-width="0.8"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%23E91E63" opacity="0.35" stroke="%23AD1457" stroke-width="0.8"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23F06292" opacity="0.3" stroke="%23AD1457" stroke-width="0.7"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23F06292" opacity="0.3" stroke="%23AD1457" stroke-width="0.7"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%23C2185B" opacity="0.45"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.45" stroke="%231B5E20" stroke-width="1"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.35" stroke="%232E7D32" stroke-width="0.8"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.35" stroke="%232E7D32" stroke-width="0.8"/></g></svg>'),
+        /* Tulipanes amarillos */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%23FFD700" opacity="0.35" stroke="%23F9A825" stroke-width="0.8"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%23FFD700" opacity="0.35" stroke="%23F9A825" stroke-width="0.8"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23FFEB3B" opacity="0.3" stroke="%23F9A825" stroke-width="0.7"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23FFEB3B" opacity="0.3" stroke="%23F9A825" stroke-width="0.7"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%23FBC02D" opacity="0.4"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.45" stroke="%231B5E20" stroke-width="1"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.35" stroke="%232E7D32" stroke-width="0.8"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.35" stroke="%232E7D32" stroke-width="0.8"/></g></svg>'),
+        /* Tulipanes naranjas */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%23FF6B00" opacity="0.35" stroke="%23E65100" stroke-width="0.8"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%23FF6B00" opacity="0.35" stroke="%23E65100" stroke-width="0.8"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23FF9800" opacity="0.3" stroke="%23E65100" stroke-width="0.7"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23FF9800" opacity="0.3" stroke="%23E65100" stroke-width="0.7"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%23EF6C00" opacity="0.45"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.45" stroke="%231B5E20" stroke-width="1"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.35" stroke="%232E7D32" stroke-width="0.8"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.35" stroke="%232E7D32" stroke-width="0.8"/></g></svg>'),
+        /* Tulipanes morados */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%237B1FA2" opacity="0.35" stroke="%236A1B9A" stroke-width="0.8"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%237B1FA2" opacity="0.35" stroke="%236A1B9A" stroke-width="0.8"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23BA68C8" opacity="0.3" stroke="%236A1B9A" stroke-width="0.7"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23BA68C8" opacity="0.3" stroke="%236A1B9A" stroke-width="0.7"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%234A148C" opacity="0.45"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.45" stroke="%231B5E20" stroke-width="1"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.35" stroke="%232E7D32" stroke-width="0.8"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.35" stroke="%232E7D32" stroke-width="0.8"/></g></svg>'),
+        /* Tulipanes blancos - con borde más visible para el fondo azul */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%23FFFFFF" opacity="0.45" stroke="%23C0D0E0" stroke-width="1.2"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%23FFFFFF" opacity="0.45" stroke="%23C0D0E0" stroke-width="1.2"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23F5F8FA" opacity="0.4" stroke="%23C0D0E0" stroke-width="1"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23F5F8FA" opacity="0.4" stroke="%23C0D0E0" stroke-width="1"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%23E8F0F5" opacity="0.5" stroke="%23B0C0D0" stroke-width="0.8"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.5" stroke="%231B5E20" stroke-width="1.2"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.4" stroke="%232E7D32" stroke-width="0.9"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.4" stroke="%232E7D32" stroke-width="0.9"/></g></svg>'),
+        /* Gradientes de color */
+        radial-gradient(circle at 20% 80%, rgba(255, 23, 68, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(233, 30, 99, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 60% 60%, rgba(255, 107, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 30% 70%, rgba(123, 31, 162, 0.08) 0%, transparent 50%);
+    background-size: 
+        200px 200px, 
+        180px 180px, 
+        220px 220px, 
+        190px 190px, 
+        210px 210px,
+        200px 200px,
+        800px 800px,
+        700px 700px,
+        900px 900px,
+        750px 750px,
+        850px 850px;
+    background-position: 
+        0% 0%, 
+        25% 25%, 
+        50% 50%, 
+        75% 75%, 
+        100% 100%,
+        10% 90%,
+        center, center, center, center, center;
+    background-repeat: repeat;
+    background-blend-mode: overlay, overlay, overlay, overlay, overlay, overlay, normal, normal, normal, normal, normal;
+    opacity: 0.5;
     pointer-events: none;
     z-index: -1;
-    animation: backgroundFloat 20s ease-in-out infinite;
+    animation: backgroundFloat 30s ease-in-out infinite;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        /* Más tulipanes detallados en diferentes tamaños y colores */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%23FF1744" opacity="0.3" stroke="%23C51162" stroke-width="0.7"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%23FF1744" opacity="0.3" stroke="%23C51162" stroke-width="0.7"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23FF5252" opacity="0.25" stroke="%23C51162" stroke-width="0.6"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23FF5252" opacity="0.25" stroke="%23C51162" stroke-width="0.6"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%23D32F2F" opacity="0.4"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.35" stroke="%231B5E20" stroke-width="0.8"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.3" stroke="%232E7D32" stroke-width="0.7"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.3" stroke="%232E7D32" stroke-width="0.7"/></g></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%23E91E63" opacity="0.25" stroke="%23AD1457" stroke-width="0.7"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%23E91E63" opacity="0.25" stroke="%23AD1457" stroke-width="0.7"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23F06292" opacity="0.2" stroke="%23AD1457" stroke-width="0.6"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23F06292" opacity="0.2" stroke="%23AD1457" stroke-width="0.6"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%23C2185B" opacity="0.35"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.3" stroke="%231B5E20" stroke-width="0.8"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.25" stroke="%232E7D32" stroke-width="0.7"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.25" stroke="%232E7D32" stroke-width="0.7"/></g></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%23FFD700" opacity="0.27" stroke="%23F9A825" stroke-width="0.7"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%23FFD700" opacity="0.27" stroke="%23F9A825" stroke-width="0.7"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23FFEB3B" opacity="0.22" stroke="%23F9A825" stroke-width="0.6"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23FFEB3B" opacity="0.22" stroke="%23F9A825" stroke-width="0.6"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%23FBC02D" opacity="0.32"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.3" stroke="%231B5E20" stroke-width="0.8"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.25" stroke="%232E7D32" stroke-width="0.7"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.25" stroke="%232E7D32" stroke-width="0.7"/></g></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%23FF6B00" opacity="0.25" stroke="%23E65100" stroke-width="0.7"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%23FF6B00" opacity="0.25" stroke="%23E65100" stroke-width="0.7"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23FF9800" opacity="0.2" stroke="%23E65100" stroke-width="0.6"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23FF9800" opacity="0.2" stroke="%23E65100" stroke-width="0.6"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%23EF6C00" opacity="0.35"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.3" stroke="%231B5E20" stroke-width="0.8"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.25" stroke="%232E7D32" stroke-width="0.7"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.25" stroke="%232E7D32" stroke-width="0.7"/></g></svg>');
+    background-size: 150px 150px, 170px 170px, 160px 160px, 165px 165px;
+    background-position: 10% 10%, 90% 90%, 30% 70%, 70% 30%;
+    background-repeat: repeat;
+    background-blend-mode: soft-light;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: -1;
+    animation: backgroundFloat 25s ease-in-out infinite reverse;
 }
 
 @keyframes backgroundFloat {
@@ -249,7 +324,7 @@ h1 img {
 /* Estilos base para la burbuja de la princesa - SIEMPRE DEBAJO */
 .princess-bubble {
     position: fixed !important;
-    z-index: 9999 !important;
+    z-index: 99999 !important;
     font-family: 'Dancing Script', cursive !important;
     text-align: center !important;
     pointer-events: none !important;
@@ -260,8 +335,6 @@ h1 img {
     animation: invitationPulse 2s ease-in-out infinite !important;
     max-width: 90vw !important;
     word-wrap: break-word !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
 }
 
 /* Contenedor del texto de la burbuja */
@@ -421,6 +494,452 @@ h1 img {
     gap: 40px;
     align-items: stretch;
     min-height: 600px;
+}
+
+/* Layout centrado del libro */
+.book-layout-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Contenedor centrado de la galería */
+.gallery-container-centered {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* ===== ESTILOS PARA LA GALERÍA EN CUADRÍCULA ===== */
+
+/* Contenedor de la galería */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    border: 2px solid #F8BBD9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Item de la galería */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    aspect-ratio: 1;
+    background: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(194, 24, 91, 0.3);
+    border: 2px solid #FF6B9D;
+}
+
+/* Imagen de la galería */
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.gallery-item:hover .gallery-img {
+    transform: scale(1.1);
+}
+
+/* Overlay de la galería */
+.gallery-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(194, 24, 91, 0.7), rgba(255, 107, 157, 0.7));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-icon {
+    font-size: 2rem;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== ESTILOS PARA EL MODAL DE GALERÍA ===== */
+
+/* Modal de galería - Contenedor principal */
+.gallery-modal-content {
+    background: linear-gradient(135deg, #FEFEFE 0%, #FFF8F0 100%);
+    border: 3px solid #F8BBD9;
+    border-radius: 25px;
+    box-shadow: 0 25px 50px rgba(194, 24, 91, 0.4);
+    overflow: hidden;
+}
+
+/* Header del modal de galería */
+.gallery-modal-header {
+    background: linear-gradient(45deg, #C2185B, #FF6B9D, #F8BBD9);
+    color: white;
+    border-radius: 22px 22px 0 0;
+    border-bottom: 3px solid #F8BBD9;
+    padding: 20px 30px;
+    text-align: center;
+    position: relative;
+}
+
+.gallery-modal-header .modal-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.2rem;
+    color: white;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 0;
+}
+
+.gallery-modal-header .btn-close {
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.gallery-modal-header .btn-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Body del modal de galería */
+.gallery-modal-body {
+    padding: 30px;
+    background: linear-gradient(135deg, #FFF8F0 0%, #FEFEFE 100%);
+}
+
+/* Contenedor de imagen del modal */
+.gallery-modal-image-container {
+    margin-bottom: 25px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(194, 24, 91, 0.2);
+    border: 3px solid #F8BBD9;
+    background: linear-gradient(135deg, #FFF8F0 0%, #FEFEFE 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+.gallery-modal-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 17px;
+    transition: transform 0.3s ease;
+}
+
+/* Contenedor de texto del modal */
+.gallery-modal-text-container {
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(248, 187, 217, 0.1) 0%, rgba(194, 24, 91, 0.05) 100%);
+    border-radius: 15px;
+    border: 2px solid rgba(248, 187, 217, 0.3);
+    text-align: center;
+}
+
+.gallery-modal-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    line-height: 1.8;
+    margin: 0;
+    font-weight: 500;
+    text-align: center;
+    animation: fadeInText 0.5s ease-in;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Contenedor del botón en el modal de galería */
+.gallery-modal-button-container {
+    margin-top: 25px;
+    text-align: center;
+    padding: 20px;
+    animation: fadeInText 0.5s ease-in;
+}
+
+/* Botón de viajes */
+.btn-travel {
+    background: linear-gradient(45deg, #1E3A8A, #3B82F6);
+    color: white;
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 5px 15px rgba(30, 58, 138, 0.3);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: inline-block;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-travel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-travel:hover {
+    background: linear-gradient(45deg, #3B82F6, #1E40AF);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(30, 58, 138, 0.4);
+    border-color: rgba(59, 130, 246, 0.6);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-travel:hover::before {
+    left: 100%;
+}
+
+.btn-travel:active {
+    transform: translateY(0);
+    transition: transform 0.1s ease;
+}
+
+.btn-travel:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* ===== RESPONSIVE PARA LA GALERÍA ===== */
+
+/* Responsive para el layout centrado */
+@media (max-width: 1200px) {
+    .book-layout-centered {
+        max-width: 100%;
+        padding: 15px;
+    }
+    
+    .gallery-grid {
+        max-width: 100%;
+    }
+}
+
+/* Responsive para tablets */
+@media (max-width: 992px) {
+    .book-layout-centered {
+        padding: 15px;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+        padding: 15px;
+    }
+    
+    .gallery-modal-header .modal-title {
+        font-size: 1.8rem;
+    }
+    
+    .gallery-modal-image {
+        max-height: 400px;
+    }
+    
+    .gallery-modal-text {
+        font-size: 1.3rem;
+    }
+    
+    .gallery-modal-button-container {
+        padding: 15px;
+    }
+    
+    .btn-travel {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    .book-layout-centered {
+        padding: 12px;
+    }
+    
+    .book-layout-centered h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+        padding: 12px;
+    }
+    
+    #our_space {
+        margin-top: 30px !important;
+    }
+    
+    #our_space p {
+        font-size: 1.1rem;
+        padding: 0 10px;
+    }
+    
+    .gallery-modal-header {
+        padding: 15px 20px;
+    }
+    
+    .gallery-modal-header .modal-title {
+        font-size: 1.8rem;
+    }
+    
+    .gallery-modal-body {
+        padding: 20px;
+    }
+    
+    .gallery-modal-image-container {
+        min-height: 250px;
+        margin-bottom: 20px;
+    }
+    
+    .gallery-modal-image {
+        max-height: 300px;
+    }
+    
+    .gallery-modal-text-container {
+        padding: 20px;
+    }
+    
+    .gallery-modal-text {
+        font-size: 1.2rem;
+    }
+    
+    .gallery-modal-button-container {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    
+    .btn-travel {
+        padding: 12px 24px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* Responsive para móviles pequeños */
+@media (max-width: 480px) {
+    .book-layout-centered {
+        padding: 10px;
+    }
+    
+    .book-layout-centered h2 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 8px;
+        padding: 10px;
+    }
+    
+    #our_space {
+        margin-top: 25px !important;
+    }
+    
+    #our_space p {
+        font-size: 1rem;
+        padding: 0 5px;
+    }
+    
+    .gallery-modal-content {
+        margin: 5px;
+    }
+    
+    .gallery-modal-header {
+        padding: 12px 15px;
+    }
+    
+    .gallery-modal-header .modal-title {
+        font-size: 1.6rem;
+    }
+    
+    .gallery-modal-body {
+        padding: 15px;
+    }
+    
+    .gallery-modal-image-container {
+        min-height: 200px;
+        margin-bottom: 15px;
+    }
+    
+    .gallery-modal-image {
+        max-height: 250px;
+    }
+    
+    .gallery-modal-text-container {
+        padding: 15px;
+    }
+    
+    .gallery-modal-text {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+    
+    .gallery-modal-button-container {
+        padding: 12px;
+        margin-top: 15px;
+    }
+    
+    .btn-travel {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        width: 100%;
+        max-width: 280px;
+    }
 }
 
 .text-content {

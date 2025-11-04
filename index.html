@@ -16,12 +16,12 @@
             
             <!-- Primera página - Portada -->
             <div class="page">
-                <h1>Elizabeth, Una Princesa <img src="./images/princesaEli.png" alt="Princesa Elizabeth" class="princess-icon" style="width: 50px; height: 50px; display: inline-block; cursor: pointer;" onclick="showPrincessFullSequence()"><!-- Updated: 2025-01-10 --></h1>
+                <h1>Elizabeth, Mi Princesa <img src="./images/princesaEli.png" alt="Princesa Elizabeth" class="princess-icon" style="width: 50px; height: 50px; display: inline-block; cursor: pointer;" onclick="showPrincessFullSequence()"><!-- Updated: 2025-01-10 --></h1>
                 <div class="text-center my-4">
-                    <button id="btnStars" class="btn btn-stars">⭐ Aún recolectando las estrellas para ti</button>
+                    <button id="btnStars" class="btn btn-stars">⭐ Nuestro planetario de amor</button>
                     <button id="btnPlayAudio" class="btn btn-danger">Cuéntame la Historia</button>
                     <button id="btnPlayAudio2" class="btn btn-info">¿Qué Significas para Mí?</button>
-                    <button id="btnOracula" class="btn btn-warning">🔮 Consulta al Oráculo</button>
+                    <button id="btnOracula" class="btn btn-warning">🔮 Tengo nuevas predicciones, Consultame!</button>
                     <div class="d-flex flex-wrap justify-content-center gap-3">
                         <button class="btn btn-tour" id="btnTour">
                             💙 Tour de Amor
@@ -71,101 +71,102 @@
 
             <!-- Segunda página - Contenido del libro -->
             <div class="page">
-                <div class="book-layout">
-                    <!-- Contenido de texto a la izquierda -->
-                    <div class="text-content">
-                        <h2 style="font-family: 'Dancing Script', cursive; color: var(--primary-color); margin-bottom: 20px;">Un Hermoso Cuento de Amor</h2>
-                        
-                        <div id="descripcion-text" style="margin-bottom: 30px;">
-                            Yo quiero que tú seas mi princesa
-                        </div>
-                        
-                        <div id="descripcion-text-a" style="margin-bottom: 30px;">
-                            Léeme hasta el final
-                        </div>
-                        
-                        <div id="our_space">
-                            <p style="font-size: 1.2rem; line-height: 1.8; color: var(--text-color); text-align: justify;">
-                                Cada página de este libro contiene una parte de nuestra historia, 
-                                cada imagen es un momento especial que hemos compartido. 
-                                Como en los cuentos de hadas.
-                            </p>
-                        </div>
-                    </div>
+                <div class="book-layout-centered">
+                    <!-- Título -->
+                    <h2 style="font-family: 'Dancing Script', cursive; color: var(--primary-color); margin-bottom: 30px; text-align: center;">Un Hermoso Cuento de Amor</h2>
+                    <h2 style="font-family: 'Dancing Script', cursive; color: var(--primary-color); margin-bottom: 20px; text-align: center;">(Pulsa en las imagenes para conocer cada etapa de nuestra amor y su historia)</h2>
 
-                    <!-- Contenido de imágenes a la derecha -->
-                    <div class="image-content">
-                        <!-- Carrusel de imágenes -->
-                        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="8000">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="images/1.png" class="d-block w-100" alt="Imagen 1">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/2.png" class="d-block w-100" alt="Imagen 2">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/3.png" class="d-block w-100" alt="Imagen 3">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/4.jpeg" class="d-block w-100" alt="Imagen 4">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/5.jpeg" class="d-block w-100" alt="Imagen 5">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/6.jpeg" class="d-block w-100" alt="Imagen 6">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/7.jpeg" class="d-block w-100" alt="Imagen 7">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/8.jpeg" class="d-block w-100" alt="Imagen 8">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/9.jpeg" class="d-block w-100" alt="Imagen 9">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/10.png" class="d-block w-100" alt="Imagen 10">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/11.png" class="d-block w-100" alt="Imagen 11">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/12.png" class="d-block w-100" alt="Imagen 12">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="images/13.png" class="d-block w-100" alt="Imagen 13">
+                    <!-- Galería de imágenes en cuadrícula centrada -->
+                    <div class="gallery-container-centered">
+                        <div class="gallery-grid" id="galleryGrid">
+                            <div class="gallery-item" data-index="0" data-image="images/1.png">
+                                <img src="images/1.png" alt="Imagen 1" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
                                 </div>
                             </div>
-                            
-                            <!-- Controles del carrusel -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Anterior</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Siguiente</span>
-                            </button>
+                            <div class="gallery-item" data-index="1" data-image="images/2.png">
+                                <img src="images/2.png" alt="Imagen 2" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-index="2" data-image="images/3.png">
+                                <img src="images/3.png" alt="Imagen 3" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-index="3" data-image="images/4.jpeg">
+                                <img src="images/4.jpeg" alt="Imagen 4" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-index="4" data-image="images/5.jpeg">
+                                <img src="images/5.jpeg" alt="Imagen 5" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-index="5" data-image="images/6.jpeg">
+                                <img src="images/6.jpeg" alt="Imagen 6" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-index="6" data-image="images/7.jpeg">
+                                <img src="images/7.jpeg" alt="Imagen 7" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-index="7" data-image="images/8.png">
+                                <img src="images/8.png" alt="Imagen 8" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-index="8" data-image="images/9.jpeg">
+                                <img src="images/9.jpeg" alt="Imagen 9" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-index="9" data-image="images/10.png">
+                                <img src="images/10.png" alt="Imagen 10" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-index="10" data-image="images/11.png">
+                                <img src="images/11.png" alt="Imagen 11" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-index="11" data-image="images/12.png">
+                                <img src="images/12.png" alt="Imagen 12" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
+                                </div>
+                            </div>
+                            <div class="gallery-item" data-index="12" data-image="images/13.png">
+                                <img src="images/13.png" alt="Imagen 13" class="gallery-img">
+                                <div class="gallery-overlay">
+                                    <span class="gallery-icon">👁️</span>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <!-- Indicadores del carrusel -->
-                        <div class="carousel-indicators" style="margin-top: 20px;">
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="6" aria-label="Slide 7"></button>
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="7" aria-label="Slide 8"></button>
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="8" aria-label="Slide 9"></button>
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="9" aria-label="Slide 10"></button>
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="10" aria-label="Slide 11"></button>
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="11" aria-label="Slide 12"></button>
-                            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="12" aria-label="Slide 13"></button>
-                        </div>
+                    </div>
+                    
+                    <!-- Texto descriptivo -->
+                    <div id="our_space" style="margin-top: 40px; text-align: center;">
+                        <p style="font-size: 1.2rem; line-height: 1.8; color: var(--text-color); text-align: justify; max-width: 800px; margin: 0 auto;">
+                            Cada página de este libro contiene una parte especial de nuestra historia, 
+                            cada imagen es un momento especial que hemos compartido. 
+                            una historia de amor auténtica, transparente y sincera...
+                        </p>
                     </div>
                 </div>
             </div>
@@ -200,13 +201,13 @@
     <script src="js/contenido.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🔍 Verificando imágenes del carrusel...');
+            console.log('🔍 Verificando imágenes de la galería...');
             
-            // Verificar todas las imágenes del carrusel
-            const carouselImages = document.querySelectorAll('#carouselExampleAutoplaying .carousel-item img');
-            console.log('📊 Total de imágenes encontradas:', carouselImages.length);
+            // Verificar todas las imágenes de la galería
+            const galleryImages = document.querySelectorAll('.gallery-item img');
+            console.log('📊 Total de imágenes encontradas:', galleryImages.length);
             
-            carouselImages.forEach((img, index) => {
+            galleryImages.forEach((img, index) => {
                 console.log(`Imagen ${index + 1}:`, img.src, 'Alt:', img.alt);
                 
                 // Verificar si la imagen se carga correctamente
@@ -219,24 +220,11 @@
                 });
             });
             
-            // Verificar el carrusel de Bootstrap
-            const carousel = document.getElementById('carouselExampleAutoplaying');
-            if (carousel) {
-                console.log('🎠 Carrusel encontrado:', carousel);
-                console.log('🎠 Total de items:', carousel.querySelectorAll('.carousel-item').length);
-                
-                // Probar navegación manual
-                setTimeout(() => {
-                    console.log('🧪 Probando navegación del carrusel...');
-                    const nextBtn = carousel.querySelector('.carousel-control-next');
-                    if (nextBtn) {
-                        console.log('➡️ Botón siguiente encontrado');
-                    }
-                    const prevBtn = carousel.querySelector('.carousel-control-prev');
-                    if (prevBtn) {
-                        console.log('⬅️ Botón anterior encontrado');
-                    }
-                }, 2000);
+            // Verificar la galería
+            const gallery = document.getElementById('galleryGrid');
+            if (gallery) {
+                console.log('🖼️ Galería encontrada:', gallery);
+                console.log('🖼️ Total de items:', gallery.querySelectorAll('.gallery-item').length);
             }
         });
     </script>
@@ -409,34 +397,27 @@
         </div>
     </div>
 
-    <!-- Modal de Bienvenida con Video -->
-    <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+  
+
+    <!-- Modal de Galería - Imagen Ampliada con Texto -->
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content welcome-modal-content">
-                <div class="modal-header welcome-modal-header">
-                    <h5 class="modal-title" id="welcomeModalLabel">🎬 ¡Bienvenida, mi princesa!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="welcomeModalClose">×</button>
+            <div class="modal-content gallery-modal-content">
+                <div class="modal-header gallery-modal-header">
+                    <h5 class="modal-title" id="galleryModalLabel">📖 Nuestra Historia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body welcome-modal-body">
-                    <div class="welcome-subtitle">
-                        <p>Bienvenida a nuestro palacio...</p>
+                <div class="modal-body gallery-modal-body">
+                    <div class="gallery-modal-image-container">
+                        <img id="galleryModalImage" src="" alt="Imagen ampliada" class="gallery-modal-image">
                     </div>
-                    
-                    <div class="welcome-video-container">
-                        <video id="welcomeModalVideo" 
-                               class="w-100" 
-                               style="border-radius: 15px; box-shadow: 0 8px 20px rgba(194, 24, 91, 0.2);"
-                               autoplay 
-                               playsinline 
-                               preload="auto"
-                               controls>
-                            <source src="video/welcome.mp4" type="video/mp4">
-                            Tu navegador no soporta la reproducción de video.
-                        </video>
+                    <div class="gallery-modal-text-container">
+                        <p id="galleryModalText" class="gallery-modal-text"></p>
                     </div>
-                    
-                    <div class="welcome-description">
-                        <p>Espero que este mensaje te haga sonreír tanto como tú me haces sonreír cada día. 💖</p>
+                    <div id="galleryModalButtonContainer" class="gallery-modal-button-container" style="display: none;">
+                        <a href="pages/vida.html" class="btn btn-travel">
+                            🌍 Ver Mis Viajes por Ti
+                        </a>
                     </div>
                 </div>
             </div>
