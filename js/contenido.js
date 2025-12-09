@@ -4477,7 +4477,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "Vale por elegir tú la película esta vez 🎬",
         "Vale por un día sin quejarme de nada 😊",
         "Vale por un baile romántico bajo las estrellas 💃",
-        "Vale por prepararte tu comida favorita 🍝",
+        "Vale por invitarte o prepararte tu comida favorita 🍝",
         "Vale por un abrazo largo y sincero 🤗",
         "Vale por escucharte sin interrumpir 👂",
         "Vale por un día completo de atención solo para ti 💝",
@@ -4491,8 +4491,10 @@ document.addEventListener('DOMContentLoaded', function() {
         "Vale por un día de hacer lo que tú quieras sin quejarme 🎯",
         "Vale por un helado compartido en el parque 🍦",
         "Vale por un poema escrito especialmente para ti ✍️",
-        "Vale por un día de limpieza sin que me lo pidas 🧹",
-        "Vale por un momento de silencio cómodo juntos 🤫"
+        "Vale porque te conteste una pregunta, la que tu quieras 🤫",
+        "Vale por un momento de silencio cómodo juntos 🤫",
+        "Vale por una chocolatina para ti 🍫",
+        "Vale por un ramo de flores para ti 🌸",
     ];
     
     const btnCuponera = document.getElementById('btnCuponera');
