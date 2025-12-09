@@ -576,19 +576,20 @@ function showPrincessBubble() {
         console.log('✅ Posición final - Top:', finalTop, 'Left:', bubbleLeft);
         console.log('✅ Dimensiones - Width:', bubbleWidth, 'Height:', bubbleHeight);
         
-        // Remover la burbuja después de 6 segundos si no se interactúa
+        // Remover la burbuja después de 3 segundos
         setTimeout(() => {
             if (bubble.parentNode) {
                 bubble.style.opacity = '0';
                 bubble.style.transform = 'scale(0.8)';
+                bubble.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                 setTimeout(() => {
                     if (bubble.parentNode) {
                         bubble.parentNode.removeChild(bubble);
-                        console.log('Burbuja de invitación removida automáticamente');
+                        console.log('Burbuja de invitación removida automáticamente después de 3 segundos');
                     }
-                }, 500);
+                }, 300);
             }
-        }, 6000);
+        }, 3000);
     } catch (error) {
         console.error('❌ Error al mostrar la burbuja de la princesa:', error);
         // Intentar de nuevo después de un delay si hay un error
@@ -3409,4 +3410,1272 @@ function hideWelcomeModal() {
 // Llamar a setupWelcomeModal cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
     setupWelcomeModal();
+});
+
+// ===== FUNCIONALIDAD PARA EL MODAL DE VELITAS - LA LUZ DE MIS DESEOS =====
+document.addEventListener('DOMContentLoaded', function() {
+    const btnVelitas = document.getElementById('btnVelitas');
+    const velitasModal = document.getElementById('velitasModal');
+    const btnEncenderVela = document.getElementById('btnEncenderVela');
+    const velitasAnimationContainer = document.getElementById('velitasAnimationContainer');
+    const velaVirtual = document.getElementById('velaVirtual');
+    const velitasMensajeFinal = document.getElementById('velitasMensajeFinal');
+    
+    // Abrir el modal cuando se hace clic en el botón
+    if (btnVelitas) {
+        btnVelitas.addEventListener('click', function() {
+            const modal = new bootstrap.Modal(velitasModal);
+            modal.show();
+            console.log('🕯️ Modal de velitas abierto');
+        });
+    }
+    
+    // Lista de imágenes y video de velitas disponibles
+    const velitasMedia = [
+        { type: 'image', src: 'images/velitas/BCZD1998.jpg', alt: 'Vela 1' },
+        { type: 'image', src: 'images/velitas/IMG_0715.jpg', alt: 'Vela 2' },
+        { type: 'image', src: 'images/velitas/IMG_0716.jpg', alt: 'Vela 3' },
+        { type: 'image', src: 'images/velitas/IMG_0737.jpg', alt: 'Vela 4' },
+        { type: 'video', src: 'images/velitas/IMG_0733.mp4', alt: 'Video de velitas' }
+    ];
+    
+    // Función para cargar las imágenes y video en el carrusel
+    function loadVelitasCarouselImages() {
+        const carouselInner = document.getElementById('velitasCarouselInner');
+        const indicatorsContainer = document.getElementById('velitasIndicators');
+        
+        if (!carouselInner || !indicatorsContainer) return;
+        
+        // Si solo hay un elemento, asegurarse de que se cargue
+        if (velitasMedia.length === 1) {
+            const firstItem = carouselInner.querySelector('.carousel-item.active');
+            if (firstItem) {
+                const firstImg = firstItem.querySelector('img');
+                const firstVideo = firstItem.querySelector('video');
+                if (firstImg && firstImg.dataset.src) {
+                    firstImg.src = firstImg.dataset.src;
+                    firstImg.removeAttribute('data-src');
+                }
+                if (firstVideo && firstVideo.dataset.src) {
+                    firstVideo.src = firstVideo.dataset.src;
+                    firstVideo.removeAttribute('data-src');
+                }
+            }
+            // Ocultar controles si solo hay un elemento
+            const carousel = document.getElementById('velitasCarousel');
+            if (carousel) {
+                const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+                controls.forEach(control => control.style.display = 'none');
+                indicatorsContainer.style.display = 'none';
+            }
+            return;
+        }
+        
+        // Mostrar controles si hay más de un elemento
+        const carousel = document.getElementById('velitasCarousel');
+        if (carousel) {
+            const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+            controls.forEach(control => control.style.display = 'block');
+            indicatorsContainer.style.display = 'flex';
+        }
+        
+        // Cargar la primera imagen/video si tiene data-src
+        const firstItem = carouselInner.querySelector('.carousel-item.active');
+        if (firstItem) {
+            const firstImg = firstItem.querySelector('img');
+            const firstVideo = firstItem.querySelector('video');
+            if (firstImg && firstImg.dataset.src) {
+                firstImg.src = firstImg.dataset.src;
+                firstImg.removeAttribute('data-src');
+            }
+            if (firstVideo && firstVideo.dataset.src) {
+                firstVideo.src = firstVideo.dataset.src;
+                firstVideo.removeAttribute('data-src');
+            }
+        }
+        
+        // Limpiar indicadores excepto el primero
+        const firstIndicator = indicatorsContainer.querySelector('button.active');
+        indicatorsContainer.innerHTML = '';
+        if (firstIndicator) {
+            indicatorsContainer.appendChild(firstIndicator);
+        }
+        
+        // Agregar los demás elementos (imágenes y video)
+        for (let i = 1; i < velitasMedia.length; i++) {
+            const media = velitasMedia[i];
+            
+            // Crear item del carrusel
+            const carouselItem = document.createElement('div');
+            carouselItem.className = 'carousel-item';
+            
+            if (media.type === 'video') {
+                // Crear elemento de video
+                const video = document.createElement('video');
+                video.setAttribute('data-src', media.src);
+                video.className = 'd-block w-100';
+                video.controls = true;
+                video.preload = 'none';
+                video.setAttribute('title', media.alt);
+                video.style.maxHeight = '400px';
+                video.style.objectFit = 'contain';
+                
+                const source = document.createElement('source');
+                source.setAttribute('data-src', media.src);
+                source.type = 'video/mp4';
+                video.appendChild(source);
+                
+                carouselItem.appendChild(video);
+            } else {
+                // Crear elemento de imagen
+                const img = document.createElement('img');
+                img.setAttribute('data-src', media.src);
+                img.src = '';
+                img.className = 'd-block w-100';
+                img.alt = media.alt;
+                img.loading = 'lazy';
+                
+                carouselItem.appendChild(img);
+            }
+            
+            carouselInner.appendChild(carouselItem);
+            
+            // Crear indicador
+            const indicator = document.createElement('button');
+            indicator.type = 'button';
+            indicator.setAttribute('data-bs-target', '#velitasCarousel');
+            indicator.setAttribute('data-bs-slide-to', i.toString());
+            indicator.setAttribute('aria-label', media.alt);
+            
+            indicatorsContainer.appendChild(indicator);
+        }
+        
+        // Cargar todas las imágenes y videos con lazy loading
+        const images = carouselInner.querySelectorAll('img[data-src]');
+        images.forEach((img) => {
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            }
+        });
+        
+        const videos = carouselInner.querySelectorAll('video[data-src]');
+        videos.forEach((video) => {
+            if (video.dataset.src) {
+                const source = video.querySelector('source[data-src]');
+                if (source) {
+                    source.src = source.dataset.src;
+                    source.removeAttribute('data-src');
+                    video.load();
+                }
+                video.removeAttribute('data-src');
+            }
+        });
+    }
+    
+    // Función para inicializar el carrusel de velitas
+    function initVelitasCarousel() {
+        const velitasCarousel = document.getElementById('velitasCarousel');
+        if (!velitasCarousel) {
+            console.error('❌ Carrusel de velitas no encontrado');
+            return;
+        }
+        
+        // Destruir instancia existente si existe
+        const existingCarousel = bootstrap.Carousel.getInstance(velitasCarousel);
+        if (existingCarousel) {
+            existingCarousel.dispose();
+        }
+        
+        // Esperar un momento para que el DOM se actualice
+        setTimeout(() => {
+            // Inicializar nuevo carrusel
+            const carousel = new bootstrap.Carousel(velitasCarousel, {
+                interval: false, // No auto-play
+                wrap: true,
+                keyboard: true,
+                touch: true // Habilitar deslizamiento táctil
+            });
+            
+            // Asegurarse de que el primer slide esté activo
+            const firstItem = velitasCarousel.querySelector('.carousel-item');
+            if (firstItem) {
+                firstItem.classList.add('active');
+            }
+            
+            // Actualizar indicadores activos
+            const indicators = document.querySelectorAll('#velitasIndicators button');
+            indicators.forEach((indicator, index) => {
+                if (index === 0) {
+                    indicator.classList.add('active');
+                    indicator.setAttribute('aria-current', 'true');
+                } else {
+                    indicator.classList.remove('active');
+                    indicator.removeAttribute('aria-current');
+                }
+            });
+            
+            // Event listener para actualizar indicadores cuando cambia el slide
+            velitasCarousel.addEventListener('slid.bs.carousel', function(event) {
+                const activeIndex = event.to;
+                const indicators = document.querySelectorAll('#velitasIndicators button');
+                indicators.forEach((indicator, index) => {
+                    if (index === activeIndex) {
+                        indicator.classList.add('active');
+                        indicator.setAttribute('aria-current', 'true');
+                    } else {
+                        indicator.classList.remove('active');
+                        indicator.removeAttribute('aria-current');
+                    }
+                });
+            });
+            
+            console.log('✅ Carrusel de velitas inicializado con', velitasMedia.length, 'elementos');
+            return carousel;
+        }, 150);
+    }
+    
+    // Función para manejar las teclas de flecha en el modal de velitas
+    function handleVelitasKeyboard(e) {
+        if (!velitasModal || !velitasModal.classList.contains('show')) return;
+        
+        const carousel = document.getElementById('velitasCarousel');
+        if (!carousel) return;
+        
+        const carouselInstance = bootstrap.Carousel.getInstance(carousel);
+        if (!carouselInstance) return;
+        
+        switch(e.key) {
+            case 'ArrowLeft':
+                e.preventDefault();
+                carouselInstance.prev();
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                carouselInstance.next();
+                break;
+        }
+    }
+    
+    // Crear elemento de audio para velitas (La Luz de mi Princesa)
+    let audioVelitas = null;
+    if (typeof Audio !== 'undefined') {
+        audioVelitas = new Audio('audio/full_starts_1.mp3');
+        audioVelitas.volume = 0.5; // Volumen al 50%
+        audioVelitas.loop = true; // Repetir mientras el modal esté abierto
+    }
+    
+    // Event listener para cuando se abre el modal
+    if (velitasModal) {
+        velitasModal.addEventListener('shown.bs.modal', function() {
+            // Resetear la animación cuando se abre el modal
+            if (velitasAnimationContainer) {
+                velitasAnimationContainer.style.display = 'none';
+            }
+            if (btnEncenderVela) {
+                btnEncenderVela.style.display = 'block';
+            }
+            
+            // Cargar imágenes y video del carrusel cuando se abra el modal
+            loadVelitasCarouselImages();
+            
+            // Inicializar el carrusel cuando la modal esté completamente visible
+            setTimeout(() => {
+                initVelitasCarousel();
+            }, 200);
+            
+            // Agregar listener de teclado cuando se abre el modal
+            document.addEventListener('keydown', handleVelitasKeyboard);
+            
+            // Reproducir canción cuando se abre el modal
+            if (audioVelitas) {
+                audioVelitas.currentTime = 0; // Reiniciar desde el principio
+                audioVelitas.volume = 0.5; // Asegurar volumen al 50%
+                audioVelitas.loop = true; // Asegurar que se repita
+                audioVelitas.play()
+                    .then(() => {
+                        console.log('🎵 Canción full_starts_1.mp3 iniciada (repetir activado)');
+                    })
+                    .catch(error => {
+                        console.error('Error al reproducir full_starts_1.mp3:', error);
+                    });
+            }
+        });
+        
+        // Event listener para cuando se cierra el modal
+        velitasModal.addEventListener('hidden.bs.modal', function() {
+            console.log('🕯️ Modal de velitas cerrado');
+            // Resetear la animación cuando se cierra el modal
+            if (velitasAnimationContainer) {
+                velitasAnimationContainer.style.display = 'none';
+            }
+            if (btnEncenderVela) {
+                btnEncenderVela.style.display = 'block';
+            }
+            // Remover listener de teclado cuando se cierra el modal
+            document.removeEventListener('keydown', handleVelitasKeyboard);
+            
+            // Detener y reiniciar la canción cuando se cierra el modal
+            if (audioVelitas) {
+                audioVelitas.pause();
+                audioVelitas.currentTime = 0;
+                audioVelitas.loop = false; // Desactivar loop al cerrar
+                console.log('🔇 Canción full_starts_1.mp3 detenida');
+            }
+        });
+    }
+    
+    // Función para encender la vela virtual
+    if (btnEncenderVela) {
+        btnEncenderVela.addEventListener('click', function() {
+            // Ocultar el botón
+            btnEncenderVela.style.display = 'none';
+            
+            // Mostrar el contenedor de animación
+            if (velitasAnimationContainer) {
+                velitasAnimationContainer.style.display = 'block';
+                
+                // Reiniciar la animación
+                if (velaVirtual) {
+                    velaVirtual.style.animation = 'none';
+                    setTimeout(() => {
+                        velaVirtual.style.animation = 'aparecerVela 1s ease-in-out';
+                    }, 10);
+                }
+                
+                // Mostrar el mensaje con un pequeño delay
+                if (velitasMensajeFinal) {
+                    velitasMensajeFinal.style.opacity = '0';
+                    velitasMensajeFinal.style.animation = 'none';
+                    setTimeout(() => {
+                        velitasMensajeFinal.style.animation = 'aparecerMensaje 1.5s ease-in-out';
+                        velitasMensajeFinal.style.opacity = '1';
+                    }, 500);
+                }
+                
+                // Crear efecto de partículas de luz
+                crearParticulasLuz();
+                
+                console.log('🕯️ Vela virtual encendida');
+            }
+        });
+    }
+    
+    // Función para crear partículas de luz alrededor de la vela
+    function crearParticulasLuz() {
+        const container = velitasAnimationContainer;
+        if (!container) return;
+        
+        // Crear varias partículas de luz
+        for (let i = 0; i < 15; i++) {
+            setTimeout(() => {
+                const particula = document.createElement('div');
+                particula.style.position = 'absolute';
+                particula.style.width = '4px';
+                particula.style.height = '4px';
+                particula.style.background = '#FFD700';
+                particula.style.borderRadius = '50%';
+                particula.style.boxShadow = '0 0 10px #FFD700, 0 0 20px #FF6B35';
+                particula.style.pointerEvents = 'none';
+                
+                // Posición aleatoria alrededor de la vela
+                const angle = (Math.PI * 2 * i) / 15;
+                const radius = 80 + Math.random() * 40;
+                const x = container.offsetWidth / 2 + Math.cos(angle) * radius;
+                const y = container.offsetHeight / 2 - 50 + Math.sin(angle) * radius;
+                
+                particula.style.left = x + 'px';
+                particula.style.top = y + 'px';
+                
+                container.appendChild(particula);
+                
+                // Animación de la partícula
+                particula.style.transition = 'all 2s ease-out';
+                setTimeout(() => {
+                    particula.style.transform = `translate(${(Math.random() - 0.5) * 100}px, ${(Math.random() - 0.5) * 100}px)`;
+                    particula.style.opacity = '0';
+                }, 10);
+                
+                // Eliminar la partícula después de la animación
+                setTimeout(() => {
+                    if (particula.parentNode) {
+                        particula.parentNode.removeChild(particula);
+                    }
+                }, 2000);
+            }, i * 100);
+        }
+    }
+});
+
+// ===== FUNCIONALIDAD PARA ABRIR MODALES DE TIMELINES =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Abrir modal de SkyStart
+    const skyStartPreview = document.getElementById('skyStartPreview');
+    const skyStartModal = document.getElementById('skyStartModal');
+    
+    if (skyStartPreview && skyStartModal) {
+        skyStartPreview.addEventListener('click', function() {
+            const modal = new bootstrap.Modal(skyStartModal);
+            modal.show();
+        });
+    }
+    
+    // Abrir modal de StartMoon
+    const startMoonPreview = document.getElementById('startMoonPreview');
+    const startMoonModal = document.getElementById('startMoonModal');
+    
+    if (startMoonPreview && startMoonModal) {
+        startMoonPreview.addEventListener('click', function() {
+            const modal = new bootstrap.Modal(startMoonModal);
+            modal.show();
+        });
+    }
+});
+
+// ===== FUNCIONALIDAD PARA EL TIMELINE DE SKYSTART =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Lista de imágenes de skyStart disponibles
+    const skyStartImages = [
+        'images/skyStart/IMG_0585.jpg',
+        'images/skyStart/IMG_0592.jpg',
+        'images/skyStart/IMG_0595.jpg',
+        'images/skyStart/IMG_E0584.jpg',
+        'images/skyStart/IMG_E0591.jpg'
+    ];
+    
+    const skyStartModal = document.getElementById('skyStartModal');
+    
+    // Función para cargar las imágenes en el carrusel
+    function loadSkyStartCarouselImages() {
+        const carouselInner = document.getElementById('skyStartCarouselInner');
+        const indicatorsContainer = document.getElementById('skyStartIndicators');
+        
+        if (!carouselInner || !indicatorsContainer) return;
+        
+        // Si solo hay una imagen, asegurarse de que se cargue
+        if (skyStartImages.length === 1) {
+            const firstImg = carouselInner.querySelector('.carousel-item.active img');
+            if (firstImg && firstImg.dataset.src) {
+                firstImg.src = firstImg.dataset.src;
+                firstImg.removeAttribute('data-src');
+            }
+            // Ocultar controles si solo hay una imagen
+            const carousel = document.getElementById('skyStartCarousel');
+            if (carousel) {
+                const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+                controls.forEach(control => control.style.display = 'none');
+                indicatorsContainer.style.display = 'none';
+            }
+            return;
+        }
+        
+        // Mostrar controles si hay más de una imagen
+        const carousel = document.getElementById('skyStartCarousel');
+        if (carousel) {
+            const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+            controls.forEach(control => control.style.display = 'block');
+            indicatorsContainer.style.display = 'flex';
+        }
+        
+        // Cargar la primera imagen si tiene data-src
+        const firstItem = carouselInner.querySelector('.carousel-item.active');
+        if (firstItem) {
+            const firstImg = firstItem.querySelector('img');
+            if (firstImg && firstImg.dataset.src) {
+                firstImg.src = firstImg.dataset.src;
+                firstImg.removeAttribute('data-src');
+            }
+        }
+        
+        // Limpiar indicadores excepto el primero
+        const firstIndicator = indicatorsContainer.querySelector('button.active');
+        indicatorsContainer.innerHTML = '';
+        if (firstIndicator) {
+            indicatorsContainer.appendChild(firstIndicator);
+        }
+        
+        // Agregar las demás imágenes
+        for (let i = 1; i < skyStartImages.length; i++) {
+            // Crear item del carrusel
+            const carouselItem = document.createElement('div');
+            carouselItem.className = 'carousel-item';
+            
+            const img = document.createElement('img');
+            img.setAttribute('data-src', skyStartImages[i]);
+            img.src = '';
+            img.className = 'd-block w-100';
+            img.alt = `Cielo ${i + 1}`;
+            img.loading = 'lazy';
+            
+            carouselItem.appendChild(img);
+            carouselInner.appendChild(carouselItem);
+            
+            // Crear indicador
+            const indicator = document.createElement('button');
+            indicator.type = 'button';
+            indicator.setAttribute('data-bs-target', '#skyStartCarousel');
+            indicator.setAttribute('data-bs-slide-to', i.toString());
+            indicator.setAttribute('aria-label', `Cielo ${i + 1}`);
+            
+            indicatorsContainer.appendChild(indicator);
+        }
+        
+        // Cargar todas las imágenes con lazy loading
+        const images = carouselInner.querySelectorAll('img[data-src]');
+        images.forEach((img) => {
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            }
+        });
+    }
+    
+    // Función para inicializar el carrusel de skyStart
+    function initSkyStartCarousel() {
+        const skyStartCarousel = document.getElementById('skyStartCarousel');
+        if (!skyStartCarousel) {
+            console.error('❌ Carrusel de skyStart no encontrado');
+            return;
+        }
+        
+        // Destruir instancia existente si existe
+        const existingCarousel = bootstrap.Carousel.getInstance(skyStartCarousel);
+        if (existingCarousel) {
+            existingCarousel.dispose();
+        }
+        
+        // Esperar un momento para que el DOM se actualice
+        setTimeout(() => {
+            // Inicializar nuevo carrusel
+            const carousel = new bootstrap.Carousel(skyStartCarousel, {
+                interval: false, // No auto-play
+                wrap: true,
+                keyboard: true,
+                touch: true // Habilitar deslizamiento táctil
+            });
+            
+            // Asegurarse de que el primer slide esté activo
+            const firstItem = skyStartCarousel.querySelector('.carousel-item');
+            if (firstItem) {
+                firstItem.classList.add('active');
+            }
+            
+            // Actualizar indicadores activos
+            const indicators = document.querySelectorAll('#skyStartIndicators button');
+            indicators.forEach((indicator, index) => {
+                if (index === 0) {
+                    indicator.classList.add('active');
+                    indicator.setAttribute('aria-current', 'true');
+                } else {
+                    indicator.classList.remove('active');
+                    indicator.removeAttribute('aria-current');
+                }
+            });
+            
+            // Event listener para actualizar indicadores cuando cambia el slide
+            skyStartCarousel.addEventListener('slid.bs.carousel', function(event) {
+                const activeIndex = event.to;
+                const indicators = document.querySelectorAll('#skyStartIndicators button');
+                indicators.forEach((indicator, index) => {
+                    if (index === activeIndex) {
+                        indicator.classList.add('active');
+                        indicator.setAttribute('aria-current', 'true');
+                    } else {
+                        indicator.classList.remove('active');
+                        indicator.removeAttribute('aria-current');
+                    }
+                });
+            });
+            
+            console.log('✅ Carrusel de skyStart inicializado con', skyStartImages.length, 'imágenes');
+            return carousel;
+        }, 150);
+    }
+    
+    // Función para manejar las teclas de flecha
+    function handleSkyStartKeyboard(e) {
+        if (!skyStartModal || !skyStartModal.classList.contains('show')) return;
+        
+        const carousel = document.getElementById('skyStartCarousel');
+        if (!carousel) return;
+        
+        const carouselInstance = bootstrap.Carousel.getInstance(carousel);
+        if (!carouselInstance) return;
+        
+        switch(e.key) {
+            case 'ArrowLeft':
+                e.preventDefault();
+                carouselInstance.prev();
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                carouselInstance.next();
+                break;
+        }
+    }
+    
+    // Crear elemento de audio para skyStart (Amaneceres del Cielo)
+    let audioSkyStart = null;
+    if (typeof Audio !== 'undefined') {
+        audioSkyStart = new Audio('audio/no_se_va1.mp3');
+        audioSkyStart.volume = 0.3; // Volumen al 30% (más bajo)
+        audioSkyStart.loop = true; // Repetir mientras el modal esté abierto
+    }
+    
+    // Cargar imágenes cuando se abra el modal
+    if (skyStartModal) {
+        skyStartModal.addEventListener('shown.bs.modal', function() {
+            loadSkyStartCarouselImages();
+            setTimeout(() => {
+                initSkyStartCarousel();
+            }, 200);
+            // Agregar listener de teclado cuando se abre el modal
+            document.addEventListener('keydown', handleSkyStartKeyboard);
+            
+            // Reproducir canción cuando se abre el modal
+            if (audioSkyStart) {
+                audioSkyStart.currentTime = 0; // Reiniciar desde el principio
+                audioSkyStart.volume = 0.3; // Asegurar volumen al 30%
+                audioSkyStart.loop = true; // Asegurar que se repita
+                audioSkyStart.play()
+                    .then(() => {
+                        console.log('🎵 Canción no_se_va1.mp3 iniciada (repetir activado)');
+                    })
+                    .catch(error => {
+                        console.error('Error al reproducir no_se_va1.mp3:', error);
+                    });
+            }
+        });
+        
+        skyStartModal.addEventListener('hidden.bs.modal', function() {
+            // Remover listener de teclado cuando se cierra el modal
+            document.removeEventListener('keydown', handleSkyStartKeyboard);
+            
+            // Detener y reiniciar la canción cuando se cierra el modal
+            if (audioSkyStart) {
+                audioSkyStart.pause();
+                audioSkyStart.currentTime = 0;
+                audioSkyStart.loop = false; // Desactivar loop al cerrar
+                console.log('🔇 Canción no_se_va1.mp3 detenida');
+            }
+        });
+    }
+});
+
+// ===== FUNCIONALIDAD PARA EL TIMELINE DE STARTMOON =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Lista de imágenes de startMoon disponibles
+    const startMoonImages = [
+        'images/startMoon/IMG_0658.jpg',
+        'images/startMoon/IMG_0671.jpg',
+        'images/startMoon/IMG_0672.jpg',
+        'images/startMoon/IMG_0680.jpg',
+        'images/startMoon/IMG_0711.jpg'
+    ];
+    
+    const startMoonModal = document.getElementById('startMoonModal');
+    
+    // Función para cargar las imágenes en el carrusel
+    function loadStartMoonCarouselImages() {
+        const carouselInner = document.getElementById('startMoonCarouselInner');
+        const indicatorsContainer = document.getElementById('startMoonIndicators');
+        
+        if (!carouselInner || !indicatorsContainer) {
+            console.error('❌ Elementos del carrusel de startMoon no encontrados');
+            return;
+        }
+        
+        // Si solo hay una imagen, asegurarse de que se cargue
+        if (startMoonImages.length === 1) {
+            const firstImg = carouselInner.querySelector('.carousel-item.active img');
+            if (firstImg && firstImg.dataset.src) {
+                firstImg.src = firstImg.dataset.src;
+                firstImg.removeAttribute('data-src');
+            }
+            // Ocultar controles si solo hay una imagen
+            const carousel = document.getElementById('startMoonCarousel');
+            if (carousel) {
+                const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+                controls.forEach(control => control.style.display = 'none');
+                indicatorsContainer.style.display = 'none';
+            }
+            return;
+        }
+        
+        // Mostrar controles si hay más de una imagen
+        const carousel = document.getElementById('startMoonCarousel');
+        if (carousel) {
+            const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+            controls.forEach(control => control.style.display = 'block');
+            indicatorsContainer.style.display = 'flex';
+        }
+        
+        // Cargar la primera imagen si tiene data-src
+        const firstItem = carouselInner.querySelector('.carousel-item.active');
+        if (firstItem) {
+            const firstImg = firstItem.querySelector('img');
+            if (firstImg && firstImg.dataset.src) {
+                firstImg.src = firstImg.dataset.src;
+                firstImg.removeAttribute('data-src');
+            }
+        }
+        
+        // Limpiar indicadores excepto el primero
+        const firstIndicator = indicatorsContainer.querySelector('button.active');
+        indicatorsContainer.innerHTML = '';
+        if (firstIndicator) {
+            indicatorsContainer.appendChild(firstIndicator);
+        }
+        
+        // Agregar las demás imágenes
+        for (let i = 1; i < startMoonImages.length; i++) {
+            // Crear item del carrusel
+            const carouselItem = document.createElement('div');
+            carouselItem.className = 'carousel-item';
+            
+            const img = document.createElement('img');
+            img.setAttribute('data-src', startMoonImages[i]);
+            img.src = '';
+            img.className = 'd-block w-100';
+            img.alt = `Luna ${i + 1}`;
+            img.loading = 'lazy';
+            
+            carouselItem.appendChild(img);
+            carouselInner.appendChild(carouselItem);
+            
+            // Crear indicador
+            const indicator = document.createElement('button');
+            indicator.type = 'button';
+            indicator.setAttribute('data-bs-target', '#startMoonCarousel');
+            indicator.setAttribute('data-bs-slide-to', i.toString());
+            indicator.setAttribute('aria-label', `Luna ${i + 1}`);
+            
+            indicatorsContainer.appendChild(indicator);
+        }
+        
+        // Cargar todas las imágenes con lazy loading
+        const images = carouselInner.querySelectorAll('img[data-src]');
+        images.forEach((img) => {
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            }
+        });
+    }
+    
+    // Función para inicializar el carrusel de startMoon
+    function initStartMoonCarousel() {
+        const startMoonCarousel = document.getElementById('startMoonCarousel');
+        if (!startMoonCarousel) {
+            console.error('❌ Carrusel de startMoon no encontrado');
+            return;
+        }
+        
+        // Destruir instancia existente si existe
+        const existingCarousel = bootstrap.Carousel.getInstance(startMoonCarousel);
+        if (existingCarousel) {
+            existingCarousel.dispose();
+        }
+        
+        // Esperar un momento para que el DOM se actualice
+        setTimeout(() => {
+            // Inicializar nuevo carrusel
+            const carousel = new bootstrap.Carousel(startMoonCarousel, {
+                interval: false, // No auto-play
+                wrap: true,
+                keyboard: true,
+                touch: true // Habilitar deslizamiento táctil
+            });
+            
+            // Asegurarse de que el primer slide esté activo
+            const firstItem = startMoonCarousel.querySelector('.carousel-item');
+            if (firstItem) {
+                firstItem.classList.add('active');
+            }
+            
+            // Actualizar indicadores activos
+            const indicators = document.querySelectorAll('#startMoonIndicators button');
+            indicators.forEach((indicator, index) => {
+                if (index === 0) {
+                    indicator.classList.add('active');
+                    indicator.setAttribute('aria-current', 'true');
+                } else {
+                    indicator.classList.remove('active');
+                    indicator.removeAttribute('aria-current');
+                }
+            });
+            
+            // Event listener para actualizar indicadores cuando cambia el slide
+            startMoonCarousel.addEventListener('slid.bs.carousel', function(event) {
+                const activeIndex = event.to;
+                const indicators = document.querySelectorAll('#startMoonIndicators button');
+                indicators.forEach((indicator, index) => {
+                    if (index === activeIndex) {
+                        indicator.classList.add('active');
+                        indicator.setAttribute('aria-current', 'true');
+                    } else {
+                        indicator.classList.remove('active');
+                        indicator.removeAttribute('aria-current');
+                    }
+                });
+            });
+            
+            console.log('✅ Carrusel de startMoon inicializado con', startMoonImages.length, 'imágenes');
+            return carousel;
+        }, 150);
+    }
+    
+    // Función para manejar las teclas de flecha
+    function handleStartMoonKeyboard(e) {
+        if (!startMoonModal || !startMoonModal.classList.contains('show')) return;
+        
+        const carousel = document.getElementById('startMoonCarousel');
+        if (!carousel) return;
+        
+        const carouselInstance = bootstrap.Carousel.getInstance(carousel);
+        if (!carouselInstance) return;
+        
+        switch(e.key) {
+            case 'ArrowLeft':
+                e.preventDefault();
+                carouselInstance.prev();
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                carouselInstance.next();
+                break;
+        }
+    }
+    
+    // Crear elemento de audio para startMoon (Noches de Luna)
+    let audioStartMoon = null;
+    if (typeof Audio !== 'undefined') {
+        audioStartMoon = new Audio('audio/por_los_dos1.mp3');
+        audioStartMoon.volume = 0.5; // Volumen al 50%
+        audioStartMoon.loop = true; // Repetir mientras el modal esté abierto
+    }
+    
+    // Cargar imágenes cuando se abra el modal
+    if (startMoonModal) {
+        startMoonModal.addEventListener('shown.bs.modal', function() {
+            loadStartMoonCarouselImages();
+            setTimeout(() => {
+                initStartMoonCarousel();
+            }, 200);
+            // Agregar listener de teclado cuando se abre el modal
+            document.addEventListener('keydown', handleStartMoonKeyboard);
+            
+            // Reproducir canción cuando se abre el modal
+            if (audioStartMoon) {
+                audioStartMoon.currentTime = 0; // Reiniciar desde el principio
+                audioStartMoon.volume = 0.5; // Asegurar volumen al 50%
+                audioStartMoon.loop = true; // Asegurar que se repita
+                audioStartMoon.play()
+                    .then(() => {
+                        console.log('🎵 Canción por_los_dos1.mp3 iniciada (repetir activado)');
+                    })
+                    .catch(error => {
+                        console.error('Error al reproducir por_los_dos1.mp3:', error);
+                    });
+            }
+        });
+        
+        startMoonModal.addEventListener('hidden.bs.modal', function() {
+            // Remover listener de teclado cuando se cierra el modal
+            document.removeEventListener('keydown', handleStartMoonKeyboard);
+            
+            // Detener y reiniciar la canción cuando se cierra el modal
+            if (audioStartMoon) {
+                audioStartMoon.pause();
+                audioStartMoon.currentTime = 0;
+                audioStartMoon.loop = false; // Desactivar loop al cerrar
+                console.log('🔇 Canción por_los_dos1.mp3 detenida');
+            }
+        });
+    }
+});
+
+// ===== FUNCIONALIDAD PARA EL TIMELINE DE SKYSTART =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Lista de imágenes de skyStart disponibles
+    const skyStartImages = [
+        'images/skyStart/IMG_0585.jpg',
+        'images/skyStart/IMG_0592.jpg',
+        'images/skyStart/IMG_0595.jpg',
+        'images/skyStart/IMG_E0584.jpg',
+        'images/skyStart/IMG_E0591.jpg'
+    ];
+    
+    // Función para cargar las imágenes en el carrusel
+    function loadSkyStartCarouselImages() {
+        const carouselInner = document.getElementById('skyStartCarouselInner');
+        const indicatorsContainer = document.getElementById('skyStartIndicators');
+        
+        if (!carouselInner || !indicatorsContainer) return;
+        
+        // Si solo hay una imagen, asegurarse de que se cargue
+        if (skyStartImages.length === 1) {
+            const firstImg = carouselInner.querySelector('.carousel-item.active img');
+            if (firstImg && firstImg.dataset.src) {
+                firstImg.src = firstImg.dataset.src;
+                firstImg.removeAttribute('data-src');
+            }
+            // Ocultar controles si solo hay una imagen
+            const carousel = document.getElementById('skyStartCarousel');
+            if (carousel) {
+                const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+                controls.forEach(control => control.style.display = 'none');
+                indicatorsContainer.style.display = 'none';
+            }
+            return;
+        }
+        
+        // Mostrar controles si hay más de una imagen
+        const carousel = document.getElementById('skyStartCarousel');
+        if (carousel) {
+            const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
+            controls.forEach(control => control.style.display = 'block');
+            indicatorsContainer.style.display = 'flex';
+        }
+        
+        // Cargar la primera imagen si tiene data-src
+        const firstItem = carouselInner.querySelector('.carousel-item.active');
+        if (firstItem) {
+            const firstImg = firstItem.querySelector('img');
+            if (firstImg && firstImg.dataset.src) {
+                firstImg.src = firstImg.dataset.src;
+                firstImg.removeAttribute('data-src');
+            }
+        }
+        
+        // Limpiar indicadores excepto el primero
+        const firstIndicator = indicatorsContainer.querySelector('button.active');
+        indicatorsContainer.innerHTML = '';
+        if (firstIndicator) {
+            indicatorsContainer.appendChild(firstIndicator);
+        }
+        
+        // Agregar las demás imágenes
+        for (let i = 1; i < skyStartImages.length; i++) {
+            // Crear item del carrusel
+            const carouselItem = document.createElement('div');
+            carouselItem.className = 'carousel-item';
+            
+            const img = document.createElement('img');
+            img.setAttribute('data-src', skyStartImages[i]);
+            img.src = '';
+            img.className = 'd-block w-100';
+            img.alt = `Cielo ${i + 1}`;
+            img.loading = 'lazy';
+            
+            carouselItem.appendChild(img);
+            carouselInner.appendChild(carouselItem);
+            
+            // Crear indicador
+            const indicator = document.createElement('button');
+            indicator.type = 'button';
+            indicator.setAttribute('data-bs-target', '#skyStartCarousel');
+            indicator.setAttribute('data-bs-slide-to', i.toString());
+            indicator.setAttribute('aria-label', `Cielo ${i + 1}`);
+            
+            indicatorsContainer.appendChild(indicator);
+        }
+        
+        // Cargar todas las imágenes con lazy loading
+        const images = carouselInner.querySelectorAll('img[data-src]');
+        images.forEach((img) => {
+            if (img.dataset.src) {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            }
+        });
+    }
+    
+    // Función para inicializar el carrusel de skyStart
+    function initSkyStartCarousel() {
+        const skyStartCarousel = document.getElementById('skyStartCarousel');
+        if (!skyStartCarousel) {
+            console.error('❌ Carrusel de skyStart no encontrado');
+            return;
+        }
+        
+        // Destruir instancia existente si existe
+        const existingCarousel = bootstrap.Carousel.getInstance(skyStartCarousel);
+        if (existingCarousel) {
+            existingCarousel.dispose();
+        }
+        
+        // Esperar un momento para que el DOM se actualice
+        setTimeout(() => {
+            // Inicializar nuevo carrusel
+            const carousel = new bootstrap.Carousel(skyStartCarousel, {
+                interval: false, // No auto-play
+                wrap: true,
+                keyboard: true,
+                touch: true // Habilitar deslizamiento táctil
+            });
+            
+            // Asegurarse de que el primer slide esté activo
+            const firstItem = skyStartCarousel.querySelector('.carousel-item');
+            if (firstItem) {
+                firstItem.classList.add('active');
+            }
+            
+            // Actualizar indicadores activos
+            const indicators = document.querySelectorAll('#skyStartIndicators button');
+            indicators.forEach((indicator, index) => {
+                if (index === 0) {
+                    indicator.classList.add('active');
+                    indicator.setAttribute('aria-current', 'true');
+                } else {
+                    indicator.classList.remove('active');
+                    indicator.removeAttribute('aria-current');
+                }
+            });
+            
+            // Event listener para actualizar indicadores cuando cambia el slide
+            skyStartCarousel.addEventListener('slid.bs.carousel', function(event) {
+                const activeIndex = event.to;
+                const indicators = document.querySelectorAll('#skyStartIndicators button');
+                indicators.forEach((indicator, index) => {
+                    if (index === activeIndex) {
+                        indicator.classList.add('active');
+                        indicator.setAttribute('aria-current', 'true');
+                    } else {
+                        indicator.classList.remove('active');
+                        indicator.removeAttribute('aria-current');
+                    }
+                });
+            });
+            
+            console.log('✅ Carrusel de skyStart inicializado con', skyStartImages.length, 'imágenes');
+            return carousel;
+        }, 150);
+    }
+    
+    // Cargar imágenes cuando se abra el modal
+    if (skyStartModal) {
+        skyStartModal.addEventListener('shown.bs.modal', function() {
+            loadSkyStartCarouselImages();
+            setTimeout(() => {
+                initSkyStartCarousel();
+            }, 200);
+        });
+    }
+});
+
+// ===== FUNCIONALIDAD PARA LA CUPONERA DE AMOR VIRTUAL =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Lista de cupones de amor
+    const cupones = [
+        "Vale por una cena romántica a la luz de las velas 💕",
+        "Vale por un masaje relajante de 30 minutos 💆‍♀️",
+        "Vale por una noche de películas y palomitas 🍿",
+        "Vale por perdonarme una tontería 😅",
+        "Vale por un desayuno especial en la cama 🥐",
+        "Vale por un paseo romántico al atardecer 🌅",
+        "Vale por elegir tú la película esta vez 🎬",
+        "Vale por un día sin quejarme de nada 😊",
+        "Vale por un baile romántico bajo las estrellas 💃",
+        "Vale por prepararte tu comida favorita 🍝",
+        "Vale por un abrazo largo y sincero 🤗",
+        "Vale por escucharte sin interrumpir 👂",
+        "Vale por un día completo de atención solo para ti 💝",
+        "Vale por un regalo sorpresa 🎁",
+        "Vale por una sesión de fotos románticas 📸",
+        "Vale por un picnic en el parque 🧺",
+        "Vale por un baño relajante con velas 🛁",
+        "Vale por un mensaje de buenos días todos los días por una semana ☀️",
+        "Vale por un día sin usar el celular cuando estemos juntos 📱",
+        "Vale por un beso especial cuando tú quieras 💋",
+        "Vale por un día de hacer lo que tú quieras sin quejarme 🎯",
+        "Vale por un helado compartido en el parque 🍦",
+        "Vale por un poema escrito especialmente para ti ✍️",
+        "Vale por un día de limpieza sin que me lo pidas 🧹",
+        "Vale por un momento de silencio cómodo juntos 🤫"
+    ];
+    
+    const btnCuponera = document.getElementById('btnCuponera');
+    const cuponeraModal = document.getElementById('cuponeraModal');
+    const cuponText = document.getElementById('cuponText');
+    const btnNuevoCupon = document.getElementById('btnNuevoCupon');
+    const cuponCard = document.getElementById('cuponCard');
+    
+    // Función para obtener un cupón aleatorio
+    function obtenerCuponAleatorio() {
+        const indiceAleatorio = Math.floor(Math.random() * cupones.length);
+        return cupones[indiceAleatorio];
+    }
+    
+    // Función para mostrar un nuevo cupón con animación
+    function mostrarNuevoCupon() {
+        if (!cuponText) return;
+        
+        // Obtener nuevo cupón
+        const nuevoCupon = obtenerCuponAleatorio();
+        const esMismoCupon = (nuevoCupon === cuponAnterior);
+        
+        // Animación de salida
+        if (cuponCard) {
+            cuponCard.style.animation = 'none';
+            setTimeout(() => {
+                cuponCard.style.animation = 'cuponSalida 0.3s ease-out';
+            }, 10);
+        }
+        
+        // Cambiar el cupón después de la animación
+        setTimeout(() => {
+            if (cuponText) {
+                cuponText.textContent = nuevoCupon;
+            }
+            
+            // Si es el mismo cupón, no deshabilitar el botón
+            if (esMismoCupon) {
+                puedeCambiarCupon = true;
+                if (btnNuevoCupon) {
+                    btnNuevoCupon.disabled = false;
+                    btnNuevoCupon.style.opacity = '1';
+                    btnNuevoCupon.style.cursor = 'pointer';
+                    btnNuevoCupon.textContent = '🎲 Nuevo Vale';
+                }
+                const warningElement = document.querySelector('.cuponera-warning');
+                if (warningElement) {
+                    warningElement.textContent = '✅ Saliste el mismo cupón - Puedes volver a sortear';
+                    warningElement.style.color = '#4CAF50';
+                    warningElement.style.fontWeight = 'bold';
+                }
+                // Limpiar temporizador si estaba corriendo
+                if (temporizadorCupon) {
+                    clearInterval(temporizadorCupon);
+                }
+            } else {
+                // Si es un cupón diferente, deshabilitar y iniciar temporizador
+                cuponAnterior = nuevoCupon;
+                iniciarTemporizador();
+            }
+            
+            // Animación de entrada
+            if (cuponCard) {
+                cuponCard.style.animation = 'cuponEntrada 0.5s ease-out';
+            }
+        }, 300);
+    }
+    
+    // Variable para el temporizador
+    let temporizadorCupon = null;
+    let tiempoRestante = 10; // 10 segundos
+    let puedeCambiarCupon = false; // Inicialmente deshabilitado
+    let cuponAnterior = null; // Para comparar si es el mismo cupón
+    
+    // Función para actualizar el temporizador
+    function actualizarTemporizador() {
+        const warningElement = document.querySelector('.cuponera-warning');
+        if (warningElement) {
+            if (tiempoRestante > 0) {
+                warningElement.textContent = `⏰ Espera ${tiempoRestante} segundos para volver a sortear otro cupón`;
+                tiempoRestante--;
+            } else {
+                // Habilitar el botón después de 15 segundos
+                puedeCambiarCupon = true;
+                if (btnNuevoCupon) {
+                    btnNuevoCupon.disabled = false;
+                    btnNuevoCupon.style.opacity = '1';
+                    btnNuevoCupon.style.cursor = 'pointer';
+                    btnNuevoCupon.textContent = '🎲 Nuevo Vale';
+                }
+                if (warningElement) {
+                    warningElement.textContent = '✅ Ya puedes volver a sortear otro cupón';
+                    warningElement.style.color = '#4CAF50';
+                    warningElement.style.fontWeight = 'bold';
+                }
+                clearInterval(temporizadorCupon);
+            }
+        }
+    }
+    
+    // Función para iniciar el temporizador
+    function iniciarTemporizador() {
+        tiempoRestante = 10; // Reiniciar a 10 segundos
+        puedeCambiarCupon = false; // Deshabilitar el botón
+        
+        if (btnNuevoCupon) {
+            btnNuevoCupon.disabled = true;
+            btnNuevoCupon.style.opacity = '0.5';
+            btnNuevoCupon.style.cursor = 'not-allowed';
+            btnNuevoCupon.textContent = '⏰ Espera...';
+        }
+        
+        const warningElement = document.querySelector('.cuponera-warning');
+        if (warningElement) {
+            warningElement.style.color = '#C2185B';
+            warningElement.style.fontWeight = 'normal';
+        }
+        
+        // Limpiar temporizador anterior si existe
+        if (temporizadorCupon) {
+            clearInterval(temporizadorCupon);
+        }
+        
+        // Actualizar cada segundo
+        temporizadorCupon = setInterval(actualizarTemporizador, 1000);
+        actualizarTemporizador(); // Llamar inmediatamente para mostrar el tiempo inicial
+    }
+    
+    // Abrir modal de cuponera automáticamente al cargar la página
+    if (cuponeraModal) {
+        // Esperar un momento para que Bootstrap esté listo
+        setTimeout(() => {
+            const modal = new bootstrap.Modal(cuponeraModal, {
+                backdrop: 'static', // No cerrar al hacer clic fuera
+                keyboard: false // No cerrar con ESC
+            });
+            modal.show();
+        }, 500);
+    }
+    
+    // Abrir modal de cuponera al hacer clic en el botón
+    if (btnCuponera && cuponeraModal) {
+        btnCuponera.addEventListener('click', function() {
+            const modal = new bootstrap.Modal(cuponeraModal);
+            modal.show();
+            iniciarTemporizador();
+        });
+    }
+    
+    // Mostrar cupón aleatorio cuando se abre el modal
+    if (cuponeraModal) {
+        cuponeraModal.addEventListener('shown.bs.modal', function() {
+            // Reiniciar variables
+            cuponAnterior = null;
+            
+            // Mostrar el primer cupón sin animación
+            const primerCupon = obtenerCuponAleatorio();
+            if (cuponText) {
+                cuponText.textContent = primerCupon;
+            }
+            cuponAnterior = primerCupon;
+            
+            // Deshabilitar el botón inicialmente y iniciar temporizador
+            iniciarTemporizador();
+        });
+        
+        // Limpiar temporizador cuando se cierra el modal
+        cuponeraModal.addEventListener('hidden.bs.modal', function() {
+            if (temporizadorCupon) {
+                clearInterval(temporizadorCupon);
+            }
+            // Reiniciar variables
+            cuponAnterior = null;
+            puedeCambiarCupon = false;
+        });
+    }
+    
+    // Botón para obtener nuevo cupón
+    if (btnNuevoCupon) {
+        btnNuevoCupon.addEventListener('click', function() {
+            if (puedeCambiarCupon) {
+                mostrarNuevoCupon();
+            }
+        });
+    }
 });

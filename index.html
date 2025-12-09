@@ -17,18 +17,22 @@
             <!-- Primera página - Portada -->
             <div class="page">
                 <h1>Elizabeth, Mi Princesa <img src="./images/princesaEli.png" alt="Princesa Elizabeth" class="princess-icon" width="50" height="50" style="width: 50px; height: 50px; display: inline-block; cursor: pointer;" onclick="showPrincessFullSequence()"><!-- Updated: 2025-01-10 --></h1>
-                <div class="text-center my-4">
-                    <button id="btnStars" class="btn btn-stars">⭐ Nuestro planetario de amor</button>
-                    <button id="btnPlayAudio" class="btn btn-danger">Cuéntame la Historia</button>
-                    <button id="btnPlayAudio2" class="btn btn-info">¿Qué Significas para Mí?</button>
-                    <button id="btnOracula" class="btn btn-warning">🔮 Tengo nuevas predicciones, Consultame!</button>
-                    <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <button class="btn btn-tour" id="btnTour">
-                            💙 Tour de Amor
-                        </button>
+                <div class="buttons-container">
+                    <div class="buttons-row buttons-row-primary">
+                        <button id="btnStars" class="btn btn-stars">⭐ Nuestro planetario de amor</button>
+                        <button id="btnPlayAudio" class="btn btn-danger">Cuéntame la Historia</button>
+                        <button id="btnPlayAudio2" class="btn btn-info">¿Qué Significas para Mí?</button>
+                    </div>
+                    <div class="buttons-row buttons-row-secondary">
+                        <button id="btnOracula" class="btn btn-warning">🔮 Tengo nuevas predicciones, Consultame!</button>
+                        <button id="btnVelitas" class="btn btn-velitas">🕯️ La Luz de mi Princesa</button>
                         <a href="https://drive.google.com/drive/folders/1XmvFviMmfro9O_tKrIUSoxdGRPNwO3LM" target="_blank" class="btn btn-download" id="btnDownload">
-                            📱 Haz clic y llévame contigo, en tu teléfono y en tu ser, a donde vayas..
+                            📱 Haz clic y llévame contigo
                         </a>
+                    </div>
+                    <div class="buttons-row buttons-row-tertiary">
+                        <button class="btn btn-tour" id="btnTour">💙 Tour de Amor</button>
+                        <button id="btnCuponera" class="btn btn-cuponera">💝🎫 Cuponera de Amor</button>
                     </div>
                     <small class="d-block mt-2 text-muted">
                         🔔 <strong>Para instalar la app móvil en tu teléfono:</strong> abre este sitio desde el navegador de tu teléfono y pulsa el botón verde.  
@@ -50,6 +54,24 @@
                                         <source src="video/welcome.mp4" type="video/mp4">
                                         Tu navegador no soporta la reproducción de video.
                                     </video>
+                                </div>
+                            </div>
+                            <!-- Timeline de SkyStart - Primera imagen clickeable -->
+                            <div class="video-frame skystart-timeline-frame">
+                                <h6 class="text-center mb-2" style="color: var(--primary-color); font-family: 'Dancing Script', cursive; font-size: 1.1rem;">
+                                    🌅 Amaneceres de Cielo
+                                </h6>
+                                <div class="timeline-preview-container" id="skyStartPreview">
+                                    <img src="images/skyStart/IMG_0585.jpg" alt="Amaneceres de Cielo" class="timeline-preview-image" style="cursor: pointer; width: 100%; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 8px 20px rgba(194, 24, 91, 0.2); transition: transform 0.3s ease;">
+                                </div>
+                            </div>
+                            <!-- Timeline de StartMoon - Primera imagen clickeable -->
+                            <div class="video-frame startmoon-timeline-frame">
+                                <h6 class="text-center mb-2" style="color: var(--primary-color); font-family: 'Dancing Script', cursive; font-size: 1.1rem;">
+                                    🌙 Noches de Luna
+                                </h6>
+                                <div class="timeline-preview-container" id="startMoonPreview">
+                                    <img src="images/startMoon/IMG_0658.jpg" alt="Noches de Luna" class="timeline-preview-image" style="cursor: pointer; width: 100%; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 8px 20px rgba(194, 24, 91, 0.2); transition: transform 0.3s ease;">
                                 </div>
                             </div>
                             <div class="video-frame">
@@ -418,6 +440,190 @@
                         <a href="pages/vida.html" class="btn btn-travel">
                             🌍 Ver Mis Viajes por Ti
                         </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Velitas - La Luz de mis Deseos -->
+    <div class="modal fade" id="velitasModal" tabindex="-1" aria-labelledby="velitasModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content velitas-modal-content">
+                <div class="modal-header velitas-modal-header">
+                    <h5 class="modal-title" id="velitasModalLabel">🕯️ La Luz de mi princesa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body velitas-modal-body">
+                    <div class="velitas-subtitle">
+                        <p>Una noche especial donde cada vela encendida lleva algo que decir desde del corazón...</p>
+                    </div>
+                    
+                    <div class="velitas-content-container">
+                        <div class="velitas-carousel-wrapper">
+                            <div id="velitasCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+                                <div class="carousel-inner" id="velitasCarouselInner">
+                                    <div class="carousel-item active">
+                                        <img data-src="images/velitas/BCZD1998.jpg" src="" class="d-block w-100" alt="Vela 1">
+                                    </div>
+                                    <!-- Las demás imágenes y video se cargarán dinámicamente -->
+                                </div>
+                                
+                                <!-- Controles del carrusel -->
+                                <button class="carousel-control-prev" type="button" data-bs-target="#velitasCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Anterior</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#velitasCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Siguiente</span>
+                                </button>
+                            </div>
+                            
+                            <!-- Indicadores del carrusel -->
+                            <div class="carousel-indicators velitas-indicators" id="velitasIndicators">
+                                <button type="button" data-bs-target="#velitasCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Vela 1"></button>
+                            </div>
+                        </div>
+                        <div class="velitas-deseo-wrapper">
+                            <div class="velitas-deseo-box">
+                                <h3 class="velitas-deseo-title">La luz de mi princesa</h3>
+                                <p class="velitas-deseo-text" id="velitasDeseoText">
+                                    Dejo arder esta vela como reflejo de la luz que encuentro en ti; esa que me invita a creer en tu esencia 
+                                    incluso entre nuestras diferencias. Te guardo en mi pensamiento y estas en cada paso, porque tu presencia ha dejado un brillo sincero en mi corazón.
+                                    <br><br>
+                                    Creo en ti, Elizabeth Timarán, en quien eres realmente y en la luz que llevas dentro. Que nunca deje de brillar…
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="velitas-button-container">
+                        <button id="btnEncenderVela" class="btn btn-encender-vela">
+                            🕯️ Encender una vela virtual
+                        </button>
+                    </div>
+
+                    <div id="velitasAnimationContainer" class="velitas-animation-container" style="display: none;">
+                        <div class="vela-virtual" id="velaVirtual">
+                            <div class="llama" id="llamaVela">
+                                <div class="llama-inner"></div>
+                            </div>
+                            <div class="cuerpo-vela"></div>
+                        </div>
+                        <p class="velitas-mensaje-final" id="velitasMensajeFinal">Mi luz siempre brillará para ti</p>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de SkyStart Timeline -->
+    <div class="modal fade" id="skyStartModal" tabindex="-1" aria-labelledby="skyStartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content timeline-modal-content">
+                <div class="modal-header timeline-modal-header">
+                    <h5 class="modal-title" id="skyStartModalLabel">🌅 Amaneceres de Cielo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body timeline-modal-body">
+                    <div class="timeline-carousel-container">
+                        <div id="skyStartCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+                            <div class="carousel-inner" id="skyStartCarouselInner">
+                                <div class="carousel-item active">
+                                    <img data-src="images/skyStart/IMG_0585.jpg" src="" class="d-block w-100" alt="Cielo 1">
+                                </div>
+                                <!-- Las demás imágenes se cargarán dinámicamente -->
+                            </div>
+                            
+                            <!-- Controles del carrusel -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#skyStartCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Anterior</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#skyStartCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Siguiente</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Indicadores del carrusel -->
+                        <div class="carousel-indicators timeline-indicators" id="skyStartIndicators">
+                            <button type="button" data-bs-target="#skyStartCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Cielo 1"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de StartMoon Timeline -->
+    <div class="modal fade" id="startMoonModal" tabindex="-1" aria-labelledby="startMoonModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content timeline-modal-content">
+                <div class="modal-header timeline-modal-header">
+                    <h5 class="modal-title" id="startMoonModalLabel">🌙 Noches de Luna</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body timeline-modal-body">
+                    <div class="timeline-carousel-container">
+                        <div id="startMoonCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+                            <div class="carousel-inner" id="startMoonCarouselInner">
+                                <div class="carousel-item active">
+                                    <img data-src="images/startMoon/IMG_0658.jpg" src="" class="d-block w-100" alt="Luna 1">
+                                </div>
+                                <!-- Las demás imágenes se cargarán dinámicamente -->
+                            </div>
+                            
+                            <!-- Controles del carrusel -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#startMoonCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Anterior</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#startMoonCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Siguiente</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Indicadores del carrusel -->
+                        <div class="carousel-indicators timeline-indicators" id="startMoonIndicators">
+                            <button type="button" data-bs-target="#startMoonCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Luna 1"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Cuponera de Amor Virtual -->
+    <div class="modal fade" id="cuponeraModal" tabindex="-1" aria-labelledby="cuponeraModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content cuponera-modal-content">
+                <div class="modal-header cuponera-modal-header">
+                    <h5 class="modal-title" id="cuponeraModalLabel">💝🎫 Cuponera de Amor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body cuponera-modal-body">
+                    <div class="cuponera-subtitle">
+                        <p>🎁 Toma captura de pantalla y reclama tu vale💕</p>
+                        <p class="cuponera-warning">⏰ Para participar por otro cupón, debes volver a sortear después de que se acabe el tiempo</p>
+                    </div>
+                    
+                    <div class="cupon-container">
+                        <div class="cupon-card" id="cuponCard">
+                            <div class="cupon-header">
+                                <h3 class="cupon-title">💝 Vale de Amor</h3>
+                                <div class="cupon-hearts">💕 💕 💕</div>
+                            </div>
+                            <div class="cupon-content">
+                                <p class="cupon-text" id="cuponText">Cargando tu vale especial...</p>
+                            </div>
+                            <div class="cupon-footer">
+                                <p class="cupon-instruction">📸 Toma captura y reclámalo cuando quieras</p>
+                                <button id="btnNuevoCupon" class="btn btn-nuevo-cupon">🎲 Nuevo Vale</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
