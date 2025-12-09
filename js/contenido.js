@@ -3573,6 +3573,41 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Variable para almacenar el intervalo de auto-play de velitas
+    let velitasAutoPlayInterval = null;
+    
+    // Función para iniciar el auto-play de velitas
+    function startVelitasAutoPlay() {
+        // Limpiar intervalo existente si hay uno
+        if (velitasAutoPlayInterval) {
+            clearInterval(velitasAutoPlayInterval);
+        }
+        
+        const velitasCarousel = document.getElementById('velitasCarousel');
+        if (!velitasCarousel) return;
+        
+        const carouselInstance = bootstrap.Carousel.getInstance(velitasCarousel);
+        if (!carouselInstance) return;
+        
+        // Iniciar auto-play cada 7 segundos
+        velitasAutoPlayInterval = setInterval(() => {
+            if (carouselInstance) {
+                carouselInstance.next();
+            }
+        }, 7000);
+        
+        console.log('✅ Auto-play de velitas iniciado (cada 7 segundos)');
+    }
+    
+    // Función para detener el auto-play de velitas
+    function stopVelitasAutoPlay() {
+        if (velitasAutoPlayInterval) {
+            clearInterval(velitasAutoPlayInterval);
+            velitasAutoPlayInterval = null;
+            console.log('⏸️ Auto-play de velitas detenido');
+        }
+    }
+    
     // Función para inicializar el carrusel de velitas
     function initVelitasCarousel() {
         const velitasCarousel = document.getElementById('velitasCarousel');
@@ -3587,11 +3622,14 @@ document.addEventListener('DOMContentLoaded', function() {
             existingCarousel.dispose();
         }
         
+        // Detener auto-play anterior si existe
+        stopVelitasAutoPlay();
+        
         // Esperar un momento para que el DOM se actualice
         setTimeout(() => {
             // Inicializar nuevo carrusel
             const carousel = new bootstrap.Carousel(velitasCarousel, {
-                interval: false, // No auto-play
+                interval: false, // No auto-play nativo de Bootstrap
                 wrap: true,
                 keyboard: true,
                 touch: true // Habilitar deslizamiento táctil
@@ -3631,6 +3669,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             console.log('✅ Carrusel de velitas inicializado con', velitasMedia.length, 'elementos');
+            
+            // Iniciar auto-play después de inicializar
+            startVelitasAutoPlay();
+            
             return carousel;
         }, 150);
     }
@@ -3682,6 +3724,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Inicializar el carrusel cuando la modal esté completamente visible
             setTimeout(() => {
                 initVelitasCarousel();
+                // El auto-play se inicia dentro de initVelitasCarousel
             }, 200);
             
             // Agregar listener de teclado cuando se abre el modal
@@ -3705,6 +3748,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Event listener para cuando se cierra el modal
         velitasModal.addEventListener('hidden.bs.modal', function() {
             console.log('🕯️ Modal de velitas cerrado');
+            // Detener auto-play cuando se cierra el modal
+            stopVelitasAutoPlay();
+            
             // Resetear la animación cuando se cierra el modal
             if (velitasAnimationContainer) {
                 velitasAnimationContainer.style.display = 'none';
@@ -3944,6 +3990,9 @@ document.addEventListener('DOMContentLoaded', function() {
             existingCarousel.dispose();
         }
         
+        // Detener auto-play anterior si existe
+        stopSkyStartAutoPlay();
+        
         // Esperar un momento para que el DOM se actualice
         setTimeout(() => {
             // Inicializar nuevo carrusel
@@ -3988,8 +4037,47 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             console.log('✅ Carrusel de skyStart inicializado con', skyStartImages.length, 'imágenes');
+            
+            // Iniciar auto-play después de inicializar
+            startSkyStartAutoPlay();
+            
             return carousel;
         }, 150);
+    }
+    
+    // Variable para almacenar el intervalo de auto-play de skyStart
+    let skyStartAutoPlayInterval = null;
+    
+    // Función para iniciar el auto-play de skyStart
+    function startSkyStartAutoPlay() {
+        // Limpiar intervalo existente si hay uno
+        if (skyStartAutoPlayInterval) {
+            clearInterval(skyStartAutoPlayInterval);
+        }
+        
+        const skyStartCarousel = document.getElementById('skyStartCarousel');
+        if (!skyStartCarousel) return;
+        
+        const carouselInstance = bootstrap.Carousel.getInstance(skyStartCarousel);
+        if (!carouselInstance) return;
+        
+        // Iniciar auto-play cada 7 segundos
+        skyStartAutoPlayInterval = setInterval(() => {
+            if (carouselInstance) {
+                carouselInstance.next();
+            }
+        }, 7000);
+        
+        console.log('✅ Auto-play de skyStart iniciado (cada 7 segundos)');
+    }
+    
+    // Función para detener el auto-play de skyStart
+    function stopSkyStartAutoPlay() {
+        if (skyStartAutoPlayInterval) {
+            clearInterval(skyStartAutoPlayInterval);
+            skyStartAutoPlayInterval = null;
+            console.log('⏸️ Auto-play de skyStart detenido');
+        }
     }
     
     // Función para manejar las teclas de flecha
@@ -4028,6 +4116,7 @@ document.addEventListener('DOMContentLoaded', function() {
             loadSkyStartCarouselImages();
             setTimeout(() => {
                 initSkyStartCarousel();
+                // El auto-play se inicia dentro de initSkyStartCarousel
             }, 200);
             // Agregar listener de teclado cuando se abre el modal
             document.addEventListener('keydown', handleSkyStartKeyboard);
@@ -4048,6 +4137,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         skyStartModal.addEventListener('hidden.bs.modal', function() {
+            // Detener auto-play cuando se cierra el modal
+            stopSkyStartAutoPlay();
+            
             // Remover listener de teclado cuando se cierra el modal
             document.removeEventListener('keydown', handleSkyStartKeyboard);
             
@@ -4177,6 +4269,9 @@ document.addEventListener('DOMContentLoaded', function() {
             existingCarousel.dispose();
         }
         
+        // Detener auto-play anterior si existe
+        stopStartMoonAutoPlay();
+        
         // Esperar un momento para que el DOM se actualice
         setTimeout(() => {
             // Inicializar nuevo carrusel
@@ -4221,8 +4316,47 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             console.log('✅ Carrusel de startMoon inicializado con', startMoonImages.length, 'imágenes');
+            
+            // Iniciar auto-play después de inicializar
+            startStartMoonAutoPlay();
+            
             return carousel;
         }, 150);
+    }
+    
+    // Variable para almacenar el intervalo de auto-play de startMoon
+    let startMoonAutoPlayInterval = null;
+    
+    // Función para iniciar el auto-play de startMoon
+    function startStartMoonAutoPlay() {
+        // Limpiar intervalo existente si hay uno
+        if (startMoonAutoPlayInterval) {
+            clearInterval(startMoonAutoPlayInterval);
+        }
+        
+        const startMoonCarousel = document.getElementById('startMoonCarousel');
+        if (!startMoonCarousel) return;
+        
+        const carouselInstance = bootstrap.Carousel.getInstance(startMoonCarousel);
+        if (!carouselInstance) return;
+        
+        // Iniciar auto-play cada 7 segundos
+        startMoonAutoPlayInterval = setInterval(() => {
+            if (carouselInstance) {
+                carouselInstance.next();
+            }
+        }, 7000);
+        
+        console.log('✅ Auto-play de startMoon iniciado (cada 7 segundos)');
+    }
+    
+    // Función para detener el auto-play de startMoon
+    function stopStartMoonAutoPlay() {
+        if (startMoonAutoPlayInterval) {
+            clearInterval(startMoonAutoPlayInterval);
+            startMoonAutoPlayInterval = null;
+            console.log('⏸️ Auto-play de startMoon detenido');
+        }
     }
     
     // Función para manejar las teclas de flecha
@@ -4281,6 +4415,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         startMoonModal.addEventListener('hidden.bs.modal', function() {
+            // Detener auto-play cuando se cierra el modal
+            stopStartMoonAutoPlay();
+            
             // Remover listener de teclado cuando se cierra el modal
             document.removeEventListener('keydown', handleStartMoonKeyboard);
             
@@ -4405,6 +4542,9 @@ document.addEventListener('DOMContentLoaded', function() {
             existingCarousel.dispose();
         }
         
+        // Detener auto-play anterior si existe
+        stopSkyStartAutoPlay();
+        
         // Esperar un momento para que el DOM se actualice
         setTimeout(() => {
             // Inicializar nuevo carrusel
@@ -4449,6 +4589,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             console.log('✅ Carrusel de skyStart inicializado con', skyStartImages.length, 'imágenes');
+            
+            // Iniciar auto-play después de inicializar
+            startSkyStartAutoPlay();
+            
             return carousel;
         }, 150);
     }
@@ -4459,7 +4603,13 @@ document.addEventListener('DOMContentLoaded', function() {
             loadSkyStartCarouselImages();
             setTimeout(() => {
                 initSkyStartCarousel();
+                // El auto-play se inicia dentro de initSkyStartCarousel
             }, 200);
+        });
+        
+        skyStartModal.addEventListener('hidden.bs.modal', function() {
+            // Detener auto-play cuando se cierra el modal
+            stopSkyStartAutoPlay();
         });
     }
 });
@@ -4483,7 +4633,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "Vale por un día completo de atención solo para ti 💝",
         "Vale por un regalo sorpresa 🎁",
         "Vale por una sesión de fotos románticas 📸",
-        "Vale por un picnic en el parque 🧺",
+        "Vale por acampar juntos en una jornada",
         "Vale por un baño relajante con velas 🛁",
         "Vale por un mensaje de buenos días todos los días por una semana ☀️",
         "Vale por un día sin usar el celular cuando estemos juntos 📱",
