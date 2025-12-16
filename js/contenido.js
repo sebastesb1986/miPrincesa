@@ -3432,6 +3432,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Lista de imágenes y video de velitas disponibles
     const velitasMedia = [
+        { type: 'image', src: 'images/velitas/history.jpg', alt: 'History' },
         { type: 'image', src: 'images/velitas/BCZD1998.jpg', alt: 'Vela 1' },
         { type: 'image', src: 'images/velitas/IMG_0715.jpg', alt: 'Vela 2' },
         { type: 'image', src: 'images/velitas/IMG_0716.jpg', alt: 'Vela 3' },
@@ -3439,142 +3440,432 @@ document.addEventListener('DOMContentLoaded', function() {
         { type: 'video', src: 'images/velitas/IMG_0733.mp4', alt: 'Video de velitas' }
     ];
     
-    // Función para cargar las imágenes y video en el carrusel
-    function loadVelitasCarouselImages() {
-        const carouselInner = document.getElementById('velitasCarouselInner');
-        const indicatorsContainer = document.getElementById('velitasIndicators');
+    // Función para cargar las imágenes en la galería grid 3x4
+    function loadVelitasGallery() {
+        const galleryGrid = document.getElementById('velitasGalleryGrid');
         
-        if (!carouselInner || !indicatorsContainer) return;
+        if (!galleryGrid) return;
         
-        // Si solo hay un elemento, asegurarse de que se cargue
-        if (velitasMedia.length === 1) {
-            const firstItem = carouselInner.querySelector('.carousel-item.active');
-            if (firstItem) {
-                const firstImg = firstItem.querySelector('img');
-                const firstVideo = firstItem.querySelector('video');
-                if (firstImg && firstImg.dataset.src) {
-                    firstImg.src = firstImg.dataset.src;
-                    firstImg.removeAttribute('data-src');
-                }
-                if (firstVideo && firstVideo.dataset.src) {
-                    firstVideo.src = firstVideo.dataset.src;
-                    firstVideo.removeAttribute('data-src');
-                }
-            }
-            // Ocultar controles si solo hay un elemento
-            const carousel = document.getElementById('velitasCarousel');
-            if (carousel) {
-                const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
-                controls.forEach(control => control.style.display = 'none');
-                indicatorsContainer.style.display = 'none';
-            }
-            return;
-        }
+        // Limpiar la galería
+        galleryGrid.innerHTML = '';
         
-        // Mostrar controles si hay más de un elemento
-        const carousel = document.getElementById('velitasCarousel');
-        if (carousel) {
-            const controls = carousel.querySelectorAll('.carousel-control-prev, .carousel-control-next');
-            controls.forEach(control => control.style.display = 'block');
-            indicatorsContainer.style.display = 'flex';
-        }
-        
-        // Cargar la primera imagen/video si tiene data-src
-        const firstItem = carouselInner.querySelector('.carousel-item.active');
-        if (firstItem) {
-            const firstImg = firstItem.querySelector('img');
-            const firstVideo = firstItem.querySelector('video');
-            if (firstImg && firstImg.dataset.src) {
-                firstImg.src = firstImg.dataset.src;
-                firstImg.removeAttribute('data-src');
-            }
-            if (firstVideo && firstVideo.dataset.src) {
-                firstVideo.src = firstVideo.dataset.src;
-                firstVideo.removeAttribute('data-src');
-            }
-        }
-        
-        // Limpiar indicadores excepto el primero
-        const firstIndicator = indicatorsContainer.querySelector('button.active');
-        indicatorsContainer.innerHTML = '';
-        if (firstIndicator) {
-            indicatorsContainer.appendChild(firstIndicator);
-        }
-        
-        // Agregar los demás elementos (imágenes y video)
-        for (let i = 1; i < velitasMedia.length; i++) {
-            const media = velitasMedia[i];
-            
-            // Crear item del carrusel
-            const carouselItem = document.createElement('div');
-            carouselItem.className = 'carousel-item';
+        // Crear items de la galería para cada imagen/video
+        velitasMedia.forEach((media, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'velitas-gallery-item';
+            galleryItem.setAttribute('data-index', index);
+            galleryItem.setAttribute('data-src', media.src);
             
             if (media.type === 'video') {
-                // Crear elemento de video
-                const video = document.createElement('video');
-                video.setAttribute('data-src', media.src);
-                video.className = 'd-block w-100';
-                video.controls = true;
-                video.preload = 'none';
-                video.setAttribute('title', media.alt);
-                video.style.maxHeight = '400px';
-                video.style.objectFit = 'contain';
+                // Para videos, crear un thumbnail con badge
+                const videoThumbnail = document.createElement('div');
+                videoThumbnail.style.position = 'relative';
+                videoThumbnail.style.width = '100%';
+                videoThumbnail.style.height = '100%';
+                videoThumbnail.style.background = 'linear-gradient(135deg, #FF8C69, #FFA07A)';
+                videoThumbnail.style.display = 'flex';
+                videoThumbnail.style.alignItems = 'center';
+                videoThumbnail.style.justifyContent = 'center';
+                videoThumbnail.style.color = 'white';
+                videoThumbnail.style.fontSize = '2rem';
                 
-                const source = document.createElement('source');
-                source.setAttribute('data-src', media.src);
-                source.type = 'video/mp4';
-                video.appendChild(source);
+                const playIcon = document.createElement('span');
+                playIcon.textContent = '▶️';
+                videoThumbnail.appendChild(playIcon);
                 
-                carouselItem.appendChild(video);
+                const videoBadge = document.createElement('div');
+                videoBadge.className = 'velitas-gallery-video-badge';
+                videoBadge.textContent = '🎥 Video';
+                videoThumbnail.appendChild(videoBadge);
+                
+                galleryItem.appendChild(videoThumbnail);
+                
+                // Al hacer clic en video, abrir en lightbox
+                galleryItem.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openVelitasLightbox(media.src, media.alt);
+                });
             } else {
-                // Crear elemento de imagen
+                // Para imágenes, crear elemento img
                 const img = document.createElement('img');
-                img.setAttribute('data-src', media.src);
-                img.src = '';
-                img.className = 'd-block w-100';
+                img.src = media.src;
                 img.alt = media.alt;
+                img.className = 'velitas-gallery-img';
                 img.loading = 'lazy';
                 
-                carouselItem.appendChild(img);
+                galleryItem.appendChild(img);
+                
+                // Overlay para hover
+                const overlay = document.createElement('div');
+                overlay.className = 'velitas-gallery-overlay';
+                const icon = document.createElement('span');
+                icon.className = 'velitas-gallery-icon';
+                icon.textContent = '👁️';
+                overlay.appendChild(icon);
+                galleryItem.appendChild(overlay);
+                
+                // Al hacer clic, abrir lightbox
+                galleryItem.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openVelitasLightbox(media.src, media.alt);
+                });
             }
             
-            carouselInner.appendChild(carouselItem);
-            
-            // Crear indicador
-            const indicator = document.createElement('button');
-            indicator.type = 'button';
-            indicator.setAttribute('data-bs-target', '#velitasCarousel');
-            indicator.setAttribute('data-bs-slide-to', i.toString());
-            indicator.setAttribute('aria-label', media.alt);
-            
-            indicatorsContainer.appendChild(indicator);
-        }
-        
-        // Cargar todas las imágenes y videos con lazy loading
-        const images = carouselInner.querySelectorAll('img[data-src]');
-        images.forEach((img) => {
-            if (img.dataset.src) {
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-            }
+            galleryGrid.appendChild(galleryItem);
         });
         
-        const videos = carouselInner.querySelectorAll('video[data-src]');
-        videos.forEach((video) => {
-            if (video.dataset.src) {
-                const source = video.querySelector('source[data-src]');
-                if (source) {
-                    source.src = source.dataset.src;
-                    source.removeAttribute('data-src');
-                    video.load();
-                }
-                video.removeAttribute('data-src');
-            }
-        });
+        console.log('✅ Galería de velitas cargada con', velitasMedia.length, 'elementos en grid 3x4');
     }
     
     // Variable para almacenar el intervalo de auto-play de velitas
     let velitasAutoPlayInterval = null;
+    
+    // Variable para almacenar la URL de la imagen actual en el lightbox
+    let currentVelitasImageUrl = '';
+    // Variable para almacenar el índice actual en el lightbox
+    let currentLightboxIndex = 0;
+    
+    // Función para abrir el lightbox con la imagen ampliada o video
+    function openVelitasLightbox(mediaSrc, mediaAlt, index = null) {
+        // Si se proporciona un índice, usarlo; si no, buscar el índice
+        if (index !== null) {
+            currentLightboxIndex = index;
+        } else {
+            const foundIndex = velitasMedia.findIndex(media => media.src === mediaSrc);
+            currentLightboxIndex = foundIndex >= 0 ? foundIndex : 0;
+        }
+        const lightboxModal = document.getElementById('velitasLightboxModal');
+        const lightboxBody = lightboxModal ? lightboxModal.querySelector('.velitas-lightbox-body') : null;
+        const lightboxTitle = document.getElementById('velitasLightboxModalLabel');
+        const btnDownload = document.getElementById('btnDownloadVelitasImage');
+        
+        if (!lightboxModal || !lightboxBody) return;
+        
+        // Verificar si es video o imagen
+        const isVideo = mediaSrc.toLowerCase().endsWith('.mp4') || mediaSrc.toLowerCase().endsWith('.webm') || mediaSrc.toLowerCase().endsWith('.ogg');
+        
+        // Obtener el contenedor del contenido (donde va la imagen/video)
+        let mainContent = lightboxBody.querySelector('.velitas-lightbox-main-content');
+        let contentWrapper = mainContent ? mainContent.querySelector('.velitas-lightbox-content-wrapper') : null;
+        const deseoLightbox = document.getElementById('velitasDeseoLightbox');
+        
+        if (!mainContent) {
+            // Si no existe, crear la estructura completa
+            lightboxBody.innerHTML = `
+                <div class="velitas-lightbox-main-content">
+                    <button class="velitas-lightbox-nav velitas-lightbox-prev" id="velitasLightboxPrev" aria-label="Anterior">
+                        <span>‹</span>
+                    </button>
+                    <div class="velitas-lightbox-content-wrapper"></div>
+                    <button class="velitas-lightbox-nav velitas-lightbox-next" id="velitasLightboxNext" aria-label="Siguiente">
+                        <span>›</span>
+                    </button>
+                </div>
+                <div class="velitas-deseo-wrapper velitas-deseo-lightbox" id="velitasDeseoLightbox" style="display: none;">
+                    <div class="velitas-deseo-box">
+                        <h3 class="velitas-deseo-title">La luz de mi princesa</h3>
+                        <p class="velitas-deseo-text" id="velitasDeseoText">
+                            Dejo arder esta vela como reflejo de la luz que encuentro en ti; esa que me invita a creer en tu esencia 
+                            incluso entre nuestras diferencias. Te guardo en mi pensamiento y estas en cada paso, porque tu presencia ha dejado un brillo sincero en mi corazón.
+                            <br><br>
+                            Creo en ti, Elizabeth Timarán, en quien eres realmente y en la luz que llevas dentro. Que nunca deje de brillar…
+                        </p>
+                    </div>
+                </div>
+            `;
+            mainContent = lightboxBody.querySelector('.velitas-lightbox-main-content');
+            contentWrapper = mainContent.querySelector('.velitas-lightbox-content-wrapper');
+        }
+        
+        // Mostrar el texto del deseo en el lightbox
+        if (deseoLightbox) {
+            deseoLightbox.style.display = 'block';
+        } else {
+            const newDeseoLightbox = lightboxBody.querySelector('#velitasDeseoLightbox');
+            if (newDeseoLightbox) {
+                newDeseoLightbox.style.display = 'block';
+            }
+        }
+        
+        // Limpiar solo el contenido, no las flechas
+        contentWrapper.innerHTML = '';
+        
+        if (isVideo) {
+            // Para videos, crear un elemento video
+            const video = document.createElement('video');
+            video.src = mediaSrc;
+            video.controls = true;
+            video.className = 'velitas-lightbox-img';
+            video.style.maxWidth = '100%';
+            video.style.maxHeight = 'calc(100vh - 150px)';
+            video.style.width = 'auto';
+            video.style.height = 'auto';
+            video.style.display = 'block';
+            video.style.margin = '0 auto';
+            
+            contentWrapper.appendChild(video);
+            
+            // Mostrar botón de descarga también para videos
+            if (btnDownload) {
+                btnDownload.style.display = 'flex';
+                btnDownload.textContent = '📥 Descargar video';
+            }
+            
+            currentVelitasImageUrl = mediaSrc;
+            // No mostrar título
+            if (lightboxTitle) {
+                lightboxTitle.textContent = '';
+            }
+        } else {
+            // Para imágenes, crear elemento img
+            const img = document.createElement('img');
+            img.id = 'velitasLightboxImage';
+            img.src = mediaSrc;
+            img.alt = mediaAlt || 'Imagen ampliada';
+            img.className = 'velitas-lightbox-img';
+            img.style.display = 'block';
+            
+            contentWrapper.appendChild(img);
+            
+            // Mostrar botón de descarga para imágenes
+            if (btnDownload) {
+                btnDownload.style.display = 'flex';
+                btnDownload.textContent = '📥 Descargar';
+            }
+            
+            currentVelitasImageUrl = mediaSrc;
+            // No mostrar título
+            if (lightboxTitle) {
+                lightboxTitle.textContent = '';
+            }
+        }
+        
+        // Configurar navegación y cierre
+        setupLightboxNavigation();
+        setupLightboxClose();
+        
+        // Obtener o crear instancia del modal
+        let modal = bootstrap.Modal.getInstance(lightboxModal);
+        if (!modal) {
+            // Crear nueva instancia del modal
+            modal = new bootstrap.Modal(lightboxModal, {
+                backdrop: 'static',
+                keyboard: false
+            });
+        }
+        
+        // Mostrar el modal
+        modal.show();
+    }
+    
+    // Función para configurar el cierre del lightbox
+    function setupLightboxClose() {
+        const lightboxModal = document.getElementById('velitasLightboxModal');
+        const btnCloseLightbox = document.getElementById('btnCloseVelitasLightbox');
+        
+        if (!lightboxModal) return;
+        
+        // Configurar el botón de cerrar para que regrese a la galería
+        if (btnCloseLightbox) {
+            // Remover listeners anteriores si existen
+            const existingBtn = btnCloseLightbox;
+            const newBtnClose = existingBtn.cloneNode(true);
+            existingBtn.parentNode.replaceChild(newBtnClose, existingBtn);
+            
+            newBtnClose.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeLightboxAndReturnToGallery();
+            });
+        }
+        
+        // Prevenir que el cierre del lightbox cierre también la modal principal
+        // Remover listener anterior si existe
+        if (lightboxModal._velitasCloseHandler) {
+            lightboxModal.removeEventListener('hide.bs.modal', lightboxModal._velitasCloseHandler);
+        }
+        
+        const closeHandler = function(e) {
+            // Asegurarse de que la modal principal de velitas siga abierta
+            setTimeout(() => {
+                const velitasModal = document.getElementById('velitasModal');
+                if (velitasModal && !velitasModal.classList.contains('show')) {
+                    const velitasModalInstance = new bootstrap.Modal(velitasModal);
+                    velitasModalInstance.show();
+                }
+            }, 50);
+        };
+        
+        lightboxModal._velitasCloseHandler = closeHandler;
+        lightboxModal.addEventListener('hide.bs.modal', closeHandler);
+    }
+    
+    // Función para configurar la navegación del lightbox
+    function setupLightboxNavigation() {
+        const btnPrev = document.getElementById('velitasLightboxPrev');
+        const btnNext = document.getElementById('velitasLightboxNext');
+        
+        if (!btnPrev || !btnNext) return;
+        
+        // Remover listeners anteriores
+        const newBtnPrev = btnPrev.cloneNode(true);
+        const newBtnNext = btnNext.cloneNode(true);
+        btnPrev.parentNode.replaceChild(newBtnPrev, btnPrev);
+        btnNext.parentNode.replaceChild(newBtnNext, btnNext);
+        
+        // Navegación anterior
+        newBtnPrev.addEventListener('click', function() {
+            navigateLightbox(-1);
+        });
+        
+        // Navegación siguiente
+        newBtnNext.addEventListener('click', function() {
+            navigateLightbox(1);
+        });
+        
+        // Remover listener anterior de teclado si existe
+        if (document._velitasLightboxKeyboardHandler) {
+            document.removeEventListener('keydown', document._velitasLightboxKeyboardHandler);
+        }
+        
+        // Navegación con teclado
+        document._velitasLightboxKeyboardHandler = handleLightboxKeyboard;
+        document.addEventListener('keydown', handleLightboxKeyboard);
+    }
+    
+    // Función para manejar teclado en el lightbox
+    function handleLightboxKeyboard(e) {
+        const lightboxModal = document.getElementById('velitasLightboxModal');
+        if (!lightboxModal || !lightboxModal.classList.contains('show')) {
+            document.removeEventListener('keydown', handleLightboxKeyboard);
+            return;
+        }
+        
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            navigateLightbox(-1);
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            navigateLightbox(1);
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            // Cerrar solo el lightbox y regresar a la galería
+            closeLightboxAndReturnToGallery();
+        }
+    }
+    
+    // Función para cerrar el lightbox y regresar a la galería
+    function closeLightboxAndReturnToGallery() {
+        const lightboxModal = document.getElementById('velitasLightboxModal');
+        if (!lightboxModal) return;
+        
+        // Remover listener de teclado
+        if (document._velitasLightboxKeyboardHandler) {
+            document.removeEventListener('keydown', document._velitasLightboxKeyboardHandler);
+            document._velitasLightboxKeyboardHandler = null;
+        }
+        
+        const modal = bootstrap.Modal.getInstance(lightboxModal);
+        if (modal) {
+            modal.hide();
+            // Asegurarse de que la modal principal de velitas siga abierta
+            setTimeout(() => {
+                const velitasModal = document.getElementById('velitasModal');
+                if (velitasModal && !velitasModal.classList.contains('show')) {
+                    const velitasModalInstance = new bootstrap.Modal(velitasModal);
+                    velitasModalInstance.show();
+                }
+            }, 100);
+        }
+    }
+    
+    // Función para navegar en el lightbox (circular)
+    function navigateLightbox(direction) {
+        currentLightboxIndex += direction;
+        
+        // Navegación circular
+        if (currentLightboxIndex < 0) {
+            currentLightboxIndex = velitasMedia.length - 1;
+        } else if (currentLightboxIndex >= velitasMedia.length) {
+            currentLightboxIndex = 0;
+        }
+        
+        // Cargar la nueva imagen/video
+        const media = velitasMedia[currentLightboxIndex];
+        if (media) {
+            openVelitasLightbox(media.src, media.alt, currentLightboxIndex);
+        }
+    }
+    
+    // Función para descargar la imagen o video del lightbox
+    function downloadVelitasImage() {
+        if (!currentVelitasImageUrl) return;
+        
+        // Extraer el nombre del archivo de la URL
+        const urlParts = currentVelitasImageUrl.split('/');
+        const fileName = urlParts[urlParts.length - 1] || 'archivo-velitas';
+        
+        // Verificar si es video o imagen
+        const isVideo = currentVelitasImageUrl.toLowerCase().endsWith('.mp4') || 
+                       currentVelitasImageUrl.toLowerCase().endsWith('.webm') || 
+                       currentVelitasImageUrl.toLowerCase().endsWith('.ogg');
+        
+        // Usar fetch para descargar el archivo como blob
+        fetch(currentVelitasImageUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al obtener el archivo');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                // Crear una URL del blob
+                const blobUrl = window.URL.createObjectURL(blob);
+                
+                // Crear un elemento <a> temporal para descargar
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = fileName; // Esto hace que el navegador pregunte dónde guardar
+                link.style.display = 'none';
+                link.setAttribute('download', fileName); // Asegurar el atributo download
+                
+                // Agregar al DOM, hacer clic y remover
+                document.body.appendChild(link);
+                link.click();
+                
+                // Limpiar después de un tiempo
+                setTimeout(() => {
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(blobUrl);
+                }, 200);
+                
+                console.log('📥 Archivo descargado:', fileName, isVideo ? '(Video)' : '(Imagen)');
+            })
+            .catch(error => {
+                console.error('Error al descargar el archivo:', error);
+                // Fallback: intentar descarga directa (puede abrir en nueva pestaña en algunos navegadores)
+                const link = document.createElement('a');
+                link.href = currentVelitasImageUrl;
+                link.download = fileName;
+                link.setAttribute('download', fileName);
+                link.style.display = 'none';
+                link.target = '_self'; // Intentar descargar en la misma ventana
+                document.body.appendChild(link);
+                link.click();
+                setTimeout(() => {
+                    document.body.removeChild(link);
+                }, 200);
+            });
+    }
+    
+    // Event listener para el botón de descarga
+    const btnDownloadVelitasImage = document.getElementById('btnDownloadVelitasImage');
+    if (btnDownloadVelitasImage) {
+        btnDownloadVelitasImage.addEventListener('click', function(e) {
+            e.preventDefault();
+            downloadVelitasImage();
+        });
+    }
     
     // Función para iniciar el auto-play de velitas
     function startVelitasAutoPlay() {
@@ -3589,14 +3880,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const carouselInstance = bootstrap.Carousel.getInstance(velitasCarousel);
         if (!carouselInstance) return;
         
-        // Iniciar auto-play cada 7 segundos
+        // Iniciar auto-play cada 10 segundos
         velitasAutoPlayInterval = setInterval(() => {
             if (carouselInstance) {
                 carouselInstance.next();
             }
-        }, 7000);
+        }, 10000);
         
-        console.log('✅ Auto-play de velitas iniciado (cada 7 segundos)');
+        console.log('✅ Auto-play de velitas iniciado (cada 10 segundos)');
     }
     
     // Función para detener el auto-play de velitas
@@ -3718,17 +4009,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 btnEncenderVela.style.display = 'block';
             }
             
-            // Cargar imágenes y video del carrusel cuando se abra el modal
-            loadVelitasCarouselImages();
-            
-            // Inicializar el carrusel cuando la modal esté completamente visible
-            setTimeout(() => {
-                initVelitasCarousel();
-                // El auto-play se inicia dentro de initVelitasCarousel
-            }, 200);
-            
-            // Agregar listener de teclado cuando se abre el modal
-            document.addEventListener('keydown', handleVelitasKeyboard);
+            // Cargar imágenes en la galería cuando se abra el modal
+            loadVelitasGallery();
             
             // Reproducir canción cuando se abre el modal
             if (audioVelitas) {

@@ -463,29 +463,12 @@
                     </div>
                     
                     <div class="velitas-content-container">
-                        <div class="velitas-carousel-wrapper">
-                            <div id="velitasCarousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
-                                <div class="carousel-inner" id="velitasCarouselInner">
-                                    <div class="carousel-item active">
-                                        <img data-src="images/velitas/BCZD1998.jpg" src="" class="d-block w-100" alt="Vela 1">
-                                    </div>
-                                    <!-- Las demás imágenes y video se cargarán dinámicamente -->
-                                </div>
-                                
-                                <!-- Controles del carrusel -->
-                                <button class="carousel-control-prev" type="button" data-bs-target="#velitasCarousel" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Anterior</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#velitasCarousel" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Siguiente</span>
-                                </button>
+                        <div class="velitas-gallery-wrapper">
+                            <div class="velitas-gallery-instruction">
+                                <p>👆 Haz clic en cualquier imagen para verla ampliada o descargarla</p>
                             </div>
-                            
-                            <!-- Indicadores del carrusel -->
-                            <div class="carousel-indicators velitas-indicators" id="velitasIndicators">
-                                <button type="button" data-bs-target="#velitasCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Vela 1"></button>
+                            <div class="velitas-gallery-grid" id="velitasGalleryGrid">
+                                <!-- Las imágenes se cargarán dinámicamente -->
                             </div>
                         </div>
                         <div class="velitas-deseo-wrapper">
@@ -632,5 +615,47 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Lightbox para ampliar imágenes de velitas -->
+    <div class="modal fade" id="velitasLightboxModal" tabindex="-1" aria-labelledby="velitasLightboxModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+            <div class="modal-content velitas-lightbox-content">
+                <div class="modal-header velitas-lightbox-header">
+                    <h5 class="modal-title" id="velitasLightboxModalLabel">Imagen ampliada</h5>
+                    <div class="velitas-lightbox-actions">
+                        <button type="button" class="btn btn-download-image" id="btnDownloadVelitasImage" title="Descargar">
+                            📥 Descargar
+                        </button>
+                        <button type="button" class="btn-close btn-close-white" id="btnCloseVelitasLightbox" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="modal-body velitas-lightbox-body">
+                    <div class="velitas-lightbox-main-content">
+                        <button class="velitas-lightbox-nav velitas-lightbox-prev" id="velitasLightboxPrev" aria-label="Anterior">
+                            <span>‹</span>
+                        </button>
+                        <div class="velitas-lightbox-content-wrapper">
+                            <img id="velitasLightboxImage" src="" alt="Imagen ampliada" class="velitas-lightbox-img" style="display: block;">
+                        </div>
+                        <button class="velitas-lightbox-nav velitas-lightbox-next" id="velitasLightboxNext" aria-label="Siguiente">
+                            <span>›</span>
+                        </button>
+                    </div>
+                    <div class="velitas-deseo-wrapper velitas-deseo-lightbox" id="velitasDeseoLightbox" style="display: none;">
+                        <div class="velitas-deseo-box">
+                            <h3 class="velitas-deseo-title">La luz de mi princesa</h3>
+                            <p class="velitas-deseo-text" id="velitasDeseoText">
+                                Dejo arder esta vela como reflejo de la luz que encuentro en ti; esa que me invita a creer en tu esencia 
+                                incluso entre nuestras diferencias. Te guardo en mi pensamiento y estas en cada paso, porque tu presencia ha dejado un brillo sincero en mi corazón.
+                                <br><br>
+                                Creo en ti, Elizabeth Timarán, en quien eres realmente y en la luz que llevas dentro. Que nunca deje de brillar…
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
