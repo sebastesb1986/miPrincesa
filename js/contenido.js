@@ -59,7 +59,6 @@ function openGalleryModal(imageIndex, imageSrc) {
     
     // Asegurarse de que el índice esté dentro del rango correcto
     if (imageIndex >= textos.length) {
-        console.log('⚠️ Índice fuera de rango, reseteando a 0');
         imageIndex = 0;
     }
     
@@ -83,17 +82,12 @@ function openGalleryModal(imageIndex, imageSrc) {
     
     // Abrir el modal
     galleryModal.show();
-    
-    console.log('🖼️ Abriendo galería - Imagen:', imageIndex + 1, 'Texto:', textos[imageIndex]);
 }
 
 // Event listeners para los items de la galería
 document.addEventListener('DOMContentLoaded', function() {
     // Esperar a que el DOM esté completamente cargado
     const galleryItems = document.querySelectorAll('.gallery-item');
-    
-    console.log('🖼️ Total de items en la galería:', galleryItems.length);
-    console.log('📝 Total de textos disponibles:', textos.length);
     
     // Agregar event listener a cada item de la galería
     galleryItems.forEach((item, index) => {
@@ -109,7 +103,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const img = item.querySelector('img');
         if (img) {
             img.addEventListener('load', function() {
-                console.log(`✅ Imagen de galería ${index + 1} cargada:`, this.src);
             });
             img.addEventListener('error', function() {
                 console.error(`❌ Error cargando imagen de galería ${index + 1}:`, this.src);
@@ -127,7 +120,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function updateDescriptionText(index) {
     // Asegúrate de que el índice esté dentro del rango correcto
     if (index >= textos.length) {
-        console.log('⚠️ Índice fuera de rango, reseteando a 0');
         index = 0;
     }
 
@@ -320,7 +312,6 @@ function typeWriterWithImage(element, text, imgHTML, speed = 50) {
             // Cuando termine la animación, agregar la imagen
             if (imgHTML) {
                 element.innerHTML = text + ' ' + imgHTML;
-                console.log('Imagen de princesa agregada al DOM');
             }
         }
     }
@@ -330,23 +321,19 @@ function typeWriterWithImage(element, text, imgHTML, speed = 50) {
 
 // Función para mostrar la burbuja de diálogo de la princesa (solo invitación inicial)
 function showPrincessBubble() {
-    console.log('🔵 Función showPrincessBubble() llamada');
     
     try {
         // Remover burbuja existente si hay una
         const existingBubble = document.querySelector('.princess-bubble');
         if (existingBubble) {
-            console.log('🔵 Removiendo burbuja existente');
             existingBubble.remove();
         }
         
         // Mensaje de invitación inicial
         const mensajeInvitacion = "👑 ¡Pulsame!, tengo algo muy especial que decirte... 💕";
-        console.log('🔵 Mensaje de invitación:', mensajeInvitacion);
         
         // Obtener la posición de la princesa
         const princessImg = document.querySelector('.princess-icon');
-        console.log('🔵 Icono de princesa encontrado:', princessImg);
         
         // Verificar que el icono de la princesa exista
         if (!princessImg) {
@@ -359,7 +346,6 @@ function showPrincessBubble() {
         }
         
         const princessRect = princessImg.getBoundingClientRect();
-        console.log('🔵 Dimensiones del icono:', princessRect);
         
         // Verificar que el icono tenga dimensiones válidas
         if (princessRect.width === 0 || princessRect.height === 0) {
@@ -572,9 +558,6 @@ function showPrincessBubble() {
         }
     
         // La burbuja ya está en el DOM desde antes, solo confirmar que está visible
-        console.log('✅ Burbuja de invitación de la princesa mostrada exitosamente');
-        console.log('✅ Posición final - Top:', finalTop, 'Left:', bubbleLeft);
-        console.log('✅ Dimensiones - Width:', bubbleWidth, 'Height:', bubbleHeight);
         
         // Remover la burbuja después de 3 segundos
         setTimeout(() => {
@@ -585,7 +568,6 @@ function showPrincessBubble() {
                 setTimeout(() => {
                     if (bubble.parentNode) {
                         bubble.parentNode.removeChild(bubble);
-                        console.log('Burbuja de invitación removida automáticamente después de 3 segundos');
                     }
                 }, 300);
             }
@@ -601,7 +583,6 @@ function showPrincessBubble() {
 
 // Función para mostrar la secuencia completa de mensajes de la princesa (solo cuando se hace clic)
 function showPrincessFullSequence() {
-    console.log('Mostrando secuencia completa de mensajes de la princesa');
     
     // Remover burbuja existente si hay una
     const existingBubble = document.querySelector('.princess-bubble');
@@ -728,7 +709,6 @@ function showPrincessFullSequence() {
         
         // Agregar la burbuja al body
         document.body.appendChild(bubble);
-        console.log(`Mensaje ${indiceMensaje + 1} de la princesa mostrado`);
         
         // Programar el siguiente mensaje o finalizar
         indiceMensaje++;
@@ -744,7 +724,6 @@ function showPrincessFullSequence() {
                     setTimeout(() => {
                         if (bubble.parentNode) {
                             bubble.parentNode.removeChild(bubble);
-                            console.log('Secuencia de mensajes de la princesa completada');
                         }
                     }, 500);
                 }
@@ -779,11 +758,9 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 const rect = princessIcon.getBoundingClientRect();
                 if (rect.width > 0 && rect.height > 0) {
-                    console.log('Mostrando burbuja de invitación automáticamente');
                     showPrincessBubble();
                 } else {
                     // Si no tiene dimensiones, intentar de nuevo
-                    console.log('El icono aún no tiene dimensiones, intentando de nuevo...');
                     setTimeout(() => {
                         tryShowPrincessBubble();
                     }, 1000);
@@ -791,7 +768,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         } else {
             // Si no se encuentra el icono, intentar de nuevo
-            console.log('No se encontró el icono de la princesa, intentando de nuevo...');
             setTimeout(() => {
                 tryShowPrincessBubble();
             }, 1000);
@@ -808,7 +784,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             const princessIcon = document.querySelector('.princess-icon');
             if (princessIcon && !document.querySelector('.princess-bubble')) {
-                console.log('Intentando mostrar burbuja después de load...');
                 showPrincessBubble();
             }
         }, 1000);
@@ -1690,7 +1665,6 @@ function setupOraculaAudio() {
         
         // Event listener para cuando termine la canción
         audioTePienso.addEventListener('ended', function() {
-            console.log('🎵 Canción tePienso.mp3 terminada');
             // Opcional: reproducir de nuevo si la modal sigue abierta
             if (document.getElementById('oraculaModal').classList.contains('show')) {
                 audioTePienso.currentTime = 0;
@@ -1846,7 +1820,6 @@ function setupAudioIndicator() {
                 audioTePienso.volume = 0.25; // Asegurar volumen al 25%
                 audioTePienso.play()
                     .then(() => {
-                        console.log('🎵 Canción tePienso.mp3 reanudada al 25% de volumen');
                         updateAudioIndicator(true);
                     })
                     .catch(error => {
@@ -1855,7 +1828,6 @@ function setupAudioIndicator() {
             } else {
                 // Si está reproduciéndose, pausar
                 audioTePienso.pause();
-                console.log('⏸️ Canción tePienso.mp3 pausada');
                 updateAudioIndicator(false);
             }
         });
@@ -1910,7 +1882,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 audioTePienso.volume = 0.25; // Asegurar volumen al 25%
                 audioTePienso.play()
                     .then(() => {
-                        console.log('🎵 Canción tePienso.mp3 iniciada al 25% de volumen');
                         updateAudioIndicator(true); // Actualizar indicador como reproduciendo
                         trackUserActivity('Audio Oráculo Reproducido');
                     })
@@ -1935,7 +1906,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (audioTePienso) {
                 audioTePienso.pause();
                 audioTePienso.currentTime = 0;
-                console.log('🔇 Canción tePienso.mp3 detenida');
                 updateAudioIndicator(false); // Actualizar indicador como pausado
             }
         });
@@ -2215,7 +2185,6 @@ document.addEventListener('DOMContentLoaded', () => {
         improveCarouselAccessibility();
         addParallaxEffect();
         
-        console.log('🎠 Mejoras dinámicas del carrusel inicializadas');
     }, 1000);
 });
 
@@ -2371,7 +2340,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Crear partículas de estrellas
             createStarParticle();
             
-            console.log('⭐ Modal de estrellas abierta');
         });
     }
     
@@ -2389,7 +2357,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Event listener para cuando se cierra la modal
         starsModal.addEventListener('hidden.bs.modal', function() {
-            console.log('⭐ Modal de estrellas cerrada');
         });
     }
 });
@@ -2438,24 +2405,16 @@ function initStarsCarousel() {
         touch: true
     });
     
-    console.log('✅ Carrusel inicializado:', carousel);
     
     // Verificar que los elementos existen
     const prevBtn = starsCarousel.querySelector('.carousel-control-prev');
     const nextBtn = starsCarousel.querySelector('.carousel-control-next');
     const indicators = starsCarousel.querySelectorAll('.carousel-indicators button');
     
-    console.log('🔍 Elementos encontrados:', {
-        prevBtn: !!prevBtn,
-        nextBtn: !!nextBtn,
-        indicators: indicators.length
-    });
-    
     // Añadir event listeners manuales
     if (prevBtn) {
         prevBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('⬅️ Botón anterior clickeado');
             carousel.prev();
         });
     }
@@ -2463,7 +2422,6 @@ function initStarsCarousel() {
     if (nextBtn) {
         nextBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('➡️ Botón siguiente clickeado');
             carousel.next();
         });
     }
@@ -2472,7 +2430,6 @@ function initStarsCarousel() {
     indicators.forEach((indicator, index) => {
         indicator.addEventListener('click', function(e) {
             e.preventDefault();
-            console.log('🔘 Indicador clickeado:', index);
             carousel.to(index);
         });
     });
@@ -2480,7 +2437,6 @@ function initStarsCarousel() {
     // Event listener para actualizar indicadores y clases
     starsCarousel.addEventListener('slid.bs.carousel', function(event) {
         const activeIndex = event.to;
-        console.log('📸 Slide cambiada a:', activeIndex);
         
         // Remover clase active de todos los items
         const allItems = starsCarousel.querySelectorAll('.carousel-item');
@@ -2835,12 +2791,9 @@ function initializePrincessCarousel() {
         // Forzar que vaya al primer slide
         bsCarousel.to(0);
         
-        console.log('🎠 Carrusel de Princess inicializado correctamente');
-        console.log('📸 Total de imágenes:', allItems.length);
         if (allItems[0]) {
             const firstImg = allItems[0].querySelector('img');
             if (firstImg) {
-                console.log('🖼️ Imagen activa:', firstImg.alt);
             }
         }
     }
@@ -2857,7 +2810,6 @@ function openPrincessModal() {
         // Cargar imágenes del carrusel de princess cuando se abra el modal
         loadPrincessCarouselImages();
         
-        console.log('👑 Modal de Princess abierto automáticamente');
     }, 1000); // 1 segundo de delay para que se vea mejor
 }
 
@@ -2882,7 +2834,6 @@ function openPrincessModalFromTour() {
         initializePrincessCarousel();
     }, 200);
     
-    console.log('💙 Modal de Princess abierto desde Tour de Amor');
 }
 
 // Función para cargar imágenes del carrusel de princess solo cuando se abra el modal
@@ -2925,7 +2876,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const princessModal = document.getElementById('princessModal');
     if (princessModal) {
         princessModal.addEventListener('shown.bs.modal', function() {
-            console.log('🎠 Modal de Princess abierto, inicializando carrusel...');
             trackUserActivity('Modal Princess Abierto', { source: 'automático' });
             
             // Cargar imágenes del carrusel de princess cuando se abra el modal
@@ -2942,7 +2892,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     
-    console.log('📱 Botón de descarga inicializado');
     
     // Inicializar botón de tour de amor
     initializeTourButton();
@@ -2994,7 +2943,6 @@ function trackUserActivity(action, details = {}) {
     
     // Sin envío de email para evitar errores 400
     
-    console.log('📊 Actividad registrada:', activity);
 }
 
 // Función para generar ID de sesión
@@ -3024,7 +2972,6 @@ function sendActivitySummary() {
     };
     
     // Sin envío de email para evitar errores 400
-    console.log('📊 Resumen de actividades:', summary);
     
     // Limpiar actividades después de enviar
     localStorage.removeItem('userActivities');
@@ -3114,7 +3061,6 @@ function initializeTourButton() {
         this.style.boxShadow = '0 5px 15px rgba(135, 206, 235, 0.3)';
     });
     
-    console.log('💙 Botón Tour de Amor inicializado - Abre la modal de Princess');
 }
 
 
@@ -3155,7 +3101,6 @@ window.addEventListener('resize', function() {
                 arrow.style.left = `calc(50% + ${arrowOffset}px)`;
             }
             
-            console.log('💬 Burbuja de la princesa reposicionada');
         }
     }
 });
@@ -3175,13 +3120,11 @@ function detectUserInteraction() {
         document.addEventListener(event, function() {
             if (!userHasInteracted) {
                 userHasInteracted = true;
-                console.log('👤 Usuario ha interactuado - activando audio...');
                 
                 // Activar audio inmediatamente cuando el usuario interactúe
                 if (welcomeVideo) {
                     welcomeVideo.muted = false;
                     welcomeVideo.volume = 1.0;
-                    console.log('🔊 Audio activado por interacción del usuario');
                 }
             }
         }, { once: true });
@@ -3190,7 +3133,6 @@ function detectUserInteraction() {
 
 // Configurar el modal de bienvenida
 function setupWelcomeModal() {
-    console.log('🎬 Configurando modal de bienvenida...');
     
     // Detectar interacción del usuario
     detectUserInteraction();
@@ -3203,7 +3145,6 @@ function setupWelcomeModal() {
     if (welcomeVideo) {
         // Mostrar botón de cerrar cuando el video termine
         welcomeVideo.addEventListener('ended', function() {
-            console.log('🎬 Video de bienvenida terminado');
             
             // Cerrar automáticamente el modal después de 2 segundos
             setTimeout(() => {
@@ -3219,7 +3160,6 @@ function setupWelcomeModal() {
         
         // Manejar cuando el video esté listo para reproducir
         welcomeVideo.addEventListener('canplaythrough', function() {
-            console.log('🎬 Video de bienvenida listo para reproducir');
         });
         
     }
@@ -3228,7 +3168,6 @@ function setupWelcomeModal() {
     const closeBtn = document.getElementById('welcomeModalClose');
     if (closeBtn) {
         closeBtn.addEventListener('click', function() {
-            console.log('❌ Cerrando modal de bienvenida...');
             hideWelcomeModal();
         });
     }
@@ -3236,7 +3175,6 @@ function setupWelcomeModal() {
     // Configurar evento cuando el modal se cierre completamente
     const modalElement = document.getElementById('welcomeModal');
     modalElement.addEventListener('hidden.bs.modal', function() {
-        console.log('✅ Modal completamente cerrado - limpiando estado...');
         
         // Limpiar estado adicional
         document.body.classList.remove('modal-open');
@@ -3248,13 +3186,11 @@ function setupWelcomeModal() {
         const modalBackdrops = document.querySelectorAll('.modal-backdrop');
         modalBackdrops.forEach(backdrop => backdrop.remove());
         
-        console.log('✅ Estado del modal completamente restaurado');
     });
 }
 
 // Mostrar el modal de bienvenida
 function showWelcomeModal() {
-    console.log('🎬 Mostrando modal de bienvenida...');
     
     // Resetear el estado de cierre
     modalClosing = false;
@@ -3273,7 +3209,6 @@ function showWelcomeModal() {
         welcomeVideo.controls = true; // Mostrar controles desde el inicio
         welcomeVideo.volume = 1.0; // Volumen máximo
         
-        console.log('🎵 Reproduciendo video silenciado - audio se activará con interacción del usuario');
         
         // Reproducir inmediatamente (silenciado) con manejo de errores mejorado
         const playVideo = () => {
@@ -3283,7 +3218,6 @@ function showWelcomeModal() {
             }
             
             welcomeVideo.play().then(() => {
-                console.log('🎬 Video reproduciéndose silenciado - esperando interacción del usuario para audio');
                 
                 // Mostrar indicador sutil de audio
                 const audioIndicator = document.createElement('div');
@@ -3341,7 +3275,6 @@ function showWelcomeModal() {
                 if (error.name !== 'AbortError') {
                     console.warn('⚠️ No se pudo reproducir el video:', error);
                 } else {
-                    console.log('🎬 Reproducción interrumpida (normal)');
                 }
             });
         };
@@ -3353,7 +3286,6 @@ function showWelcomeModal() {
 
 // Ocultar el modal de bienvenida
 function hideWelcomeModal() {
-    console.log('🎬 Ocultando modal de bienvenida...');
     
     // Marcar que el modal se está cerrando
     modalClosing = true;
@@ -3364,7 +3296,6 @@ function hideWelcomeModal() {
             welcomeVideo.pause();
             welcomeVideo.currentTime = 0; // Reiniciar el video
         } catch (error) {
-            console.log('🎬 Video ya pausado o no disponible');
         }
     }
     
@@ -3403,7 +3334,6 @@ function hideWelcomeModal() {
         // Forzar reflow para asegurar que los cambios se apliquen
         document.body.offsetHeight;
         
-        console.log('✅ Modal cerrado completamente - interacción restaurada');
     }, 100);
 }
 
@@ -3426,7 +3356,6 @@ document.addEventListener('DOMContentLoaded', function() {
         btnVelitas.addEventListener('click', function() {
             const modal = new bootstrap.Modal(velitasModal);
             modal.show();
-            console.log('🕯️ Modal de velitas abierto');
         });
     }
     
@@ -3514,7 +3443,6 @@ document.addEventListener('DOMContentLoaded', function() {
             galleryGrid.appendChild(galleryItem);
         });
         
-        console.log('✅ Galería de velitas cargada con', velitasMedia.length, 'elementos en grid 3x4');
     }
     
     // Variable para almacenar el intervalo de auto-play de velitas
@@ -3839,7 +3767,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     window.URL.revokeObjectURL(blobUrl);
                 }, 200);
                 
-                console.log('📥 Archivo descargado:', fileName, isVideo ? '(Video)' : '(Imagen)');
             })
             .catch(error => {
                 console.error('Error al descargar el archivo:', error);
@@ -3887,7 +3814,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 10000);
         
-        console.log('✅ Auto-play de velitas iniciado (cada 10 segundos)');
     }
     
     // Función para detener el auto-play de velitas
@@ -3895,7 +3821,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (velitasAutoPlayInterval) {
             clearInterval(velitasAutoPlayInterval);
             velitasAutoPlayInterval = null;
-            console.log('⏸️ Auto-play de velitas detenido');
         }
     }
     
@@ -3959,7 +3884,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
             
-            console.log('✅ Carrusel de velitas inicializado con', velitasMedia.length, 'elementos');
             
             // Iniciar auto-play después de inicializar
             startVelitasAutoPlay();
@@ -4019,7 +3943,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 audioVelitas.loop = true; // Asegurar que se repita
                 audioVelitas.play()
                     .then(() => {
-                        console.log('🎵 Canción full_starts_1.mp3 iniciada (repetir activado)');
                     })
                     .catch(error => {
                         console.error('Error al reproducir full_starts_1.mp3:', error);
@@ -4029,7 +3952,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Event listener para cuando se cierra el modal
         velitasModal.addEventListener('hidden.bs.modal', function() {
-            console.log('🕯️ Modal de velitas cerrado');
             // Detener auto-play cuando se cierra el modal
             stopVelitasAutoPlay();
             
@@ -4048,7 +3970,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 audioVelitas.pause();
                 audioVelitas.currentTime = 0;
                 audioVelitas.loop = false; // Desactivar loop al cerrar
-                console.log('🔇 Canción full_starts_1.mp3 detenida');
             }
         });
     }
@@ -4083,8 +4004,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Crear efecto de partículas de luz
                 crearParticulasLuz();
-                
-                console.log('🕯️ Vela virtual encendida');
             }
         });
     }
@@ -4318,7 +4237,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
             
-            console.log('✅ Carrusel de skyStart inicializado con', skyStartImages.length, 'imágenes');
             
             // Iniciar auto-play después de inicializar
             startSkyStartAutoPlay();
@@ -4350,7 +4268,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 7000);
         
-        console.log('✅ Auto-play de skyStart iniciado (cada 7 segundos)');
     }
     
     // Función para detener el auto-play de skyStart
@@ -4358,7 +4275,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (skyStartAutoPlayInterval) {
             clearInterval(skyStartAutoPlayInterval);
             skyStartAutoPlayInterval = null;
-            console.log('⏸️ Auto-play de skyStart detenido');
         }
     }
     
@@ -4410,7 +4326,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 audioSkyStart.loop = true; // Asegurar que se repita
                 audioSkyStart.play()
                     .then(() => {
-                        console.log('🎵 Canción no_se_va1.mp3 iniciada (repetir activado)');
                     })
                     .catch(error => {
                         console.error('Error al reproducir no_se_va1.mp3:', error);
@@ -4430,7 +4345,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 audioSkyStart.pause();
                 audioSkyStart.currentTime = 0;
                 audioSkyStart.loop = false; // Desactivar loop al cerrar
-                console.log('🔇 Canción no_se_va1.mp3 detenida');
             }
         });
     }
@@ -4597,7 +4511,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
             
-            console.log('✅ Carrusel de startMoon inicializado con', startMoonImages.length, 'imágenes');
             
             // Iniciar auto-play después de inicializar
             startStartMoonAutoPlay();
@@ -4629,7 +4542,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 7000);
         
-        console.log('✅ Auto-play de startMoon iniciado (cada 7 segundos)');
     }
     
     // Función para detener el auto-play de startMoon
@@ -4637,7 +4549,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (startMoonAutoPlayInterval) {
             clearInterval(startMoonAutoPlayInterval);
             startMoonAutoPlayInterval = null;
-            console.log('⏸️ Auto-play de startMoon detenido');
         }
     }
     
@@ -4688,7 +4599,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 audioStartMoon.loop = true; // Asegurar que se repita
                 audioStartMoon.play()
                     .then(() => {
-                        console.log('🎵 Canción por_los_dos1.mp3 iniciada (repetir activado)');
                     })
                     .catch(error => {
                         console.error('Error al reproducir por_los_dos1.mp3:', error);
@@ -4708,7 +4618,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 audioStartMoon.pause();
                 audioStartMoon.currentTime = 0;
                 audioStartMoon.loop = false; // Desactivar loop al cerrar
-                console.log('🔇 Canción por_los_dos1.mp3 detenida');
             }
         });
     }
@@ -4870,7 +4779,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
             
-            console.log('✅ Carrusel de skyStart inicializado con', skyStartImages.length, 'imágenes');
             
             // Iniciar auto-play después de inicializar
             startSkyStartAutoPlay();
@@ -4898,170 +4806,276 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== FUNCIONALIDAD PARA LA CUPONERA DE AMOR VIRTUAL =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Lista de cupones de amor
-    const cupones = [
+    // Lista de cupones de amor (actualizada para coincidir con React Native)
+    const CUPONES = [
         "Vale por una cena romántica a la luz de las velas 💕",
         "Vale por un masaje relajante de 30 minutos 💆‍♀️",
-        "Vale por una noche de películas y palomitas 🍿",
-        "Vale por perdonarme una tontería 😅",
-        "Vale por un desayuno especial en la cama 🥐",
-        "Vale por un paseo romántico al atardecer 🌅",
-        "Vale por elegir tú la película esta vez 🎬",
+        "Vale porque te conteste una pregunta, la que tu quieras 🤫",
+        "Vale por un café especial 🍵",
+        "Vale por ir a cine y palomitas🎬",
         "Vale por un día sin quejarme de nada 😊",
-        "Vale por un baile romántico bajo las estrellas 💃",
         "Vale por invitarte o prepararte tu comida favorita 🍝",
         "Vale por un abrazo largo y sincero 🤗",
         "Vale por escucharte sin interrumpir 👂",
         "Vale por un día completo de atención solo para ti 💝",
         "Vale por un regalo sorpresa 🎁",
-        "Vale por una sesión de fotos románticas 📸",
+        "Vale por verte sonreir 💕",
         "Vale por acampar juntos en una jornada",
-        "Vale por un baño relajante con velas 🛁",
         "Vale por un mensaje de buenos días todos los días por una semana ☀️",
         "Vale por un día sin usar el celular cuando estemos juntos 📱",
         "Vale por un beso especial cuando tú quieras 💋",
         "Vale por un día de hacer lo que tú quieras sin quejarme 🎯",
-        "Vale por un helado compartido en el parque 🍦",
+        "Vale por un helado 🍦",
         "Vale por un poema escrito especialmente para ti ✍️",
-        "Vale porque te conteste una pregunta, la que tu quieras 🤫",
-        "Vale por un momento de silencio cómodo juntos 🤫",
+        "Vale por una noche de películas y palomitas 🍿",
         "Vale por una chocolatina para ti 🍫",
         "Vale por un ramo de flores para ti 🌸",
     ];
     
+    // Función para obtener el título de un cupón
+    function getTituloCupon(cuponTexto) {
+        const titulos = {
+            "Vale por una cena romántica a la luz de las velas 💕": "💕 Cena Romántica",
+            "Vale por un masaje relajante de 30 minutos 💆‍♀️": "💆‍♀️ Masaje Relajante",
+            "Vale por una noche de películas y palomitas 🍿": "🍿 Noche de Cine",
+            "Vale por un café especial 🍵": "🍵 Café Especial",
+            "Vale por ir a cine y palomitas🎬": "🎬 Cine y Palomitas",
+            "Vale por un día sin quejarme de nada 😊": "😊 Día Sin Quejas",
+            "Vale por invitarte o prepararte tu comida favorita 🍝": "🍝 Tu Comida Favorita",
+            "Vale por un abrazo largo y sincero 🤗": "🤗 Abrazo Sincero",
+            "Vale por escucharte sin interrumpir 👂": "👂 Te Escucho",
+            "Vale por un día completo de atención solo para ti 💝": "💝 Día Solo Para Ti",
+            "Vale por un regalo sorpresa 🎁": "🎁 Regalo Sorpresa",
+            "Vale por verte sonreir 💕": "💕 Tu Sonrisa",
+            "Vale por acampar juntos en una jornada": "🏕️ Acampada Juntos",
+            "Vale por un mensaje de buenos días todos los días por una semana ☀️": "☀️ Buenos Días",
+            "Vale por un día sin usar el celular cuando estemos juntos 📱": "📱 Sin Celular",
+            "Vale por un beso especial cuando tú quieras 💋": "💋 Beso Especial",
+            "Vale por un día de hacer lo que tú quieras sin quejarme 🎯": "🎯 Tu Día Ideal",
+            "Vale por un helado 🍦": "🍦 Helado",
+            "Vale por un poema escrito especialmente para ti ✍️": "✍️ Poema Para Ti",
+            "Vale porque te conteste una pregunta, la que tu quieras 🤫": "🤫 Pregunta Especial",
+            "Vale por una chocolatina para ti 🍫": "🍫 Chocolatina",
+            "Vale por un ramo de flores para ti 🌸": "🌸 Ramo de Flores",
+        };
+        return titulos[cuponTexto] || "💝 Cupón de Amor";
+    }
+    
+    // Referencias a elementos del DOM
     const btnCuponera = document.getElementById('btnCuponera');
     const cuponeraModal = document.getElementById('cuponeraModal');
-    const cuponText = document.getElementById('cuponText');
-    const btnNuevoCupon = document.getElementById('btnNuevoCupon');
-    const cuponCard = document.getElementById('cuponCard');
+    const cuponeraGrid = document.getElementById('cuponeraGrid');
+    const cuponeraGridWrapper = document.getElementById('cuponeraGridWrapper');
+    const cuponeraAmpliadoWrapper = document.getElementById('cuponeraAmpliadoWrapper');
+    const cuponAmpliadoText = document.getElementById('cuponAmpliadoText');
+    const btnVolverGrid = document.getElementById('btnVolverGrid');
+    const btnPrevPage = document.getElementById('btnPrevPage');
+    const btnNextPage = document.getElementById('btnNextPage');
+    const paginationText = document.getElementById('paginationText');
+    const cuponeraWarning = document.getElementById('cuponeraWarning');
     
-    // Función para obtener un cupón aleatorio
-    function obtenerCuponAleatorio() {
-        const indiceAleatorio = Math.floor(Math.random() * cupones.length);
-        return cupones[indiceAleatorio];
+    // Variables de estado
+    let currentPage = 0;
+    let selectedCuponIndex = null;
+    let canChange = true;
+    let timeRemaining = 0;
+    let timerInterval = null;
+    const cuponesPorPagina = 16; // Cambiado a 4x4 (16 cupones por página)
+    const totalPages = Math.ceil(CUPONES.length / cuponesPorPagina);
+    
+    // Obtener los cupones de la página actual
+    function getCuponesPaginaActual() {
+        const inicio = currentPage * cuponesPorPagina;
+        const fin = inicio + cuponesPorPagina;
+        return CUPONES.slice(inicio, fin);
     }
     
-    // Función para mostrar un nuevo cupón con animación
-    function mostrarNuevoCupon() {
-        if (!cuponText) return;
+    // Obtener el cupón completo basado en el índice de la página actual
+    function getCuponCompleto(indexEnPagina) {
+        const indiceGlobal = (currentPage * cuponesPorPagina) + indexEnPagina;
+        return CUPONES[indiceGlobal];
+    }
+    
+    // Renderizar la cuadrícula de cupones
+    function renderCuponGrid() {
+        if (!cuponeraGrid) return;
         
-        // Obtener nuevo cupón
-        const nuevoCupon = obtenerCuponAleatorio();
-        const esMismoCupon = (nuevoCupon === cuponAnterior);
+        const cuponesPagina = getCuponesPaginaActual();
+        cuponeraGrid.innerHTML = '';
         
-        // Animación de salida
-        if (cuponCard) {
-            cuponCard.style.animation = 'none';
-            setTimeout(() => {
-                cuponCard.style.animation = 'cuponSalida 0.3s ease-out';
-            }, 10);
+        cuponesPagina.forEach((cupon, indexEnPagina) => {
+            const cuponSquare = document.createElement('div');
+            cuponSquare.className = 'cupon-square';
+            if (selectedCuponIndex === indexEnPagina) {
+                cuponSquare.classList.add('cupon-square-selected');
+            }
+            
+            if (selectedCuponIndex !== null && selectedCuponIndex !== indexEnPagina && !canChange) {
+                cuponSquare.style.pointerEvents = 'none';
+                cuponSquare.style.opacity = '0.5';
+            }
+            
+            cuponSquare.addEventListener('click', () => handleCuponPress(indexEnPagina));
+            
+            const cuponSquareContent = document.createElement('div');
+            cuponSquareContent.className = 'cupon-square-content';
+            
+            const cuponSquareText = document.createElement('div');
+            cuponSquareText.className = 'cupon-square-text';
+            cuponSquareText.textContent = getTituloCupon(cupon);
+            
+            const dottedBorder = document.createElement('div');
+            dottedBorder.className = 'dotted-border';
+            
+            cuponSquareContent.appendChild(cuponSquareText);
+            cuponSquareContent.appendChild(dottedBorder);
+            cuponSquare.appendChild(cuponSquareContent);
+            cuponeraGrid.appendChild(cuponSquare);
+        });
+        
+        // Actualizar paginación
+        updatePagination();
+    }
+    
+    // Actualizar controles de paginación
+    function updatePagination() {
+        if (paginationText) {
+            paginationText.textContent = `Página ${currentPage + 1} de ${totalPages}`;
         }
-        
-        // Cambiar el cupón después de la animación
-        setTimeout(() => {
-            if (cuponText) {
-                cuponText.textContent = nuevoCupon;
-            }
-            
-            // Si es el mismo cupón, no deshabilitar el botón
-            if (esMismoCupon) {
-                puedeCambiarCupon = true;
-                if (btnNuevoCupon) {
-                    btnNuevoCupon.disabled = false;
-                    btnNuevoCupon.style.opacity = '1';
-                    btnNuevoCupon.style.cursor = 'pointer';
-                    btnNuevoCupon.textContent = '🎲 Nuevo Vale';
-                }
-                const warningElement = document.querySelector('.cuponera-warning');
-                if (warningElement) {
-                    warningElement.textContent = '✅ Saliste el mismo cupón - Puedes volver a sortear';
-                    warningElement.style.color = '#4CAF50';
-                    warningElement.style.fontWeight = 'bold';
-                }
-                // Limpiar temporizador si estaba corriendo
-                if (temporizadorCupon) {
-                    clearInterval(temporizadorCupon);
-                }
-            } else {
-                // Si es un cupón diferente, deshabilitar y iniciar temporizador
-                cuponAnterior = nuevoCupon;
-                iniciarTemporizador();
-            }
-            
-            // Animación de entrada
-            if (cuponCard) {
-                cuponCard.style.animation = 'cuponEntrada 0.5s ease-out';
-            }
-        }, 300);
-    }
-    
-    // Variable para el temporizador
-    let temporizadorCupon = null;
-    let tiempoRestante = 10; // 10 segundos
-    let puedeCambiarCupon = false; // Inicialmente deshabilitado
-    let cuponAnterior = null; // Para comparar si es el mismo cupón
-    
-    // Función para actualizar el temporizador
-    function actualizarTemporizador() {
-        const warningElement = document.querySelector('.cuponera-warning');
-        if (warningElement) {
-            if (tiempoRestante > 0) {
-                warningElement.textContent = `⏰ Espera ${tiempoRestante} segundos para volver a sortear otro cupón`;
-                tiempoRestante--;
-            } else {
-                // Habilitar el botón después de 15 segundos
-                puedeCambiarCupon = true;
-                if (btnNuevoCupon) {
-                    btnNuevoCupon.disabled = false;
-                    btnNuevoCupon.style.opacity = '1';
-                    btnNuevoCupon.style.cursor = 'pointer';
-                    btnNuevoCupon.textContent = '🎲 Nuevo Vale';
-                }
-                if (warningElement) {
-                    warningElement.textContent = '✅ Ya puedes volver a sortear otro cupón';
-                    warningElement.style.color = '#4CAF50';
-                    warningElement.style.fontWeight = 'bold';
-                }
-                clearInterval(temporizadorCupon);
-            }
+        if (btnPrevPage) {
+            btnPrevPage.disabled = currentPage === 0;
+        }
+        if (btnNextPage) {
+            btnNextPage.disabled = currentPage >= totalPages - 1;
         }
     }
     
-    // Función para iniciar el temporizador
+    // Manejar clic en un cupón
+    function handleCuponPress(indexEnPagina) {
+        if (selectedCuponIndex === null) {
+            // Seleccionar cupón
+            selectedCuponIndex = indexEnPagina;
+            renderCuponGrid();
+            showAmpliadoCupon();
+        } else if (canChange && selectedCuponIndex !== null) {
+            // Cambiar cupón si puede
+            selectedCuponIndex = indexEnPagina;
+            renderCuponGrid();
+            showAmpliadoCupon();
+            iniciarTemporizador();
+        }
+    }
+    
+    // Mostrar cupón ampliado
+    function showAmpliadoCupon() {
+        if (!cuponeraGridWrapper || !cuponeraAmpliadoWrapper || !cuponAmpliadoText) return;
+        
+        const cuponSeleccionado = getCuponCompleto(selectedCuponIndex);
+        if (!cuponSeleccionado) return;
+        
+        cuponAmpliadoText.textContent = cuponSeleccionado;
+        
+        cuponeraGridWrapper.style.display = 'none';
+        cuponeraAmpliadoWrapper.style.display = 'flex';
+        
+        // Animación de entrada
+        const cuponCardAmpliado = document.getElementById('cuponCardAmpliado');
+        if (cuponCardAmpliado) {
+            cuponCardAmpliado.style.animation = 'cuponAmpliadoEntrada 0.5s ease-out';
+        }
+    }
+    
+    // Volver a la cuadrícula
+    function handleVolverAGrid() {
+        if (!cuponeraGridWrapper || !cuponeraAmpliadoWrapper) return;
+        
+        cuponeraAmpliadoWrapper.style.display = 'none';
+        cuponeraGridWrapper.style.display = 'block';
+        selectedCuponIndex = null;
+        renderCuponGrid();
+    }
+    
+    // Iniciar temporizador
     function iniciarTemporizador() {
-        tiempoRestante = 10; // Reiniciar a 10 segundos
-        puedeCambiarCupon = false; // Deshabilitar el botón
-        
-        if (btnNuevoCupon) {
-            btnNuevoCupon.disabled = true;
-            btnNuevoCupon.style.opacity = '0.5';
-            btnNuevoCupon.style.cursor = 'not-allowed';
-            btnNuevoCupon.textContent = '⏰ Espera...';
+        if (timerInterval) {
+            clearInterval(timerInterval);
         }
         
-        const warningElement = document.querySelector('.cuponera-warning');
-        if (warningElement) {
-            warningElement.style.color = '#C2185B';
-            warningElement.style.fontWeight = 'normal';
+        canChange = false;
+        timeRemaining = 6;
+        
+        if (cuponeraWarning) {
+            cuponeraWarning.textContent = `⏰ Espera ${timeRemaining} segundos para seleccionar otro cupón`;
+            cuponeraWarning.style.color = '#C2185B';
         }
         
-        // Limpiar temporizador anterior si existe
-        if (temporizadorCupon) {
-            clearInterval(temporizadorCupon);
+        timerInterval = setInterval(() => {
+            timeRemaining--;
+            if (timeRemaining <= 0) {
+                canChange = true;
+                if (cuponeraWarning) {
+                    cuponeraWarning.textContent = '✅ Ya puedes seleccionar otro cupón';
+                    cuponeraWarning.style.color = '#4CAF50';
+                    cuponeraWarning.style.fontWeight = 'bold';
+                }
+                clearInterval(timerInterval);
+                timerInterval = null;
+            } else {
+                if (cuponeraWarning) {
+                    cuponeraWarning.textContent = `⏰ Espera ${timeRemaining} segundos para seleccionar otro cupón`;
+                }
+            }
+        }, 1000);
+    }
+    
+    // Cambiar página
+    function handlePreviousPage() {
+        if (currentPage > 0) {
+            currentPage--;
+            selectedCuponIndex = null;
+            renderCuponGrid();
+            if (cuponeraAmpliadoWrapper) {
+                cuponeraAmpliadoWrapper.style.display = 'none';
+            }
+            if (cuponeraGridWrapper) {
+                cuponeraGridWrapper.style.display = 'block';
+            }
         }
-        
-        // Actualizar cada segundo
-        temporizadorCupon = setInterval(actualizarTemporizador, 1000);
-        actualizarTemporizador(); // Llamar inmediatamente para mostrar el tiempo inicial
+    }
+    
+    function handleNextPage() {
+        if (currentPage < totalPages - 1) {
+            currentPage++;
+            selectedCuponIndex = null;
+            renderCuponGrid();
+            if (cuponeraAmpliadoWrapper) {
+                cuponeraAmpliadoWrapper.style.display = 'none';
+            }
+            if (cuponeraGridWrapper) {
+                cuponeraGridWrapper.style.display = 'block';
+            }
+        }
+    }
+    
+    // Event listeners
+    if (btnVolverGrid) {
+        btnVolverGrid.addEventListener('click', handleVolverAGrid);
+    }
+    
+    if (btnPrevPage) {
+        btnPrevPage.addEventListener('click', handlePreviousPage);
+    }
+    
+    if (btnNextPage) {
+        btnNextPage.addEventListener('click', handleNextPage);
     }
     
     // Abrir modal de cuponera automáticamente al cargar la página
     if (cuponeraModal) {
-        // Esperar un momento para que Bootstrap esté listo
         setTimeout(() => {
             const modal = new bootstrap.Modal(cuponeraModal, {
-                backdrop: 'static', // No cerrar al hacer clic fuera
-                keyboard: false // No cerrar con ESC
+                backdrop: 'static',
+                keyboard: false
             });
             modal.show();
         }, 500);
@@ -5072,44 +5086,48 @@ document.addEventListener('DOMContentLoaded', function() {
         btnCuponera.addEventListener('click', function() {
             const modal = new bootstrap.Modal(cuponeraModal);
             modal.show();
-            iniciarTemporizador();
         });
     }
     
-    // Mostrar cupón aleatorio cuando se abre el modal
+    // Inicializar cuando se abre el modal
     if (cuponeraModal) {
         cuponeraModal.addEventListener('shown.bs.modal', function() {
-            // Reiniciar variables
-            cuponAnterior = null;
-            
-            // Mostrar el primer cupón sin animación
-            const primerCupon = obtenerCuponAleatorio();
-            if (cuponText) {
-                cuponText.textContent = primerCupon;
+            currentPage = 0;
+            selectedCuponIndex = null;
+            canChange = true;
+            timeRemaining = 0;
+            if (cuponeraWarning) {
+                cuponeraWarning.textContent = '';
             }
-            cuponAnterior = primerCupon;
-            
-            // Deshabilitar el botón inicialmente y iniciar temporizador
-            iniciarTemporizador();
+            if (cuponeraGridWrapper) {
+                cuponeraGridWrapper.style.display = 'block';
+            }
+            if (cuponeraAmpliadoWrapper) {
+                cuponeraAmpliadoWrapper.style.display = 'none';
+            }
+            renderCuponGrid();
         });
         
-        // Limpiar temporizador cuando se cierra el modal
+        // Limpiar cuando se cierra el modal
         cuponeraModal.addEventListener('hidden.bs.modal', function() {
-            if (temporizadorCupon) {
-                clearInterval(temporizadorCupon);
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
             }
-            // Reiniciar variables
-            cuponAnterior = null;
-            puedeCambiarCupon = false;
+            currentPage = 0;
+            selectedCuponIndex = null;
+            canChange = true;
+            timeRemaining = 0;
         });
     }
     
-    // Botón para obtener nuevo cupón
-    if (btnNuevoCupon) {
-        btnNuevoCupon.addEventListener('click', function() {
-            if (puedeCambiarCupon) {
-                mostrarNuevoCupon();
-            }
+    // Botón "En vivo"
+    const btnEnVivo = document.getElementById('btnEnVivo');
+    const enVivoModal = document.getElementById('enVivoModal');
+    if (btnEnVivo && enVivoModal) {
+        btnEnVivo.addEventListener('click', function() {
+            const modal = new bootstrap.Modal(enVivoModal);
+            modal.show();
         });
     }
 });

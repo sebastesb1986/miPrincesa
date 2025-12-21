@@ -5305,21 +5305,24 @@ h1 img {
 
 /* Estilos del Modal de Cuponera */
 .cuponera-modal-content {
-    background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E1 100%);
+    background: linear-gradient(135deg, rgba(240, 248, 255, 0.98) 0%, rgba(230, 240, 250, 0.98) 50%, rgba(235, 245, 255, 0.98) 100%);
     border: 3px solid #FF69B4;
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(255, 105, 180, 0.3);
     overflow: hidden;
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
+    position: relative;
 }
 
 .cuponera-modal-header {
-    background: linear-gradient(45deg, #FF69B4, #FF1493);
+    background: linear-gradient(45deg, #FF69B4, #FF1493, #C2185B);
     color: white;
     border-radius: 17px 17px 0 0;
     border-bottom: 2px solid rgba(255, 105, 180, 0.5);
     padding: 20px 30px;
+    position: relative;
+    z-index: 10;
 }
 
 .cuponera-modal-header .modal-title {
@@ -5343,91 +5346,222 @@ h1 img {
 
 .cuponera-modal-body {
     padding: 30px;
-    background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E1 100%);
+    background: linear-gradient(135deg, rgba(240, 248, 255, 0.98) 0%, rgba(230, 240, 250, 0.98) 50%, rgba(235, 245, 255, 0.98) 100%);
+    min-height: 500px;
+    position: relative;
 }
 
-.cuponera-subtitle {
+.cuponera-subtitle-container {
     text-align: center;
     margin-bottom: 25px;
 }
 
-.cuponera-subtitle p {
+.cuponera-info-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.875rem;
+    color: #666;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.cuponera-subtitle {
     font-family: 'Dancing Script', cursive;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: #FF69B4;
     font-weight: 600;
-    margin: 0;
+    margin: 0 0 8px 0;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .cuponera-warning {
     font-family: 'Playfair Display', serif;
-    font-size: 0.75rem !important;
-    color: #C2185B !important;
-    font-weight: 500 !important;
-    margin-top: 8px !important;
-    opacity: 0.8;
-    font-style: italic;
+    font-size: 0.875rem;
+    color: #C2185B;
+    font-weight: 500;
+    margin-top: 5px;
 }
 
-.cupon-container {
+/* Cuadrícula de cupones */
+.cuponera-grid-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.cuponera-grid-container {
+    padding: 10px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.cuponera-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.cupon-square {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    border: 2px dashed #C2185B;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 300px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(194, 24, 91, 0.2);
+    aspect-ratio: 1;
+    width: 100%;
+    max-width: 180px;
+    position: relative;
 }
 
-.cupon-card {
-    background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%);
-    border: 3px dashed #FF69B4;
+.cupon-square:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 8px rgba(194, 24, 91, 0.3);
+    border-color: #FF1493;
+}
+
+.cupon-square-selected {
+    border-color: #FF1493;
+    border-width: 3px;
+    background-color: #FFF0F5;
+    box-shadow: 0 4px 8px rgba(255, 20, 147, 0.4);
+}
+
+.cupon-square-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+}
+
+.cupon-square-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #C2185B;
+    text-align: center;
+    z-index: 1;
+    line-height: 1.3;
+}
+
+.dotted-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 1px dashed #F8BBD9;
+    border-radius: 10px;
+}
+
+/* Paginación */
+.cuponera-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    margin-top: 20px;
+    background-color: rgba(248, 187, 217, 0.2);
+    border-top: 2px solid #F8BBD9;
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-pagination {
+    background-color: #C2185B;
+    color: white;
+    border: none;
+    padding: 8px 20px;
     border-radius: 20px;
-    padding: 40px;
-    box-shadow: 
-        0 10px 30px rgba(255, 105, 180, 0.2),
-        inset 0 0 20px rgba(255, 105, 180, 0.1);
+    font-size: 0.875rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+}
+
+.btn-pagination:hover:not(:disabled) {
+    background-color: #FF1493;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(194, 24, 91, 0.3);
+}
+
+.btn-pagination:disabled {
+    background-color: #D3D3D3;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-text {
+    font-size: 1rem;
+    color: #C2185B;
+    font-weight: 600;
+}
+
+/* Vista ampliada del cupón */
+.cuponera-ampliado-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 400px;
+}
+
+.cupon-card-ampliado {
+    background: linear-gradient(135deg, rgba(240, 248, 255, 0.98) 0%, rgba(230, 240, 250, 0.98) 50%, rgba(235, 245, 255, 0.98) 100%);
+    border: 3px solid #F8BBD9;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(194, 24, 91, 0.3);
     text-align: center;
     position: relative;
     max-width: 500px;
     width: 100%;
-    animation: cuponEntrada 0.5s ease-out;
+    animation: cuponAmpliadoEntrada 0.5s ease-out;
 }
 
-@keyframes cuponEntrada {
+@keyframes cuponAmpliadoEntrada {
     0% {
-        transform: scale(0.8) rotate(-5deg);
+        transform: scale(0.8);
         opacity: 0;
     }
     100% {
-        transform: scale(1) rotate(0deg);
+        transform: scale(1);
         opacity: 1;
     }
 }
 
-@keyframes cuponSalida {
-    0% {
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(0.8) rotate(5deg);
-        opacity: 0;
-    }
+.cupon-ampliado-header {
+    margin-bottom: 20px;
 }
 
-.cupon-header {
-    margin-bottom: 25px;
-}
-
-.cupon-title {
+.cupon-ampliado-title {
     font-family: 'Dancing Script', cursive;
-    font-size: 2.5rem;
-    color: #FF69B4;
+    font-size: 2rem;
+    color: #C2185B;
     font-weight: 700;
     margin: 0 0 10px 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.cupon-hearts {
+.cupon-ampliado-hearts {
     font-size: 1.5rem;
     animation: latido 1.5s ease-in-out infinite;
 }
@@ -5441,64 +5575,497 @@ h1 img {
     }
 }
 
-.cupon-content {
-    margin: 30px 0;
-    min-height: 100px;
-}
-
-.cupon-text {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.8rem;
-    color: #C2185B;
-    font-weight: 600;
-    line-height: 1.6;
-    margin: 0;
-    padding: 20px;
-    background: linear-gradient(135deg, rgba(255, 105, 180, 0.1) 0%, rgba(255, 20, 147, 0.1) 100%);
+.cupon-ampliado-content {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 25px;
     border-radius: 15px;
-    border: 2px solid rgba(255, 105, 180, 0.3);
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #F8BBD9;
 }
 
-.cupon-footer {
-    margin-top: 25px;
+.cupon-ampliado-text {
+    font-size: 1.125rem;
+    color: #2D1B69;
+    text-align: center;
+    line-height: 1.6;
+    font-weight: 500;
 }
 
-.cupon-instruction {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.2rem;
-    color: #FF69B4;
+.cupon-ampliado-footer {
     margin-bottom: 15px;
-    font-weight: 600;
 }
 
-.btn-nuevo-cupon {
-    background: linear-gradient(45deg, #FF69B4, #FF1493);
-    color: white;
-    border: 2px solid rgba(255, 105, 180, 0.5);
-    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
-    padding: 10px 20px;
+.cupon-ampliado-instruction {
     font-size: 1rem;
+    color: #C2185B;
+    text-align: center;
     font-weight: 600;
+    font-style: italic;
+}
+
+.btn-volver-grid {
+    background-color: #C2185B;
+    color: white;
+    border: none;
+    padding: 10px 25px;
     border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-volver-grid:hover {
+    background-color: #FF1493;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(194, 24, 91, 0.3);
+}
+
+/* Botón En vivo - Super llamativo */
+.btn-en-vivo {
+    background: #000000;
+    color: white;
+    border: 4px solid #333333;
+    box-shadow: 
+        0 5px 15px rgba(0, 0, 0, 0.8),
+        0 0 25px rgba(0, 0, 0, 0.5);
+    padding: 14px 28px;
+    font-size: 1.2rem;
+    font-weight: 900;
+    border-radius: 30px;
     transition: all 0.3s ease;
     font-family: 'Dancing Script', cursive;
-    cursor: pointer;
+    text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.8),
+        0 0 10px rgba(255, 255, 255, 0.3);
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    transform: scale(1);
 }
 
-.btn-nuevo-cupon:hover {
-    background: linear-gradient(45deg, #FF1493, #FF69B4);
+/* Animación de oscilación para la nota musical */
+.btn-en-vivo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nota-musical {
+    display: inline-block;
+    animation: oscilarNota 1.5s ease-in-out infinite;
+}
+
+/* Efecto de brillo deslizante como el botón de velitas */
+.btn-en-vivo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transition: left 0.5s ease;
+    animation: brilloDeslizanteEnVivo 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes brilloDeslizanteEnVivo {
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* Animación de oscilación para el emoji de nota musical */
+@keyframes oscilarNota {
+    0%, 100% {
+        transform: rotate(-10deg) translateY(0);
+    }
+    25% {
+        transform: rotate(10deg) translateY(-3px);
+    }
+    50% {
+        transform: rotate(-10deg) translateY(0);
+    }
+    75% {
+        transform: rotate(10deg) translateY(3px);
+    }
+}
+
+
+.btn-en-vivo:hover {
+    background: #1a1a1a;
     transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.9),
+        0 0 40px rgba(255, 255, 255, 0.3),
+        0 0 60px rgba(255, 255, 255, 0.2),
+        0 0 80px rgba(255, 255, 255, 0.1);
+    border-color: #555555;
+    border-width: 4px;
+    animation: brilloIntensoEnVivo 1s ease-in-out infinite;
 }
 
-.btn-nuevo-cupon:active {
+@keyframes brilloIntensoEnVivo {
+    0%, 100% {
+        box-shadow: 
+            0 8px 25px rgba(0, 0, 0, 0.9),
+            0 0 40px rgba(255, 255, 255, 0.3),
+            0 0 60px rgba(255, 255, 255, 0.2),
+            0 0 80px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        box-shadow: 
+            0 8px 30px rgba(0, 0, 0, 0.95),
+            0 0 50px rgba(255, 255, 255, 0.4),
+            0 0 70px rgba(255, 255, 255, 0.3),
+            0 0 100px rgba(255, 255, 255, 0.2);
+    }
+}
+
+.btn-en-vivo:active {
     transform: translateY(0);
+    transition: transform 0.1s ease;
+}
+
+/* Animaciones para el botón En Vivo */
+
+/* Estilos del Modal En Vivo */
+.en-vivo-modal-content {
+    background: 
+        /* Fondo base con gradiente suave */
+        linear-gradient(135deg, rgba(240, 248, 255, 0.98) 0%, rgba(230, 240, 250, 0.98) 50%, rgba(235, 245, 255, 0.98) 100%),
+        /* Textura de papel */
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 100px,
+            rgba(200, 220, 240, 0.02) 100px,
+            rgba(200, 220, 240, 0.02) 200px
+        );
+    background-size: 100% 100%, 200px 200px;
+    border: 3px solid rgba(194, 24, 91, 0.3);
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 40px rgba(194, 24, 91, 0.2),
+        0 0 0 1px rgba(194, 24, 91, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+/* Fondo de tulipanes para el modal */
+.en-vivo-modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        /* Tulipanes rojos */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%23FF1744" opacity="0.25" stroke="%23C51162" stroke-width="0.6"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%23FF1744" opacity="0.25" stroke="%23C51162" stroke-width="0.6"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23FF5252" opacity="0.2" stroke="%23C51162" stroke-width="0.5"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23FF5252" opacity="0.2" stroke="%23C51162" stroke-width="0.5"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%23D32F2F" opacity="0.3"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.3" stroke="%231B5E20" stroke-width="0.8"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.25" stroke="%232E7D32" stroke-width="0.7"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.25" stroke="%232E7D32" stroke-width="0.7"/></g></svg>'),
+        /* Tulipanes rosas */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%23E91E63" opacity="0.2" stroke="%23AD1457" stroke-width="0.6"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%23E91E63" opacity="0.2" stroke="%23AD1457" stroke-width="0.6"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23F06292" opacity="0.15" stroke="%23AD1457" stroke-width="0.5"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23F06292" opacity="0.15" stroke="%23AD1457" stroke-width="0.5"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%23C2185B" opacity="0.3"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.3" stroke="%231B5E20" stroke-width="0.8"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.25" stroke="%232E7D32" stroke-width="0.7"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.25" stroke="%232E7D32" stroke-width="0.7"/></g></svg>'),
+        /* Tulipanes amarillos */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g><path d="M50 12 Q45 12, 42 18 Q40 22, 38 30 Q37 35, 38 40 Q40 45, 42 48 Q45 50, 50 52" fill="%23FFD700" opacity="0.2" stroke="%23F9A825" stroke-width="0.6"/><path d="M50 12 Q55 12, 58 18 Q60 22, 62 30 Q63 35, 62 40 Q60 45, 58 48 Q55 50, 50 52" fill="%23FFD700" opacity="0.2" stroke="%23F9A825" stroke-width="0.6"/><path d="M50 12 Q48 15, 45 25 Q43 32, 42 40 Q41 45, 42 48 Q45 50, 50 52" fill="%23FFEB3B" opacity="0.15" stroke="%23F9A825" stroke-width="0.5"/><path d="M50 12 Q52 15, 55 25 Q57 32, 58 40 Q59 45, 58 48 Q55 50, 50 52" fill="%23FFEB3B" opacity="0.15" stroke="%23F9A825" stroke-width="0.5"/><path d="M42 48 Q45 50, 50 52 Q55 50, 58 48 Q57 50, 55 51 Q50 52, 45 51 Q43 50, 42 48 Z" fill="%23FBC02D" opacity="0.25"/><path d="M50 52 L50 90 L48.5 90 L48.5 52 Z" fill="%23338800" opacity="0.3" stroke="%231B5E20" stroke-width="0.8"/><path d="M50 60 Q45 62, 42 65 Q40 67, 40 70 Q40 72, 42 73 Q45 74, 50 75" fill="%234CAF50" opacity="0.25" stroke="%232E7D32" stroke-width="0.7"/><path d="M50 60 Q55 62, 58 65 Q60 67, 60 70 Q60 72, 58 73 Q55 74, 50 75" fill="%234CAF50" opacity="0.25" stroke="%232E7D32" stroke-width="0.7"/></g></svg>'),
+        /* Gradientes radiales suaves */
+        radial-gradient(circle at 20% 80%, rgba(255, 23, 68, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(233, 30, 99, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.06) 0%, transparent 50%);
+    background-size: 
+        200px 200px, 
+        180px 180px, 
+        220px 220px,
+        600px 600px,
+        500px 500px,
+        700px 700px;
+    background-position: 
+        0% 0%, 
+        25% 25%, 
+        50% 50%,
+        center, center, center;
+    background-repeat: repeat;
+    opacity: 0.4;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.en-vivo-modal-header {
+    background: linear-gradient(135deg, #C2185B 0%, #E91E63 50%, #FF69B4 100%);
+    color: white;
+    border-radius: 17px 17px 0 0;
+    border-bottom: 2px solid rgba(194, 24, 91, 0.3);
+    padding: 20px 30px;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(194, 24, 91, 0.2);
+}
+
+.en-vivo-modal-header .modal-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: white;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.en-vivo-modal-header .btn-close {
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.en-vivo-modal-header .btn-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.en-vivo-modal-body {
+    padding: 30px;
+    position: relative;
+    z-index: 1;
+    background: transparent;
+}
+
+.en-vivo-message {
+    text-align: center;
+    margin-bottom: 35px;
+    padding: 40px 45px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(250, 248, 255, 0.98) 100%);
+    border-radius: 20px;
+    border: 2px solid rgba(194, 24, 91, 0.2);
+    box-shadow: 
+        0 10px 30px rgba(194, 24, 91, 0.12),
+        0 0 0 1px rgba(194, 24, 91, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        inset 0 -1px 0 rgba(194, 24, 91, 0.05);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.en-vivo-message::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(194, 24, 91, 0.4), 
+        rgba(233, 30, 99, 0.4),
+        rgba(194, 24, 91, 0.4),
+        transparent);
+}
+
+.en-vivo-message::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(194, 24, 91, 0.2), 
+        transparent);
+}
+
+.en-vivo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    line-height: 2;
+    margin: 0;
+    text-align: justify;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    position: relative;
+    z-index: 1;
+    word-spacing: 0.1em;
+}
+
+.en-vivo-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.7rem;
+    color: #C2185B;
+    font-weight: 600;
+    line-height: 1.5;
+    display: block;
+    margin-bottom: 1.5em;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 1px 2px rgba(194, 24, 91, 0.1);
+}
+
+.en-vivo-body {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: #1e40af;
+    font-style: italic;
+    text-align: justify;
+    line-height: 2.1;
+    display: block;
+    word-spacing: 0.1em;
+    letter-spacing: 0.25px;
+    position: relative;
+    z-index: 2;
+    font-weight: 400;
+}
+
+.en-vivo-signature {
+    display: block;
+    text-align: right;
+    font-style: italic;
+    color: #C2185B;
+    margin-top: 15px;
+    font-size: 1.2rem;
+}
+
+.en-vivo-iframe-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 25px;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 248, 255, 0.95) 100%);
+    border-radius: 18px;
+    border: 2px solid rgba(194, 24, 91, 0.2);
+    box-shadow: 
+        0 8px 20px rgba(194, 24, 91, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    position: relative;
+    z-index: 2;
+}
+
+.en-vivo-iframe {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive para Modal En Vivo */
+@media (max-width: 768px) {
+    .en-vivo-modal-content {
+        max-width: 95%;
+    }
+    
+    .en-vivo-modal-header {
+        padding: 15px 20px;
+    }
+    
+    .en-vivo-modal-header .modal-title {
+        font-size: 1.6rem;
+    }
+    
+    .en-vivo-modal-body {
+        padding: 20px;
+    }
+    
+    .en-vivo-message {
+        padding: 25px 20px;
+    }
+    
+    .en-vivo-text {
+        font-size: 1.05rem;
+        line-height: 1.85;
+        text-align: left;
+    }
+    
+    .en-vivo-text::first-line {
+        font-size: 1.3rem;
+    }
+    
+    .en-vivo-signature {
+        font-size: 1rem;
+    }
+    
+    .en-vivo-iframe-container {
+        padding: 15px;
+    }
+    
+    .en-vivo-iframe {
+        width: 100%;
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .en-vivo-message {
+        padding: 20px 15px;
+    }
+    
+    .en-vivo-text {
+        font-size: 1rem;
+        line-height: 1.75;
+        text-align: left;
+    }
+    
+    .en-vivo-text::first-line {
+        font-size: 1.2rem;
+    }
+    
+    .en-vivo-iframe {
+        height: 160px;
+    }
+}
+
+@media (max-width: 480px) {
+    .en-vivo-text {
+        font-size: 1.1rem;
+    }
+    
+    .en-vivo-iframe {
+        height: 160px;
+    }
 }
 
 /* Responsive para Cuponera */
+@media (max-width: 1200px) {
+    .cuponera-grid-container {
+        max-width: 900px;
+    }
+    
+    .cupon-square {
+        max-width: 160px;
+    }
+}
+
+@media (max-width: 992px) {
+    .cuponera-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+    
+    .cupon-square {
+        max-width: 140px;
+    }
+    
+    .cupon-square-text {
+        font-size: 0.8rem;
+    }
+}
+
 @media (max-width: 768px) {
-    .btn-cuponera {
+    .btn-cuponera, .btn-en-vivo {
         margin-left: 0;
         margin-top: 10px;
         width: 100%;
@@ -5508,17 +6075,29 @@ h1 img {
         max-width: 95%;
     }
     
-    .cupon-card {
-        padding: 30px 20px;
+    .cuponera-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
     }
     
-    .cupon-title {
-        font-size: 2rem;
+    .cupon-square {
+        max-width: 120px;
     }
     
-    .cupon-text {
-        font-size: 1.5rem;
-        padding: 15px;
+    .cupon-square-text {
+        font-size: 0.7rem;
+    }
+    
+    .cupon-card-ampliado {
+        padding: 25px 20px;
+    }
+    
+    .cupon-ampliado-title {
+        font-size: 1.75rem;
+    }
+    
+    .cupon-ampliado-text {
+        font-size: 1rem;
     }
 }
 
@@ -5532,28 +6111,47 @@ h1 img {
     }
     
     .cuponera-modal-body {
-        padding: 20px;
+        padding: 20px 15px;
     }
     
-    .cupon-card {
-        padding: 25px 15px;
+    .cuponera-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
     }
     
-    .cupon-title {
-        font-size: 1.8rem;
+    .cupon-square {
+        max-width: 100px;
     }
     
-    .cupon-text {
-        font-size: 1.3rem;
-        padding: 12px;
+    .cupon-square-text {
+        font-size: 0.65rem;
+        padding: 5px;
     }
     
-    .cuponera-subtitle p {
+    .cupon-card-ampliado {
+        padding: 20px 15px;
+    }
+    
+    .cupon-ampliado-title {
+        font-size: 1.5rem;
+    }
+    
+    .cupon-ampliado-text {
+        font-size: 0.9rem;
+    }
+    
+    .cuponera-subtitle {
         font-size: 1.2rem;
     }
-}
-    margin: 8px;
-    animation: brilloLlamativo 2s ease-in-out infinite;
+    
+    .cuponera-pagination {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-pagination {
+        width: 100%;
+    }
 }
 
 @keyframes brilloLlamativo {

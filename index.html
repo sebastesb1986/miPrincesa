@@ -26,6 +26,7 @@
                     <div class="buttons-row buttons-row-secondary">
                         <button id="btnOracula" class="btn btn-warning">🔮 Tengo nuevas predicciones, Consultame!</button>
                         <button class="btn btn-tour" id="btnTour">💙 Tour de Amor</button>
+                        <!--<button id="btnEnVivo" class="btn btn-en-vivo"><span class="nota-musical" style="display: inline-block; animation: oscilarNota 1.5s ease-in-out infinite;">🎵</span> En vivo!</button>-->
                         <a href="https://drive.google.com/drive/folders/1XmvFviMmfro9O_tKrIUSoxdGRPNwO3LM" target="_blank" class="btn btn-download" id="btnDownload">
                             📱 Haz clic y llévame contigo
                         </a>
@@ -224,31 +225,17 @@
     <script src="js/contenido.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🔍 Verificando imágenes de la galería...');
-            
             // Verificar todas las imágenes de la galería
             const galleryImages = document.querySelectorAll('.gallery-item img');
-            console.log('📊 Total de imágenes encontradas:', galleryImages.length);
             
             galleryImages.forEach((img, index) => {
-                console.log(`Imagen ${index + 1}:`, img.src, 'Alt:', img.alt);
-                
                 // Verificar si la imagen se carga correctamente
                 img.addEventListener('load', function() {
-                    console.log(`✅ Imagen ${index + 1} cargada correctamente:`, this.src);
                 });
                 
                 img.addEventListener('error', function() {
-                    console.error(`❌ Error cargando imagen ${index + 1}:`, this.src);
                 });
             });
-            
-            // Verificar la galería
-            const gallery = document.getElementById('galleryGrid');
-            if (gallery) {
-                console.log('🖼️ Galería encontrada:', gallery);
-                console.log('🖼️ Total de items:', gallery.querySelectorAll('.gallery-item').length);
-            }
         });
     </script>
     <audio id="audio-cuento" src="audio/miPrincesa.mp3" preload="none"></audio>
@@ -583,32 +570,50 @@
     </div>
 
     <!-- Modal de Cuponera de Amor Virtual -->
-    <div class="modal fade" id="cuponeraModal" tabindex="-1" aria-labelledby="cuponeraModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal fade" id="cuponeraModal" tabindex="-1" aria-labelledby="cuponeraModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content cuponera-modal-content">
                 <div class="modal-header cuponera-modal-header">
                     <h5 class="modal-title" id="cuponeraModalLabel">💝🎫 Cuponera de Amor</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body cuponera-modal-body">
-                    <div class="cuponera-subtitle">
-                        <p>🎁 Toma captura de pantalla y reclama tu vale💕</p>
-                        <p class="cuponera-warning">⏰ Para participar por otro cupón, debes volver a sortear después de que se acabe el tiempo</p>
+                    <div class="cuponera-subtitle-container">
+                        <p class="cuponera-info-text">💡 Cierra la cuponera para ir al resto de la app</p>
+                        <p class="cuponera-subtitle">🎁 Selecciona un cupón de la cuadrícula 💕</p>
+                        <p class="cuponera-warning" id="cuponeraWarning"></p>
                     </div>
                     
-                    <div class="cupon-container">
-                        <div class="cupon-card" id="cuponCard">
-                            <div class="cupon-header">
-                                <h3 class="cupon-title">💝 Vale de Amor</h3>
-                                <div class="cupon-hearts">💕 💕 💕</div>
+                    <!-- Vista de cuadrícula de cupones -->
+                    <div class="cuponera-grid-wrapper" id="cuponeraGridWrapper">
+                        <div class="cuponera-grid-container">
+                            <div class="cuponera-grid" id="cuponeraGrid">
+                                <!-- Los cupones se generarán dinámicamente -->
                             </div>
-                            <div class="cupon-content">
-                                <p class="cupon-text" id="cuponText">Cargando tu vale especial...</p>
+                        </div>
+                        
+                        <!-- Controles de paginación -->
+                        <div class="cuponera-pagination" id="cuponeraPagination">
+                            <button class="btn-pagination" id="btnPrevPage" disabled>← Anterior</button>
+                            <span class="pagination-text" id="paginationText">Página 1 de 1</span>
+                            <button class="btn-pagination" id="btnNextPage">Siguiente →</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Vista ampliada del cupón -->
+                    <div class="cuponera-ampliado-wrapper" id="cuponeraAmpliadoWrapper" style="display: none;">
+                        <div class="cupon-card-ampliado" id="cuponCardAmpliado">
+                            <div class="cupon-ampliado-header">
+                                <h3 class="cupon-ampliado-title">💝 Vale de Amor</h3>
+                                <div class="cupon-ampliado-hearts">💕 💕 💕</div>
                             </div>
-                            <div class="cupon-footer">
-                                <p class="cupon-instruction">📸 Toma captura, reclámalo y déjame consentirte</p>
-                                <button id="btnNuevoCupon" class="btn btn-nuevo-cupon">🎲 Nuevo Vale</button>
+                            <div class="cupon-ampliado-content">
+                                <p class="cupon-ampliado-text" id="cuponAmpliadoText"></p>
                             </div>
+                            <div class="cupon-ampliado-footer">
+                                <p class="cupon-ampliado-instruction">📸 Toma captura, reclámalo y déjame consentirte</p>
+                            </div>
+                            <button class="btn-volver-grid" id="btnVolverGrid">← Volver a la cuadrícula</button>
                         </div>
                     </div>
                 </div>
@@ -651,6 +656,35 @@
                                 Creo en ti, Elizabeth Timarán, en quien eres realmente y en la luz que llevas dentro. Que nunca deje de brillar…
                             </p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal En Vivo -->
+    <div class="modal fade" id="enVivoModal" tabindex="-1" aria-labelledby="enVivoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content en-vivo-modal-content">
+                <div class="modal-header en-vivo-modal-header">
+                    <h5 class="modal-title" id="enVivoModalLabel">🎵 En Vivo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body en-vivo-modal-body">
+                    <div class="en-vivo-message">
+                        <p class="en-vivo-text">
+                            <span class="en-vivo-title">Dicen que no hay talento, pero te aseguro que sobra sentimiento...</span>
+                            <span class="en-vivo-body">Grabar esto me recordó que, aunque el silencio y los kilómetros intenten hacer ruido, lo que es real no se rompe tan fácil. Ya vivimos la lejanía una vez y no me interesa repetir esa historia. No te escribo para pedirte nada, ni para interrumpir tu vida. Solo quería que supieras que, a pesar de todo, sigo creyendo que entre nosotros no hubo maldad, solo pausa. Aquí estoy, sin armaduras y con la misma certeza de siempre.</span>
+                        </p>
+                    </div>
+                    <div class="en-vivo-iframe-container">
+                        <iframe 
+                            width="560" 
+                            height="202" 
+                            src="https://www.bandlab.com/embed/?id=4f934ebb-d6dd-f011-819b-6045bd3096b1" 
+                            allowfullscreen
+                            class="en-vivo-iframe">
+                        </iframe>
                     </div>
                 </div>
             </div>
