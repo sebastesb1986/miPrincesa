@@ -4830,7 +4830,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "Vale por una noche de películas y palomitas 🍿",
         "Vale por una chocolatina para ti 🍫",
         "Vale por un ramo de flores para ti 🌸",
-        "Vale por una conversación sin armaduras, solo tú, yo, un café y compartir ese [postre/comida favorita de ambos] que nos gusta.",
+        // "Vale por una conversación sin armaduras, solo tú, yo, un café y compartir ese [postre/comida favorita de ambos] que nos gusta.",
     ];
     
     // Función para obtener el título de un cupón
