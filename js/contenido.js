@@ -4830,6 +4830,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "Vale por una noche de películas y palomitas 🍿",
         "Vale por una chocolatina para ti 🍫",
         "Vale por un ramo de flores para ti 🌸",
+        "Vale por una conversación sin armaduras, solo tú, yo, un café y compartir ese [postre/comida favorita de ambos] que nos gusta.",
     ];
     
     // Función para obtener el título de un cupón
@@ -4857,6 +4858,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "Vale porque te conteste una pregunta, la que tu quieras 🤫": "🤫 Pregunta Especial",
             "Vale por una chocolatina para ti 🍫": "🍫 Chocolatina",
             "Vale por un ramo de flores para ti 🌸": "🌸 Ramo de Flores",
+            "Vale por una conversación sin armaduras, solo tú, yo, un café y compartir ese [postre/comida favorita de ambos] que nos gusta.": "🎫 TICKET DE SINTONÍA",
         };
         return titulos[cuponTexto] || "💝 Cupón de Amor";
     }
@@ -4881,19 +4883,32 @@ document.addEventListener('DOMContentLoaded', function() {
     let timeRemaining = 0;
     let timerInterval = null;
     const cuponesPorPagina = 16; // Cambiado a 4x4 (16 cupones por página)
-    const totalPages = Math.ceil(CUPONES.length / cuponesPorPagina);
+    
+    // Función para mezclar aleatoriamente un array (Fisher-Yates shuffle)
+    function mezclarArray(array) {
+        const nuevoArray = [...array];
+        for (let i = nuevoArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [nuevoArray[i], nuevoArray[j]] = [nuevoArray[j], nuevoArray[i]];
+        }
+        return nuevoArray;
+    }
+    
+    // Mezclar los cupones aleatoriamente al inicio
+    const CUPONES_MEZCLADOS = mezclarArray(CUPONES);
+    const totalPages = Math.ceil(CUPONES_MEZCLADOS.length / cuponesPorPagina);
     
     // Obtener los cupones de la página actual
     function getCuponesPaginaActual() {
         const inicio = currentPage * cuponesPorPagina;
         const fin = inicio + cuponesPorPagina;
-        return CUPONES.slice(inicio, fin);
+        return CUPONES_MEZCLADOS.slice(inicio, fin);
     }
     
     // Obtener el cupón completo basado en el índice de la página actual
     function getCuponCompleto(indexEnPagina) {
         const indiceGlobal = (currentPage * cuponesPorPagina) + indexEnPagina;
-        return CUPONES[indiceGlobal];
+        return CUPONES_MEZCLADOS[indiceGlobal];
     }
     
     // Renderizar la cuadrícula de cupones
@@ -4906,6 +4921,13 @@ document.addEventListener('DOMContentLoaded', function() {
         cuponesPagina.forEach((cupon, indexEnPagina) => {
             const cuponSquare = document.createElement('div');
             cuponSquare.className = 'cupon-square';
+            
+            // Detectar si es el TICKET DE SINTONÍA para agregar clase especial
+            const esTicketSintonia = cupon.includes("conversación sin armaduras");
+            if (esTicketSintonia) {
+                cuponSquare.classList.add('cupon-ticket-sintonia');
+            }
+            
             if (selectedCuponIndex === indexEnPagina) {
                 cuponSquare.classList.add('cupon-square-selected');
             }
@@ -4922,7 +4944,25 @@ document.addEventListener('DOMContentLoaded', function() {
             
             const cuponSquareText = document.createElement('div');
             cuponSquareText.className = 'cupon-square-text';
-            cuponSquareText.textContent = getTituloCupon(cupon);
+            
+            // Si es el TICKET DE SINTONÍA, envolver el emoji en un span especial
+            const tituloCupon = getTituloCupon(cupon);
+            if (esTicketSintonia && tituloCupon.includes('🎫')) {
+                const emojiIndex = tituloCupon.indexOf('🎫');
+                const emoji = tituloCupon.substring(emojiIndex, emojiIndex + 2);
+                const textoRestante = tituloCupon.replace('🎫', '');
+                
+                const emojiSpan = document.createElement('span');
+                emojiSpan.className = 'ticket-emoji-brillo';
+                emojiSpan.textContent = emoji;
+                
+                cuponSquareText.appendChild(emojiSpan);
+                if (textoRestante.trim()) {
+                    cuponSquareText.appendChild(document.createTextNode(' ' + textoRestante.trim()));
+                }
+            } else {
+                cuponSquareText.textContent = tituloCupon;
+            }
             
             const dottedBorder = document.createElement('div');
             dottedBorder.className = 'dotted-border';
@@ -4973,7 +5013,31 @@ document.addEventListener('DOMContentLoaded', function() {
         const cuponSeleccionado = getCuponCompleto(selectedCuponIndex);
         if (!cuponSeleccionado) return;
         
-        cuponAmpliadoText.textContent = cuponSeleccionado;
+        // Verificar si es el cupón de RECONEXIÓN para mostrar notas especiales
+        const esTicketReconexion = cuponSeleccionado.includes("conversación sin armaduras");
+        
+        if (esTicketReconexion) {
+            // Mostrar con HTML para incluir las notas pequeñas
+            cuponAmpliadoText.innerHTML = `
+                ${cuponSeleccionado}
+                <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(194, 24, 91, 0.2);">
+                    <p style="font-size: 0.75rem; color: #666; line-height: 1.6; margin: 8px 0; text-align: center;">
+                        No acumulable con rencores. Válido exclusivamente porque...
+                    </p>
+                    <p style="font-size: 0.75rem; color: #666; line-height: 1.6; margin: 8px 0; text-align: center; font-style: italic;">
+                        Nota: No hace falta tener la razón, solo hace falta un buen café.
+                    </p>
+                </div>
+            `;
+        } else {
+            cuponAmpliadoText.textContent = cuponSeleccionado;
+        }
+        
+        // Actualizar el título del cupón
+        const cuponAmpliadoTitle = document.querySelector('.cupon-ampliado-title');
+        if (cuponAmpliadoTitle) {
+            cuponAmpliadoTitle.textContent = getTituloCupon(cuponSeleccionado);
+        }
         
         cuponeraGridWrapper.style.display = 'none';
         cuponeraAmpliadoWrapper.style.display = 'flex';
