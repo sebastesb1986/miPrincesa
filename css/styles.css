@@ -5428,6 +5428,24 @@ h1 img {
     position: relative;
 }
 
+.cupon-square::before {
+    content: '✂';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    background-color: #FFFFFF;
+    padding: 2px 4px;
+    font-size: 0.75rem;
+    z-index: 10;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    color: #000000;
+    transform: rotate(-90deg);
+    display: inline-block;
+    line-height: 1;
+    font-weight: 900;
+    -webkit-text-stroke: 0.3px #000000;
+}
+
 .cupon-square:hover {
     transform: translateY(-2px) scale(1.02);
     box-shadow: 0 4px 8px rgba(194, 24, 91, 0.3);
@@ -5545,7 +5563,7 @@ h1 img {
 
 .cupon-card-ampliado {
     background: linear-gradient(135deg, rgba(240, 248, 255, 0.98) 0%, rgba(230, 240, 250, 0.98) 50%, rgba(235, 245, 255, 0.98) 100%);
-    border: 3px solid #F8BBD9;
+    border: 3px dashed #F8BBD9;
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 10px 30px rgba(194, 24, 91, 0.3);
@@ -5554,6 +5572,24 @@ h1 img {
     max-width: 500px;
     width: 100%;
     animation: cuponAmpliadoEntrada 0.5s ease-out;
+}
+
+.cupon-card-ampliado::before {
+    content: '✂';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    background-color: rgba(240, 248, 255, 0.98);
+    padding: 4px 6px;
+    font-size: 1rem;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    color: #000000;
+    transform: rotate(-90deg);
+    display: inline-block;
+    line-height: 1;
+    font-weight: 900;
+    -webkit-text-stroke: 0.5px #000000;
 }
 
 @keyframes cuponAmpliadoEntrada {
