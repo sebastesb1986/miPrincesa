@@ -452,7 +452,7 @@ function showPrincessBubble() {
             top: -1000px !important;
             left: ${bubbleLeft}px !important;
             background: white !important;
-            border: ${isMobile ? '2px' : '3px'} solid #C2185B !important;
+            border: ${isMobile ? '2px' : '3px'} solid #B71C1C !important;
             border-radius: ${isMobile ? '15px' : '20px'} !important;
             padding: ${bubblePadding} !important;
             box-shadow: 0 ${isMobile ? '8px' : '10px'} ${isMobile ? '20px' : '30px'} rgba(194, 24, 91, 0.3) !important;
@@ -521,7 +521,7 @@ function showPrincessBubble() {
                     height: 0 !important;
                     border-left: ${arrowSize}px solid transparent !important;
                     border-right: ${arrowSize}px solid transparent !important;
-                    border-top: ${arrowSize}px solid #C2185B !important;
+                    border-top: ${arrowSize}px solid #B71C1C !important;
                     border-bottom: none !important;
                 `;
             } else {
@@ -535,7 +535,7 @@ function showPrincessBubble() {
                     height: 0 !important;
                     border-left: ${arrowSize}px solid transparent !important;
                     border-right: ${arrowSize}px solid transparent !important;
-                    border-bottom: ${arrowSize}px solid #C2185B !important;
+                    border-bottom: ${arrowSize}px solid #B71C1C !important;
                     border-top: none !important;
                 `;
             }
@@ -655,7 +655,7 @@ function showPrincessFullSequence() {
             top: ${bubbleTop}px !important;
             left: ${adjustedBubbleLeft}px !important;
             background: white !important;
-            border: 3px solid #C2185B !important;
+            border: 3px solid #B71C1C !important;
             border-radius: 20px !important;
             padding: ${bubblePadding} !important;
             box-shadow: 0 10px 30px rgba(194, 24, 91, 0.3) !important;
@@ -692,7 +692,7 @@ function showPrincessFullSequence() {
                 height: 0 !important;
                 border-left: 10px solid transparent !important;
                 border-right: 10px solid transparent !important;
-                border-bottom: 10px solid #C2185B !important;
+                border-bottom: 10px solid #B71C1C !important;
             `;
         }
         
@@ -2562,10 +2562,10 @@ function showDownloadAlert() {
                 <strong>Importante:</strong> Para instalar la aplicación en tu teléfono, necesitarás permitir la instalación de fuentes desconocidas en la configuración de seguridad.
             </p>
             <div style="background: #FCE4EC; padding: 10px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #E91E63;">
-                <p style="margin: 0; font-size: 0.9rem; color: #C2185B;">
+                <p style="margin: 0; font-size: 0.9rem; color: #B71C1C;">
                     <strong>💡 Consejo:</strong> Ve a Configuración > Seguridad > Fuentes desconocidas y actívala para instalar.
                 </p>
-                <p style="margin: 0; font-size: 0.9rem; color: #C2185B;">
+                <p style="margin: 0; font-size: 0.9rem; color: #B71C1C;">
                     <strong>IMPORTANTE:</strong> Apenas descargues, instales y abras la aplicación, pulsa en permitir para recibir notiticaciones(En caso de que lo pida).
                 </p>
             </div>
@@ -5070,7 +5070,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (cuponeraWarning) {
             cuponeraWarning.textContent = `⏰ Espera ${timeRemaining} segundos para seleccionar otro cupón`;
-            cuponeraWarning.style.color = '#C2185B';
+            cuponeraWarning.style.color = '#B71C1C';
         }
         
         timerInterval = setInterval(() => {
@@ -5134,15 +5134,31 @@ document.addEventListener('DOMContentLoaded', function() {
         btnNextPage.addEventListener('click', handleNextPage);
     }
     
-    // Abrir modal de cuponera automáticamente al cargar la página
-    if (cuponeraModal) {
+    // Abrir modal de San Valentín al cargar (ya no se abre la cuponera automáticamente)
+    const sanValentinModal = document.getElementById('sanValentinModal');
+    const sanValentinMensajeWrapper = document.getElementById('sanValentinMensajeWrapper');
+    const sanValentinMensaje = document.getElementById('sanValentinMensaje');
+    const sanValentinCerrarMsg = document.getElementById('sanValentinCerrarMsg');
+    if (sanValentinModal) {
         setTimeout(() => {
-            const modal = new bootstrap.Modal(cuponeraModal, {
+            const modal = new bootstrap.Modal(sanValentinModal, {
                 backdrop: 'static',
                 keyboard: false
             });
             modal.show();
         }, 500);
+    }
+    if (sanValentinMensajeWrapper && sanValentinMensaje && sanValentinCerrarMsg) {
+        document.querySelectorAll('.san-valentin-cupon').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                const msg = this.getAttribute('data-sv-msg') || '';
+                sanValentinMensaje.textContent = msg;
+                sanValentinMensajeWrapper.style.display = 'block';
+            });
+        });
+        sanValentinCerrarMsg.addEventListener('click', function() {
+            sanValentinMensajeWrapper.style.display = 'none';
+        });
     }
     
     // Abrir modal de cuponera al hacer clic en el botón
