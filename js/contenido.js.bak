@@ -5276,7 +5276,7 @@ document.addEventListener('DOMContentLoaded', function() {
             for(let i=0; i<15; i++) setTimeout(() => createCelebrationParticle('🎂'), i * 200);
         }
     } 
-    else if (mes === 5 && dia === 10) {
+    else if (mes === 5 && dia === 8) {
         // DÍA DE LA MADRE (10 DE MAYO) - BLOQUEA SAN VALENTÍN
         if (momModalElem) {
             const modalMom = new bootstrap.Modal(momModalElem);

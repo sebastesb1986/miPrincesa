@@ -583,7 +583,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body san-valentin-modal-body">
-                    <h2 class="san-valentin-titulo">Vida! 9 y 10 de mayo aqui hay sorpresas para ti my princess</h2>
+                    <h2 class="san-valentin-titulo">Vida! Feliz día de san valentín</h2>
                     <p class="san-valentin-sub"> <span class="san-valentin-cupid-icon" aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="1.4em" height="1.4em" style="vertical-align: middle;" aria-label="Cupido con arco y flecha"><circle cx="50" cy="26" r="11" fill="#B71C1C"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="#B71C1C"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="#C62828" stroke="#8B0000" stroke-width="1"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="#C62828" stroke="#8B0000" stroke-width="1"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="#8B4513" stroke-width="2.5" stroke-linecap="round"/><line x1="26" y1="55" x2="52" y2="55" stroke="#5D4E37" stroke-width="2" stroke-linecap="round"/><path d="M26 55 L20 52 L20 58 Z" fill="#5D4E37"/></svg></span> 💕💕 </p>
                     <div class="san-valentin-imagen-wrapper">
