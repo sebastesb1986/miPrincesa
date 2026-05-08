@@ -589,7 +589,7 @@
                     <div class="san-valentin-imagen-wrapper">
                         <img src="./images/valentin.jpeg" alt="San Valentín" class="san-valentin-imagen" />
                     </div>
-                    <p class="san-valentin-descubreme">Espera hasta el dia y descúbreme… 💕 <span class="san-valentin-descubreme-hint"></span></p>
+                    <p class="san-valentin-descubreme">Espera hasta el dia y Descúbreme… 💕 <span class="san-valentin-descubreme-hint"></span></p>
                     <!--<div class="san-valentin-cupones">
                         <button type="button" class="san-valentin-cupon" data-sv-msg="Te quiero" aria-label="?">?</button>
                         <button type="button" class="san-valentin-cupon" data-sv-msg="Te pienso" aria-label="?">?</button>
