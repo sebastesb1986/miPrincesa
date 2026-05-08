@@ -5266,7 +5266,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const svModalElem = document.getElementById('sanValentinModal');
 
     // LÓGICA DE APERTURA EXCLUSIVA POR FECHA
-    if (mes === 5 && dia === 8) {
+    if (mes === 5 && dia === 9) {
         // CUMPLEAÑOS (9 DE MAYO) - BLOQUEA SAN VALENTÍN
         if (bdayModalElem) {
             const modalBday = new bootstrap.Modal(bdayModalElem);

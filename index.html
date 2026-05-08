@@ -18,6 +18,10 @@
             <div class="page">
                 <h1>Elizabeth, Mi Princesa <img src="./images/princesaEli.png" alt="Princesa Elizabeth" class="princess-icon" width="50" height="50" style="width: 50px; height: 50px; display: inline-block; cursor: pointer;" onclick="showPrincessFullSequence()"></h1>
                 <div class="buttons-container">
+					<div class="buttons-row buttons-row-special">
+						<button id="btnBirthday" class="btn btn-birthday">🎂 Feliz Cumpleaños Elizabeth</button>
+						<button id="btnMomDay" class="btn btn-mom">🌸 Para una princesa muy especial</button>
+					</div>
                     <div class="buttons-row buttons-row-primary">
                         <button id="btnStars" class="btn btn-stars">⭐ Nuestro planetario de amor</button>
                         <button id="btnPlayAudio" class="btn btn-danger">Cuéntame la Historia</button>
@@ -715,6 +719,46 @@
             </div>
         </div>
     </div>
+	
+	<div class="modal fade" id="birthdayModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content bday-modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">🎂 Un Año Más de Brillo</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body text-center">
+					<h2 class="celebration-title">¡Vida, Feliz Cumpleaños</h2>
+					<p class="celebration-p">Hoy celebro tu vida y la mujer maravillosa que eres. Que este nuevo año esté lleno de la misma luz y alegría que transmites. A pesar de todo, te quiero vida</p>
+					<iframe 
+						width="100%" 
+						height="240" 
+						src="https://www.youtube.com/embed/RLuyHWP_wnM" 
+						title="The Simpsons: Lisa, it's your Birthday" 
+						frameborder="0" 
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+						allowfullscreen>
+					</iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="momModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content mom-modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">🌸 Admiro tu Corazón hermosa madre</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body text-center">
+					<p class="celebration-p" style="font-style: italic;">
+						"Admiro profundamente la dedicación y el amor que entregas cada día. Tu fuerza como mujer y tu entrega en tu rol de madre son inspiración pura. Te reconozco hoy con amor, respeto y mucho cariño."
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>
