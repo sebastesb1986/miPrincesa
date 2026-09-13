@@ -25,6 +25,21 @@ let audioCuento = null;
 let audioPienso = null;
 let btnCuento = null;
 let btnPienso = null;
+let audioPhotograph = null;
+
+function showBootstrapModal(element, options) {
+    if (!element || typeof bootstrap === 'undefined' || !bootstrap.Modal) {
+        return null;
+    }
+    try {
+        const instance = bootstrap.Modal.getOrCreateInstance(element, options || {});
+        instance.show();
+        return instance;
+    } catch (error) {
+        console.warn('No se pudo abrir el modal:', error);
+        return null;
+    }
+}
 
 // Nota: La función updateCarouselIndicators ya no es necesaria porque el carrusel fue reemplazado por la galería
 
@@ -43,16 +58,22 @@ function stopAllAudios() {
         btnPienso.innerHTML = '💝 ¿Qué Significas para Mí?';
         btnPienso.style.background = 'linear-gradient(45deg, #3B82F6, #1D4ED8)';
     }
+
+    if (audioPhotograph && !audioPhotograph.paused) {
+        audioPhotograph.pause();
+        if (typeof actualizarEstadoMusicControl === 'function') {
+            actualizarEstadoMusicControl(false);
+        }
+    }
 }
 
 // ===== FUNCIONALIDAD DE LA GALERÍA =====
 
 // Función para abrir el modal de la galería con la imagen y texto correspondiente
 function openGalleryModal(imageIndex, imageSrc) {
-    // Obtener el modal de Bootstrap
-    const galleryModal = new bootstrap.Modal(document.getElementById('galleryModal'));
-    
-    // Obtener los elementos del modal
+    const galleryModalEl = document.getElementById('galleryModal');
+    if (!galleryModalEl) return;
+
     const modalImage = document.getElementById('galleryModalImage');
     const modalText = document.getElementById('galleryModalText');
     const modalButtonContainer = document.getElementById('galleryModalButtonContainer');
@@ -81,7 +102,7 @@ function openGalleryModal(imageIndex, imageSrc) {
     }
     
     // Abrir el modal
-    galleryModal.show();
+    showBootstrapModal(galleryModalEl);
 }
 
 // Event listeners para los items de la galería
@@ -2802,15 +2823,10 @@ function initializePrincessCarousel() {
 
 // Función para abrir el modal de princess automáticamente
 function openPrincessModal() {
-    // Esperar un poco para que la página se cargue completamente
     setTimeout(() => {
-        const princessModal = new bootstrap.Modal(document.getElementById('princessModal'));
-        princessModal.show();
-        
-        // Cargar imágenes del carrusel de princess cuando se abra el modal
+        showBootstrapModal(document.getElementById('princessModal'));
         loadPrincessCarouselImages();
-        
-    }, 1000); // 1 segundo de delay para que se vea mejor
+    }, 1000);
 }
 
 // Función para abrir el modal de princess desde el botón Tour de Amor
@@ -2823,8 +2839,7 @@ function openPrincessModalFromTour() {
     }
     
     // Abrir la modal de Princess inmediatamente
-    const princessModal = new bootstrap.Modal(document.getElementById('princessModal'));
-    princessModal.show();
+    showBootstrapModal(document.getElementById('princessModal'));
     
     // Cargar imágenes del carrusel de princess cuando se abra el modal
     loadPrincessCarouselImages();
@@ -3133,6 +3148,10 @@ function detectUserInteraction() {
 
 // Configurar el modal de bienvenida
 function setupWelcomeModal() {
+    const modalElement = document.getElementById('welcomeModal');
+    if (!modalElement) {
+        return; // El modal ya no existe en la página, evitar error
+    }
     
     // Detectar interacción del usuario
     detectUserInteraction();
@@ -3173,7 +3192,6 @@ function setupWelcomeModal() {
     }
     
     // Configurar evento cuando el modal se cierre completamente
-    const modalElement = document.getElementById('welcomeModal');
     modalElement.addEventListener('hidden.bs.modal', function() {
         
         // Limpiar estado adicional
@@ -3191,11 +3209,13 @@ function setupWelcomeModal() {
 
 // Mostrar el modal de bienvenida
 function showWelcomeModal() {
-    
+    const modalElement = document.getElementById('welcomeModal');
+    if (!modalElement) return;
+
     // Resetear el estado de cierre
     modalClosing = false;
     
-    const welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+    const welcomeModal = new bootstrap.Modal(modalElement);
     welcomeModal.show();
     
     // Configurar el video para reproducción automática
@@ -5266,6 +5286,8 @@ function startStarRain(duration = 5000) {
 
 // 3. BLOQUE PRINCIPAL DE CONTROL EXCLUSIVO
 document.addEventListener('DOMContentLoaded', function() {
+    initPhotographMusicPlayer();
+
     const hoy = new Date();
     const mes = hoy.getMonth() + 1; // Mayo es 5
     const dia = hoy.getDate();
@@ -5278,8 +5300,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mes === 5 && dia === 9) {
         // CUMPLEAÑOS (9 DE MAYO) - BLOQUEA SAN VALENTÍN
         if (bdayModalElem) {
-            const modalBday = new bootstrap.Modal(bdayModalElem);
-            modalBday.show();
+            showBootstrapModal(bdayModalElem);
             // Disparar efectos automáticos
             setTimeout(() => startStarRain(8000), 500); 
             for(let i=0; i<15; i++) setTimeout(() => createCelebrationParticle('🎂'), i * 200);
@@ -5288,8 +5309,7 @@ document.addEventListener('DOMContentLoaded', function() {
     else if (mes === 5 && dia === 10) {
         // DÍA DE LA MADRE (10 DE MAYO) - BLOQUEA SAN VALENTÍN
         if (momModalElem) {
-            const modalMom = new bootstrap.Modal(momModalElem);
-            modalMom.show();
+            showBootstrapModal(momModalElem);
             for(let i=0; i<15; i++) setTimeout(() => createCelebrationParticle('🌸'), i * 200);
         }
     } 
@@ -5297,9 +5317,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // CUALQUIER OTRO DÍA: SE ABRE SAN VALENTÍN NORMALMENTE
         if (svModalElem) {
             setTimeout(() => {
-                // Se inicializa sin solaparse con los otros
-                const modalSV = new bootstrap.Modal(svModalElem);
-                modalSV.show();
+                showBootstrapModal(svModalElem);
             }, 800);
         }
     }
@@ -5310,7 +5328,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (btnBday) {
         btnBday.addEventListener('click', () => {
-            new bootstrap.Modal(document.getElementById('birthdayModal')).show();
+            showBootstrapModal(document.getElementById('birthdayModal'));
             startStarRain(6000);
             for(let i=0; i<5; i++) setTimeout(() => createCelebrationParticle('🎂'), i * 300);
         });
@@ -5318,7 +5336,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (btnMom) {
         btnMom.addEventListener('click', () => {
-            new bootstrap.Modal(document.getElementById('momModal')).show();
+            showBootstrapModal(document.getElementById('momModal'));
             for(let i=0; i<10; i++) setTimeout(() => createCelebrationParticle('🌹'), i * 200);
         });
     }
@@ -5327,3 +5345,98 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof setupWelcomeModal === "function") setupWelcomeModal();
     if (typeof trackUserActivity === "function") trackUserActivity('Sesión Iniciada - Modo Especial Activado');
 });
+
+// Función para inicializar y controlar la música Photograph de Ed Sheeran
+function initPhotographMusicPlayer() {
+    audioPhotograph = document.getElementById('audio-photograph');
+    const btnToggle = document.getElementById('btnMusicToggle');
+    const musicDisc  = document.getElementById('musicDisc');
+    const musicStatus = document.getElementById('musicStatus');
+
+    if (!audioPhotograph) return;
+
+    audioPhotograph.loop   = true;
+    audioPhotograph.volume = 1;
+
+    // ── Actualizar UI del control flotante ──────────────────────────────────
+    window.actualizarEstadoMusicControl = function(isPlaying) {
+        if (musicDisc)   musicDisc.classList.toggle('rotating', isPlaying);
+        if (musicStatus) musicStatus.textContent = isPlaying ? 'Sonando para ti 💕' : 'Toca ▶ para escuchar 🎵';
+        if (btnToggle) {
+            btnToggle.classList.toggle('is-playing', isPlaying);
+            btnToggle.setAttribute('aria-pressed', String(isPlaying));
+            btnToggle.title = isPlaying ? 'Detener música' : 'Reproducir música';
+            btnToggle.setAttribute('aria-label', isPlaying ? 'Detener música' : 'Reproducir música');
+        }
+    };
+
+    // ── Reproducir ──────────────────────────────────────────────────────────
+    function reproducirPhotograph() {
+        if (audioCuento && !audioCuento.paused) audioCuento.pause();
+        if (audioPienso && !audioPienso.paused) audioPienso.pause();
+        return audioPhotograph.play();
+    }
+
+    // ── Detener ─────────────────────────────────────────────────────────────
+    function detenerPhotograph() {
+        audioPhotograph.pause();
+        audioPhotograph.currentTime = 0;
+        actualizarEstadoMusicControl(false);
+        if (musicStatus) musicStatus.textContent = 'Música detenida ⏹️';
+    }
+
+    // ── Botón Play/Stop ──────────────────────────────────────────────────────
+    if (btnToggle) {
+        btnToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (audioPhotograph.paused) {
+                reproducirPhotograph()
+                    .then(() => actualizarEstadoMusicControl(true))
+                    .catch(() => actualizarEstadoMusicControl(false));
+            } else {
+                detenerPhotograph();
+            }
+        });
+    }
+
+    // ── Sincronizar UI con eventos del audio ────────────────────────────────
+    audioPhotograph.addEventListener('play',  () => actualizarEstadoMusicControl(true));
+    audioPhotograph.addEventListener('pause', () => actualizarEstadoMusicControl(false));
+    audioPhotograph.addEventListener('ended', () => actualizarEstadoMusicControl(false));
+
+    // ── Autoplay al cargar ──────────────────────────────────────────────────
+    // El audio arranca con 'autoplay muted' en el HTML (Chrome siempre lo permite).
+    // En cuanto el audio comienza a reproducirse, lo desmutamos → suena con volumen completo.
+    actualizarEstadoMusicControl(false);
+
+    function desmuteYSonar() {
+        audioPhotograph.muted  = false;
+        audioPhotograph.volume = 1;
+        actualizarEstadoMusicControl(true);
+    }
+
+    if (!audioPhotograph.paused) {
+        // El autoplay ya arrancó (caso fast-load)
+        desmuteYSonar();
+    } else {
+        // Esperar a que el navegador arranque el autoplay
+        audioPhotograph.addEventListener('play', function onAutoplayStart() {
+            audioPhotograph.removeEventListener('play', onAutoplayStart);
+            desmuteYSonar();
+        });
+
+        // Plan B: si incluso el autoplay muted fue bloqueado,
+        // activar en la primera interacción del usuario (invisible para ella)
+        const EVENTOS = ['click', 'touchstart', 'keydown', 'scroll', 'pointerdown'];
+        function alPrimeraInteraccion() {
+            EVENTOS.forEach(evt => document.removeEventListener(evt, alPrimeraInteraccion, true));
+            if (!audioPhotograph.paused) { desmuteYSonar(); return; }
+            audioPhotograph.muted = false;
+            audioPhotograph.play()
+                .then(() => actualizarEstadoMusicControl(true))
+                .catch(() => actualizarEstadoMusicControl(false));
+        }
+        EVENTOS.forEach(evt => document.addEventListener(evt, alPrimeraInteraccion, true));
+    }
+}

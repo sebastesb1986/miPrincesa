@@ -8802,3 +8802,220 @@ h1 img {
     }
 }
 
+/* ===== CONTROL FLOTANTE DE MÚSICA DE FONDO (AMOR Y AMISTAD) ===== */
+.floating-music-control {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 10050;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px 10px 12px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 2px solid rgba(212, 175, 55, 0.7); /* Oro Champagne */
+    border-radius: 40px;
+    box-shadow: 0 10px 30px rgba(183, 28, 28, 0.2), 0 0 20px rgba(255, 105, 180, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    animation: floatingMusicEntrance 0.8s ease-out;
+    pointer-events: auto;
+}
+
+body.modal-open .floating-music-control {
+    z-index: 10050;
+}
+
+.floating-music-control:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 35px rgba(183, 28, 28, 0.3), 0 0 25px rgba(212, 175, 55, 0.4);
+}
+
+/* Disco de vinilo / nota musical giratoria */
+.music-disc {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #B71C1C, #900C3F);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #FFD700;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+.music-disc.rotating {
+    animation: rotateMusicDisc 3.5s linear infinite;
+}
+
+.music-note-icon {
+    font-size: 1.1rem;
+}
+
+/* Información de la pista */
+.music-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    min-width: 140px;
+    max-width: 190px;
+}
+
+.music-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #900C3F;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+}
+
+.music-status {
+    font-family: 'Dancing Script', cursive;
+    font-size: 0.95rem;
+    color: #B71C1C;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Botones de acción (Play y Stop) */
+.music-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-music-action {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+#btnMusicToggle {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: #ffffff;
+}
+
+#btnMusicToggle:hover {
+    transform: scale(1.12);
+    background: linear-gradient(135deg, #66BB6A, #388E3C);
+}
+
+#btnMusicToggle.is-playing {
+    background: linear-gradient(135deg, #E53935, #B71C1C);
+}
+
+#btnMusicToggle.is-playing:hover {
+    background: linear-gradient(135deg, #EF5350, #C62828);
+}
+
+#btnMusicToggle .icon-music-stop {
+    display: none;
+}
+
+#btnMusicToggle.is-playing .icon-music-play {
+    display: none;
+}
+
+#btnMusicToggle.is-playing .icon-music-stop {
+    display: block;
+}
+
+.btn-music-action.active-pulse {
+    animation: heartBeatPulse 1.8s infinite;
+}
+
+@keyframes rotateMusicDisc {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes floatingMusicEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsivo para celulares */
+@media (max-width: 576px) {
+    .floating-music-control {
+        top: 14px;
+        right: 14px;
+        padding: 8px 12px;
+        gap: 8px;
+    }
+    
+    .music-info {
+        max-width: 120px;
+    }
+    
+    .music-title {
+        font-size: 0.78rem;
+    }
+    
+    .music-status {
+        font-size: 0.85rem;
+    }
+    
+    .btn-music-action {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+
+/* ── Tercera polaroid (moon.jpeg) en modal Amor y Amistad ─────────────────── */
+.amor-amistad-showcase {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+}
+
+.amor-amistad-showcase .amor-card-photo {
+    flex: 0 1 calc(33% - 16px);
+    min-width: 120px;
+    max-width: 180px;
+}
+
+.polaroid-moon {
+    transform: rotate(0deg);
+    background: linear-gradient(145deg, #1a1a2e, #16213e);
+    border: 3px solid #7c5cbf;
+    box-shadow:
+        0 6px 20px rgba(124, 92, 191, 0.45),
+        0 0 12px rgba(200, 170, 255, 0.25);
+}
+
+.polaroid-moon .polaroid-pin {
+    color: #c8aaff;
+    filter: drop-shadow(0 0 4px rgba(200, 170, 255, 0.6));
+}
+
+.polaroid-moon .polaroid-caption {
+    color: #d4b8ff;
+    font-style: italic;
+}
+
+@media (max-width: 576px) {
+    .amor-amistad-showcase .amor-card-photo {
+        flex: 0 1 calc(50% - 10px);
+        max-width: 140px;
+    }
+}
