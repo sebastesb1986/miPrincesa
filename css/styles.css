@@ -8952,16 +8952,17 @@ body.modal-open .floating-music-control {
     }
 }
 
-/* Responsivo para celulares: solo disco giratorio y botón play/stop para no tapar el título */
+/* Responsivo para celulares: posicionado debajo del botón cerrar (X) para no interferir con él ni con el título */
 @media (max-width: 768px) {
     .floating-music-control {
-        top: 12px;
-        right: 12px;
+        top: 68px;
+        right: 14px;
         padding: 5px 8px;
         gap: 6px;
         border-radius: 30px;
-        background: rgba(255, 255, 255, 0.92);
-        box-shadow: 0 4px 15px rgba(183, 28, 28, 0.2);
+        background: rgba(255, 255, 255, 0.94);
+        border: 1.5px solid rgba(212, 175, 55, 0.7);
+        box-shadow: 0 4px 15px rgba(183, 28, 28, 0.25);
     }
     
     .music-info {
@@ -8986,6 +8987,17 @@ body.modal-open .floating-music-control {
     .btn-music-action svg {
         width: 15px;
         height: 15px;
+    }
+
+    /* Margen de seguridad para que el título del modal quede centrado y con espacio libre a la derecha */
+    .amor-amistad-titulo {
+        max-width: 82%;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .amor-amistad-badge-top {
+        max-width: 80%;
     }
 }
 
