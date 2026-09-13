@@ -5374,6 +5374,8 @@ function initPhotographMusicPlayer() {
     function reproducirPhotograph() {
         if (audioCuento && !audioCuento.paused) audioCuento.pause();
         if (audioPienso && !audioPienso.paused) audioPienso.pause();
+        audioPhotograph.muted = false;
+        audioPhotograph.volume = 1;
         return audioPhotograph.play();
     }
 
@@ -5405,38 +5407,52 @@ function initPhotographMusicPlayer() {
     audioPhotograph.addEventListener('pause', () => actualizarEstadoMusicControl(false));
     audioPhotograph.addEventListener('ended', () => actualizarEstadoMusicControl(false));
 
-    // ── Autoplay al cargar ──────────────────────────────────────────────────
-    // El audio arranca con 'autoplay muted' en el HTML (Chrome siempre lo permite).
-    // En cuanto el audio comienza a reproducirse, lo desmutamos → suena con volumen completo.
-    actualizarEstadoMusicControl(false);
+    // ── Autoplay inteligente y desbloqueo garantizado ───────────────────────
+    let desbloqueado = false;
+    const EVENTOS_ACTIVACION = ['click', 'touchstart', 'touchend', 'pointerdown', 'keydown'];
 
-    function desmuteYSonar() {
-        audioPhotograph.muted  = false;
-        audioPhotograph.volume = 1;
-        actualizarEstadoMusicControl(true);
-    }
-
-    if (!audioPhotograph.paused) {
-        // El autoplay ya arrancó (caso fast-load)
-        desmuteYSonar();
-    } else {
-        // Esperar a que el navegador arranque el autoplay
-        audioPhotograph.addEventListener('play', function onAutoplayStart() {
-            audioPhotograph.removeEventListener('play', onAutoplayStart);
-            desmuteYSonar();
-        });
-
-        // Plan B: si incluso el autoplay muted fue bloqueado,
-        // activar en la primera interacción del usuario (invisible para ella)
-        const EVENTOS = ['click', 'touchstart', 'keydown', 'scroll', 'pointerdown'];
-        function alPrimeraInteraccion() {
-            EVENTOS.forEach(evt => document.removeEventListener(evt, alPrimeraInteraccion, true));
-            if (!audioPhotograph.paused) { desmuteYSonar(); return; }
-            audioPhotograph.muted = false;
-            audioPhotograph.play()
-                .then(() => actualizarEstadoMusicControl(true))
-                .catch(() => actualizarEstadoMusicControl(false));
+    function intentarDesbloqueo() {
+        if (desbloqueado || !audioPhotograph.paused) {
+            removerListeners();
+            return;
         }
-        EVENTOS.forEach(evt => document.addEventListener(evt, alPrimeraInteraccion, true));
+
+        reproducirPhotograph()
+            .then(() => {
+                desbloqueado = true;
+                actualizarEstadoMusicControl(true);
+                removerListeners();
+            })
+            .catch(() => {
+                // Si este intento fue bloqueado por la política del navegador,
+                // los listeners permanecen activos para sonar en el siguiente toque/clic
+            });
     }
+
+    function removerListeners() {
+        EVENTOS_ACTIVACION.forEach(evt => {
+            document.removeEventListener(evt, intentarDesbloqueo, true);
+            window.removeEventListener(evt, intentarDesbloqueo, true);
+        });
+        const modal = document.getElementById('sanValentinModal');
+        if (modal) {
+            EVENTOS_ACTIVACION.forEach(evt => modal.removeEventListener(evt, intentarDesbloqueo, true));
+        }
+    }
+
+    // Registrar listeners para capturar el primer toque en cualquier parte de la pantalla o modal
+    EVENTOS_ACTIVACION.forEach(evt => {
+        document.addEventListener(evt, intentarDesbloqueo, true);
+        window.addEventListener(evt, intentarDesbloqueo, true);
+    });
+
+    // También vincular con la apertura o interacción del modal de Amor y Amistad
+    const modal = document.getElementById('sanValentinModal');
+    if (modal) {
+        EVENTOS_ACTIVACION.forEach(evt => modal.addEventListener(evt, intentarDesbloqueo, true));
+        modal.addEventListener('shown.bs.modal', intentarDesbloqueo);
+    }
+
+    // Intento 1: reproducir inmediatamente al cargar
+    intentarDesbloqueo();
 }

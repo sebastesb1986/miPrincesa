@@ -8952,30 +8952,40 @@ body.modal-open .floating-music-control {
     }
 }
 
-/* Responsivo para celulares */
-@media (max-width: 576px) {
+/* Responsivo para celulares: solo disco giratorio y botón play/stop para no tapar el título */
+@media (max-width: 768px) {
     .floating-music-control {
-        top: 14px;
-        right: 14px;
-        padding: 8px 12px;
-        gap: 8px;
+        top: 12px;
+        right: 12px;
+        padding: 5px 8px;
+        gap: 6px;
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 4px 15px rgba(183, 28, 28, 0.2);
     }
     
     .music-info {
-        max-width: 120px;
+        display: none !important;
     }
     
-    .music-title {
-        font-size: 0.78rem;
+    .music-disc {
+        width: 32px;
+        height: 32px;
+        border-width: 1.5px;
     }
-    
-    .music-status {
-        font-size: 0.85rem;
+
+    .music-note-icon {
+        font-size: 0.95rem;
     }
     
     .btn-music-action {
-        width: 30px;
-        height: 30px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .btn-music-action svg {
+        width: 15px;
+        height: 15px;
     }
 }
 
