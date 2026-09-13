@@ -5134,32 +5134,41 @@ document.addEventListener('DOMContentLoaded', function() {
         btnNextPage.addEventListener('click', handleNextPage);
     }
     
-    // Abrir modal de San Valentín al cargar (ya no se abre la cuponera automáticamente)
-    /* const sanValentinModal = document.getElementById('sanValentinModal');
-    const sanValentinMensajeWrapper = document.getElementById('sanValentinMensajeWrapper');
-    const sanValentinMensaje = document.getElementById('sanValentinMensaje');
-    const sanValentinCerrarMsg = document.getElementById('sanValentinCerrarMsg');
-    if (sanValentinModal) {
-        setTimeout(() => {
-            const modal = new bootstrap.Modal(sanValentinModal, {
-                backdrop: 'static',
-                keyboard: false
-            });
-            modal.show();
-        }, 500);
-    }
-    if (sanValentinMensajeWrapper && sanValentinMensaje && sanValentinCerrarMsg) {
-        document.querySelectorAll('.san-valentin-cupon').forEach(function(btn) {
+    // Lógica interactiva para la Modal de Amor y Amistad (Mensajes Sorpresa)
+    const amorMensajeWrapper = document.getElementById('amorMensajeWrapper');
+    const amorMensajeTexto = document.getElementById('amorMensajeTexto');
+    const amorCerrarMsg = document.getElementById('amorCerrarMsg');
+    
+    if (amorMensajeWrapper && amorMensajeTexto && amorCerrarMsg) {
+        document.querySelectorAll('.btn-amor-sorpresa').forEach(function(btn) {
             btn.addEventListener('click', function() {
-                const msg = this.getAttribute('data-sv-msg') || '';
-                sanValentinMensaje.textContent = msg;
-                sanValentinMensajeWrapper.style.display = 'block';
+                const mensaje = this.getAttribute('data-mensaje') || '';
+                amorMensajeTexto.textContent = mensaje;
+                amorMensajeWrapper.style.display = 'block';
+                
+                // Lluvia mágica de corazones y rosas al descubrir un mensaje
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => createCelebrationParticle('💖', 'rain'), i * 120);
+                    setTimeout(() => createCelebrationParticle('🌹', 'float'), i * 150);
+                }
             });
         });
-        sanValentinCerrarMsg.addEventListener('click', function() {
-            sanValentinMensajeWrapper.style.display = 'none';
+        
+        amorCerrarMsg.addEventListener('click', function() {
+            amorMensajeWrapper.style.display = 'none';
         });
-    }*/
+    }
+
+    // Efecto de lluvia de corazones cuando se abre la modal de Amor y Amistad
+    const svModalElemInit = document.getElementById('sanValentinModal');
+    if (svModalElemInit) {
+        svModalElemInit.addEventListener('shown.bs.modal', function() {
+            for (let i = 0; i < 12; i++) {
+                setTimeout(() => createCelebrationParticle('💕', 'rain'), i * 180);
+                setTimeout(() => createCelebrationParticle('✨', 'rain'), i * 220);
+            }
+        });
+    }
     
     // Abrir modal de cuponera al hacer clic en el botón
     if (btnCuponera && cuponeraModal) {

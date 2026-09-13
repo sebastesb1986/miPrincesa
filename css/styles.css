@@ -194,7 +194,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Fondo animado con cupidos de San Valentín */
+/* Fondo animado romántico y sutil de Amor y Amistad */
 body::before {
     content: '';
     position: fixed;
@@ -203,50 +203,41 @@ body::before {
     width: 100%;
     height: 100%;
     background-image: 
-        /* Cupidos (ángel con arco y flecha) rojos */
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="26" r="11" fill="%23B71C1C" opacity="0.4"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="%23B71C1C" opacity="0.4"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="%23C62828" opacity="0.35" stroke="%238B0000" stroke-width="0.8"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="%23C62828" opacity="0.35" stroke="%238B0000" stroke-width="0.8"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="%238B4513" stroke-width="2" opacity="0.85"/><line x1="26" y1="55" x2="52" y2="55" stroke="%23654321" stroke-width="1.5" opacity="0.9"/><path d="M26 55 L20 52 L20 58 Z" fill="%23654321" opacity="0.9"/></svg>'),
-        /* Cupidos rosas */
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="26" r="11" fill="%23D32F2F" opacity="0.35"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="%23D32F2F" opacity="0.35"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="%23E53935" opacity="0.3" stroke="%238B0000" stroke-width="0.8"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="%23E53935" opacity="0.3" stroke="%238B0000" stroke-width="0.8"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="%238B4513" stroke-width="2" opacity="0.8"/><line x1="26" y1="55" x2="52" y2="55" stroke="%23654321" stroke-width="1.5" opacity="0.85"/><path d="M26 55 L20 52 L20 58 Z" fill="%23654321" opacity="0.85"/></svg>'),
-        /* Cupidos claros */
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="26" r="11" fill="%23FF5252" opacity="0.3"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="%23FF5252" opacity="0.3"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="%23FF8A80" opacity="0.25" stroke="%23C62828" stroke-width="0.7"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="%23FF8A80" opacity="0.25" stroke="%23C62828" stroke-width="0.7"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="%238B4513" stroke-width="2" opacity="0.75"/><line x1="26" y1="55" x2="52" y2="55" stroke="%23654321" stroke-width="1.5" opacity="0.8"/><path d="M26 55 L20 52 L20 58 Z" fill="%23654321" opacity="0.8"/></svg>'),
-        /* Cupidos oscuros */
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="26" r="11" fill="%238B0000" opacity="0.35"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="%238B0000" opacity="0.35"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="%23B71C1C" opacity="0.3" stroke="%236B0F0F" stroke-width="0.8"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="%23B71C1C" opacity="0.3" stroke="%236B0F0F" stroke-width="0.8"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="%235D4E37" stroke-width="2" opacity="0.85"/><line x1="26" y1="55" x2="52" y2="55" stroke="%234A3728" stroke-width="1.5" opacity="0.9"/><path d="M26 55 L20 52 L20 58 Z" fill="%234A3728" opacity="0.9"/></svg>'),
-        /* Cupidos suaves */
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="26" r="11" fill="%23E53935" opacity="0.3"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="%23E53935" opacity="0.3"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="%23EF5350" opacity="0.25" stroke="%23B71C1C" stroke-width="0.7"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="%23EF5350" opacity="0.25" stroke="%23B71C1C" stroke-width="0.7"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="%238B4513" stroke-width="2" opacity="0.8"/><line x1="26" y1="55" x2="52" y2="55" stroke="%23654321" stroke-width="1.5" opacity="0.85"/><path d="M26 55 L20 52 L20 58 Z" fill="%23654321" opacity="0.85"/></svg>'),
-        /* Cupidos blancos/rosas */
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="26" r="11" fill="%23FFCDD2" opacity="0.45"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="%23FFCDD2" opacity="0.45"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="%23F8BBD9" opacity="0.4" stroke="%23C2185B" stroke-width="0.8"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="%23F8BBD9" opacity="0.4" stroke="%23C2185B" stroke-width="0.8"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="%238B4513" stroke-width="2" opacity="0.8"/><line x1="26" y1="55" x2="52" y2="55" stroke="%23654321" stroke-width="1.5" opacity="0.85"/><path d="M26 55 L20 52 L20 58 Z" fill="%23654321" opacity="0.85"/></svg>'),
-        /* Gradientes de color */
-        radial-gradient(circle at 20% 80%, rgba(255, 23, 68, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(233, 30, 99, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 60% 60%, rgba(255, 107, 0, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 30% 70%, rgba(123, 31, 162, 0.08) 0%, transparent 50%);
+        /* Corazones delineados en oro y rosa suave */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 82 C50 82 18 55 18 34 C18 20 30 14 40 19 C46 22 50 28 50 28 C50 28 54 22 60 19 C70 14 82 20 82 34 C82 55 50 82 50 82 Z" fill="%23FF4081" opacity="0.14" stroke="%23D4AF37" stroke-width="1"/></svg>'),
+        /* Corazones en carmesí aterciopelado suave */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 80 C50 80 20 54 20 35 C20 22 32 16 41 20 C46 23 50 28 50 28 C50 28 54 23 59 20 C68 16 80 22 80 35 C80 54 50 80 50 80 Z" fill="%23E91E63" opacity="0.12"/></svg>'),
+        /* Siluetas de rosas y pétalos sutiles */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="16" fill="%23C2185B" opacity="0.1"/><circle cx="43" cy="45" r="11" fill="%23E91E63" opacity="0.08"/><circle cx="57" cy="45" r="11" fill="%23FF80AB" opacity="0.08"/><circle cx="50" cy="57" r="10" fill="%23C2185B" opacity="0.08"/></svg>'),
+        /* Destellos mágicos (estrellitas doradas de complicidad) */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,15 59,38 85,42 65,60 71,85 50,71 29,85 35,60 15,42 41,38" fill="%23D4AF37" opacity="0.16"/></svg>'),
+        /* Gradientes radiales de luz suave y romance */
+        radial-gradient(circle at 15% 15%, rgba(255, 192, 203, 0.25) 0%, transparent 45%),
+        radial-gradient(circle at 85% 20%, rgba(255, 223, 186, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(255, 182, 193, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 20% 85%, rgba(248, 187, 208, 0.22) 0%, transparent 50%),
+        radial-gradient(circle at 80% 85%, rgba(255, 235, 238, 0.3) 0%, transparent 50%);
     background-size: 
-        200px 200px, 
+        140px 140px, 
         180px 180px, 
-        220px 220px, 
-        190px 190px, 
-        210px 210px,
-        200px 200px,
-        800px 800px,
+        210px 210px, 
+        160px 160px,
         700px 700px,
-        900px 900px,
         750px 750px,
+        900px 900px,
+        800px 800px,
         850px 850px;
     background-position: 
         0% 0%, 
-        25% 25%, 
-        50% 50%, 
-        75% 75%, 
-        100% 100%,
-        10% 90%,
-        center, center, center, center, center;
-    background-repeat: repeat;
-    background-blend-mode: overlay, overlay, overlay, overlay, overlay, overlay, normal, normal, normal, normal, normal;
-    opacity: 0.5;
+        35% 45%, 
+        75% 20%, 
+        20% 80%,
+        top left, top right, center, bottom left, bottom right;
+    background-repeat: repeat, repeat, repeat, repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    opacity: 0.85;
     pointer-events: none;
     z-index: -1;
-    animation: backgroundFloat 30s ease-in-out infinite;
+    animation: backgroundFloat 24s ease-in-out infinite alternate;
 }
 
 body::after {
@@ -257,19 +248,17 @@ body::after {
     width: 100%;
     height: 100%;
     background-image: 
-        /* Cupidos (ángel arco y flecha) - capa adicional */
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="26" r="11" fill="%23B71C1C" opacity="0.3"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="%23B71C1C" opacity="0.3"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="%23C62828" opacity="0.25" stroke="%238B0000" stroke-width="0.7"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="%23C62828" opacity="0.25" stroke="%238B0000" stroke-width="0.7"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="%238B4513" stroke-width="2" opacity="0.8"/><line x1="26" y1="55" x2="52" y2="55" stroke="%23654321" stroke-width="1.5" opacity="0.85"/><path d="M26 55 L20 52 L20 58 Z" fill="%23654321" opacity="0.85"/></svg>'),
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="26" r="11" fill="%23D32F2F" opacity="0.25"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="%23D32F2F" opacity="0.25"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="%23E53935" opacity="0.2" stroke="%238B0000" stroke-width="0.7"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="%23E53935" opacity="0.2" stroke="%238B0000" stroke-width="0.7"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="%238B4513" stroke-width="2" opacity="0.75"/><line x1="26" y1="55" x2="52" y2="55" stroke="%23654321" stroke-width="1.5" opacity="0.8"/><path d="M26 55 L20 52 L20 58 Z" fill="%23654321" opacity="0.8"/></svg>'),
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="26" r="11" fill="%23FF5252" opacity="0.22"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="%23FF5252" opacity="0.22"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="%23FF8A80" opacity="0.2" stroke="%23C62828" stroke-width="0.6"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="%23FF8A80" opacity="0.2" stroke="%23C62828" stroke-width="0.6"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="%238B4513" stroke-width="2" opacity="0.7"/><line x1="26" y1="55" x2="52" y2="55" stroke="%23654321" stroke-width="1.5" opacity="0.75"/><path d="M26 55 L20 52 L20 58 Z" fill="%23654321" opacity="0.75"/></svg>'),
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="26" r="11" fill="%238B0000" opacity="0.25"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="%238B0000" opacity="0.25"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="%23B71C1C" opacity="0.2" stroke="%236B0F0F" stroke-width="0.7"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="%23B71C1C" opacity="0.2" stroke="%236B0F0F" stroke-width="0.7"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="%235D4E37" stroke-width="2" opacity="0.8"/><line x1="26" y1="55" x2="52" y2="55" stroke="%234A3728" stroke-width="1.5" opacity="0.8"/><path d="M26 55 L20 52 L20 58 Z" fill="%234A3728" opacity="0.8"/></svg>');
-    background-size: 150px 150px, 170px 170px, 160px 160px, 165px 165px;
-    background-position: 10% 10%, 90% 90%, 30% 70%, 70% 30%;
+        /* Parejas de corazones entrelazados (Amor y Amistad) */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M40 70 C40 70 15 48 15 32 C15 20 25 15 33 19 C38 22 40 26 40 26 C40 26 42 22 47 19 C55 15 65 20 65 32 C65 48 40 70 40 70 Z" fill="%23FF5252" opacity="0.1"/><path d="M60 75 C60 75 35 53 35 37 C35 25 45 20 53 24 C58 27 60 31 60 31 C60 31 62 27 67 24 C75 20 85 25 85 37 C85 53 60 75 60 75 Z" fill="%23D4AF37" opacity="0.12"/></svg>'),
+        /* Corazoncitos flotantes pequeños */
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 78 C50 78 26 55 26 38 C26 27 34 22 41 25 C46 27 50 31 50 31 C50 31 54 27 59 25 C66 22 74 27 74 38 C74 55 50 78 50 78 Z" fill="%23FF80AB" opacity="0.15"/></svg>');
+    background-size: 220px 220px, 130px 130px;
+    background-position: 50% 25%, 15% 75%;
     background-repeat: repeat;
-    background-blend-mode: soft-light;
-    opacity: 0.4;
+    opacity: 0.7;
     pointer-events: none;
     z-index: -1;
-    animation: backgroundFloat 25s ease-in-out infinite reverse;
+    animation: backgroundFloat 18s ease-in-out infinite reverse;
 }
 
 @keyframes backgroundFloat {
@@ -5397,158 +5386,375 @@ h1 img {
 }
 
 /* Modal San Valentín - Feliz día */
-.san-valentin-modal-content {
-    background: linear-gradient(160deg, rgba(255, 248, 252, 0.98) 0%, rgba(255, 235, 243, 0.98) 50%, rgba(254, 220, 230, 0.98) 100%);
-    border: 3px solid rgba(183, 28, 28, 0.4);
-    border-radius: 24px;
-    box-shadow: 0 24px 48px rgba(183, 28, 28, 0.2), 0 0 0 1px rgba(183, 28, 28, 0.08);
+/* ===== MODAL DE AMOR Y AMISTAD - EDICIÓN DE LUJO ===== */
+.amor-amistad-modal-content {
+    background: linear-gradient(145deg, #fff9fa 0%, #fff0f5 45%, #fde4ec 100%);
+    border: 2.5px solid rgba(212, 175, 55, 0.65); /* Borde Champagne Gold */
+    border-radius: 30px;
+    box-shadow: 0 25px 60px rgba(183, 28, 28, 0.3), 0 0 40px rgba(233, 30, 99, 0.15);
     overflow: hidden;
     position: relative;
+    backdrop-filter: blur(10px);
 }
 
-.san-valentin-modal-header {
+/* Orbes brillantes de fondo */
+.modal-glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+.modal-glow-orb-1 {
+    width: 250px;
+    height: 250px;
+    top: -50px;
+    left: -50px;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.8) 0%, rgba(255, 105, 180, 0) 70%);
+}
+
+.modal-glow-orb-2 {
+    width: 300px;
+    height: 300px;
+    bottom: -60px;
+    right: -60px;
+    background: radial-gradient(circle, rgba(254, 219, 226, 0.9) 0%, rgba(212, 175, 55, 0.25) 70%);
+}
+
+.amor-amistad-modal-header {
     border: none;
-    padding: 16px 20px 0;
+    padding: 16px 22px 0;
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 20;
+    z-index: 25;
     background: transparent;
 }
 
-.san-valentin-modal-header .btn-close {
-    filter: none;
-    opacity: 0.9;
-    --bs-btn-close-color: #B71C1C;
-    background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23B71C1C'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat;
+.amor-amistad-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 10px rgba(183, 28, 28, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    opacity: 0.85;
+    transition: all 0.3s ease;
 }
 
-.san-valentin-modal-header .btn-close:hover {
+.amor-amistad-close:hover {
     opacity: 1;
-    filter: none;
+    transform: rotate(90deg) scale(1.1);
+    background-color: #fff;
 }
 
-.san-valentin-modal-body {
-    padding: 48px 36px 40px;
+.amor-amistad-modal-body {
+    padding: 38px 28px 34px;
     text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+/* Insignia superior con corona */
+.amor-amistad-badge-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 18px;
+    background: linear-gradient(135deg, rgba(255, 240, 245, 0.95), rgba(255, 255, 255, 0.95));
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+    margin-bottom: 14px;
+    animation: floatingBadge 3s ease-in-out infinite;
+}
+
+.amor-amistad-crown {
+    font-size: 1.2rem;
+    animation: heartBeatPulse 2s ease-in-out infinite;
+}
+
+.amor-amistad-tag {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #900C3F;
+}
+
+/* Título y subtítulo */
+.amor-amistad-titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 5vw, 2.9rem);
+    font-weight: 700;
+    color: #B71C1C;
+    margin: 0 0 6px;
+    text-shadow: 2px 2px 4px rgba(183, 28, 28, 0.15), 0 0 20px rgba(255, 105, 180, 0.2);
+    line-height: 1.2;
+}
+
+.amor-amistad-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #7b1113;
+    margin: 0 0 22px;
+    letter-spacing: 0.3px;
+}
+
+/* Galería de Fotografías Estilo Polaroid Romántico */
+.amor-amistad-showcase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.amor-card-photo {
+    background: #ffffff;
+    padding: 10px 10px 14px;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(183, 28, 28, 0.22), 0 0 0 1px rgba(212, 175, 55, 0.3);
+    position: relative;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease;
+    max-width: 210px;
+    flex: 1 1 180px;
+}
+
+.polaroid-ramo {
+    transform: rotate(-3deg);
+}
+
+.polaroid-nota {
+    transform: rotate(3deg);
+}
+
+.amor-card-photo:hover {
+    transform: rotate(0deg) scale(1.06);
+    box-shadow: 0 18px 36px rgba(183, 28, 28, 0.35), 0 0 25px rgba(212, 175, 55, 0.4);
+    z-index: 5;
+}
+
+.polaroid-pin {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.1rem;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.amor-img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.polaroid-caption {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #8B0000;
+    display: block;
+    line-height: 1.2;
+}
+
+/* Carta / Dedicatoria con borde de orla dorada */
+.amor-amistad-letter-box {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 245, 248, 0.95));
+    border: 1.5px solid rgba(212, 175, 55, 0.45);
+    border-radius: 20px;
+    padding: 22px 26px 18px;
+    margin-bottom: 22px;
+    box-shadow: 0 8px 25px rgba(183, 28, 28, 0.08), inset 0 0 15px rgba(255, 235, 240, 0.5);
+}
+
+.letter-quotes-icon {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    line-height: 0;
+    position: absolute;
+    top: 18px;
+    left: 14px;
+    color: rgba(212, 175, 55, 0.3);
+}
+
+.amor-amistad-dedicatoria {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: #4a2c2c;
+    margin-bottom: 12px;
+}
+
+.destacado-amor {
+    display: block;
+    margin-top: 8px;
+    font-weight: 700;
+    color: #B71C1C;
+    font-style: italic;
+}
+
+.amor-amistad-firma {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-family: 'Dancing Script', cursive;
+    color: #8B0000;
+    font-size: 1.15rem;
+    border-top: 1px dashed rgba(212, 175, 55, 0.4);
+    padding-top: 8px;
+    margin-top: 6px;
+}
+
+.amor-amistad-firma strong {
+    font-size: 1.35rem;
+    color: #B71C1C;
+}
+
+/* Sección de Botones Interactivos de Mensajes Sorpresa */
+.amor-amistad-instruccion {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.3rem;
+    color: #900C3F;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.amor-amistad-botones-sorpresa {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.btn-amor-sorpresa {
+    background: linear-gradient(135deg, #B71C1C 0%, #D81B60 60%, #FF4081 100%);
+    color: #ffffff;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 10px 18px;
+    border-radius: 20px;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 6px 18px rgba(183, 28, 28, 0.35);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-amor-sorpresa:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 24px rgba(216, 27, 96, 0.45);
+    color: #ffffff;
+    border-color: #ffd700;
+}
+
+.btn-amor-sorpresa:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Panel Desplegable de Mensaje Revelado */
+.amor-amistad-mensaje-revelado {
+    margin-top: 16px;
+    animation: fadeInSlideUp 0.4s ease-out;
+}
+
+.mensaje-revelado-content {
+    background: linear-gradient(135deg, #ffffff, #fff5f8);
+    border: 2px solid #FF4081;
+    border-radius: 20px;
+    padding: 20px 24px;
+    box-shadow: 0 12px 30px rgba(255, 64, 129, 0.25);
     position: relative;
 }
 
-.san-valentin-titulo {
-    font-family: 'Dancing Script', cursive;
-    font-size: clamp(1.6rem, 4vw, 2.4rem);
-    color: #B71C1C;
-    font-weight: 700;
-    margin: 0 0 8px;
-    text-shadow: 1px 1px 2px rgba(183, 28, 28, 0.15);
-    line-height: 1.3;
-}
-
-.san-valentin-sub {
-    font-size: 1rem;
-    color: #8B0000;
-    margin: 0 0 28px;
-    opacity: 0.9;
-}
-
-.san-valentin-imagen-wrapper {
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-.san-valentin-imagen {
-    max-width: 220px;
-    width: 100%;
-    height: auto;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(183, 28, 28, 0.25);
-    object-fit: cover;
-}
-
-.san-valentin-descubreme {
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.5rem;
-    color: #B71C1C;
-    text-align: center;
-    margin: 0 0 14px;
-    font-weight: 600;
-}
-
-.san-valentin-descubreme-hint {
-    font-size: 0.85rem;
-    color: #8B0000;
-    opacity: 0.85;
-    font-weight: 500;
-}
-
-.san-valentin-cupid-icon {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0 2px;
-}
-
-.san-valentin-cupid-icon svg {
-    display: block;
-}
-
-.san-valentin-cupones {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    justify-content: center;
-    margin-bottom: 24px;
-}
-
-.san-valentin-cupon {
-    padding: 14px 24px;
-    font-family: 'Dancing Script', cursive;
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: #fff;
-    background: linear-gradient(135deg, #B71C1C, #E53935);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-radius: 16px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 14px rgba(183, 28, 28, 0.35);
-}
-
-.san-valentin-cupon:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(183, 28, 28, 0.45);
-}
-
-.san-valentin-mensaje-wrapper {
-    margin-top: 20px;
-    padding: 24px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 245, 0.95));
-    border-radius: 16px;
-    border: 2px solid rgba(183, 28, 28, 0.2);
-    box-shadow: 0 8px 24px rgba(183, 28, 28, 0.12);
-}
-
-.san-valentin-mensaje {
-    font-family: 'Dancing Script', cursive;
+.mensaje-revelado-sparkle {
     font-size: 1.8rem;
-    color: #B71C1C;
-    font-weight: 700;
-    margin: 0 0 16px;
+    display: block;
+    margin-bottom: 6px;
+    animation: heartBeatPulse 1.2s infinite;
 }
 
-.san-valentin-cerrar-msg {
-    padding: 8px 20px;
-    font-size: 0.9rem;
+.mensaje-revelado-texto {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.65rem;
+    font-weight: 700;
     color: #B71C1C;
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid rgba(183, 28, 28, 0.3);
+    margin: 0 0 14px;
+    line-height: 1.35;
+}
+
+.btn-cerrar-revelado {
+    background: transparent;
+    border: 1.5px solid rgba(183, 28, 28, 0.4);
+    color: #B71C1C;
+    padding: 6px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
     border-radius: 12px;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
+    transition: all 0.2s ease;
 }
 
-.san-valentin-cerrar-msg:hover {
+.btn-cerrar-revelado:hover {
     background: rgba(183, 28, 28, 0.1);
-    color: #8B0000;
+    border-color: #B71C1C;
+}
+
+/* Animaciones */
+@keyframes floatingBadge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+@keyframes heartBeatPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Adaptabilidad móvil */
+@media (max-width: 576px) {
+    .amor-amistad-modal-body {
+        padding: 30px 18px 24px;
+    }
+    .amor-card-photo {
+        max-width: 100%;
+        transform: none !important;
+    }
+    .amor-img {
+        height: 220px;
+    }
+    .amor-amistad-botones-sorpresa {
+        flex-direction: column;
+    }
+    .btn-amor-sorpresa {
+        justify-content: center;
+        width: 100%;
+    }
 }
 
 /* Estilos del Modal de Cuponera */

@@ -39,7 +39,14 @@
                         <button id="btnVelitas" class="btn btn-velitas">🕯️ La Luz de mi Princesa</button>
                         <div class="cuponera-y-cupid-wrapper">
                             <button id="btnCuponera" class="btn btn-cuponera" style="box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;">💝🎫 Cuponera de Amor</button>
-                            <button type="button" class="btn btn-cupid-san-valentin" data-bs-toggle="modal" data-bs-target="#sanValentinModal" aria-label="Feliz San Valentín" title="Feliz San Valentín"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="cupid-icon-svg" aria-hidden="true"><circle cx="50" cy="26" r="11" fill="#FFFFFF"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="#FFFFFF"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="rgba(255,255,255,0.95)" stroke="#FFFFFF" stroke-width="1"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="rgba(255,255,255,0.95)" stroke="#FFFFFF" stroke-width="1"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" opacity="0.95"/><line x1="26" y1="55" x2="52" y2="55" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.9"/><path d="M26 55 L20 52 L20 58 Z" fill="#FFFFFF" opacity="0.9"/></svg></button>
+                            <button type="button" class="btn btn-cupid-san-valentin" data-bs-toggle="modal" data-bs-target="#sanValentinModal" aria-label="Feliz Amor y Amistad" title="Feliz Amor y Amistad">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="cupid-icon-svg" aria-hidden="true">
+                                    <path d="M50 82 S15 54 15 32 A18 18 0 0 1 50 24 A18 18 0 0 1 85 32 C85 54 50 82 50 82 Z" fill="#FFFFFF"/>
+                                    <path d="M50 28 Q40 12 28 20 Q16 28 25 38" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M50 28 Q60 12 72 20 Q84 28 75 38" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+                                    <circle cx="50" cy="46" r="5" fill="#B71C1C"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                     <small class="d-block mt-2 text-muted">
@@ -575,29 +582,78 @@
         </div>
     </div>
 
-    <!-- Modal San Valentín - Feliz día -->
+    <!-- Modal Amor y Amistad - Edición Especial Princesa -->
     <div class="modal fade" id="sanValentinModal" tabindex="-1" aria-labelledby="sanValentinModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content san-valentin-modal-content">
-                <div class="modal-header san-valentin-modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content amor-amistad-modal-content">
+                <!-- Efectos decorativos de fondo -->
+                <div class="modal-glow-orb modal-glow-orb-1"></div>
+                <div class="modal-glow-orb modal-glow-orb-2"></div>
+                
+                <div class="modal-header amor-amistad-modal-header">
+                    <button type="button" class="btn-close amor-amistad-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body san-valentin-modal-body">
-                    <h2 class="san-valentin-titulo">Mi princesa! 9 y 10 de mayo por aqui habran sorpresas para ti.</h2>
-                    <p class="san-valentin-sub"> <span class="san-valentin-cupid-icon" aria-hidden="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="1.4em" height="1.4em" style="vertical-align: middle;" aria-label="Cupido con arco y flecha"><circle cx="50" cy="26" r="11" fill="#B71C1C"/><path d="M40 38 L60 38 L56 76 L50 86 L44 76 Z" fill="#B71C1C"/><path d="M40 38 Q8 30 18 52 Q32 48 40 38" fill="#C62828" stroke="#8B0000" stroke-width="1"/><path d="M60 38 Q92 30 82 52 Q68 48 60 38" fill="#C62828" stroke="#8B0000" stroke-width="1"/><path d="M32 46 Q24 55 32 64" fill="none" stroke="#8B4513" stroke-width="2.5" stroke-linecap="round"/><line x1="26" y1="55" x2="52" y2="55" stroke="#5D4E37" stroke-width="2" stroke-linecap="round"/><path d="M26 55 L20 52 L20 58 Z" fill="#5D4E37"/></svg></span> 💕💕 </p>
-                    <div class="san-valentin-imagen-wrapper">
-                        <img src="./images/valentin.jpeg" alt="San Valentín" class="san-valentin-imagen" />
+                
+                <div class="modal-body amor-amistad-modal-body">
+                    <!-- Insignia y Corona Superior -->
+                    <div class="amor-amistad-badge-top">
+                        <span class="amor-amistad-crown">👑</span>
+                        <span class="amor-amistad-tag">Especial de Amor y Amistad</span>
+                        <span class="amor-amistad-crown">✨</span>
                     </div>
-                    <p class="san-valentin-descubreme">Espera hasta el dia y descúbreme… 💕 <span class="san-valentin-descubreme-hint"></span></p>
-                    <!--<div class="san-valentin-cupones">
-                        <button type="button" class="san-valentin-cupon" data-sv-msg="Te quiero" aria-label="?">?</button>
-                        <button type="button" class="san-valentin-cupon" data-sv-msg="Te pienso" aria-label="?">?</button>
-                        <button type="button" class="san-valentin-cupon" data-sv-msg="Me importas" aria-label="?">?</button>
-                    </div>-->
-                    <div class="san-valentin-mensaje-wrapper" id="sanValentinMensajeWrapper" style="display: none;">
-                        <p class="san-valentin-mensaje" id="sanValentinMensaje"></p>
-                        <button type="button" class="san-valentin-cerrar-msg" id="sanValentinCerrarMsg">❌</button>
+
+                    <!-- Título Deslumbrante -->
+                    <h2 class="amor-amistad-titulo">¡Feliz Día de Amor y Amistad, Mi Princesa!</h2>
+                    <p class="amor-amistad-sub">Para la mujer más hermosa, tierna e inolvidable de mi vida 💕</p>
+
+                    <!-- Galería de Recuerdos Románticos (Ramo con Osito + Nota Manuscrita) -->
+                    <div class="amor-amistad-showcase">
+                        <div class="amor-card-photo polaroid-ramo">
+                            <div class="polaroid-pin">❤️</div>
+                            <img src="./images/princess/p6.jpeg" alt="Rosas rojas para mi princesa" class="amor-img" />
+                            <span class="polaroid-caption">Rosas que jamás igualarán tu belleza 🌹</span>
+                        </div>
+                        <div class="amor-card-photo polaroid-nota">
+                            <div class="polaroid-pin">✨</div>
+                            <img src="./images/valentin.jpeg" alt="Un detalle dulce para ti" class="amor-img" />
+                            <span class="polaroid-caption">En cada pensamiento estás tú 🍫💌</span>
+                        </div>
+                    </div>
+
+                    <!-- Mensaje Emotivo Dedicado -->
+                    <div class="amor-amistad-letter-box">
+                        <div class="letter-quotes-icon">“</div>
+                        <p class="amor-amistad-dedicatoria">
+                            En este día tan especial quiero recordarte lo increíble que eres. Tu dulzura, tu sonrisa y cada momento que hemos vivido ocupan un lugar sagrado en mi alma. 
+                            <span class="destacado-amor">Vida, intocable es tu lugar...</span>
+                        </p>
+                        <div class="amor-amistad-firma">
+                            <span>Con todo mi cariño, admiración y amor sincero siempre,</span>
+                            <strong>👑💖</strong>
+                        </div>
+                    </div>
+
+                    <!-- Botones Interactivos de Mensajes Sorpresa -->
+                    <p class="amor-amistad-instruccion">Toca un corazón y descubre un secreto para ti: 👇</p>
+                    <div class="amor-amistad-botones-sorpresa">
+                        <button type="button" class="btn-amor-sorpresa" data-mensaje="Eres esa personita por la que siempre sonrío sin darme cuenta. ¡Te pienso en cada instante! 💭💖">
+                            <span>💌</span> ¿Sabes algo?
+                        </button>
+                        <button type="button" class="btn-amor-sorpresa" data-mensaje="Hay personas que se quedan a vivir en la mente, pase lo que pase afuera. Te pienso y sé exactamente lo que significas. 🌟👑">
+                            <span>✨</span> Lo que admiro en silencio
+                        </button>
+                        <button type="button" class="btn-amor-sorpresa" data-mensaje="Siempre habrá un lugar para ti si sabes cuidarlo; mi cariño está presente, pero no está garantizado en el olvido. 🌹💍">
+                            <span>🌹</span> El valor de lo que permanece
+                        </button>
+                    </div>
+
+                    <!-- Cuadro desplegable para mensaje sorpresa -->
+                    <div class="amor-amistad-mensaje-revelado" id="amorMensajeWrapper" style="display: none;">
+                        <div class="mensaje-revelado-content">
+                            <span class="mensaje-revelado-sparkle">💖</span>
+                            <p class="mensaje-revelado-texto" id="amorMensajeTexto"></p>
+                            <button type="button" class="btn-cerrar-revelado" id="amorCerrarMsg">Cerrar con una sonrisa 😊</button>
+                        </div>
                     </div>
                 </div>
             </div>
