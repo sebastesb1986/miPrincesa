@@ -20,12 +20,14 @@ const descripcion = document.getElementById('descripcion-text');
 const descripcion_a = document.getElementById('descripcion-text-a');
 const ourSpace = document.getElementById('our_space');
 
-// Variables globales para los audios
+// Variables globales para los audios y video
 let audioCuento = null;
 let audioPienso = null;
 let btnCuento = null;
 let btnPienso = null;
 let audioPhotograph = null;
+let videoPrincesa = null;
+
 
 function showBootstrapModal(element, options) {
     if (!element || typeof bootstrap === 'undefined' || !bootstrap.Modal) {
@@ -59,7 +61,12 @@ function stopAllAudios() {
         btnPienso.style.background = 'linear-gradient(45deg, #3B82F6, #1D4ED8)';
     }
 
-    if (audioPhotograph && !audioPhotograph.paused) {
+    if (videoPrincesa && !videoPrincesa.paused) {
+        videoPrincesa.pause();
+        if (typeof actualizarEstadoMusicControl === 'function') {
+            actualizarEstadoMusicControl(false);
+        }
+    } else if (audioPhotograph && !audioPhotograph.paused) {
         audioPhotograph.pause();
         if (typeof actualizarEstadoMusicControl === 'function') {
             actualizarEstadoMusicControl(false);
@@ -5346,86 +5353,125 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof trackUserActivity === "function") trackUserActivity('Sesión Iniciada - Modo Especial Activado');
 });
 
-// Función para inicializar y controlar la música Photograph de Ed Sheeran
+// Función para inicializar y controlar la reproducción del Video de la Princesa al Piano
 function initPhotographMusicPlayer() {
-    audioPhotograph = document.getElementById('audio-photograph');
+    videoPrincesa = document.getElementById('video-miPrincesa');
+    audioPhotograph = videoPrincesa; // Compatibilidad con referencias previas
     const btnToggle = document.getElementById('btnMusicToggle');
+    const btnStop   = document.getElementById('btnMusicStop');
     const musicDisc  = document.getElementById('musicDisc');
     const musicStatus = document.getElementById('musicStatus');
 
-    if (!audioPhotograph) return;
+    if (!videoPrincesa) return;
 
-    audioPhotograph.loop   = true;
-    audioPhotograph.volume = 1;
+    videoPrincesa.loop = true;
+    videoPrincesa.volume = 1;
 
     // ── Actualizar UI del control flotante ──────────────────────────────────
     window.actualizarEstadoMusicControl = function(isPlaying) {
         if (musicDisc)   musicDisc.classList.toggle('rotating', isPlaying);
-        if (musicStatus) musicStatus.textContent = isPlaying ? 'Sonando para ti 💕' : 'Toca ▶ para escuchar 🎵';
+        if (musicStatus) {
+            if (isPlaying) {
+                musicStatus.textContent = 'Sonando para ti 💕';
+            } else if (videoPrincesa && videoPrincesa.currentTime > 0) {
+                musicStatus.textContent = 'Video en pausa ⏸️';
+            } else {
+                musicStatus.textContent = 'Toca ▶ para ver y escuchar 🎹';
+            }
+        }
         if (btnToggle) {
             btnToggle.classList.toggle('is-playing', isPlaying);
             btnToggle.setAttribute('aria-pressed', String(isPlaying));
-            btnToggle.title = isPlaying ? 'Detener música' : 'Reproducir música';
-            btnToggle.setAttribute('aria-label', isPlaying ? 'Detener música' : 'Reproducir música');
+            btnToggle.title = isPlaying ? 'Pausar video' : 'Reproducir video';
+            btnToggle.setAttribute('aria-label', isPlaying ? 'Pausar video' : 'Reproducir video');
         }
     };
 
-    // ── Reproducir ──────────────────────────────────────────────────────────
-    function reproducirPhotograph() {
+    // ── Reproducir Video ────────────────────────────────────────────────────
+    function reproducirVideo() {
         if (audioCuento && !audioCuento.paused) audioCuento.pause();
         if (audioPienso && !audioPienso.paused) audioPienso.pause();
-        audioPhotograph.muted = false;
-        audioPhotograph.volume = 1;
-        return audioPhotograph.play();
+        videoPrincesa.muted = false;
+        videoPrincesa.volume = 1;
+        return videoPrincesa.play();
     }
 
-    // ── Detener ─────────────────────────────────────────────────────────────
-    function detenerPhotograph() {
-        audioPhotograph.pause();
-        audioPhotograph.currentTime = 0;
+    // ── Pausar Video (sin reiniciar tiempo) ──────────────────────────────────
+    function pausarVideo() {
+        videoPrincesa.pause();
         actualizarEstadoMusicControl(false);
-        if (musicStatus) musicStatus.textContent = 'Música detenida ⏹️';
     }
 
-    // ── Botón Play/Stop ──────────────────────────────────────────────────────
+    // ── Detener Video (pausa y reinicia a 0) ─────────────────────────────────
+    function detenerVideo() {
+        videoPrincesa.pause();
+        videoPrincesa.currentTime = 0;
+        actualizarEstadoMusicControl(false);
+        if (musicStatus) musicStatus.textContent = 'Video detenido ⏹️';
+    }
+
+    // ── Botón Play / Pause Flotante ─────────────────────────────────────────
     if (btnToggle) {
         btnToggle.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            if (audioPhotograph.paused) {
-                reproducirPhotograph()
+            if (videoPrincesa.paused) {
+                reproducirVideo()
                     .then(() => actualizarEstadoMusicControl(true))
                     .catch(() => actualizarEstadoMusicControl(false));
             } else {
-                detenerPhotograph();
+                pausarVideo();
             }
         });
     }
 
-    // ── Sincronizar UI con eventos del audio ────────────────────────────────
-    audioPhotograph.addEventListener('play',  () => actualizarEstadoMusicControl(true));
-    audioPhotograph.addEventListener('pause', () => actualizarEstadoMusicControl(false));
-    audioPhotograph.addEventListener('ended', () => actualizarEstadoMusicControl(false));
+    // ── Botón Stop Separado ─────────────────────────────────────────────────
+    if (btnStop) {
+        btnStop.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            detenerVideo();
+        });
+    }
+
+    // ── Sincronizar UI con eventos directos del video ───────────────────────
+    videoPrincesa.addEventListener('play',  () => actualizarEstadoMusicControl(true));
+    videoPrincesa.addEventListener('pause', () => actualizarEstadoMusicControl(false));
+    videoPrincesa.addEventListener('ended', () => {
+        videoPrincesa.currentTime = 0;
+        actualizarEstadoMusicControl(false);
+    });
+
+    // Si la persona toca directamente el video para interactuar
+    videoPrincesa.addEventListener('click', function() {
+        if (videoPrincesa.paused) {
+            reproducirVideo()
+                .then(() => actualizarEstadoMusicControl(true))
+                .catch(() => {});
+        } else {
+            pausarVideo();
+        }
+    });
 
     // ── Autoplay inteligente y desbloqueo garantizado ───────────────────────
     let desbloqueado = false;
     const EVENTOS_ACTIVACION = ['click', 'touchstart', 'touchend', 'pointerdown', 'keydown'];
 
     function intentarDesbloqueo() {
-        if (desbloqueado || !audioPhotograph.paused) {
+        if (desbloqueado || !videoPrincesa.paused) {
             removerListeners();
             return;
         }
 
-        reproducirPhotograph()
+        reproducirVideo()
             .then(() => {
                 desbloqueado = true;
                 actualizarEstadoMusicControl(true);
                 removerListeners();
             })
             .catch(() => {
-                // Si este intento fue bloqueado por la política del navegador,
-                // los listeners permanecen activos para sonar en el siguiente toque/clic
+                // Si el navegador retiene la reproducción automática con sonido,
+                // los listeners permanecen activos para sonar al primer toque o scroll
             });
     }
 
@@ -5440,13 +5486,13 @@ function initPhotographMusicPlayer() {
         }
     }
 
-    // Registrar listeners para capturar el primer toque en cualquier parte de la pantalla o modal
+    // Registrar listeners para capturar el primer toque en pantalla o dentro de la modal
     EVENTOS_ACTIVACION.forEach(evt => {
         document.addEventListener(evt, intentarDesbloqueo, true);
         window.addEventListener(evt, intentarDesbloqueo, true);
     });
 
-    // También vincular con la apertura o interacción del modal de Amor y Amistad
+    // Vincular también con la apertura o interacción de la modal de Amor y Amistad
     const modal = document.getElementById('sanValentinModal');
     if (modal) {
         EVENTOS_ACTIVACION.forEach(evt => modal.addEventListener(evt, intentarDesbloqueo, true));
