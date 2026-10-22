@@ -65,12 +65,36 @@
                         <button id="btnVelitas" class="btn btn-velitas">🕯️ La Luz de mi Princesa</button>
                         <div class="cuponera-y-cupid-wrapper">
                             <button id="btnCuponera" class="btn btn-cuponera" style="box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;">💝🎫 Cuponera de Amor</button>
-                            <button type="button" class="btn btn-cupid-san-valentin" data-bs-toggle="modal" data-bs-target="#sanValentinModal" aria-label="Feliz Amor y Amistad" title="Feliz Amor y Amistad">
+                            <button type="button" class="btn btn-cupid-san-valentin" data-bs-toggle="modal" data-bs-target="#sanValentinModal" aria-label="Decreto Real: Amor y Amistad" title="Decreto Real: Amor y Amistad" style="box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="cupid-icon-svg" aria-hidden="true">
-                                    <path d="M50 82 S15 54 15 32 A18 18 0 0 1 50 24 A18 18 0 0 1 85 32 C85 54 50 82 50 82 Z" fill="#FFFFFF"/>
-                                    <path d="M50 28 Q40 12 28 20 Q16 28 25 38" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
-                                    <path d="M50 28 Q60 12 72 20 Q84 28 75 38" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
-                                    <circle cx="50" cy="46" r="5" fill="#B71C1C"/>
+                                    <!-- Cuerpo del pergamino blanco -->
+                                    <path d="M25 18 L75 18 C79 18 82 21 82 25 L82 72 C82 76 79 79 75 79 L25 79 C21 79 18 76 18 72 L18 25 C18 21 21 18 25 18 Z" fill="#FFFFFF"/>
+                                    <!-- Rollo superior con ribete dorado -->
+                                    <path d="M20 18 C20 12 25 9 34 9 L74 9 C81 9 86 13 86 18 C86 23 81 26 74 26 L26 26 C21 26 20 23 20 18 Z" fill="#FFF9E6" stroke="#D4AF37" stroke-width="1.8"/>
+                                    <ellipse cx="22" cy="18" rx="2.5" ry="4.5" fill="#D4AF37"/>
+                                    <ellipse cx="22" cy="18" rx="1.5" ry="3" fill="#FFF8E7"/>
+                                    <!-- Rollo inferior con ribete dorado -->
+                                    <path d="M16 74 C16 69 20 66 28 66 L72 66 C79 66 84 70 84 75 C84 80 79 84 72 84 L26 84 C19 84 16 80 16 74 Z" fill="#FFF9E6" stroke="#D4AF37" stroke-width="1.8"/>
+                                    <ellipse cx="78" cy="75" rx="2.5" ry="4.5" fill="#D4AF37"/>
+                                    <ellipse cx="78" cy="75" rx="1.5" ry="3" fill="#FFF8E7"/>
+                                    <!-- Corona Real del Decreto -->
+                                    <path d="M41 33 L44 24 L50 28 L56 24 L59 33 Z" fill="#FFD700" stroke="#D4AF37" stroke-width="1" stroke-linejoin="round"/>
+                                    <circle cx="50" cy="23.5" r="1.4" fill="#FFD700"/>
+                                    <circle cx="44" cy="23.5" r="1.1" fill="#FFD700"/>
+                                    <circle cx="56" cy="23.5" r="1.1" fill="#FFD700"/>
+                                    <!-- Líneas de texto del decreto real -->
+                                    <line x1="31" y1="39" x2="69" y2="39" stroke="#B71C1C" stroke-width="2.6" stroke-linecap="round"/>
+                                    <line x1="31" y1="45" x2="69" y2="45" stroke="#795548" stroke-width="2.2" stroke-linecap="round"/>
+                                    <line x1="31" y1="51" x2="69" y2="51" stroke="#795548" stroke-width="2.2" stroke-linecap="round"/>
+                                    <line x1="31" y1="57" x2="53" y2="57" stroke="#795548" stroke-width="2.2" stroke-linecap="round"/>
+                                    <!-- Cintas del sello real de lacre -->
+                                    <path d="M45 64 L40 85 L46 81 L50 85 L48 64" fill="#B71C1C"/>
+                                    <path d="M55 64 L60 85 L54 81 L50 85 L52 64" fill="#880E4F"/>
+                                    <!-- Sello de lacre con relieve y ribete dorado -->
+                                    <circle cx="50" cy="67" r="8.5" fill="#B71C1C" stroke="#FFD700" stroke-width="1.8"/>
+                                    <circle cx="50" cy="67" r="5.5" fill="#D32F2F"/>
+                                    <!-- Corona en el sello de lacre -->
+                                    <path d="M47 68.5 L48 65.5 L50 67 L52 65.5 L53 68.5 Z" fill="#FFD700"/>
                                 </svg>
                             </button>
                         </div>
@@ -620,7 +644,7 @@
                     <h2 class="amor-amistad-titulo">¡Feliz Día de Amor y Amistad, Princesa!</h2>
                     <p class="amor-amistad-sub">Para la mujer más hermosa, tierna y especial 💕</p>
 
-                    <!-- Galería de Recuerdos Románticos (3 Fotos Arriba) -->
+                    <!-- Galería de Recuerdos Románticos -->
                     <div class="amor-amistad-showcase">
                         <div class="amor-card-photo polaroid-ramo">
                             <div class="polaroid-pin">❤️</div>
@@ -636,6 +660,16 @@
                             <div class="polaroid-pin">✨</div>
                             <img src="./images/valentin.jpeg" alt="Un detalle dulce para ti" class="amor-img" />
                             <span class="polaroid-caption">En cada pensamiento estás tú 🍫💌</span>
+                        </div>
+                        <div class="amor-card-photo polaroid-princesa">
+                            <div class="polaroid-pin">👑</div>
+                            <img src="./images/miPrincesaToy.png" alt="Mi princesa hermosa Elizabeth" class="amor-img" />
+                            <span class="polaroid-caption">La princesa más hermosa del mundo 👑💖</span>
+                        </div>
+                        <div class="amor-card-photo polaroid-romance">
+                            <div class="polaroid-pin">💫</div>
+                            <img src="./images/romanceToy.png" alt="Nuestro cuento de amor bajo la luna" class="amor-img" />
+                            <span class="polaroid-caption">Nuestro hermoso cuento de amor 🌙✨</span>
                         </div>
                     </div>
 
