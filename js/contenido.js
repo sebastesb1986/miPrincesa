@@ -198,6 +198,9 @@ function updateDescriptionText(index) {
 document.addEventListener('DOMContentLoaded', function () {
     btnCuento = document.getElementById('btnPlayAudio');
     audioCuento = document.getElementById('audio-cuento');
+    if (audioCuento) {
+        audioCuento.volume = 0.4; // Volumen intermedio
+    }
 
     btnCuento.addEventListener('click', function () {
         if (audioCuento.paused) {
@@ -207,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Detener el otro audio antes de reproducir este
             stopAllAudios();
             
+            audioCuento.volume = 0.4; // Asegurar volumen intermedio
             audioCuento.play()
                 .then(() => {
                     btnCuento.innerHTML = '⏸️ Pausar Historia';
@@ -241,6 +245,9 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
     btnPienso = document.getElementById('btnPlayAudio2');
     audioPienso = document.getElementById('audio-pienso');
+    if (audioPienso) {
+        audioPienso.volume = 0.4; // Volumen intermedio
+    }
 
     btnPienso.addEventListener('click', function () {
         if (audioPienso.paused) {
@@ -250,6 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Detener el otro audio antes de reproducir este
             stopAllAudios();
             
+            audioPienso.volume = 0.4; // Asegurar volumen intermedio
             audioPienso.play()
                 .then(() => {
                     btnPienso.innerHTML = '⏸️ Pausar Significado';
@@ -3146,7 +3154,7 @@ function detectUserInteraction() {
                 // Activar audio inmediatamente cuando el usuario interactúe
                 if (welcomeVideo) {
                     welcomeVideo.muted = false;
-                    welcomeVideo.volume = 1.0;
+                    welcomeVideo.volume = 0.45; // Volumen intermedio
                 }
             }
         }, { once: true });
@@ -3234,7 +3242,7 @@ function showWelcomeModal() {
         welcomeVideo.loop = false;
         welcomeVideo.playsInline = true; // Importante para móviles
         welcomeVideo.controls = true; // Mostrar controles desde el inicio
-        welcomeVideo.volume = 1.0; // Volumen máximo
+        welcomeVideo.volume = 0.45; // Volumen intermedio y agradable
         
         
         // Reproducir inmediatamente (silenciado) con manejo de errores mejorado
@@ -5364,8 +5372,9 @@ function initPhotographMusicPlayer() {
 
     if (!videoPrincesa) return;
 
+    const VOLUMEN_INTERMEDIO = 0.4; // Nivel de volumen intermedio (40%), cómodo y suave
     videoPrincesa.loop = true;
-    videoPrincesa.volume = 1;
+    videoPrincesa.volume = VOLUMEN_INTERMEDIO;
 
     // ── Actualizar UI del control flotante ──────────────────────────────────
     window.actualizarEstadoMusicControl = function(isPlaying) {
@@ -5392,7 +5401,7 @@ function initPhotographMusicPlayer() {
         if (audioCuento && !audioCuento.paused) audioCuento.pause();
         if (audioPienso && !audioPienso.paused) audioPienso.pause();
         videoPrincesa.muted = false;
-        videoPrincesa.volume = 1;
+        videoPrincesa.volume = VOLUMEN_INTERMEDIO;
         return videoPrincesa.play();
     }
 
@@ -5435,7 +5444,12 @@ function initPhotographMusicPlayer() {
     }
 
     // ── Sincronizar UI con eventos directos del video ───────────────────────
-    videoPrincesa.addEventListener('play',  () => actualizarEstadoMusicControl(true));
+    videoPrincesa.addEventListener('play', () => {
+        if (videoPrincesa.volume > 0.5) {
+            videoPrincesa.volume = VOLUMEN_INTERMEDIO;
+        }
+        actualizarEstadoMusicControl(true);
+    });
     videoPrincesa.addEventListener('pause', () => actualizarEstadoMusicControl(false));
     videoPrincesa.addEventListener('ended', () => {
         videoPrincesa.currentTime = 0;
