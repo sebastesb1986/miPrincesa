@@ -5264,6 +5264,81 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Interacción divertida: Alerta sorpresa en la Polaroid Princesa
+    const polaroidPrincesa = document.getElementById('polaroidPrincesa');
+    const polaroidTagPulsante = document.getElementById('polaroidTagPulsante');
+    const sorpresaAlert = document.getElementById('sorpresaPrincesaAlert');
+    const sorpresaClose = document.getElementById('sorpresaBtnClose');
+    const sorpresaQuizas = document.getElementById('btnSorpresaQuizas');
+    const btnSaberMasWpp = document.getElementById('btnSaberMasWpp');
+
+    if (polaroidPrincesa && sorpresaAlert) {
+        // Función para abrir la alerta con efectos
+        const abrirAlertaSorpresa = function(e) {
+            if (e) e.stopPropagation();
+            sorpresaAlert.style.display = 'flex';
+            
+            // Partículas mágicas de intriga y sorpresa
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => createCelebrationParticle('✨', 'float'), i * 90);
+                setTimeout(() => createCelebrationParticle('👑', 'rain'), i * 110);
+            }
+        };
+
+        // Al pulsar la foto de la princesa o su medallita lateral
+        polaroidPrincesa.addEventListener('click', abrirAlertaSorpresa);
+        if (polaroidTagPulsante) {
+            polaroidTagPulsante.addEventListener('click', abrirAlertaSorpresa);
+        }
+
+        // Cerrar alerta con la X
+        if (sorpresaClose) {
+            sorpresaClose.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sorpresaAlert.style.display = 'none';
+            });
+        }
+
+        // Cerrar alerta con el botón "Quizás después..."
+        if (sorpresaQuizas) {
+            sorpresaQuizas.addEventListener('click', function(e) {
+                e.stopPropagation();
+                sorpresaAlert.style.display = 'none';
+            });
+        }
+
+        // Cerrar al hacer clic fuera de la tarjeta (en el backdrop)
+        sorpresaAlert.addEventListener('click', function(e) {
+            if (e.target === sorpresaAlert) {
+                sorpresaAlert.style.display = 'none';
+            }
+        });
+
+        // Al pulsar "Saber más..." para ir a WhatsApp
+        if (btnSaberMasWpp) {
+            btnSaberMasWpp.addEventListener('click', function(e) {
+                e.preventDefault();
+                const phoneNumber = '573175631608';
+                const message = encodeURIComponent('Hola... vi la sorpresa 👑 ¿de qué se trata? ✨');
+                const whatsappWebUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
+                // Enviar a WhatsApp según el dispositivo
+                if (typeof isMobileDevice === 'function' && isMobileDevice()) {
+                    window.location.href = `whatsapp://send?phone=${phoneNumber}&text=${message}`;
+                    setTimeout(() => {
+                        window.open(whatsappWebUrl, '_blank');
+                    }, 1200);
+                } else {
+                    window.open(whatsappWebUrl, '_blank');
+                }
+
+                setTimeout(() => {
+                    sorpresaAlert.style.display = 'none';
+                }, 600);
+            });
+        }
+    }
+
     // Inicializar funcionalidad dinámica del Regalo Sorpresa Sin Causa
     initRegaloSinCausa();
     
