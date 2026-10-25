@@ -5697,6 +5697,62 @@ h1 img {
     transform: translateY(0) scale(0.98);
 }
 
+/* Botón Dado Misterioso */
+.btn-dado-misterio {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
+    border: 1.5px solid rgba(255, 215, 0, 0.6) !important;
+    box-shadow: 0 6px 20px rgba(15, 52, 96, 0.5), 0 0 12px rgba(255, 215, 0, 0.15) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-dado-misterio:hover {
+    box-shadow: 0 10px 28px rgba(15, 52, 96, 0.6), 0 0 20px rgba(255, 215, 0, 0.3) !important;
+    border-color: #ffd700 !important;
+}
+
+.dado-icon {
+    display: inline-block;
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
+}
+
+.dado-icon.girando {
+    animation: girarDado 0.6s ease-in-out 3;
+}
+
+@keyframes girarDado {
+    0%   { transform: rotate(0deg) scale(1); }
+    25%  { transform: rotate(90deg) scale(1.3); }
+    50%  { transform: rotate(180deg) scale(1); }
+    75%  { transform: rotate(270deg) scale(1.3); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+.dado-resultado-num {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ffd700;
+    color: #1a1a2e;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 900;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    animation: fadeInScale 0.3s ease;
+}
+
+@keyframes fadeInScale {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+}
+
 /* Panel Desplegable de Mensaje Revelado */
 .amor-amistad-mensaje-revelado {
     margin-top: 16px;
@@ -5767,6 +5823,637 @@ h1 img {
     }
 }
 
+/* ==========================================================================
+   SECCIÓN DINÁMICA: REGALO SIN CAUSA NI CALENDARIO (MODAL AMOR Y AMISTAD)
+   ========================================================================== */
+.amor-amistad-tag-sorpresa {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA000 100%);
+    color: #5D4037;
+    font-weight: 800;
+    font-size: 0.8rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(255, 160, 0, 0.4);
+    letter-spacing: 0.3px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.regalo-sin-causa-container {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(255, 245, 248, 0.98));
+    border: 2px solid rgba(212, 175, 55, 0.65);
+    border-radius: 24px;
+    padding: 26px 22px 22px;
+    margin: 22px 0 26px;
+    box-shadow: 0 12px 35px rgba(183, 28, 28, 0.14), inset 0 0 25px rgba(255, 235, 242, 0.6);
+    position: relative;
+    overflow: hidden;
+}
+
+.regalo-sin-causa-container::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.regalo-sin-causa-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, #FFF8E7, #FFE8EC);
+    border: 1.5px solid rgba(212, 175, 55, 0.7);
+    border-radius: 20px;
+    color: #B71C1C;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.25);
+    animation: floatingBadge 3s ease-in-out infinite;
+}
+
+.regalo-sin-causa-titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: #B71C1C;
+    margin: 0 0 10px;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(183, 28, 28, 0.15);
+}
+
+.regalo-sin-causa-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #5d3a3a;
+    max-width: 620px;
+    margin: 0 auto 20px;
+}
+
+/* ── Caja de Regalo Mágica Interactiva ───────────────────────────────────── */
+.regalo-box-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 0 10px;
+}
+
+.regalo-box-interactive {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    cursor: pointer;
+    margin: 10px auto 18px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: giftFloat 3.5s ease-in-out infinite;
+    user-select: none;
+}
+
+.regalo-box-interactive:hover {
+    transform: scale(1.1) rotate(-2deg);
+}
+
+.regalo-glow-pulse {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    top: -10px;
+    left: -10px;
+    background: radial-gradient(circle, rgba(255, 64, 129, 0.35) 0%, rgba(255, 215, 0, 0.2) 50%, transparent 70%);
+    border-radius: 50%;
+    animation: pulseGlow 2s infinite ease-in-out;
+    pointer-events: none;
+}
+
+.regalo-tapa {
+    width: 124px;
+    height: 32px;
+    background: linear-gradient(135deg, #D32F2F, #B71C1C);
+    border: 2px solid #FFD700;
+    border-radius: 10px 10px 6px 6px;
+    position: absolute;
+    top: 15px;
+    left: -2px;
+    z-index: 5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: transform 0.5s ease, opacity 0.4s ease;
+}
+
+.regalo-lazo-top {
+    font-size: 2.2rem;
+    position: absolute;
+    top: -26px;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    animation: heartBeatPulse 2s infinite;
+}
+
+.regalo-cinta-horizontal {
+    width: 100%;
+    height: 12px;
+    background: linear-gradient(90deg, #FFD700, #FFF8E7, #FFD700);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.regalo-cuerpo {
+    width: 110px;
+    height: 80px;
+    background: linear-gradient(135deg, #B71C1C 0%, #880E4F 100%);
+    border: 2px solid #FFD700;
+    border-radius: 6px 6px 14px 14px;
+    position: absolute;
+    top: 40px;
+    left: 5px;
+    box-shadow: 0 8px 20px rgba(183, 28, 28, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.regalo-cinta-vertical {
+    width: 18px;
+    height: 100%;
+    background: linear-gradient(180deg, #FFD700, #FFF8E7, #FFD700);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.regalo-icono-centro {
+    font-size: 1.6rem;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.regalo-sparkle-float {
+    position: absolute;
+    font-size: 1.1rem;
+    pointer-events: none;
+    animation: floatingBadge 2.5s infinite ease-in-out;
+}
+
+.regalo-sparkle-float.s1 { top: -5px; right: 0; animation-delay: 0.2s; }
+.regalo-sparkle-float.s2 { bottom: 10px; left: -10px; animation-delay: 0.7s; }
+.regalo-sparkle-float.s3 { top: 30px; right: -15px; animation-delay: 1.2s; }
+
+.regalo-box-interactive.abriendo .regalo-tapa {
+    transform: translateY(-50px) rotate(-18deg);
+    opacity: 0;
+}
+
+.btn-abrir-regalo {
+    background: linear-gradient(135deg, #B71C1C, #D81B60, #E91E63);
+    color: #ffffff;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.35rem;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 25px;
+    border: 2px solid #FFD700;
+    box-shadow: 0 6px 20px rgba(183, 28, 28, 0.35);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-abrir-regalo:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(233, 30, 99, 0.45);
+    color: #fff;
+    border-color: #fff;
+}
+
+.regalo-tap-hint {
+    display: block;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: #880E4F;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+/* ── Panel Revelado: Certificado & Vales ──────────────────────────────────── */
+.regalo-revelado-panel {
+    animation: fadeInSlideUp 0.6s ease-out;
+}
+
+.regalo-certificado-card {
+    background: linear-gradient(145deg, #fffdf8 0%, #fff7f9 100%);
+    border: 2px solid rgba(212, 175, 55, 0.8);
+    border-radius: 20px;
+    padding: 26px 22px;
+    box-shadow: 0 10px 30px rgba(183, 28, 28, 0.1), inset 0 0 20px rgba(255, 240, 245, 0.8);
+    position: relative;
+    overflow: hidden;
+}
+
+.certificado-watermark {
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.035;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+}
+
+.certificado-header {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.certificado-tag {
+    display: inline-block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #8D6E63;
+    font-weight: 700;
+    margin-bottom: 6px;
+    border-bottom: 1.5px solid rgba(212, 175, 55, 0.6);
+    padding-bottom: 2px;
+}
+
+.certificado-titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.1rem;
+    color: #B71C1C;
+    font-weight: 700;
+    margin: 4px 0 8px;
+}
+
+.certificado-desc {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: #5c3a3a;
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* ── Cuadrícula de Vales ─────────────────────────────────────────────────── */
+.regalo-vales-grid {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 22px 0;
+    position: relative;
+    z-index: 2;
+}
+
+.regalo-vale-card {
+    background: #ffffff;
+    border: 1.5px solid rgba(212, 175, 55, 0.5);
+    border-radius: 16px;
+    padding: 20px 16px 16px;
+    flex: 1 1 200px;
+    max-width: 230px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 6px 18px rgba(183, 28, 28, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.regalo-vale-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(183, 28, 28, 0.16);
+    border-color: #D4AF37;
+}
+
+.regalo-vale-card.vale-dorado {
+    background: linear-gradient(145deg, #fffcf2 0%, #fff7e6 100%);
+    border: 2px solid #FFD700;
+    box-shadow: 0 8px 22px rgba(255, 193, 7, 0.22);
+}
+
+.regalo-vale-card.vale-reclamado {
+    border-color: #2E7D32 !important;
+    background: linear-gradient(145deg, #F1F8E9, #FFFFFF) !important;
+    box-shadow: 0 8px 24px rgba(46, 125, 50, 0.2) !important;
+}
+
+.vale-pin {
+    font-size: 2.2rem;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.vale-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #C2185B;
+    background: #FCE4EC;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.vale-badge-oro {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #8D6E63;
+    background: #FFF3E0;
+    border: 1px solid #FFD54F;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.vale-nombre {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #8B0000;
+    margin: 0 0 8px;
+    line-height: 1.25;
+}
+
+.vale-desc {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.88rem;
+    color: #555555;
+    line-height: 1.45;
+    margin-bottom: 14px;
+    flex-grow: 1;
+}
+
+.btn-activar-vale {
+    background: linear-gradient(135deg, #B71C1C, #D32F2F);
+    color: #ffffff;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 18px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(183, 28, 28, 0.3);
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+}
+
+.btn-activar-vale:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(183, 28, 28, 0.45);
+    background: linear-gradient(135deg, #C2185B, #E91E63);
+}
+
+.btn-activar-oro {
+    background: linear-gradient(135deg, #D4AF37, #B8860B);
+    border: 1px solid #FFF8E7;
+}
+
+.btn-activar-oro:hover {
+    background: linear-gradient(135deg, #FFA000, #FF6F00);
+}
+
+.regalo-vale-card.vale-reclamado .btn-activar-vale {
+    background: linear-gradient(135deg, #2E7D32, #43A047);
+    cursor: default;
+    transform: none !important;
+}
+
+/* ── Mensaje de confirmación del vale ────────────────────────────────────── */
+.vale-confirmacion-box {
+    background: linear-gradient(135deg, #FFFDE7, #FFF8E1);
+    border: 2px dashed #FFD54F;
+    border-radius: 16px;
+    padding: 14px 18px;
+    margin: 16px auto 22px;
+    max-width: 620px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+    animation: fadeInSlideUp 0.35s ease-out;
+}
+
+.confirmacion-icono {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.confirmacion-texto {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: #4E342E;
+    margin: 0;
+    line-height: 1.45;
+    text-align: left;
+    font-weight: 600;
+}
+
+/* ── Generador Dinámico de Motivos Espontáneos ────────────────────────────── */
+.regalo-motivos-box {
+    background: linear-gradient(135deg, rgba(255, 240, 245, 0.85), rgba(255, 248, 250, 0.95));
+    border: 1.5px solid rgba(216, 27, 96, 0.35);
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin: 18px 0 20px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.motivos-header {
+    margin-bottom: 8px;
+}
+
+.motivos-mini-tag {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 700;
+    color: #C2185B;
+    background: #FCE4EC;
+    padding: 2px 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+.motivos-titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+    color: #900C3F;
+    font-weight: 700;
+    margin: 6px 0 0;
+}
+
+.motivo-frase-display {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    color: #B71C1C;
+    font-weight: 700;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    line-height: 1.35;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.btn-otro-motivo {
+    background: linear-gradient(135deg, #880E4F, #AD1457);
+    color: #ffffff;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 8px 22px;
+    border-radius: 20px;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(136, 14, 79, 0.3);
+    transition: all 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.btn-otro-motivo:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 20px rgba(136, 14, 79, 0.45);
+    background: linear-gradient(135deg, #AD1457, #C2185B);
+}
+
+/* ── Sello de Promesa Real ───────────────────────────────────────────────── */
+.regalo-sello-footer {
+    text-align: center;
+    margin-top: 18px;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-sellar-regalo {
+    background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+    color: #ffffff;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.35rem;
+    font-weight: 700;
+    padding: 10px 26px;
+    border-radius: 22px;
+    border: 2px solid #FFF8E7;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(184, 134, 11, 0.35);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-sellar-regalo:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
+    background: linear-gradient(135deg, #FFA000, #FF6F00);
+}
+
+.btn-sellar-regalo.sellado {
+    background: linear-gradient(135deg, #2E7D32, #388E3C);
+    cursor: default;
+    border-color: #C8E6C9;
+    box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+}
+
+.sello-revelado {
+    margin-top: 16px;
+    animation: fadeInSlideUp 0.5s ease-out;
+}
+
+.sello-cera-dorada {
+    width: 140px;
+    height: 140px;
+    background: radial-gradient(circle, #FFD700 0%, #FFA000 60%, #B8860B 100%);
+    border: 3px double #FFF8E7;
+    border-radius: 50%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #4E342E;
+    box-shadow: 0 8px 25px rgba(184, 134, 11, 0.45), inset 0 2px 8px rgba(255, 255, 255, 0.6);
+    animation: heartBeatPulse 3s infinite;
+}
+
+.sello-cera-dorada .sello-corona {
+    font-size: 2.2rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.sello-cera-dorada .sello-texto-superior {
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+.sello-cera-dorada .sello-texto-destacado {
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    color: #795548;
+}
+
+.sello-cera-dorada .sello-texto-inferior {
+    font-size: 0.58rem;
+    font-style: italic;
+    opacity: 0.85;
+}
+
+.sello-frase-final {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.35rem;
+    color: #8B0000;
+    font-weight: 700;
+    margin: 10px 0 0;
+}
+
+@keyframes giftFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.18); opacity: 0.85; }
+}
+
 /* Adaptabilidad móvil */
 @media (max-width: 576px) {
     .amor-amistad-modal-body {
@@ -5785,6 +6472,29 @@ h1 img {
     .btn-amor-sorpresa {
         justify-content: center;
         width: 100%;
+    }
+    .regalo-sin-causa-container {
+        padding: 20px 14px 18px;
+    }
+    .regalo-sin-causa-titulo {
+        font-size: 1.7rem;
+    }
+    .certificado-titulo {
+        font-size: 1.7rem;
+    }
+    .regalo-vale-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+    .motivo-frase-display {
+        font-size: 1.35rem;
+        min-height: 65px;
+    }
+    .btn-abrir-regalo, .btn-sellar-regalo {
+        font-size: 1.15rem;
+        padding: 10px 18px;
+        width: 100%;
+        justify-content: center;
     }
 }
 

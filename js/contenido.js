@@ -5177,6 +5177,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (amorMensajeWrapper && amorMensajeTexto && amorCerrarMsg) {
         document.querySelectorAll('.btn-amor-sorpresa').forEach(function(btn) {
             btn.addEventListener('click', function() {
+                // Ignorar el botón del dado (tiene su propio handler)
+                if (this.classList.contains('btn-dado-misterio')) return;
+                
                 const mensaje = this.getAttribute('data-mensaje') || '';
                 amorMensajeTexto.textContent = mensaje;
                 amorMensajeWrapper.style.display = 'block';
@@ -5192,6 +5195,64 @@ document.addEventListener('DOMContentLoaded', function() {
         amorCerrarMsg.addEventListener('click', function() {
             amorMensajeWrapper.style.display = 'none';
         });
+
+        // ---------- Dado Misterioso ----------
+        const btnDado = document.getElementById('btnDadoMisterio');
+        if (btnDado) {
+            const dadoIcon = document.getElementById('dadoIcon');
+            const mensajesDado = [
+                { num: 1, texto: '¿Por qué eres tan valiosa? Porque… hay algo en ti que ni tú misma has descubierto del todo. 🔮' },
+                { num: 2, texto: 'cada interacción, cada momento compartido y cada instante en que coincidimos tuvieron una magia real, de esas que no se repiten con cualquiera. Se extraña, por supuesto; no desde la carencia, sino desde el reconocimiento de lo impecable y real. Pero el resto… solo lo sabrás si algún día preguntas. 🧩' },
+                { num: 3, texto: '¿Te has preguntado por qué no te olvido aunque pasen meses? La respuesta te sorprendería. 🌙' },
+                { num: 4, texto: 'Hay una razón por la que tu nombre aparece en pensamientos ajenos sin previo aviso… y no, no es casualidad. ⚡' },
+                { num: 5, texto: '¿Qué pasaría si supieras exactamente el impacto que dejaste? Digamos que el número 5 guarda ese secreto… por ahora. 👑' },
+                { num: 6, texto: 'El 6 es el número más alto, Un café, una sorpresa, flores, chocolates, una cancion... No digo más. Si la curiosidad gana… ¿Te interesa? 🎯✨' }
+            ];
+
+            let dadoGirando = false;
+
+            btnDado.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (dadoGirando) return;
+                dadoGirando = true;
+
+                // Animación de giro — el icono 🎲 siempre se mantiene
+                dadoIcon.classList.add('girando');
+
+                // Quitar badge anterior si existe
+                const badgeAnterior = btnDado.querySelector('.dado-resultado-num');
+                if (badgeAnterior) badgeAnterior.remove();
+
+                // Al terminar la animación (0.6s * 3 repeticiones = 1.8s)
+                setTimeout(function() {
+                    dadoIcon.classList.remove('girando');
+                    // El icono siempre vuelve a ser 🎲
+                    dadoIcon.textContent = '🎲';
+
+                    // Resultado aleatorio solo para el badge y el mensaje
+                    const resultado = Math.floor(Math.random() * 6);
+
+                    // Mostrar número en badge
+                    const badge = document.createElement('span');
+                    badge.className = 'dado-resultado-num';
+                    badge.textContent = resultado + 1;
+                    btnDado.appendChild(badge);
+
+                    // Mostrar mensaje misterioso
+                    const mensajeObj = mensajesDado[resultado];
+                    amorMensajeTexto.textContent = mensajeObj.texto;
+                    amorMensajeWrapper.style.display = 'block';
+
+                    // Partículas especiales para el dado
+                    for (let i = 0; i < 6; i++) {
+                        setTimeout(function() { createCelebrationParticle('🎲', 'rain'); }, i * 100);
+                        setTimeout(function() { createCelebrationParticle('✨', 'float'); }, i * 130);
+                    }
+
+                    dadoGirando = false;
+                }, 1900);
+            });
+        }
     }
 
     // Efecto de lluvia de corazones cuando se abre la modal de Amor y Amistad
@@ -5204,6 +5265,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Inicializar funcionalidad dinámica del Regalo Sorpresa Sin Causa
+    initRegaloSinCausa();
     
     // Abrir modal de cuponera al hacer clic en el botón
     if (btnCuponera && cuponeraModal) {
@@ -5255,6 +5319,155 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// ===== FUNCIONALIDAD DINÁMICA: REGALO SIN CAUSA NI CALENDARIO =====
+function initRegaloSinCausa() {
+    const regaloBoxInteractive = document.getElementById('regaloBoxInteractive');
+    const btnAbrirRegalo = document.getElementById('btnAbrirRegalo');
+    const regaloBoxWrapper = document.getElementById('regaloBoxWrapper');
+    const regaloReveladoPanel = document.getElementById('regaloReveladoPanel');
+    const valeConfirmacionBox = document.getElementById('valeConfirmacionBox');
+    const valeConfirmacionTexto = document.getElementById('valeConfirmacionTexto');
+    const motivoFraseDisplay = document.getElementById('motivoFraseDisplay');
+    const btnOtroMotivo = document.getElementById('btnOtroMotivo');
+    const btnSellarRegalo = document.getElementById('btnSellarRegalo');
+    const selloRevelado = document.getElementById('selloRevelado');
+
+    if (!regaloBoxWrapper || !regaloReveladoPanel) return;
+
+    let regaloAbierto = false;
+
+    // 1. Apertura animada de la Caja de Regalo
+    function abrirRegalo() {
+        if (regaloAbierto) return;
+        regaloAbierto = true;
+
+        if (regaloBoxInteractive) {
+            regaloBoxInteractive.classList.add('abriendo');
+        }
+
+        // Lluvia mágica de apertura
+        const particulas = ['✨', '🎁', '💖', '👑', '🌟', '🌹', '💌'];
+        for (let i = 0; i < 18; i++) {
+            const p = particulas[i % particulas.length];
+            setTimeout(() => createCelebrationParticle(p, 'rain'), i * 80);
+        }
+
+        setTimeout(() => {
+            regaloBoxWrapper.style.display = 'none';
+            regaloReveladoPanel.style.display = 'block';
+
+            // Scroll suave dentro del modal hacia el certificado
+            const container = document.getElementById('regaloSinCausaContainer');
+            if (container) {
+                container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }, 500);
+    }
+
+    if (btnAbrirRegalo) {
+        btnAbrirRegalo.addEventListener('click', abrirRegalo);
+    }
+    if (regaloBoxInteractive) {
+        regaloBoxInteractive.addEventListener('click', abrirRegalo);
+        regaloBoxInteractive.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                abrirRegalo();
+            }
+        });
+    }
+
+    // 2. Activación de Vales Interactivos
+    const MENSAJES_VALES = {
+        '1': '☕ Queda claro: sin presiones ni apuros. La buena disposición y el respeto siguen intactos para cuando tú lo decidas.',
+        '2': '🛡️ La madurez se demuestra en saber valorar lo que fue bueno, sin guardar amargura por el silencio ni por la distancia.',
+        '3': '👑 Las personas auténticas dejan huella; tú lo hiciste y eso nadie lo cambia, ni los meses ni las circunstancias.'
+    };
+
+    document.querySelectorAll('.btn-activar-vale').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const valeId = this.getAttribute('data-vale') || '1';
+            const card = document.getElementById('valeCard' + valeId);
+
+            if (card) {
+                card.classList.add('vale-reclamado');
+            }
+
+            this.innerHTML = '<span>✅</span> Certeza afirmada';
+
+            if (valeConfirmacionBox && valeConfirmacionTexto) {
+                valeConfirmacionTexto.textContent = MENSAJES_VALES[valeId] || 'Certeza guardada con serenidad.';
+                valeConfirmacionBox.style.display = 'flex';
+            }
+
+            // Efecto de celebración
+            const emojis = ['👑', '✨', '⭐', '✉️'];
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => createCelebrationParticle(emojis[i % emojis.length], 'float'), i * 100);
+            }
+        });
+    });
+
+    // 3. Generador Dinámico de Motivos / Certezas
+    const MOTIVOS_ESPONTANEOS = [
+        "“Porque a pesar de tu carácter, de tus silencios y de tus distancias, siempre supiste ser auténtica.”",
+        "“Porque no necesito que hablemos todos los días para tener claro el impacto que tuviste en mi vida.”",
+        "“Porque las personas que de verdad marcan una diferencia no se olvidan con un par de meses de ausencia.”",
+        "“Porque reconozco tu valor como mujer, tu firmeza y esa manera tan tuya de ver el mundo.”",
+        "“Porque entre nosotros hubo cosas reales, y lo que es real no se ensucia con orgullo ni con rencores.”",
+        "“Porque sé que tienes tus corazas y tus formas, pero también sé lo que vales cuando te muestras transparente.”",
+        "“Porque no te escribo desde la necesidad ni esperando nada; te reconozco desde la tranquilidad de lo que viví.”",
+        "“Porque tu lugar en mi historia te lo ganaste con hechos, y eso no se desvanece por una pausa.”",
+        "“Porque me enseñaste cosas que hoy valoro, y la gratitud no tiene fecha de caducidad.”",
+        "“Porque ser importante para alguien no depende de estar cerca, sino de haber dejado una marca que se respeta. 👑”"
+    ];
+
+    let indiceMotivoActual = 0;
+
+    if (btnOtroMotivo && motivoFraseDisplay) {
+        btnOtroMotivo.addEventListener('click', function() {
+            let nuevoIndice;
+            do {
+                nuevoIndice = Math.floor(Math.random() * MOTIVOS_ESPONTANEOS.length);
+            } while (nuevoIndice === indiceMotivoActual && MOTIVOS_ESPONTANEOS.length > 1);
+
+            indiceMotivoActual = nuevoIndice;
+
+            // Animación suave de cambio de frase
+            motivoFraseDisplay.style.opacity = '0';
+            motivoFraseDisplay.style.transform = 'translateY(8px)';
+
+            setTimeout(() => {
+                motivoFraseDisplay.textContent = MOTIVOS_ESPONTANEOS[indiceMotivoActual];
+                motivoFraseDisplay.style.opacity = '1';
+                motivoFraseDisplay.style.transform = 'translateY(0)';
+            }, 250);
+
+            for (let i = 0; i < 4; i++) {
+                setTimeout(() => createCelebrationParticle('✨', 'float'), i * 100);
+            }
+        });
+    }
+
+    // 4. Sello de Promesa Real
+    if (btnSellarRegalo && selloRevelado) {
+        btnSellarRegalo.addEventListener('click', function() {
+            this.classList.add('sellado');
+            this.innerHTML = '<span>✅</span> Constancia Dejada con Serenidad';
+            this.disabled = true;
+
+            selloRevelado.style.display = 'block';
+
+            // Lluvia dorada de estrellas y coronas
+            const sellosEmojis = ['👑', '✨', '⭐', '✉️'];
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => createCelebrationParticle(sellosEmojis[i % sellosEmojis.length], 'rain'), i * 100);
+            }
+        });
+    }
+}
 
 // 1. FUNCIÓN DE PARTÍCULAS MEJORADA (Lluvia de Estrellas y Emojis)
 function createCelebrationParticle(emoji, type = 'float') {
@@ -5511,6 +5724,28 @@ function initPhotographMusicPlayer() {
     if (modal) {
         EVENTOS_ACTIVACION.forEach(evt => modal.addEventListener(evt, intentarDesbloqueo, true));
         modal.addEventListener('shown.bs.modal', intentarDesbloqueo);
+
+        // Detener la música completamente cuando se cierra la modal
+        const detenerTodoAlCerrar = function() {
+            detenerVideo();
+            if (typeof stopAllAudios === 'function') {
+                stopAllAudios();
+            }
+        };
+
+        modal.addEventListener('hide.bs.modal', detenerTodoAlCerrar);
+        modal.addEventListener('hidden.bs.modal', detenerTodoAlCerrar);
+    }
+
+    // Botón directo de cerrar la modal
+    const btnCerrarModalAmor = document.querySelector('.amor-amistad-close');
+    if (btnCerrarModalAmor) {
+        btnCerrarModalAmor.addEventListener('click', function() {
+            detenerVideo();
+            if (typeof stopAllAudios === 'function') {
+                stopAllAudios();
+            }
+        });
     }
 
     // Intento 1: reproducir inmediatamente al cargar
