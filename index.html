@@ -644,6 +644,17 @@
                     <h2 class="amor-amistad-titulo">¡Feliz Día de Amor y Amistad, Princesa!</h2>
                     <p class="amor-amistad-sub">Para la mujer más hermosa, tierna y especial 💕</p>
 
+                    <!-- Video Exclusivo al Piano -->
+                    <div class="amor-video-exclusive-wrapper">
+                        <div class="amor-card-photo polaroid-video polaroid-video-exclusive">
+                            <div class="polaroid-pin">🎹</div>
+                            <div class="video-frame-container">
+                                <video id="video-miPrincesa" src="./video/miPrincesaPiano.mp4" playsinline loop preload="auto" class="amor-video amor-video-wide" controls></video>
+                            </div>
+                            <span class="polaroid-caption polaroid-caption-exclusive">It's always times like these when I think of you 🎹✨</span>
+                        </div>
+                    </div>
+
                     <!-- Galería de Recuerdos Románticos -->
                     <div class="amor-amistad-showcase">
                         <div class="amor-card-photo polaroid-ramo">
@@ -673,17 +684,6 @@
                         </div>
                     </div>
 
-                    <!-- Video Exclusivo al Piano (Abajo de las 3 fotos, a todo lo ancho y exclusivo) -->
-                    <div class="amor-video-exclusive-wrapper">
-                        <div class="amor-card-photo polaroid-video polaroid-video-exclusive">
-                            <div class="polaroid-pin">🎹</div>
-                            <div class="video-frame-container">
-                                <video id="video-miPrincesa" src="./video/miPrincesaPiano.mp4" playsinline loop preload="auto" class="amor-video amor-video-wide" controls></video>
-                            </div>
-                            <span class="polaroid-caption polaroid-caption-exclusive">It's always times like these when I think of you 🎹✨</span>
-                        </div>
-                    </div>
-
                     <!-- Mensaje Emotivo Dedicado -->
                     <div class="amor-amistad-letter-box">
                         <div class="letter-quotes-icon">“</div>
@@ -710,7 +710,10 @@
                             <span>🌹</span> El valor de lo que permanece
                         </button>
                         <button type="button" class="btn-amor-sorpresa btn-dado-misterio" id="btnDadoMisterio">
-                            <span class="dado-icon" id="dadoIcon">🎲</span> Pulsame y "Tira el dado: ¡siempre obtendras algo!"
+                            <span class="dado-icon" id="dadoIcon">
+                                <span class="dado-emoji">🎲</span>
+                                <span class="dado-top-num" id="dadoTopNum" style="display: none;">1</span>
+                            </span> Pulsame y "Tira el dado: ¡siempre obtendras algo!"
                         </button>
                     </div>
 

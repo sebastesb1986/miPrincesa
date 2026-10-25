@@ -5200,43 +5200,41 @@ document.addEventListener('DOMContentLoaded', function() {
         const btnDado = document.getElementById('btnDadoMisterio');
         if (btnDado) {
             const dadoIcon = document.getElementById('dadoIcon');
+            const dadoTopNum = document.getElementById('dadoTopNum');
             const mensajesDado = [
                 { num: 1, texto: '¿Por qué eres tan valiosa? Porque… hay algo en ti que ni tú misma has descubierto del todo. 🔮' },
-                { num: 2, texto: 'cada interacción, cada momento compartido y cada instante en que coincidimos tuvieron una magia real, de esas que no se repiten con cualquiera. Se extraña, por supuesto; no desde la carencia, sino desde el reconocimiento de lo impecable y real. Pero el resto… solo lo sabrás si algún día preguntas. 🧩' },
-                { num: 3, texto: '¿Te has preguntado por qué no te olvido aunque pasen meses? La respuesta te sorprendería. 🌙' },
-                { num: 4, texto: 'Hay una razón por la que tu nombre aparece en pensamientos ajenos sin previo aviso… y no, no es casualidad. ⚡' },
+                { num: 2, texto: 'cada interacción, cada momento compartido y cada instante en que coincidimos poseen una magia real, de esas que no se repiten con cualquiera. Se extraña, por supuesto; no desde la carencia, sino desde el reconocimiento de lo impecable y real. Pero el resto… solo lo sabrás si algún día preguntas. 🧩' },
+                { num: 3, texto: '¿Te has preguntado por qué no te olvido? La respuesta te sorprendería. 🌙' },
+                { num: 4, texto: 'Hay una razón por la que tu nombre aparece en mis pensamientos ajenos sin previo aviso… y no, no es casualidad. ⚡' },
                 { num: 5, texto: '¿Qué pasaría si supieras exactamente el impacto que dejaste? Digamos que el número 5 guarda ese secreto… por ahora. 👑' },
-                { num: 6, texto: 'El 6 es el número más alto, Un café, una sorpresa, flores, chocolates, una cancion... No digo más. Si la curiosidad gana… ¿Te interesa? 🎯✨' }
+                { num: 6, texto: 'El 6 es el número más alto, Un café, una sorpresa, un secreto a voces, tulipanes, chocolates, una cancion... No digo más. Si la curiosidad gana… ¿Te interesa? 🎯✨' }
             ];
 
             let dadoGirando = false;
+            let dadoIndice = 0; // Recorre los mensajes en secuencia 0→5, luego vuelve a 0
 
             btnDado.addEventListener('click', function(e) {
                 e.stopPropagation();
                 if (dadoGirando) return;
                 dadoGirando = true;
 
-                // Animación de giro — el icono 🎲 siempre se mantiene
+                // Animación de giro
                 dadoIcon.classList.add('girando');
-
-                // Quitar badge anterior si existe
-                const badgeAnterior = btnDado.querySelector('.dado-resultado-num');
-                if (badgeAnterior) badgeAnterior.remove();
+                if (dadoTopNum) dadoTopNum.style.display = 'none';
 
                 // Al terminar la animación (0.6s * 3 repeticiones = 1.8s)
                 setTimeout(function() {
                     dadoIcon.classList.remove('girando');
-                    // El icono siempre vuelve a ser 🎲
-                    dadoIcon.textContent = '🎲';
 
-                    // Resultado aleatorio solo para el badge y el mensaje
-                    const resultado = Math.floor(Math.random() * 6);
+                    // Secuencial: usa dadoIndice y avanza
+                    const resultado = dadoIndice;
+                    dadoIndice = (dadoIndice + 1) % mensajesDado.length;
 
-                    // Mostrar número en badge
-                    const badge = document.createElement('span');
-                    badge.className = 'dado-resultado-num';
-                    badge.textContent = resultado + 1;
-                    btnDado.appendChild(badge);
+                    // En la cara de arriba del propio dadoIcon: muestra el número que salió
+                    if (dadoTopNum) {
+                        dadoTopNum.textContent = resultado + 1;
+                        dadoTopNum.style.display = 'flex';
+                    }
 
                     // Mostrar mensaje misterioso
                     const mensajeObj = mensajesDado[resultado];

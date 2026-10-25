@@ -5557,6 +5557,18 @@ h1 img {
     transform: rotate(2.5deg);
 }
 
+.polaroid-ramo .amor-img {
+    object-position: center 25%;
+}
+
+.polaroid-moon .amor-img {
+    object-position: center center;
+}
+
+.polaroid-nota .amor-img {
+    object-position: center center;
+}
+
 .polaroid-princesa .amor-img {
     object-position: center top;
 }
@@ -5582,7 +5594,8 @@ h1 img {
 
 .amor-img {
     width: 100%;
-    height: 190px;
+    aspect-ratio: 1 / 1;
+    height: auto;
     object-fit: cover;
     border-radius: 10px;
     display: block;
@@ -5703,7 +5716,7 @@ h1 img {
     border: 1.5px solid rgba(255, 215, 0, 0.6) !important;
     box-shadow: 0 6px 20px rgba(15, 52, 96, 0.5), 0 0 12px rgba(255, 215, 0, 0.15) !important;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .btn-dado-misterio:hover {
@@ -5712,9 +5725,43 @@ h1 img {
 }
 
 .dado-icon {
-    display: inline-block;
-    font-size: 1.4rem;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.55rem;
+    line-height: 1;
+    margin-right: 6px;
+    vertical-align: middle;
     transition: transform 0.3s ease;
+}
+
+.dado-emoji {
+    display: inline-block;
+    line-height: 1;
+}
+
+.dado-top-num {
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffd700;
+    color: #1a1a2e;
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 0.65rem;
+    font-weight: 900;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 0 6px rgba(255, 215, 0, 0.8);
+    border: 1.5px solid #ffffff;
+    pointer-events: none;
+    z-index: 2;
+    animation: fadeInScale 0.3s ease;
 }
 
 .dado-icon.girando {
@@ -6460,11 +6507,13 @@ h1 img {
         padding: 30px 18px 24px;
     }
     .amor-card-photo {
-        max-width: 100%;
         transform: none !important;
     }
     .amor-img {
-        height: 220px;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
     }
     .amor-amistad-botones-sorpresa {
         flex-direction: column;
@@ -9852,15 +9901,36 @@ body.modal-open .floating-music-control {
 
 @media (max-width: 576px) {
     .amor-amistad-showcase {
-        gap: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
     }
     .amor-amistad-showcase .amor-card-photo {
-        flex: 0 1 calc(50% - 6px);
-        max-width: 145px;
+        flex: 0 1 calc(50% - 8px);
+        max-width: 155px;
+        min-width: 125px;
+        padding: 8px 8px 12px;
+        border-radius: 14px;
+        box-sizing: border-box;
     }
     .amor-amistad-showcase .amor-card-photo:last-child {
-        flex: 0 1 calc(58% - 6px);
+        flex: 0 1 calc(55% - 8px);
         max-width: 165px;
+    }
+    .amor-amistad-showcase .amor-img {
+        width: 100%;
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 6px;
+    }
+    .amor-amistad-showcase .polaroid-caption {
+        font-size: 0.92rem;
+        line-height: 1.15;
     }
     .polaroid-video-exclusive {
         padding: 10px 10px 12px;
